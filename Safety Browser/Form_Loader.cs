@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace Safety_Browser
 {
-    public partial class Form1 : Form
+    public partial class Form_Loader : Form
     {
-        public Form1()
+        public Form_Loader()
         {
             InitializeComponent();
+        }
+
+        private void timer_loader_Tick(object sender, EventArgs e)
+        {
+            timer_loader.Stop();
+            Form_Main form_main = new Form_Main();
+            Hide();
+            form_main.ShowDialog();
         }
     }
 }
