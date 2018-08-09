@@ -18,7 +18,7 @@ namespace Safety_Browser
         private string[] domain_test = { "http://raincheck.ssitex.com/testapi/getDomains.php", "http://raincheck.ssitex.com/testapi/getDomains123.php", "http://raincheck.ssitex.com/testapi/getDomains2.php" };
         private string text_search;
         private bool close = true;
-        private string web_title;
+        private string web_title = "";
         private int loaded_detect;
         private int i_timeout;
         private bool isHijacked;
@@ -27,12 +27,14 @@ namespace Safety_Browser
         private int total_domain_index;
         private int current_web_service = 0;
         private int current_domain = 0;
+        private int detectnotloading;
 
         public Form_Main()
         {
             InitializeComponent();
         }
 
+        // Form Load
         private void Form_Main_Load(object sender, EventArgs e)
         {
             InitializeChromium();
@@ -70,6 +72,14 @@ namespace Safety_Browser
         private void ChromiumWebBrowser_TitleChanged(object sender, TitleChangedEventArgs e)
         {
             web_title = e.Title;
+
+            if (!loadOneMoreTime)
+            {
+                if (!String.IsNullOrEmpty(web_title))
+                {
+                    chromeBrowser.Stop();
+                }
+            }
         }
 
         // Loading State
@@ -85,13 +95,15 @@ namespace Safety_Browser
                     {
                         i_timeout = 1;
                         timer_timeout.Start();
+                        detectnotloading = 0;
+                        timer_detectnotloading.Stop();
                         label_loadingstate.Text = "1";
                     }
                     else
                     {
                         await Task.Run(async () =>
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(2000);
                         });
 
                         loaded_detect++;
@@ -100,7 +112,8 @@ namespace Safety_Browser
                         {
                             i_timeout = 1;
                             timer_timeout.Stop();
-
+                            detectnotloading = 0;
+                            timer_detectnotloading.Start();
                             label_loadingstate.Text = "0";
                             loadOneMoreTime = false;
                         }
@@ -112,19 +125,19 @@ namespace Safety_Browser
 
                     if (e.IsLoading)
                     {
-                        pictureBox_loader.Visible = true;
-                        pictureBox_loader.Enabled = true;
-
                         i_timeout = 1;
                         timer_timeout.Start();
-
+                        detectnotloading = 0;
+                        timer_detectnotloading.Stop();
+                        pictureBox_loader.Visible = true;
+                        pictureBox_loader.Enabled = true;
                         label_loadingstate.Text = "1";
                     }
                     else
                     {
                         await Task.Run(async () =>
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(2000);
                         });
 
                         loaded_detect++;
@@ -133,6 +146,8 @@ namespace Safety_Browser
                         {
                             i_timeout = 1;
                             timer_timeout.Stop();
+                            detectnotloading = 0;
+                            timer_detectnotloading.Start();
 
                             string strValue = text_search;
                             string[] strArray = strValue.Split(',');
@@ -316,6 +331,8 @@ namespace Safety_Browser
             }
         }
 
+        // ByPass Calling
+
         private void ByPassCalling()
         {
             #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -433,6 +450,41 @@ namespace Safety_Browser
             }
         }
 
+        // Menu
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (close)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    close = false;
+                    Cef.Shutdown();
+                    Close();
+                }
+            }
+            else
+            {
+                Cef.Shutdown();
+            }
+        }
+
+        // Detect Not Loading
+        private void timer_detectnotloading_Tick(object sender, EventArgs e)
+        {
+            label_detectnotloading.Text = detectnotloading++.ToString();
+
+            if (detectnotloading > 20)
+            {
+                dataGridView_domain.ClearSelection();
+                i_timeout = 1;
+                timer_timeout.Start();
+                dataGridView_domain.Rows[current_domain_index].Selected = true;
+                detectnotloading = 0;
+                timer_detectnotloading.Stop();
+            }
+        }
+
         // Form Closing
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -446,24 +498,6 @@ namespace Safety_Browser
                 else
                 {
                     Cef.Shutdown();
-                }
-            }
-            else
-            {
-                Cef.Shutdown();
-            }
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (close)
-            {
-                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
-                {
-                    close = false;
-                    Cef.Shutdown();
-                    Close();
                 }
             }
             else
