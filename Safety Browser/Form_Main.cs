@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
@@ -34,6 +35,7 @@ namespace Safety_Browser
         private bool loadingstate = true;
         private bool last_index_hijacked_get = false;
         private bool networkIsAvailable;
+        private bool last_index_hijacked_load = true;
 
         public Form_Main()
         {
@@ -111,10 +113,16 @@ namespace Safety_Browser
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
-                        panel_browser.Visible = true;
-                        panel_browser.Enabled = true;
-                        pictureBox_loader.Visible = true;
-                        pictureBox_loader.Enabled = true;
+                        if (panel_browser.Visible == true)
+                        {
+                            pictureBox_loader.Visible = false;
+                            pictureBox_loader.Enabled = false;
+                        }
+                        else
+                        {
+                            pictureBox_loader.Visible = true;
+                            pictureBox_loader.Enabled = true;
+                        }
 
                         dataGridView_domain.ClearSelection();
                         dataGridView_domain.Rows[current_domain_index].Selected = true;
@@ -122,6 +130,8 @@ namespace Safety_Browser
                 }
                 else
                 {
+                    chromeBrowser.Stop();
+
                     i_timeout = 1;
                     timer_timeout.Stop();
                     detectnotloading = 0;
@@ -188,11 +198,12 @@ namespace Safety_Browser
 
                         if (e.IsLoading)
                         {
+                            //MessageBox.Show("loading load one more time");
+                            label_loadingstate.Text = "1";
                             i_timeout = 1;
                             timer_timeout.Start();
                             detectnotloading = 0;
                             timer_detectnotloading.Stop();
-                            label_loadingstate.Text = "1";
                         }
                         else
                         {
@@ -205,12 +216,16 @@ namespace Safety_Browser
 
                             if (loaded_detect == 1)
                             {
-                                MessageBox.Show("loaded 1");
+                                await Task.Run(async () =>
+                                {
+                                    await Task.Delay(2000);
+                                });
+
+                                label_loadingstate.Text = "0";
                                 i_timeout = 1;
                                 timer_timeout.Stop();
                                 detectnotloading = 0;
                                 timer_detectnotloading.Start();
-                                label_loadingstate.Text = "0";
                                 loadOneMoreTime = false;
                             }
                         }
@@ -240,7 +255,6 @@ namespace Safety_Browser
 
                             if (loaded_detect == 1)
                             {
-                                MessageBox.Show("loaded");
                                 i_timeout = 1;
                                 timer_timeout.Stop();
                                 detectnotloading = 0;
@@ -273,8 +287,55 @@ namespace Safety_Browser
 
                                 if (isHijacked)
                                 {
-                                    label_loadingstate.Text = "0";
-                                    last_index_hijacked_get = true;
+                                    string replace_domain_get = "";
+                                    string html = "";
+
+                                    if (!domain_get.Contains("http"))
+                                    {
+                                        try
+                                        {
+                                            replace_domain_get = "http://" + domain_get;
+                                            html = new WebClient().DownloadString(replace_domain_get);
+                                        }
+                                        catch (Exception)
+                                        {
+                                            html = "";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        try
+                                        {
+                                            html = new WebClient().DownloadString(domain_get);
+                                        }
+                                        catch (Exception)
+                                        {
+                                            html = "";
+                                        }
+                                    }
+
+                                    if (html.Contains("landing_image"))
+                                    {
+                                        last_index_hijacked_get = false;
+
+                                        if (string.IsNullOrEmpty(label_get.Text))
+                                        {
+                                            label_get.Text = domain_get;
+                                        }
+
+                                        pictureBox_loader.Visible = false;
+                                        pictureBox_loader.Enabled = false;
+
+                                        loadOneMoreTime = true;
+
+                                        dataGridView_domain.ClearSelection();
+                                        dataGridView_domain.Rows[current_domain_index].Selected = true;
+                                    }
+                                    else
+                                    {
+                                        label_loadingstate.Text = "0";
+                                        last_index_hijacked_get = true;
+                                    }
                                 }
                                 else
                                 {
@@ -294,6 +355,18 @@ namespace Safety_Browser
                                     dataGridView_domain.Rows[current_domain_index].Selected = true;
                                 }
                             }
+                        }
+                    }
+                }
+                else
+                {
+                    if (last_index_hijacked_load)
+                    {
+                        if (!e.IsLoading)
+                        {
+                            SetVisibleBrowser(true);
+                            chromeBrowser.Load(label_get.Text);
+                            last_index_hijacked_load = false;
                         }
                     }
                 }
@@ -374,14 +447,12 @@ namespace Safety_Browser
 
                             if (last_index_hijacked_get)
                             {
-                                SetVisibleBrowser(true);
+                                SetVisibleBrowser(false);
                                 pictureBox_loader.Visible = false;
                                 pictureBox_loader.Enabled = false;
                                 loadingstate = false;
                                 chromeBrowser.Load(label_get.Text);
                             }
-
-                            //MessageBox.Show("done all! 3");
                         }
 
                         return;
@@ -445,14 +516,12 @@ namespace Safety_Browser
 
                                 if (last_index_hijacked_get)
                                 {
-                                    SetVisibleBrowser(true);
+                                    SetVisibleBrowser(false);
                                     pictureBox_loader.Visible = false;
                                     pictureBox_loader.Enabled = false;
                                     loadingstate = false;
                                     chromeBrowser.Load(label_get.Text);
                                 }
-
-                                //MessageBox.Show("done all! 1");
                             }
                         }
                     }
@@ -596,14 +665,12 @@ namespace Safety_Browser
 
                         if (last_index_hijacked_get)
                         {
-                            SetVisibleBrowser(true);
+                            SetVisibleBrowser(false);
                             pictureBox_loader.Visible = false;
                             pictureBox_loader.Enabled = false;
                             loadingstate = false;
                             chromeBrowser.Load(label_get.Text);
                         }
-
-                        //MessageBox.Show("done all! 2");
                     }
                 }
                 else
