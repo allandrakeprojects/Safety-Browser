@@ -1,13 +1,10 @@
-﻿using CefSharp;
-using CefSharp.WinForms;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,27 +12,26 @@ namespace Safety_Browser
 {
     public partial class Form_Main : Form
     {
-        private ChromiumWebBrowser chromeBrowser;
         private string[] web_service = { "http://raincheck.ssitex.com/testapi/getTxt2Search.php", "http://raincheck.ssitex.com/testapi/getTxt2Search2.php", "http://raincheck.ssitex.com/testapi/getTxt2Search.php" };
         private string[] domain_test = { "http://raincheck.ssitex.com/testapi/getDomains.php", "http://raincheck.ssitex.com/testapi/getDomains123.php", "http://raincheck.ssitex.com/testapi/getDomains2.php" };
         private string text_search;
         private bool close = true;
-        private string web_title;
-        private int loaded_detect;
-        private int i_timeout;
         private bool isHijacked;
-        private bool loadOneMoreTime = false;
         private int current_domain_index = 0;
         private int total_domain_index;
         private int current_web_service = 0;
         private int current_domain = 0;
-        private int detectnotloading;
         private string domain_get;
-        private bool last_index_hijacked = false;
-        private bool loadingstate = true;
         private bool last_index_hijacked_get = false;
         private bool networkIsAvailable;
-        private bool last_index_hijacked_load = true;
+        private bool completed = true;
+        private bool timeout = true;
+        private string webbrowser_handler_title;
+        private Uri webbrowser_handler_url;
+        private string replace_domain_get;
+        private bool domain_one_time = true;
+        private bool load_not_hijacked = false;
+        private bool connection_handler = false;
 
         public Form_Main()
         {
@@ -46,11 +42,11 @@ namespace Safety_Browser
         private void Form_Main_Load(object sender, EventArgs e)
         {
             NetworkAvailability();
-            InitializeChromium();
             #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetTextToTextAsync(web_service[current_web_service]);
             #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             PictureBoxCenter();
+            //((Control)webBrowser_handler).Enabled = false;
         }
 
         private void NetworkAvailability()
@@ -69,15 +65,10 @@ namespace Safety_Browser
 
             if (!networkIsAvailable)
             {
-                i_timeout = 1;
-                timer_timeout.Stop();
-                detectnotloading = 0;
-                timer_detectnotloading.Stop();
+                timer_handler.Stop();
 
-                panel_browser.Visible = false;
-                panel_browser.Enabled = false;
+                webBrowser_handler.Visible = false;
                 pictureBox_loader.Visible = false;
-                pictureBox_loader.Enabled = false;
 
                 panel_connection.Visible = true;
                 panel_connection.Enabled = true;
@@ -94,7 +85,7 @@ namespace Safety_Browser
 
                 if (networkIsAvailable)
                 {
-                    if (dataGridView_domain.RowCount == 0)
+                    if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
                         #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         GetTextToTextAsync(web_service[current_web_service]);
@@ -103,44 +94,49 @@ namespace Safety_Browser
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
-                        panel_browser.Visible = true;
-                        panel_browser.Enabled = true;
+                        webBrowser_handler.Visible = true;
                         pictureBox_loader.Visible = true;
-                        pictureBox_loader.Enabled = true;
                     }
                     else
                     {
+                        webBrowser_handler.Visible = false;
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
-                        if (panel_browser.Visible == true)
+                        if (webBrowser_handler.Visible == true)
                         {
                             pictureBox_loader.Visible = false;
-                            pictureBox_loader.Enabled = false;
                         }
                         else
                         {
-                            pictureBox_loader.Visible = true;
-                            pictureBox_loader.Enabled = true;
+                            if (!connection_handler)
+                            {
+                                pictureBox_loader.Visible = true;
+                            }
+                            else
+                            {
+                                webBrowser_handler.Visible = true;
+                            }
                         }
 
-                        dataGridView_domain.ClearSelection();
-                        dataGridView_domain.Rows[current_domain_index].Selected = true;
+                        if (!connection_handler)
+                        {
+                            dataGridView_domain.ClearSelection();
+                            dataGridView_domain.Rows[current_domain_index].Selected = true;
+                        }
+                        else
+                        {
+                            webBrowser_handler.Navigate(label_get.Text);
+                        }
                     }
                 }
                 else
                 {
-                    chromeBrowser.Stop();
+                    webBrowser_handler.Stop();
+                    timer_handler.Stop();
 
-                    i_timeout = 1;
-                    timer_timeout.Stop();
-                    detectnotloading = 0;
-                    timer_detectnotloading.Stop();
-
-                    panel_browser.Visible = false;
-                    panel_browser.Enabled = false;
+                    webBrowser_handler.Visible = false;
                     pictureBox_loader.Visible = false;
-                    pictureBox_loader.Enabled = false;
 
                     panel_connection.Visible = true;
                     panel_connection.Enabled = true;
@@ -155,252 +151,6 @@ namespace Safety_Browser
 
             panel_connection.Left = (ClientSize.Width - panel_connection.Width) / 2;
             panel_connection.Top = (ClientSize.Height - panel_connection.Height) / 2;
-        }
-
-        // Initialize Chromium
-        private void InitializeChromium()
-        {
-            try
-            {
-                CefSettings settings = new CefSettings();
-                Cef.Initialize(settings);
-                chromeBrowser = new ChromiumWebBrowser("");
-                chromeBrowser.MenuHandler = new CustomMenuHandler();
-                panel_browser.Controls.Add(chromeBrowser);
-                chromeBrowser.Dock = DockStyle.Fill;
-
-                // Functions
-                chromeBrowser.TitleChanged += ChromiumWebBrowser_TitleChanged;
-                chromeBrowser.LoadingStateChanged += ChromiumWebBrowser_LoadingStateChanged;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Get Website Title
-        private void ChromiumWebBrowser_TitleChanged(object sender, TitleChangedEventArgs e)
-        {
-            web_title = e.Title;
-        }
-
-        // Loading State
-        private void ChromiumWebBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
-        {
-            Invoke(new Action(async () =>
-            {
-                if (loadingstate)
-                {
-                    if (loadOneMoreTime)
-                    {
-                        SetVisibleBrowser(true);
-
-                        if (e.IsLoading)
-                        {
-                            //MessageBox.Show("loading load one more time");
-                            label_loadingstate.Text = "1";
-                            i_timeout = 1;
-                            timer_timeout.Start();
-                            detectnotloading = 0;
-                            timer_detectnotloading.Stop();
-                        }
-                        else
-                        {
-                            await Task.Run(async () =>
-                            {
-                                await Task.Delay(2000);
-                            });
-
-                            loaded_detect++;
-
-                            if (loaded_detect == 1)
-                            {
-                                await Task.Run(async () =>
-                                {
-                                    await Task.Delay(2000);
-                                });
-
-                                label_loadingstate.Text = "0";
-                                i_timeout = 1;
-                                timer_timeout.Stop();
-                                detectnotloading = 0;
-                                timer_detectnotloading.Start();
-                                loadOneMoreTime = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        SetVisibleBrowser(false);
-
-                        if (e.IsLoading)
-                        {
-                            i_timeout = 1;
-                            timer_timeout.Start();
-                            detectnotloading = 0;
-                            timer_detectnotloading.Stop();
-                            pictureBox_loader.Visible = true;
-                            pictureBox_loader.Enabled = true;
-                            label_loadingstate.Text = "1";
-                        }
-                        else
-                        {
-                            await Task.Run(async () =>
-                            {
-                                await Task.Delay(2000);
-                            });
-
-                            loaded_detect++;
-
-                            if (loaded_detect == 1)
-                            {
-                                i_timeout = 1;
-                                timer_timeout.Stop();
-                                detectnotloading = 0;
-                                timer_detectnotloading.Start();
-
-                                string strValue = text_search;
-                                string[] strArray = strValue.Split(',');
-
-                                foreach (string obj in strArray)
-                                {
-                                    bool contains = web_title.Contains(obj);
-
-                                    if (contains == true)
-                                    {
-                                        Invoke(new Action(() =>
-                                        {
-                                            isHijacked = false;
-                                        }));
-
-                                        break;
-                                    }
-                                    else if (!contains)
-                                    {
-                                        Invoke(new Action(() =>
-                                        {
-                                            isHijacked = true;
-                                        }));
-                                    }
-                                }
-
-                                if (isHijacked)
-                                {
-                                    string replace_domain_get = "";
-                                    string html = "";
-
-                                    if (!domain_get.Contains("http"))
-                                    {
-                                        try
-                                        {
-                                            replace_domain_get = "http://" + domain_get;
-                                            html = new WebClient().DownloadString(replace_domain_get);
-                                        }
-                                        catch (Exception)
-                                        {
-                                            html = "";
-                                        }
-                                    }
-                                    else
-                                    {
-                                        try
-                                        {
-                                            html = new WebClient().DownloadString(domain_get);
-                                        }
-                                        catch (Exception)
-                                        {
-                                            html = "";
-                                        }
-                                    }
-
-                                    if (html.Contains("landing_image"))
-                                    {
-                                        last_index_hijacked_get = false;
-
-                                        if (string.IsNullOrEmpty(label_get.Text))
-                                        {
-                                            label_get.Text = domain_get;
-                                        }
-
-                                        pictureBox_loader.Visible = false;
-                                        pictureBox_loader.Enabled = false;
-
-                                        loadOneMoreTime = true;
-
-                                        dataGridView_domain.ClearSelection();
-                                        dataGridView_domain.Rows[current_domain_index].Selected = true;
-                                    }
-                                    else
-                                    {
-                                        label_loadingstate.Text = "0";
-                                        last_index_hijacked_get = true;
-                                    }
-                                }
-                                else
-                                {
-                                    last_index_hijacked_get = false;
-
-                                    if (string.IsNullOrEmpty(label_get.Text))
-                                    {
-                                        label_get.Text = domain_get;
-                                    }
-
-                                    pictureBox_loader.Visible = false;
-                                    pictureBox_loader.Enabled = false;
-
-                                    loadOneMoreTime = true;
-
-                                    dataGridView_domain.ClearSelection();
-                                    dataGridView_domain.Rows[current_domain_index].Selected = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (last_index_hijacked_load)
-                    {
-                        if (!e.IsLoading)
-                        {
-                            SetVisibleBrowser(true);
-                            chromeBrowser.Load(label_get.Text);
-                            last_index_hijacked_load = false;
-                        }
-                    }
-                }
-            }));
-        }
-
-        // Timeout
-        private void timer_timeout_Tick(object sender, EventArgs e)
-        {
-            label_timeout_count.Text = i_timeout++.ToString();
-
-            if (i_timeout > 30)
-            {
-                timer_timeout.Stop();
-                chromeBrowser.Stop();
-            }
-        }
-
-        // Visibility of Browser
-        private void SetVisibleBrowser(bool browser)
-        {
-            Invoke(new Action(() =>
-            {
-                if (browser)
-                {
-                    panel_browser.Controls.Add(chromeBrowser);
-                    chromeBrowser.Dock = DockStyle.Fill;
-                }
-                else
-                {
-                    panel_browser.Controls.Remove(chromeBrowser);
-                    chromeBrowser.Dock = DockStyle.None;
-                }
-            }));
         }
 
         // Get Text to Search
@@ -425,10 +175,6 @@ namespace Safety_Browser
                     {
                         text_search = "";
                         close = true;
-                        web_title = "";
-                        loaded_detect = 0;
-                        i_timeout = 0;
-                        loadOneMoreTime = false;
                         current_domain_index = 0;
                         total_domain_index = 0;
 
@@ -442,17 +188,18 @@ namespace Safety_Browser
                         }
                         else
                         {
-                            detectnotloading = 0;
-                            timer_detectnotloading.Stop();
-
                             if (last_index_hijacked_get)
                             {
-                                SetVisibleBrowser(false);
-                                pictureBox_loader.Visible = false;
-                                pictureBox_loader.Enabled = false;
-                                loadingstate = false;
-                                chromeBrowser.Load(label_get.Text);
+                                pictureBox_loader.Visible = true;
+
+                                if (!String.IsNullOrEmpty(label_get.Text))
+                                {
+                                    load_not_hijacked = true;
+                                    webBrowser_handler.Navigate(label_get.Text);
+                                }
                             }
+
+                            connection_handler = true;
                         }
 
                         return;
@@ -489,15 +236,12 @@ namespace Safety_Browser
                             total_domain_index = dataGridView_domain.RowCount;
                             dataGridView_domain.ClearSelection();
                             dataGridView_domain.Rows[current_domain_index].Selected = true;
+                            domain_one_time = true;
                         }
                         else
                         {
                             text_search = "";
                             close = true;
-                            web_title = "";
-                            loaded_detect = 0;
-                            i_timeout = 0;
-                            loadOneMoreTime = false;
                             current_domain_index = 0;
                             total_domain_index = 0;
 
@@ -511,17 +255,18 @@ namespace Safety_Browser
                             }
                             else
                             {
-                                detectnotloading = 0;
-                                timer_detectnotloading.Stop();
-
                                 if (last_index_hijacked_get)
                                 {
-                                    SetVisibleBrowser(false);
-                                    pictureBox_loader.Visible = false;
-                                    pictureBox_loader.Enabled = false;
-                                    loadingstate = false;
-                                    chromeBrowser.Load(label_get.Text);
+                                    pictureBox_loader.Visible = true;
+
+                                    if (!String.IsNullOrEmpty(label_get.Text))
+                                    {
+                                        load_not_hijacked = true;
+                                        webBrowser_handler.Navigate(label_get.Text);
+                                    }
                                 }
+
+                                connection_handler = true;
                             }
                         }
                     }
@@ -535,15 +280,10 @@ namespace Safety_Browser
             }
             else
             {
-                i_timeout = 1;
-                timer_timeout.Stop();
-                detectnotloading = 0;
-                timer_detectnotloading.Stop();
+                timer_handler.Stop();
 
-                panel_browser.Visible = false;
-                panel_browser.Enabled = false;
+                webBrowser_handler.Visible = false;
                 pictureBox_loader.Visible = false;
-                pictureBox_loader.Enabled = false;
 
                 panel_connection.Visible = true;
                 panel_connection.Enabled = true;
@@ -611,9 +351,19 @@ namespace Safety_Browser
                 {
                     try
                     {
-                        loaded_detect = 0;
                         domain_get = row.Cells[0].Value.ToString();
-                        chromeBrowser.Load(domain_get);
+
+                        webBrowser_handler.Visible = false;
+
+                        pictureBox_loader.Visible = true;
+
+                        timer_handler.Stop();
+                        timer_handler.Start();
+
+                        completed = true;
+                        timeout = true;
+
+                        webBrowser_handler.Navigate(domain_get);
                     }
                     catch (Exception)
                     {
@@ -622,7 +372,264 @@ namespace Safety_Browser
                 }
             }
         }
-        
+
+        // asd123
+        private async void webBrowser_handler_DocumentCompletedAsync(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            if (domain_one_time)
+            {
+                if (completed)
+                {
+                    if (webBrowser_handler.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        if (e.Url == webBrowser_handler.Url)
+                        {
+                            // handlers
+                            webbrowser_handler_title = webBrowser_handler.DocumentTitle;
+                            webbrowser_handler_url = webBrowser_handler.Url;
+                            timeout = false;
+                            timer_handler.Stop();
+
+                            string strValue = text_search;
+                            string[] strArray = strValue.Split(',');
+
+                            foreach (string obj in strArray)
+                            {
+                                bool contains = webbrowser_handler_title.Contains(obj);
+
+                                if (contains == true)
+                                {
+                                    Invoke(new Action(() =>
+                                    {
+                                        isHijacked = false;
+                                    }));
+
+                                    break;
+                                }
+                                else if (!contains)
+                                {
+                                    Invoke(new Action(() =>
+                                    {
+                                        isHijacked = true;
+                                    }));
+                                }
+                            }
+
+                            if (isHijacked)
+                            {
+                                var html = "";
+
+                                if (!domain_get.Contains("http"))
+                                {
+                                    try
+                                    {
+                                        replace_domain_get = "http://" + domain_get;
+                                        html = new WebClient().DownloadString(replace_domain_get);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        html = "";
+                                    }
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        html = new WebClient().DownloadString(domain_get);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        html = "";
+                                    }
+                                }
+
+                                if (html.Contains("landing_image"))
+                                {
+                                    if (String.IsNullOrEmpty(label_get.Text))
+                                    {
+                                        label_get.Text = domain_get;
+                                    }
+
+                                    last_index_hijacked_get = false;
+                                    pictureBox_loader.Visible = false;
+                                    webBrowser_handler.Visible = true;
+
+                                    await Task.Run(async () =>
+                                    {
+                                        await Task.Delay(2000);
+                                    });
+
+                                    label_loadingstate.Text = "1";
+                                    label_loadingstate.Text = "0";
+                                }
+                                else
+                                {
+                                    last_index_hijacked_get = true;
+                                    label_loadingstate.Text = "1";
+                                    label_loadingstate.Text = "0";
+                                }
+                            }
+                            else
+                            {
+                                if (String.IsNullOrEmpty(label_get.Text))
+                                {
+                                    label_get.Text = domain_get;
+                                }
+
+                                last_index_hijacked_get = false;
+                                pictureBox_loader.Visible = false;
+                                webBrowser_handler.Visible = true;
+
+                                await Task.Run(async () =>
+                                {
+                                    await Task.Delay(2000);
+                                });
+
+                                label_loadingstate.Text = "1";
+                                label_loadingstate.Text = "0";
+                            }
+                        }
+                    }
+                }
+            }
+            else if (load_not_hijacked)
+            {
+                if (webBrowser_handler.ReadyState == WebBrowserReadyState.Complete)
+                {
+                    if (e.Url == webBrowser_handler.Url)
+                    {
+                        pictureBox_loader.Visible = false;
+                        webBrowser_handler.Visible = true;
+                        load_not_hijacked = false;
+                    }
+                }
+            }
+        }
+
+        private async void timer_handler_TickAsync(object sender, EventArgs e)
+        {
+            if (domain_one_time)
+            {
+                if (timeout)
+                {
+                    // handlers
+                    webbrowser_handler_title = webBrowser_handler.DocumentTitle;
+                    webbrowser_handler_url = webBrowser_handler.Url;
+                    completed = false;
+                    webBrowser_handler.Stop();
+                    timer_handler.Stop();
+
+                    string strValue = text_search;
+                    string[] strArray = strValue.Split(',');
+
+                    foreach (string obj in strArray)
+                    {
+                        bool contains = webbrowser_handler_title.Contains(obj);
+
+                        if (contains == true)
+                        {
+                            Invoke(new Action(() =>
+                            {
+                                isHijacked = false;
+                            }));
+
+                            break;
+                        }
+                        else if (!contains)
+                        {
+                            Invoke(new Action(() =>
+                            {
+                                isHijacked = true;
+                            }));
+                        }
+                    }
+
+                    if (isHijacked)
+                    {
+                        var html = "";
+
+                        if (!domain_get.Contains("http"))
+                        {
+                            try
+                            {
+                                replace_domain_get = "http://" + domain_get;
+                                html = new WebClient().DownloadString(replace_domain_get);
+                            }
+                            catch (Exception)
+                            {
+                                html = "";
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                html = new WebClient().DownloadString(domain_get);
+                            }
+                            catch (Exception)
+                            {
+                                html = "";
+                            }
+                        }
+
+                        if (html.Contains("landing_image"))
+                        {
+                            if (String.IsNullOrEmpty(label_get.Text))
+                            {
+                                label_get.Text = domain_get;
+                            }
+
+                            last_index_hijacked_get = false;
+                            pictureBox_loader.Visible = false;
+                            webBrowser_handler.Visible = true;
+
+                            await Task.Run(async () =>
+                            {
+                                await Task.Delay(2000);
+                            });
+
+                            label_loadingstate.Text = "1";
+                            label_loadingstate.Text = "0";
+                        }
+                        else
+                        {
+                            last_index_hijacked_get = true;
+                            label_loadingstate.Text = "1";
+                            label_loadingstate.Text = "0";
+                        }
+                    }
+                    else
+                    {
+                        if (String.IsNullOrEmpty(label_get.Text))
+                        {
+                            label_get.Text = domain_get;
+                        }
+
+                        last_index_hijacked_get = false;
+                        pictureBox_loader.Visible = false;
+                        webBrowser_handler.Visible = true;
+
+                        await Task.Run(async () =>
+                        {
+                            await Task.Delay(2000);
+                        });
+
+                        label_loadingstate.Text = "1";
+                        label_loadingstate.Text = "0";
+                    }
+                }
+            }
+            else if (load_not_hijacked)
+            {
+                webBrowser_handler.Stop();
+                timer_handler.Stop();
+
+                pictureBox_loader.Visible = false;
+                webBrowser_handler.Visible = true;
+                load_not_hijacked = false;
+            }
+        }
+
         // Loading State Changed
         private void label_loadingstate_TextChanged(object sender, EventArgs e)
         {
@@ -632,44 +639,40 @@ namespace Safety_Browser
                 
                 if (current_domain_index == total_domain_index)
                 {
-                    if (last_index_hijacked_get)
+                    if (domain_one_time)
                     {
-                        last_index_hijacked = true;
-                    }
+                        domain_one_time = false;
+                        text_search = "";
+                        close = true;
+                        current_domain_index = 0;
+                        total_domain_index = 0;
 
-                    text_search = "";
-                    close = true;
-                    web_title = "";
-                    loaded_detect = 0;
-                    i_timeout = 0;
-                    loadOneMoreTime = false;
-                    current_domain_index = 0;
-                    total_domain_index = 0;
+                        dataGridView_domain.Rows.Clear();
+                        dataGridView_domain.Refresh();
 
-                    dataGridView_domain.Rows.Clear();
-                    dataGridView_domain.Refresh();
+                        current_web_service++;
+                        current_domain++;
 
-                    current_web_service++;
-                    current_domain++;
-
-                    if (current_web_service < web_service.Length)
-                    {
-                        #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                        GetTextToTextAsync(web_service[current_web_service]);
-                        #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    }
-                    else
-                    {
-                        detectnotloading = 0;
-                        timer_detectnotloading.Stop();
-
-                        if (last_index_hijacked_get)
+                        if (current_web_service < web_service.Length)
                         {
-                            SetVisibleBrowser(false);
-                            pictureBox_loader.Visible = false;
-                            pictureBox_loader.Enabled = false;
-                            loadingstate = false;
-                            chromeBrowser.Load(label_get.Text);
+                            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            GetTextToTextAsync(web_service[current_web_service]);
+                            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        }
+                        else
+                        {
+                            if (last_index_hijacked_get)
+                            {
+                                pictureBox_loader.Visible = true;
+
+                                if (!String.IsNullOrEmpty(label_get.Text))
+                                {
+                                    load_not_hijacked = true;
+                                    webBrowser_handler.Navigate(label_get.Text);
+                                }
+                            }
+
+                            connection_handler = true;
                         }
                     }
                 }
@@ -691,40 +694,13 @@ namespace Safety_Browser
                 if (dr == DialogResult.Yes)
                 {
                     close = false;
-                    Cef.Shutdown();
+                    //Cef.Shutdown();
                     Close();
                 }
             }
             else
             {
-                Cef.Shutdown();
-            }
-        }
-
-        // Detect Not Loading
-        private void timer_detectnotloading_Tick(object sender, EventArgs e)
-        {
-            label_detectnotloading.Text = detectnotloading++.ToString();
-
-            if (detectnotloading > 10)
-            {
-                if (current_domain_index != total_domain_index)
-                {
-                    i_timeout = 1;
-                    timer_timeout.Start();
-                    dataGridView_domain.ClearSelection();
-                    dataGridView_domain.Rows[current_domain_index].Selected = true;
-                    detectnotloading = 0;
-                    timer_detectnotloading.Stop();
-                }
-                else
-                {
-                    detectnotloading = 0;
-                    timer_detectnotloading.Stop();
-
-                    pictureBox_loader.Visible = false;
-                    pictureBox_loader.Enabled = false;
-                }
+                //Cef.Shutdown();
             }
         }
 
@@ -740,12 +716,12 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    Cef.Shutdown();
+                    //Cef.Shutdown();
                 }
             }
             else
             {
-                Cef.Shutdown();
+                //Cef.Shutdown();
             }
         }
     }
