@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,8 +15,8 @@ namespace Safety_Browser
 {
     public partial class Form_Main : Form
     {
-        private string[] web_service = { "http://raincheck.ssitex.com/testapi/getTxt2Search.php", "http://raincheck.ssitex.com/testapi/getTxt2Search2.php", "http://raincheck.ssitex.com/testapi/getTxt2Search.php" };
-        private string[] domain_test = { "http://raincheck.ssitex.com/testapi/getDomains.php", "http://raincheck.ssitex.com/testapi/getDomains123.php", "http://raincheck.ssitex.com/testapi/getDomains2.php" };
+        private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "www.ssitectonic.com/GetTxt2Search", "www.ssihedonic.com/GetTxt2Search" };
+        private string[] domain_test = { "http://www.ssicortex.com/GetDomains", "www.ssitectonic.com/GetText2Search", "www.ssihedonic.com/GetText2Search" };
         private string text_search;
         private bool close = true;
         private bool isHijacked;
@@ -38,6 +40,10 @@ namespace Safety_Browser
         private string _city;
         private string _region;
         private string _country;
+        private string BRAND_CODE = "YB";
+        private string API_KEY_SSIHEDONIC = "0397c2be1d97aac330bc3d5278c47696";
+        private string API_KEY_SSITECTONIC = "561b9fd16b50553213e4be2024fb4cf9";
+        private string API_KEY_SSICORTEX = "6b8c7e5617414bf2d4ace37600b6ab71";
 
         public Form_Main()
         {
@@ -87,6 +93,7 @@ namespace Safety_Browser
             NetworkChange.NetworkAvailabilityChanged += new NetworkAvailabilityChangedEventHandler(NetworkChange_NetworkAvailabilityChanged);
         }
 
+        // Network Handler Changed
         private void NetworkChange_NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
         {
             Invoke(new Action(() =>
@@ -197,7 +204,8 @@ namespace Safety_Browser
                 {
                     var client = new HttpClient();
                     var requestContent = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair<string, string>("test", "test"),
+                    new KeyValuePair<string, string>("api_key", API_KEY_SSICORTEX),
+                    new KeyValuePair<string, string>("brand_code", BRAND_CODE),
                 });
 
                     HttpResponseMessage response = await client.PostAsync(
@@ -233,24 +241,13 @@ namespace Safety_Browser
 
                     using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
                     {
-                        JArray jArray = JArray.Parse(await reader.ReadToEndAsync());
-                        int count = jArray.Count;
-                        int minus_count = count - 1;
-                        int i = 0;
+                        string json = await reader.ReadToEndAsync();
+                        string pattern = @"\[(.*?)\]";
+                        var matches = Regex.Matches(json, pattern);
 
-                        while (i < count)
+                        foreach (Match m in matches)
                         {
-                            string get = jArray[i]["text_search"].Value<string>();
-                            if (i == minus_count)
-                            {
-                                text_search += get;
-                            }
-                            else
-                            {
-                                text_search += get + ",";
-                            }
-
-                            i++;
+                            text_search = Regex.Unescape(m.Groups[1].ToString().Replace("\"", ""));
                         }
 
                         if (!String.IsNullOrEmpty(text_search))
@@ -322,7 +319,8 @@ namespace Safety_Browser
             {
                 var client = new HttpClient();
                 var requestContent = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair<string, string>("test", "test"),
+                    new KeyValuePair<string, string>("api_key", API_KEY_SSICORTEX),
+                    new KeyValuePair<string, string>("brand_code", BRAND_CODE),
                 });
 
                 HttpResponseMessage response = await client.PostAsync(
@@ -333,17 +331,40 @@ namespace Safety_Browser
 
                 using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
                 {
-                    JArray jArray = JArray.Parse(await reader.ReadToEndAsync());
-                    int count = jArray.Count;
-                    int i = 0;
+                    string json = await reader.ReadToEndAsync();
+                    string pattern = @"\[(.*?)\]";
+                    var matches = Regex.Matches(json, pattern);
+                    string domain_get = string.Empty;
 
-                    while (i < count)
+                    foreach (Match m in matches)
                     {
-                        string get = jArray[i]["domain_name"].Value<string>();
-                        dataGridView_domain.ClearSelection();
-                        dataGridView_domain.Rows.Add(get);
-                        i++;
+                        domain_get = Regex.Unescape(m.Groups[1].ToString().Replace("\"", ""));
                     }
+
+                    StringBuilder sb = new StringBuilder(domain_get);
+                    sb.Replace("domain_ur", "");
+                    sb.Replace("\"", "");
+                    sb.Replace("l:", "");
+                    sb.Replace("{", "");
+                    sb.Replace("}", "");
+                    
+                    var elements = sb.ToString().Split(new[]
+                    { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string items in elements)
+                    {
+                        dataGridView_domain.Rows.Add(items);
+                    }
+
+                    //int count = jArray.Count;
+                    //int i = 0;
+
+                    //while (i < count)
+                    //{
+                    //    string get = jArray[i]["domain_name"].Value<string>();
+                    //    dataGridView_domain.ClearSelection();
+                    //    dataGridView_domain.Rows.Add(get);
+                    //    i++;
+                    //}
                 }
             }
             catch (Exception err)
@@ -751,7 +772,7 @@ namespace Safety_Browser
                             _region = locationDetails.regionName;
                             _country = locationDetails.country;
 
-                            MessageBox.Show(_mac_address + "\n" + _external_ip + "\n" + _city + "\n" + _region + "\n" + _country);
+                            //MessageBox.Show(_mac_address + "\n" + _external_ip + "\n" + _city + "\n" + _region + "\n" + _country);
                             string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         }
                     }
