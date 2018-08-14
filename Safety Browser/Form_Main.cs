@@ -85,7 +85,25 @@ namespace Safety_Browser
 
                 if (networkIsAvailable)
                 {
-                    if (dataGridView_domain.RowCount == 0 && !connection_handler)
+                    if (dataGridView_domain.RowCount == 0 && last_index_hijacked_get)
+                    {
+                        if (current_web_service < web_service.Length)
+                        {
+                            ByPassCalling();
+                        
+                            panel_connection.Visible = false;
+                            panel_connection.Enabled = false;
+                        }
+                        else
+                        {
+                            panel_connection.Visible = false;
+                            panel_connection.Enabled = false;
+
+                            webBrowser_handler.Visible = false;
+                            pictureBox_loader.Visible = false;
+                        }
+                    }
+                    else if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
                         #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         GetTextToTextAsync(web_service[current_web_service]);
@@ -94,8 +112,8 @@ namespace Safety_Browser
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
-                        webBrowser_handler.Visible = true;
-                        pictureBox_loader.Visible = true;
+                        webBrowser_handler.Visible = false;
+                        pictureBox_loader.Visible = false;
                     }
                     else
                     {
@@ -123,10 +141,6 @@ namespace Safety_Browser
                         {
                             dataGridView_domain.ClearSelection();
                             dataGridView_domain.Rows[current_domain_index].Selected = true;
-                        }
-                        else
-                        {
-                            webBrowser_handler.Navigate(label_get.Text);
                         }
                     }
                 }
@@ -188,17 +202,8 @@ namespace Safety_Browser
                         }
                         else
                         {
-                            if (last_index_hijacked_get)
-                            {
-                                pictureBox_loader.Visible = true;
-
-                                if (!String.IsNullOrEmpty(label_get.Text))
-                                {
-                                    load_not_hijacked = true;
-                                    webBrowser_handler.Navigate(label_get.Text);
-                                }
-                            }
-
+                            pictureBox_loader.Visible = false;
+                            pictureBox_loader.Enabled = false;
                             connection_handler = true;
                         }
 
@@ -255,17 +260,8 @@ namespace Safety_Browser
                             }
                             else
                             {
-                                if (last_index_hijacked_get)
-                                {
-                                    pictureBox_loader.Visible = true;
-
-                                    if (!String.IsNullOrEmpty(label_get.Text))
-                                    {
-                                        load_not_hijacked = true;
-                                        webBrowser_handler.Navigate(label_get.Text);
-                                    }
-                                }
-
+                                pictureBox_loader.Visible = false;
+                                pictureBox_loader.Enabled = false;
                                 connection_handler = true;
                             }
                         }
@@ -374,7 +370,7 @@ namespace Safety_Browser
         }
 
         // asd123
-        private async void webBrowser_handler_DocumentCompletedAsync(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void webBrowser_handler_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (domain_one_time)
             {
@@ -445,22 +441,10 @@ namespace Safety_Browser
 
                                 if (html.Contains("landing_image"))
                                 {
-                                    if (String.IsNullOrEmpty(label_get.Text))
-                                    {
-                                        label_get.Text = domain_get;
-                                    }
-
+                                    domain_one_time = false;
                                     last_index_hijacked_get = false;
                                     pictureBox_loader.Visible = false;
                                     webBrowser_handler.Visible = true;
-
-                                    await Task.Run(async () =>
-                                    {
-                                        await Task.Delay(2000);
-                                    });
-
-                                    label_loadingstate.Text = "1";
-                                    label_loadingstate.Text = "0";
                                 }
                                 else
                                 {
@@ -471,22 +455,10 @@ namespace Safety_Browser
                             }
                             else
                             {
-                                if (String.IsNullOrEmpty(label_get.Text))
-                                {
-                                    label_get.Text = domain_get;
-                                }
-
+                                domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
                                 webBrowser_handler.Visible = true;
-
-                                await Task.Run(async () =>
-                                {
-                                    await Task.Delay(2000);
-                                });
-
-                                label_loadingstate.Text = "1";
-                                label_loadingstate.Text = "0";
                             }
                         }
                     }
@@ -506,7 +478,7 @@ namespace Safety_Browser
             }
         }
 
-        private async void timer_handler_TickAsync(object sender, EventArgs e)
+        private void Timer_handler_Tick(object sender, EventArgs e)
         {
             if (domain_one_time)
             {
@@ -574,22 +546,10 @@ namespace Safety_Browser
 
                         if (html.Contains("landing_image"))
                         {
-                            if (String.IsNullOrEmpty(label_get.Text))
-                            {
-                                label_get.Text = domain_get;
-                            }
-
+                            domain_one_time = false;
                             last_index_hijacked_get = false;
                             pictureBox_loader.Visible = false;
                             webBrowser_handler.Visible = true;
-
-                            await Task.Run(async () =>
-                            {
-                                await Task.Delay(2000);
-                            });
-
-                            label_loadingstate.Text = "1";
-                            label_loadingstate.Text = "0";
                         }
                         else
                         {
@@ -600,22 +560,10 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        if (String.IsNullOrEmpty(label_get.Text))
-                        {
-                            label_get.Text = domain_get;
-                        }
-
+                        domain_one_time = false;
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
                         webBrowser_handler.Visible = true;
-
-                        await Task.Run(async () =>
-                        {
-                            await Task.Delay(2000);
-                        });
-
-                        label_loadingstate.Text = "1";
-                        label_loadingstate.Text = "0";
                     }
                 }
             }
@@ -661,17 +609,8 @@ namespace Safety_Browser
                         }
                         else
                         {
-                            if (last_index_hijacked_get)
-                            {
-                                pictureBox_loader.Visible = true;
-
-                                if (!String.IsNullOrEmpty(label_get.Text))
-                                {
-                                    load_not_hijacked = true;
-                                    webBrowser_handler.Navigate(label_get.Text);
-                                }
-                            }
-
+                            pictureBox_loader.Visible = false;
+                            pictureBox_loader.Enabled = false;
                             connection_handler = true;
                         }
                     }
