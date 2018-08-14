@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,6 +33,11 @@ namespace Safety_Browser
         private bool domain_one_time = true;
         private bool load_not_hijacked = false;
         private bool connection_handler = false;
+        private string _mac_address;
+        private string _external_ip;
+        private string _city;
+        private string _region;
+        private string _country;
 
         public Form_Main()
         {
@@ -46,9 +52,9 @@ namespace Safety_Browser
             GetTextToTextAsync(web_service[current_web_service]);
             #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             PictureBoxCenter();
-            //((Control)webBrowser_handler).Enabled = false;
         }
 
+        // Network Handler
         private void NetworkAvailability()
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
@@ -63,7 +69,11 @@ namespace Safety_Browser
                 }
             }
 
-            if (!networkIsAvailable)
+            if (networkIsAvailable)
+            {
+                GetIPInfo();
+            }
+            else
             {
                 timer_handler.Stop();
 
@@ -115,6 +125,14 @@ namespace Safety_Browser
                         webBrowser_handler.Visible = false;
                         pictureBox_loader.Visible = false;
                     }
+                    else if (!last_index_hijacked_get)
+                    {
+                        panel_connection.Visible = false;
+                        panel_connection.Enabled = false;
+                        pictureBox_loader.Visible = false;
+                        
+                        webBrowser_handler.Visible = true;
+                    }
                     else
                     {
                         webBrowser_handler.Visible = false;
@@ -158,6 +176,7 @@ namespace Safety_Browser
             }));
         }
 
+        // Loader Center
         private void PictureBoxCenter()
         {
             pictureBox_loader.Left = (ClientSize.Width - pictureBox_loader.Width) / 2;
@@ -334,8 +353,8 @@ namespace Safety_Browser
             }
         }
         
-        // Domain Changed
-        private void dataGridView_domain_SelectionChanged(object sender, EventArgs e)
+        // Domain Selection Changed
+        private void DataGridView_domain_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_domain.CurrentCell == null || dataGridView_domain.CurrentCell.Value == null)
             {
@@ -370,7 +389,8 @@ namespace Safety_Browser
         }
 
         // asd123
-        private void webBrowser_handler_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        // Web Browser Loaded
+        private void WebBrowser_handler_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (domain_one_time)
             {
@@ -478,6 +498,7 @@ namespace Safety_Browser
             }
         }
 
+        // Timeout
         private void Timer_handler_Tick(object sender, EventArgs e)
         {
             if (domain_one_time)
@@ -579,7 +600,7 @@ namespace Safety_Browser
         }
 
         // Loading State Changed
-        private void label_loadingstate_TextChanged(object sender, EventArgs e)
+        private void Label_loadingstate_TextChanged(object sender, EventArgs e)
         {
             if (label_loadingstate.Text == "0")
             {
@@ -625,7 +646,7 @@ namespace Safety_Browser
         }
 
         // Menu
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (close)
             {
@@ -661,6 +682,84 @@ namespace Safety_Browser
             else
             {
                 //Cef.Shutdown();
+            }
+        }
+
+        // Get external IP
+        private string GetExternalIp()
+        {
+            try
+            {
+                string externalIP;
+                externalIP = (new WebClient()).DownloadString("https://canihazip.com/s");
+                externalIP = (new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"))
+                             .Matches(externalIP)[0].ToString();
+                
+                return externalIP;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        // Get MAC Address
+        public static string GetMACAddress()
+        {
+            try
+            {
+                string macAddress = string.Empty;
+                foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
+                        nic.OperationalStatus == OperationalStatus.Up && !nic.Name.Contains("Tunnel") && !nic.Name.Contains("VirtualBox") && !nic.Name.Contains("Adapter") && !nic.Description.Contains("Npcap") && !nic.Description.Contains("Loopback"))
+                        macAddress += nic.GetPhysicalAddress().ToString();
+                }
+
+                return macAddress;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        // Get IP Info
+        private void GetIPInfo()
+        {
+            try
+            {
+                var API_PATH_IP_API = "http://ip-api.com/json/" + GetExternalIp();
+
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                    client.BaseAddress = new Uri(API_PATH_IP_API);
+                    HttpResponseMessage response = client.GetAsync(API_PATH_IP_API).GetAwaiter().GetResult();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var locationDetails = response.Content.ReadAsAsync<IpInfo>().GetAwaiter().GetResult();
+                        if (locationDetails != null)
+                        {
+                            _mac_address = GetMACAddress();
+                            _external_ip = GetExternalIp();
+                            _city = locationDetails.city;
+                            _region = locationDetails.regionName;
+                            _country = locationDetails.country;
+
+                            MessageBox.Show(_mac_address + "\n" + _external_ip + "\n" + _city + "\n" + _region + "\n" + _country);
+                            string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
