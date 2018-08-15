@@ -1,6 +1,6 @@
 ﻿namespace Safety_Browser
 {
-    partial class Form_Main
+    partial class Form_YB
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
             this.label_current_web_service = new System.Windows.Forms.Label();
@@ -53,6 +53,7 @@
             this.pictureBox_close = new System.Windows.Forms.PictureBox();
             this.pictureBox_menu = new System.Windows.Forms.PictureBox();
             this.label_menu = new System.Windows.Forms.Label();
+            this.panel_cefsharp = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -101,7 +102,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView_domain.Location = new System.Drawing.Point(1280, 65);
+            this.dataGridView_domain.Location = new System.Drawing.Point(1292, 46);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
@@ -124,7 +125,7 @@
             // 
             this.label_current_web_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_web_service.AutoSize = true;
-            this.label_current_web_service.Location = new System.Drawing.Point(1278, 368);
+            this.label_current_web_service.Location = new System.Drawing.Point(1290, 349);
             this.label_current_web_service.Name = "label_current_web_service";
             this.label_current_web_service.Size = new System.Drawing.Size(106, 13);
             this.label_current_web_service.TabIndex = 27;
@@ -135,7 +136,7 @@
             // 
             this.label_current_domain_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_domain_service.AutoSize = true;
-            this.label_current_domain_service.Location = new System.Drawing.Point(1278, 385);
+            this.label_current_domain_service.Location = new System.Drawing.Point(1290, 366);
             this.label_current_domain_service.Name = "label_current_domain_service";
             this.label_current_domain_service.Size = new System.Drawing.Size(120, 13);
             this.label_current_domain_service.TabIndex = 28;
@@ -195,7 +196,7 @@
             // 
             this.label_loadingstate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_loadingstate.AutoSize = true;
-            this.label_loadingstate.Location = new System.Drawing.Point(1278, 349);
+            this.label_loadingstate.Location = new System.Drawing.Point(1290, 330);
             this.label_loadingstate.Name = "label_loadingstate";
             this.label_loadingstate.Size = new System.Drawing.Size(64, 13);
             this.label_loadingstate.TabIndex = 21;
@@ -207,7 +208,7 @@
             // 
             this.label_titlebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.label_titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.label_titlebar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_titlebar.ForeColor = System.Drawing.Color.White;
             this.label_titlebar.Location = new System.Drawing.Point(2, 1);
@@ -224,11 +225,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.webBrowser_handler.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser_handler.Location = new System.Drawing.Point(1, 38);
+            this.webBrowser_handler.Location = new System.Drawing.Point(1306, 422);
             this.webBrowser_handler.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser_handler.Name = "webBrowser_handler";
             this.webBrowser_handler.ScriptErrorsSuppressed = true;
-            this.webBrowser_handler.Size = new System.Drawing.Size(1268, 725);
+            this.webBrowser_handler.Size = new System.Drawing.Size(52, 51);
             this.webBrowser_handler.TabIndex = 37;
             this.webBrowser_handler.Visible = false;
             this.webBrowser_handler.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser_handler_DocumentCompleted);
@@ -236,7 +237,7 @@
             // pictureBox_minimize
             // 
             this.pictureBox_minimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_minimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_minimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_minimize.Image = global::Safety_Browser.Properties.Resources.minimize;
             this.pictureBox_minimize.Location = new System.Drawing.Point(1140, 1);
             this.pictureBox_minimize.Name = "pictureBox_minimize";
@@ -251,7 +252,7 @@
             // pictureBox_maximize
             // 
             this.pictureBox_maximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_maximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_maximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_maximize.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_maximize.Image")));
             this.pictureBox_maximize.Location = new System.Drawing.Point(1183, 1);
             this.pictureBox_maximize.Name = "pictureBox_maximize";
@@ -265,7 +266,7 @@
             // 
             // pictureBox_hover
             // 
-            this.pictureBox_hover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_hover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_hover.Location = new System.Drawing.Point(1, 1);
             this.pictureBox_hover.Name = "pictureBox_hover";
             this.pictureBox_hover.Size = new System.Drawing.Size(58, 37);
@@ -292,7 +293,7 @@
             // pictureBox_close
             // 
             this.pictureBox_close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_close.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_close.Image")));
             this.pictureBox_close.Location = new System.Drawing.Point(1226, 1);
             this.pictureBox_close.Name = "pictureBox_close";
@@ -306,9 +307,9 @@
             // 
             // pictureBox_menu
             // 
-            this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_menu.Image = global::Safety_Browser.Properties.Resources.menu;
-            this.pictureBox_menu.Location = new System.Drawing.Point(16, 10);
+            this.pictureBox_menu.Location = new System.Drawing.Point(16, 9);
             this.pictureBox_menu.Name = "pictureBox_menu";
             this.pictureBox_menu.Size = new System.Drawing.Size(29, 18);
             this.pictureBox_menu.TabIndex = 45;
@@ -334,7 +335,17 @@
             this.label_menu.Visible = false;
             this.label_menu.Click += new System.EventHandler(this.label_menu_Click);
             // 
-            // Form_Main
+            // panel_cefsharp
+            // 
+            this.panel_cefsharp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_cefsharp.Location = new System.Drawing.Point(1, 38);
+            this.panel_cefsharp.Name = "panel_cefsharp";
+            this.panel_cefsharp.Size = new System.Drawing.Size(1268, 725);
+            this.panel_cefsharp.TabIndex = 48;
+            // 
+            // Form_YB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -355,9 +366,11 @@
             this.Controls.Add(this.label_loadingstate);
             this.Controls.Add(this.dataGridView_domain);
             this.Controls.Add(this.webBrowser_handler);
+            this.Controls.Add(this.panel_cefsharp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1270, 764);
-            this.Name = "Form_Main";
+            this.Name = "Form_YB";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
@@ -396,6 +409,7 @@
         private System.Windows.Forms.PictureBox pictureBox_close;
         private System.Windows.Forms.PictureBox pictureBox_menu;
         private System.Windows.Forms.Label label_menu;
+        private System.Windows.Forms.Panel panel_cefsharp;
     }
 }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
@@ -14,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Safety_Browser
 {
-    public partial class Form_Main : Form
+    public partial class Form_YB : Form
     {
         private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "http://www.ssitectonic.com/GetTxt2Search", "http://www.ssihedonic.com/GetTxt2Search" };
         private string[] domain_service = { "http://www.ssicortex.com/GetDomains", "http://www.ssitectonic.com/GetText2Search", "http://www.ssihedonic.com/GetText2Search" };
@@ -44,6 +46,7 @@ namespace Safety_Browser
         private string _country;
         private string BRAND_CODE = "YB";
         private string API_KEY = "6b8c7e5617414bf2d4ace37600b6ab71";
+        private ChromiumWebBrowser chromeBrowser;
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         private const int
@@ -73,11 +76,12 @@ namespace Safety_Browser
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        public Form_Main()
+        public Form_YB()
         {
             InitializeComponent();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
+            InitializeChromium();
         }
 
         // Form Load
@@ -113,7 +117,7 @@ namespace Safety_Browser
             {
                 timer_handler.Stop();
 
-                webBrowser_handler.Visible = false;
+                panel_cefsharp.Visible = false;
                 pictureBox_loader.Visible = false;
 
                 panel_connection.Visible = true;
@@ -146,7 +150,7 @@ namespace Safety_Browser
                             panel_connection.Visible = false;
                             panel_connection.Enabled = false;
 
-                            webBrowser_handler.Visible = false;
+                            panel_cefsharp.Visible = false;
                             pictureBox_loader.Visible = false;
                         }
                     }
@@ -159,7 +163,7 @@ namespace Safety_Browser
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
-                        webBrowser_handler.Visible = false;
+                        panel_cefsharp.Visible = false;
                         pictureBox_loader.Visible = false;
                     }
                     else if (!last_index_hijacked_get)
@@ -168,15 +172,15 @@ namespace Safety_Browser
                         panel_connection.Enabled = false;
                         pictureBox_loader.Visible = false;
                         
-                        webBrowser_handler.Visible = true;
+                        panel_cefsharp.Visible = true;
                     }
                     else
                     {
-                        webBrowser_handler.Visible = false;
+                        panel_cefsharp.Visible = false;
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
-                        if (webBrowser_handler.Visible == true)
+                        if (panel_cefsharp.Visible == true)
                         {
                             pictureBox_loader.Visible = false;
                         }
@@ -188,7 +192,7 @@ namespace Safety_Browser
                             }
                             else
                             {
-                                webBrowser_handler.Visible = true;
+                                panel_cefsharp.Visible = true;
                             }
                         }
 
@@ -204,7 +208,7 @@ namespace Safety_Browser
                     webBrowser_handler.Stop();
                     timer_handler.Stop();
 
-                    webBrowser_handler.Visible = false;
+                    panel_cefsharp.Visible = false;
                     pictureBox_loader.Visible = false;
 
                     panel_connection.Visible = true;
@@ -324,7 +328,7 @@ namespace Safety_Browser
             {
                 timer_handler.Stop();
 
-                webBrowser_handler.Visible = false;
+                panel_cefsharp.Visible = false;
                 pictureBox_loader.Visible = false;
 
                 panel_connection.Visible = true;
@@ -420,7 +424,7 @@ namespace Safety_Browser
                     {
                         domain_get = row.Cells[0].Value.ToString();
 
-                        webBrowser_handler.Visible = false;
+                        panel_cefsharp.Visible = false;
 
                         pictureBox_loader.Visible = true;
 
@@ -516,7 +520,9 @@ namespace Safety_Browser
                                     domain_one_time = false;
                                     last_index_hijacked_get = false;
                                     pictureBox_loader.Visible = false;
-                                    webBrowser_handler.Visible = true;
+                                    panel_cefsharp.Visible = true;
+
+                                    chromeBrowser.Load(domain_get);
                                 }
                                 else
                                 {
@@ -530,7 +536,9 @@ namespace Safety_Browser
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
-                                webBrowser_handler.Visible = true;
+                                panel_cefsharp.Visible = true;
+
+                                chromeBrowser.Load(domain_get);
                             }
                         }
                     }
@@ -543,7 +551,7 @@ namespace Safety_Browser
                     if (e.Url == webBrowser_handler.Url)
                     {
                         pictureBox_loader.Visible = false;
-                        webBrowser_handler.Visible = true;
+                        panel_cefsharp.Visible = true;
                         load_not_hijacked = false;
                     }
                 }
@@ -622,7 +630,9 @@ namespace Safety_Browser
                             domain_one_time = false;
                             last_index_hijacked_get = false;
                             pictureBox_loader.Visible = false;
-                            webBrowser_handler.Visible = true;
+                            panel_cefsharp.Visible = true;
+
+                            chromeBrowser.Load(domain_get);
                         }
                         else
                         {
@@ -636,7 +646,9 @@ namespace Safety_Browser
                         domain_one_time = false;
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
-                        webBrowser_handler.Visible = true;
+                        panel_cefsharp.Visible = true;
+
+                        chromeBrowser.Load(domain_get);
                     }
                 }
             }
@@ -646,11 +658,22 @@ namespace Safety_Browser
                 timer_handler.Stop();
 
                 pictureBox_loader.Visible = false;
-                webBrowser_handler.Visible = true;
+                panel_cefsharp.Visible = true;
                 load_not_hijacked = false;
             }
         }
 
+        // Initialize Chromium
+        private void InitializeChromium()
+        {
+            CefSettings settings = new CefSettings();
+            Cef.Initialize(settings);
+            chromeBrowser = new ChromiumWebBrowser();
+            chromeBrowser.MenuHandler = new CustomMenuHandler();
+            panel_cefsharp.Controls.Add(chromeBrowser);
+            chromeBrowser.Dock = DockStyle.Fill;
+        }
+        
         // Loading State Changed
         private void Label_loadingstate_TextChanged(object sender, EventArgs e)
         {
@@ -1020,7 +1043,7 @@ namespace Safety_Browser
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            SolidBrush defaultColor = new SolidBrush(Color.FromArgb(197, 112, 53));
+            SolidBrush defaultColor = new SolidBrush(Color.FromArgb(235, 99, 6));
             e.Graphics.FillRectangle(defaultColor, Top);
             e.Graphics.FillRectangle(defaultColor, Left);
             e.Graphics.FillRectangle(defaultColor, Right);
