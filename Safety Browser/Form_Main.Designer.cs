@@ -33,70 +33,36 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label_separator = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
             this.label_current_web_service = new System.Windows.Forms.Label();
             this.label_current_domain_service = new System.Windows.Forms.Label();
-            this.webBrowser_handler = new System.Windows.Forms.WebBrowser();
             this.timer_handler = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_loader = new System.Windows.Forms.PictureBox();
             this.panel_connection = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label_loadingstate = new System.Windows.Forms.Label();
-            this.menuStrip.SuspendLayout();
+            this.label_titlebar = new System.Windows.Forms.Label();
+            this.webBrowser_handler = new System.Windows.Forms.WebBrowser();
+            this.pictureBox_minimize = new System.Windows.Forms.PictureBox();
+            this.pictureBox_maximize = new System.Windows.Forms.PictureBox();
+            this.pictureBox_hover = new System.Windows.Forms.PictureBox();
+            this.pictureBox_loader = new System.Windows.Forms.PictureBox();
+            this.pictureBox_close = new System.Windows.Forms.PictureBox();
+            this.pictureBox_menu = new System.Windows.Forms.PictureBox();
+            this.label_menu = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_minimize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_close)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_menu)).BeginInit();
             this.SuspendLayout();
-            // 
-            // menuStrip
-            // 
-            this.menuStrip.BackColor = System.Drawing.Color.White;
-            this.menuStrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1254, 24);
-            this.menuStrip.TabIndex = 1;
-            this.menuStrip.Text = "menuStrip1";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.editToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.ShortcutKeyDisplayString = "E";
-            this.editToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.editToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Image = global::Safety_Browser.Properties.Resources.exit;
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
-            // 
-            // label_separator
-            // 
-            this.label_separator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_separator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.label_separator.Location = new System.Drawing.Point(-4, 22);
-            this.label_separator.Name = "label_separator";
-            this.label_separator.Size = new System.Drawing.Size(1266, 1);
-            this.label_separator.TabIndex = 19;
-            this.label_separator.Text = " ";
             // 
             // domain
             // 
@@ -135,7 +101,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView_domain.Location = new System.Drawing.Point(1265, 27);
+            this.dataGridView_domain.Location = new System.Drawing.Point(1280, 65);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
@@ -158,7 +124,7 @@
             // 
             this.label_current_web_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_web_service.AutoSize = true;
-            this.label_current_web_service.Location = new System.Drawing.Point(1263, 330);
+            this.label_current_web_service.Location = new System.Drawing.Point(1278, 368);
             this.label_current_web_service.Name = "label_current_web_service";
             this.label_current_web_service.Size = new System.Drawing.Size(106, 13);
             this.label_current_web_service.TabIndex = 27;
@@ -169,46 +135,17 @@
             // 
             this.label_current_domain_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_domain_service.AutoSize = true;
-            this.label_current_domain_service.Location = new System.Drawing.Point(1263, 347);
+            this.label_current_domain_service.Location = new System.Drawing.Point(1278, 385);
             this.label_current_domain_service.Name = "label_current_domain_service";
             this.label_current_domain_service.Size = new System.Drawing.Size(120, 13);
             this.label_current_domain_service.TabIndex = 28;
             this.label_current_domain_service.Text = "current_domain_service";
             this.label_current_domain_service.Visible = false;
             // 
-            // webBrowser_handler
-            // 
-            this.webBrowser_handler.AllowWebBrowserDrop = false;
-            this.webBrowser_handler.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser_handler.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser_handler.Location = new System.Drawing.Point(0, 26);
-            this.webBrowser_handler.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser_handler.Name = "webBrowser_handler";
-            this.webBrowser_handler.ScriptErrorsSuppressed = true;
-            this.webBrowser_handler.Size = new System.Drawing.Size(1254, 698);
-            this.webBrowser_handler.TabIndex = 37;
-            this.webBrowser_handler.Visible = false;
-            this.webBrowser_handler.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser_handler_DocumentCompleted);
-            // 
             // timer_handler
             // 
             this.timer_handler.Interval = 60000;
             this.timer_handler.Tick += new System.EventHandler(this.Timer_handler_Tick);
-            // 
-            // pictureBox_loader
-            // 
-            this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_loader.ErrorImage = null;
-            this.pictureBox_loader.Image = global::Safety_Browser.Properties.Resources.loader;
-            this.pictureBox_loader.Location = new System.Drawing.Point(495, 230);
-            this.pictureBox_loader.Name = "pictureBox_loader";
-            this.pictureBox_loader.Size = new System.Drawing.Size(265, 265);
-            this.pictureBox_loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox_loader.TabIndex = 38;
-            this.pictureBox_loader.TabStop = false;
             // 
             // panel_connection
             // 
@@ -216,7 +153,7 @@
             this.panel_connection.Controls.Add(this.pictureBox1);
             this.panel_connection.Controls.Add(this.label1);
             this.panel_connection.Controls.Add(this.label8);
-            this.panel_connection.Location = new System.Drawing.Point(953, 761);
+            this.panel_connection.Location = new System.Drawing.Point(961, 817);
             this.panel_connection.Name = "panel_connection";
             this.panel_connection.Size = new System.Drawing.Size(335, 289);
             this.panel_connection.TabIndex = 39;
@@ -225,7 +162,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.connection;
-            this.pictureBox1.Location = new System.Drawing.Point(81, 11);
+            this.pictureBox1.Location = new System.Drawing.Point(81, 47);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(180, 140);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -236,7 +173,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(3, 178);
+            this.label1.Location = new System.Drawing.Point(3, 214);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(329, 25);
             this.label1.TabIndex = 33;
@@ -247,7 +184,7 @@
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label8.ForeColor = System.Drawing.Color.Gray;
-            this.label8.Location = new System.Drawing.Point(3, 209);
+            this.label8.Location = new System.Drawing.Point(3, 245);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(329, 13);
             this.label8.TabIndex = 34;
@@ -258,7 +195,7 @@
             // 
             this.label_loadingstate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_loadingstate.AutoSize = true;
-            this.label_loadingstate.Location = new System.Drawing.Point(1263, 311);
+            this.label_loadingstate.Location = new System.Drawing.Point(1278, 349);
             this.label_loadingstate.Name = "label_loadingstate";
             this.label_loadingstate.Size = new System.Drawing.Size(64, 13);
             this.label_loadingstate.TabIndex = 21;
@@ -266,49 +203,184 @@
             this.label_loadingstate.Visible = false;
             this.label_loadingstate.TextChanged += new System.EventHandler(this.Label_loadingstate_TextChanged);
             // 
+            // label_titlebar
+            // 
+            this.label_titlebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.label_titlebar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_titlebar.ForeColor = System.Drawing.Color.White;
+            this.label_titlebar.Location = new System.Drawing.Point(2, 1);
+            this.label_titlebar.Name = "label_titlebar";
+            this.label_titlebar.Size = new System.Drawing.Size(1267, 37);
+            this.label_titlebar.TabIndex = 40;
+            this.label_titlebar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_titlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label_titlebar_MouseDown);
+            // 
+            // webBrowser_handler
+            // 
+            this.webBrowser_handler.AllowWebBrowserDrop = false;
+            this.webBrowser_handler.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser_handler.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser_handler.Location = new System.Drawing.Point(1, 38);
+            this.webBrowser_handler.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser_handler.Name = "webBrowser_handler";
+            this.webBrowser_handler.ScriptErrorsSuppressed = true;
+            this.webBrowser_handler.Size = new System.Drawing.Size(1268, 725);
+            this.webBrowser_handler.TabIndex = 37;
+            this.webBrowser_handler.Visible = false;
+            this.webBrowser_handler.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser_handler_DocumentCompleted);
+            // 
+            // pictureBox_minimize
+            // 
+            this.pictureBox_minimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_minimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_minimize.Image = global::Safety_Browser.Properties.Resources.minimize;
+            this.pictureBox_minimize.Location = new System.Drawing.Point(1140, 1);
+            this.pictureBox_minimize.Name = "pictureBox_minimize";
+            this.pictureBox_minimize.Size = new System.Drawing.Size(43, 37);
+            this.pictureBox_minimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_minimize.TabIndex = 43;
+            this.pictureBox_minimize.TabStop = false;
+            this.pictureBox_minimize.Click += new System.EventHandler(this.pictureBox_minimize_Click);
+            this.pictureBox_minimize.MouseLeave += new System.EventHandler(this.pictureBox_minimize_MouseLeave);
+            this.pictureBox_minimize.MouseHover += new System.EventHandler(this.pictureBox_minimize_MouseHover);
+            // 
+            // pictureBox_maximize
+            // 
+            this.pictureBox_maximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_maximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_maximize.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_maximize.Image")));
+            this.pictureBox_maximize.Location = new System.Drawing.Point(1183, 1);
+            this.pictureBox_maximize.Name = "pictureBox_maximize";
+            this.pictureBox_maximize.Size = new System.Drawing.Size(43, 37);
+            this.pictureBox_maximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_maximize.TabIndex = 42;
+            this.pictureBox_maximize.TabStop = false;
+            this.pictureBox_maximize.Click += new System.EventHandler(this.pictureBox_maximize_Click);
+            this.pictureBox_maximize.MouseLeave += new System.EventHandler(this.pictureBox_maximize_MouseLeave);
+            this.pictureBox_maximize.MouseHover += new System.EventHandler(this.pictureBox_maximize_MouseHover);
+            // 
+            // pictureBox_hover
+            // 
+            this.pictureBox_hover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_hover.Location = new System.Drawing.Point(1, 1);
+            this.pictureBox_hover.Name = "pictureBox_hover";
+            this.pictureBox_hover.Size = new System.Drawing.Size(58, 37);
+            this.pictureBox_hover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_hover.TabIndex = 41;
+            this.pictureBox_hover.TabStop = false;
+            this.pictureBox_hover.Click += new System.EventHandler(this.pictureBox_hover_Click);
+            this.pictureBox_hover.MouseLeave += new System.EventHandler(this.pictureBox_hover_MouseLeave);
+            this.pictureBox_hover.MouseHover += new System.EventHandler(this.pictureBox_hover_MouseHover);
+            // 
+            // pictureBox_loader
+            // 
+            this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_loader.ErrorImage = null;
+            this.pictureBox_loader.Image = global::Safety_Browser.Properties.Resources.loader;
+            this.pictureBox_loader.Location = new System.Drawing.Point(503, 289);
+            this.pictureBox_loader.Name = "pictureBox_loader";
+            this.pictureBox_loader.Size = new System.Drawing.Size(265, 265);
+            this.pictureBox_loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_loader.TabIndex = 38;
+            this.pictureBox_loader.TabStop = false;
+            // 
+            // pictureBox_close
+            // 
+            this.pictureBox_close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_close.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_close.Image")));
+            this.pictureBox_close.Location = new System.Drawing.Point(1226, 1);
+            this.pictureBox_close.Name = "pictureBox_close";
+            this.pictureBox_close.Size = new System.Drawing.Size(43, 37);
+            this.pictureBox_close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_close.TabIndex = 44;
+            this.pictureBox_close.TabStop = false;
+            this.pictureBox_close.Click += new System.EventHandler(this.pictureBox_close_Click);
+            this.pictureBox_close.MouseLeave += new System.EventHandler(this.pictureBox_close_MouseLeave);
+            this.pictureBox_close.MouseHover += new System.EventHandler(this.pictureBox_close_MouseHover);
+            // 
+            // pictureBox_menu
+            // 
+            this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(100)))), ((int)(((byte)(6)))));
+            this.pictureBox_menu.Image = global::Safety_Browser.Properties.Resources.menu;
+            this.pictureBox_menu.Location = new System.Drawing.Point(16, 10);
+            this.pictureBox_menu.Name = "pictureBox_menu";
+            this.pictureBox_menu.Size = new System.Drawing.Size(29, 18);
+            this.pictureBox_menu.TabIndex = 45;
+            this.pictureBox_menu.TabStop = false;
+            this.pictureBox_menu.Click += new System.EventHandler(this.pictureBox_menu_Click);
+            this.pictureBox_menu.MouseLeave += new System.EventHandler(this.pictureBox_menu_MouseLeave);
+            this.pictureBox_menu.MouseHover += new System.EventHandler(this.pictureBox_menu_MouseHover);
+            // 
+            // label_menu
+            // 
+            this.label_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_menu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_menu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_menu.Image = global::Safety_Browser.Properties.Resources.exit;
+            this.label_menu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label_menu.Location = new System.Drawing.Point(1, 38);
+            this.label_menu.Name = "label_menu";
+            this.label_menu.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label_menu.Size = new System.Drawing.Size(66, 28);
+            this.label_menu.TabIndex = 47;
+            this.label_menu.Text = "Exit";
+            this.label_menu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label_menu.Visible = false;
+            this.label_menu.Click += new System.EventHandler(this.label_menu_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1254, 725);
+            this.ClientSize = new System.Drawing.Size(1270, 764);
+            this.Controls.Add(this.label_menu);
+            this.Controls.Add(this.pictureBox_menu);
+            this.Controls.Add(this.pictureBox_close);
+            this.Controls.Add(this.pictureBox_minimize);
+            this.Controls.Add(this.pictureBox_maximize);
+            this.Controls.Add(this.pictureBox_hover);
+            this.Controls.Add(this.label_titlebar);
             this.Controls.Add(this.panel_connection);
             this.Controls.Add(this.pictureBox_loader);
-            this.Controls.Add(this.label_separator);
-            this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.label_current_domain_service);
             this.Controls.Add(this.label_current_web_service);
             this.Controls.Add(this.label_loadingstate);
             this.Controls.Add(this.dataGridView_domain);
             this.Controls.Add(this.webBrowser_handler);
-            this.MainMenuStrip = this.menuStrip;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(1270, 764);
             this.Name = "Form_Main";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
             this.Load += new System.EventHandler(this.Form_Main_Load);
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
             this.panel_connection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_minimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_close)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_menu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Label label_separator;
         private System.Windows.Forms.DataGridViewTextBoxColumn domain;
         private System.Windows.Forms.DataGridView dataGridView_domain;
         private System.Windows.Forms.Label label_current_web_service;
         private System.Windows.Forms.Label label_current_domain_service;
-        private System.Windows.Forms.WebBrowser webBrowser_handler;
         private System.Windows.Forms.Timer timer_handler;
         private System.Windows.Forms.PictureBox pictureBox_loader;
         private System.Windows.Forms.Panel panel_connection;
@@ -316,6 +388,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label_loadingstate;
+        private System.Windows.Forms.Label label_titlebar;
+        private System.Windows.Forms.PictureBox pictureBox_hover;
+        private System.Windows.Forms.PictureBox pictureBox_maximize;
+        private System.Windows.Forms.WebBrowser webBrowser_handler;
+        private System.Windows.Forms.PictureBox pictureBox_minimize;
+        private System.Windows.Forms.PictureBox pictureBox_close;
+        private System.Windows.Forms.PictureBox pictureBox_menu;
+        private System.Windows.Forms.Label label_menu;
     }
 }
 

@@ -2,10 +2,13 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,8 +18,9 @@ namespace Safety_Browser
 {
     public partial class Form_Main : Form
     {
-        private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "www.ssitectonic.com/GetTxt2Search", "www.ssihedonic.com/GetTxt2Search" };
-        private string[] domain_test = { "http://www.ssicortex.com/GetDomains", "www.ssitectonic.com/GetText2Search", "www.ssihedonic.com/GetText2Search" };
+        private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "http://www.ssitectonic.com/GetTxt2Search", "http://www.ssihedonic.com/GetTxt2Search" };
+        private string[] domain_service = { "http://www.ssicortex.com/GetDomains", "http://www.ssitectonic.com/GetText2Search", "http://www.ssihedonic.com/GetText2Search" };
+        private string[] send_service = { "http://www.ssicortex.com/SendDetails", "http://www.ssitectonic.com/SendDetails", "http://www.ssihedonic.com/SendDetails" };
         private string text_search;
         private bool close = true;
         private bool isHijacked;
@@ -41,13 +45,41 @@ namespace Safety_Browser
         private string _region;
         private string _country;
         private string BRAND_CODE = "YB";
-        private string API_KEY_SSIHEDONIC = "0397c2be1d97aac330bc3d5278c47696";
-        private string API_KEY_SSITECTONIC = "561b9fd16b50553213e4be2024fb4cf9";
-        private string API_KEY_SSICORTEX = "6b8c7e5617414bf2d4ace37600b6ab71";
+        private string API_KEY = "6b8c7e5617414bf2d4ace37600b6ab71";
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        private const int
+             HTLEFT = 10,
+             HTRIGHT = 11,
+             HTTOP = 12,
+             HTTOPLEFT = 13,
+             HTTOPRIGHT = 14,
+             HTBOTTOM = 15,
+             HTBOTTOMLEFT = 16,
+             HTBOTTOMRIGHT = 17;
+        const int _ = 1; // you can rename this variable if you like
+        new Rectangle Top { get { return new Rectangle(0, 0, this.ClientSize.Width, _); } }
+        new Rectangle Left { get { return new Rectangle(0, 0, _, this.ClientSize.Height); } }
+        new Rectangle Bottom { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
+        new Rectangle Right { get { return new Rectangle(this.ClientSize.Width - _, 0, _, ClientSize.Height); } }
+        Rectangle TopLeft { get { return new Rectangle(0, 0, _, _); } }
+        Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
+        Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - _, _, _); } }
+        Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
+
+        public bool IsMenuVisible { get; private set; }
+        public bool IsCloseVisible { get; private set; }
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         public Form_Main()
         {
             InitializeComponent();
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
         // Form Load
@@ -204,9 +236,9 @@ namespace Safety_Browser
                 {
                     var client = new HttpClient();
                     var requestContent = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair<string, string>("api_key", API_KEY_SSICORTEX),
-                    new KeyValuePair<string, string>("brand_code", BRAND_CODE),
-                });
+                        new KeyValuePair<string, string>("api_key", API_KEY),
+                        new KeyValuePair<string, string>("brand_code", BRAND_CODE),
+                    });
 
                     HttpResponseMessage response = await client.PostAsync(
                         web_service_test,
@@ -253,7 +285,7 @@ namespace Safety_Browser
                         if (!String.IsNullOrEmpty(text_search))
                         {
                             // Get Domains
-                            await GetDomainsAsync(domain_test[current_domain]);
+                            await GetDomainsAsync(domain_service[current_domain]);
                             total_domain_index = dataGridView_domain.RowCount;
                             dataGridView_domain.ClearSelection();
                             dataGridView_domain.Rows[current_domain_index].Selected = true;
@@ -319,7 +351,7 @@ namespace Safety_Browser
             {
                 var client = new HttpClient();
                 var requestContent = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair<string, string>("api_key", API_KEY_SSICORTEX),
+                    new KeyValuePair<string, string>("api_key", API_KEY),
                     new KeyValuePair<string, string>("brand_code", BRAND_CODE),
                 });
 
@@ -340,6 +372,7 @@ namespace Safety_Browser
                     {
                         domain_get = Regex.Unescape(m.Groups[1].ToString().Replace("\"", ""));
                     }
+
 
                     StringBuilder sb = new StringBuilder(domain_get);
                     sb.Replace("domain_ur", "");
@@ -771,9 +804,7 @@ namespace Safety_Browser
                             _city = locationDetails.city;
                             _region = locationDetails.regionName;
                             _country = locationDetails.country;
-
-                            //MessageBox.Show(_mac_address + "\n" + _external_ip + "\n" + _city + "\n" + _region + "\n" + _country);
-                            string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            InsertDevice(send_service[current_web_service], _external_ip, _mac_address, _city, _country);
                         }
                     }
                 }
@@ -783,5 +814,240 @@ namespace Safety_Browser
                 MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void InsertDevice(string domain, string ip, string mac_address, string city, string country)
+        {
+            try
+            {
+                using (var wb = new WebClient())
+                {
+                    var data = new NameValueCollection
+                    {
+                        ["api_key"] = API_KEY,
+                        ["brand_code"] = BRAND_CODE,
+                        ["ip"] = ip,
+                        ["macid"] = mac_address,
+                        ["city"] = city,
+                        ["country"] = country
+                    };
+
+                    var response = wb.UploadValues(domain, "POST", data);
+                    string responseInString = Encoding.UTF8.GetString(response);
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                close = false;
+                Close();
+            }
+        }
+
+        private void IPExists(string ip)
+        {
+
+        }
+
+        private void pictureBox_minimize_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_minimize.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_minimize_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_minimize.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_maximize_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_maximize.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_maximize_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_maximize.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_close_MouseHover(object sender, EventArgs e)
+        {
+            if (!IsCloseVisible)
+            {
+                pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
+            }
+        }
+
+        private void pictureBox_close_MouseLeave(object sender, EventArgs e)
+        {
+            if (!IsCloseVisible)
+            {
+                pictureBox_close.BackColor = Color.FromArgb(235, 99, 6);
+            }
+        }
+
+        private void pictureBox_menu_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_menu_MouseLeave(object sender, EventArgs e)
+        {
+            if (!IsMenuVisible)
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
+            }
+        }
+
+        private void pictureBox_hover_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_hover_MouseLeave(object sender, EventArgs e)
+        {
+            if (!IsMenuVisible)
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
+            }
+        }
+
+        private void pictureBox_menu_Click(object sender, EventArgs e)
+        {
+            if (label_menu.Visible == true)
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
+                IsMenuVisible = false;
+                label_menu.Visible = false;
+            }
+            else
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
+                pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
+                IsMenuVisible = true;
+                label_menu.Visible = true;
+            }
+        }
+
+        private void pictureBox_hover_Click(object sender, EventArgs e)
+        {
+            if (label_menu.Visible == true)
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
+                IsMenuVisible = false;
+                label_menu.Visible = false;
+            }
+            else
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
+                pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
+                IsMenuVisible = true;
+                label_menu.Visible = true;
+            }
+        }
+
+        private void label_menu_Click(object sender, EventArgs e)
+        {
+            if (close)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Environment.Exit(0);
+                }
+            }
+        }
+        
+        private void pictureBox_minimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void pictureBox_maximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void pictureBox_close_Click(object sender, EventArgs e)
+        {
+            if (close)
+            {
+                IsCloseVisible = true;
+                pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
+
+                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    IsCloseVisible = false;
+                    pictureBox_close.BackColor = Color.FromArgb(235, 99, 6);
+                }
+            }
+        }
+         
+        private void label_titlebar_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && e.Clicks >= 2)
+            {
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    WindowState = FormWindowState.Normal;
+                }
+                else
+                {
+                    WindowState = FormWindowState.Maximized;
+                }
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            SolidBrush defaultColor = new SolidBrush(Color.FromArgb(197, 112, 53));
+            e.Graphics.FillRectangle(defaultColor, Top);
+            e.Graphics.FillRectangle(defaultColor, Left);
+            e.Graphics.FillRectangle(defaultColor, Right);
+            e.Graphics.FillRectangle(defaultColor, Bottom);
+        }  
+        
+        protected override void WndProc(ref Message message)
+        {
+            base.WndProc(ref message);
+
+            if (message.Msg == 0x84)
+            {
+                var cursor = this.PointToClient(Cursor.Position);
+
+                if (TopLeft.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
+                else if (TopRight.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
+                else if (BottomLeft.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
+                else if (BottomRight.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
+
+                else if (Top.Contains(cursor)) message.Result = (IntPtr)HTTOP;
+                else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
+                else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
+                else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
+            }
+        }
     }
 }
+
