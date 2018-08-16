@@ -67,10 +67,8 @@ namespace Safety_Browser
         Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
         Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - _, _, _); } }
         Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
-
         public bool IsMenuVisible { get; private set; }
         public bool IsCloseVisible { get; private set; }
-
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
@@ -79,9 +77,9 @@ namespace Safety_Browser
         public Form_YB()
         {
             InitializeComponent();
+            InitializeChromium();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
-            InitializeChromium();
         }
 
         // Form Load
@@ -667,6 +665,8 @@ namespace Safety_Browser
         private void InitializeChromium()
         {
             CefSettings settings = new CefSettings();
+            //settings.CefCommandLineArgs.Add("ppapi-flash-path", @"C:\WINDOWS\SysWOW64\Macromed\Flash\pepflashplayer32_18_0_0_209.dll"); //Load a specific pepper flash version (Step 1 of 2)
+            //settings.CefCommandLineArgs.Add("ppapi-flash-version", "18.0.0.209"); //Load a specific pepper flash version (Step 2 of 2)
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
@@ -822,9 +822,9 @@ namespace Safety_Browser
                         {
                             _mac_address = GetMACAddress();
                             _external_ip = GetExternalIp();
-                            _city = locationDetails.city;
-                            _region = locationDetails.regionName;
-                            _country = locationDetails.country;
+                            _city = locationDetails.city.Replace("'", "''");
+                            _region = locationDetails.regionName.Replace("'", "''");
+                            _country = locationDetails.country.Replace("'", "''");
                             InsertDevice(send_service[current_web_service], _external_ip, _mac_address, _city, _country);
                         }
                     }
