@@ -11,13 +11,12 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Safety_Browser
 {
-    public partial class Form_YB : Form
+    public partial class Form_CL : Form
     {
         private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "http://www.ssitectonic.com/GetTxt2Search", "http://www.ssihedonic.com/GetTxt2Search" };
         private string[] domain_service = { "http://www.ssicortex.com/GetDomains", "http://www.ssitectonic.com/GetText2Search", "http://www.ssihedonic.com/GetText2Search" };
@@ -48,8 +47,6 @@ namespace Safety_Browser
         private string BRAND_CODE = "YB";
         private string API_KEY = "6b8c7e5617414bf2d4ace37600b6ab71";
         private ChromiumWebBrowser chromeBrowser;
-        private double defaultValue = 0;
-        private GlobalKeyboardHook gHook;
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         private const int
@@ -72,116 +69,17 @@ namespace Safety_Browser
         Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
         public bool IsMenuVisible { get; private set; }
         public bool IsCloseVisible { get; private set; }
-        public bool not_hijacked = false;
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
-        [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(Keys vKey);
 
-        public Form_YB()
+        public Form_CL()
         {
             InitializeComponent();
             InitializeChromium();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
-
-            gHook = new GlobalKeyboardHook();
-            gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
-            foreach (Keys key in Enum.GetValues(typeof(Keys)))
-            {
-                gHook.HookedKeys.Add(key);
-            }
-            gHook.hook();
-        }
-
-        public void gHook_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (not_hijacked)
-            {
-                if (ContainsFocus)
-                {
-                    if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyData.ToString().ToUpper().IndexOf("Shift".ToUpper()) >= 0 && e.KeyCode == Keys.R)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                chromeBrowser.Reload(false);
-                            }));
-
-                        }).Start();
-                    } 
-                    else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.R)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                chromeBrowser.Reload(true);
-                            }));
-
-                        }).Start();
-                    }
-                    else if (e.KeyCode == Keys.Left)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                chromeBrowser.Back();
-                            }));
-
-                        }).Start();
-                    }
-                    else if (e.KeyCode == Keys.Right)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                chromeBrowser.Forward();
-                            }));
-
-                        }).Start();
-                    }
-                    else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.D0)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                defaultValue = 0;
-                                chromeBrowser.SetZoomLevel(0);
-                            }));
-
-                        }).Start();
-                    }
-                    else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.Oemplus)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                chromeBrowser.SetZoomLevel(++defaultValue);
-                            }));
-
-                        }).Start();
-                    }
-                    else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.OemMinus)
-                    {
-                        new Thread(() =>
-                        {
-                            Invoke(new Action(delegate
-                            {
-                                chromeBrowser.SetZoomLevel(--defaultValue);
-                            }));
-
-                        }).Start();
-                    }
-                }
-            }
         }
 
         // Form Load
@@ -621,14 +519,12 @@ namespace Safety_Browser
                                     last_index_hijacked_get = false;
                                     pictureBox_loader.Visible = false;
                                     panel_cefsharp.Visible = true;
-                                    not_hijacked = true;
 
                                     chromeBrowser.Load(domain_get);
                                 }
                                 else
                                 {
                                     last_index_hijacked_get = true;
-                                    not_hijacked = false;
                                     label_loadingstate.Text = "1";
                                     label_loadingstate.Text = "0";
                                 }
@@ -639,7 +535,6 @@ namespace Safety_Browser
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
                                 panel_cefsharp.Visible = true;
-                                not_hijacked = true;
 
                                 chromeBrowser.Load(domain_get);
                             }
@@ -649,7 +544,6 @@ namespace Safety_Browser
             }
             else if (load_not_hijacked)
             {
-                // handlers
                 if (webBrowser_handler.ReadyState == WebBrowserReadyState.Complete)
                 {
                     if (e.Url == webBrowser_handler.Url)
@@ -776,7 +670,6 @@ namespace Safety_Browser
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
-            //chromeBrowser.LifeSpanHandler = new BrowserLifeSpanHandler();
             panel_cefsharp.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
         }
@@ -826,6 +719,26 @@ namespace Safety_Browser
                 }
             }
         }
+
+        // Menu
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (close)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    close = false;
+                    //Cef.Shutdown();
+                    Close();
+                }
+            }
+            else
+            {
+                //Cef.Shutdown();
+            }
+        }
+
         // Form Closing
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -838,12 +751,12 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    Cef.Shutdown();
+                    //Cef.Shutdown();
                 }
             }
             else
             {
-                Cef.Shutdown();
+                //Cef.Shutdown();
             }
         }
 
@@ -910,16 +823,16 @@ namespace Safety_Browser
                             _mac_address = GetMACAddress();
                             _external_ip = GetExternalIp();
                             _city = locationDetails.city.Replace("'", "''");
+                            _region = locationDetails.regionName.Replace("'", "''");
                             _country = locationDetails.country.Replace("'", "''");
-                            //MessageBox.Show(_mac_address + "\n" + _external_ip + "\n" + _city + "\n" + _country);
-                            //InsertDevice(send_service[current_web_service], _external_ip, _mac_address, _city, _country);
+                            InsertDevice(send_service[current_web_service], _external_ip, _mac_address, _city, _country);
                         }
                     }
                 }
             }
             catch (Exception err)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -963,7 +876,7 @@ namespace Safety_Browser
 
         private void pictureBox_minimize_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox_minimize.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_minimize.BackColor = Color.FromArgb(32, 98, 174);
         }
 
         private void pictureBox_maximize_MouseHover(object sender, EventArgs e)
@@ -973,7 +886,7 @@ namespace Safety_Browser
 
         private void pictureBox_maximize_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox_maximize.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_maximize.BackColor = Color.FromArgb(32, 98, 174);
         }
 
         private void pictureBox_close_MouseHover(object sender, EventArgs e)
@@ -988,15 +901,12 @@ namespace Safety_Browser
         {
             if (!IsCloseVisible)
             {
-                pictureBox_close.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_close.BackColor = Color.FromArgb(32, 98, 174);
             }
         }
 
         private void pictureBox_menu_MouseHover(object sender, EventArgs e)
         {
-            Point position = new Point(pictureBox_menu.Left, pictureBox_menu.Height);
-            ToolStripMenuItem.DropDown.Show(pictureBox_menu, position);
-
             pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
             pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
         }
@@ -1005,16 +915,13 @@ namespace Safety_Browser
         {
             if (!IsMenuVisible)
             {
-                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
-                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_hover.BackColor = Color.FromArgb(32, 98, 174);
+                pictureBox_menu.BackColor = Color.FromArgb(32, 98, 174);
             }
         }
 
         private void pictureBox_hover_MouseHover(object sender, EventArgs e)
         {
-            Point position = new Point(pictureBox_menu.Left, pictureBox_menu.Height);
-            ToolStripMenuItem.DropDown.Show(pictureBox_menu, position);
-
             pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
             pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
         }
@@ -1023,105 +930,57 @@ namespace Safety_Browser
         {
             if (!IsMenuVisible)
             {
-                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
-                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_hover.BackColor = Color.FromArgb(32, 98, 174);
+                pictureBox_menu.BackColor = Color.FromArgb(32, 98, 174);
             }
         }
 
         private void pictureBox_menu_Click(object sender, EventArgs e)
         {
-            Point position = new Point(pictureBox_menu.Left, pictureBox_menu.Height);
-            ToolStripMenuItem.DropDown.Show(pictureBox_menu, position);
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (close)
+            if (label_menu.Visible == true)
             {
-                IsCloseVisible = true;
-                pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
-                pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
-
-                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
-                {
-                    Environment.Exit(0);
-                    Cef.Shutdown();
-                }
-                else
-                {
-                    IsCloseVisible = false;
-                    pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
-                    pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
-                }
+                pictureBox_hover.BackColor = Color.FromArgb(32, 98, 174);
+                pictureBox_menu.BackColor = Color.FromArgb(32, 98, 174);
+                IsMenuVisible = false;
+                label_menu.Visible = false;
             }
             else
             {
-                Environment.Exit(0);
-                Cef.Shutdown();
-            }
-        }
-
-        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.Reload(true);
-            }
-        }
-        private void cleanAndReloadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.Reload(false);
-            }
-        }
-
-        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.SetZoomLevel(++defaultValue);
-            }
-        }
-
-        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.SetZoomLevel(--defaultValue);
-            }
-        }
-
-        private void resetZoomToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                defaultValue = 0;
-                chromeBrowser.SetZoomLevel(0);
-            }
-        }
-
-        private void goBackToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.Back();
-            }
-        }
-
-        private void forwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.Forward();
+                pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
+                pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
+                IsMenuVisible = true;
+                label_menu.Visible = true;
             }
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
         {
-            Point position = new Point(pictureBox_menu.Left, pictureBox_menu.Height);
-            ToolStripMenuItem.DropDown.Show(pictureBox_menu, position);
+            if (label_menu.Visible == true)
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(32, 98, 174);
+                pictureBox_menu.BackColor = Color.FromArgb(32, 98, 174);
+                IsMenuVisible = false;
+                label_menu.Visible = false;
+            }
+            else
+            {
+                pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
+                pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
+                IsMenuVisible = true;
+                label_menu.Visible = true;
+            }
+        }
+
+        private void label_menu_Click(object sender, EventArgs e)
+        {
+            if (close)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Environment.Exit(0);
+                }
+            }
         }
         
         private void pictureBox_minimize_Click(object sender, EventArgs e)
@@ -1152,18 +1011,12 @@ namespace Safety_Browser
                 if (dr == DialogResult.Yes)
                 {
                     Environment.Exit(0);
-                    Cef.Shutdown();
                 }
                 else
                 {
                     IsCloseVisible = false;
-                    pictureBox_close.BackColor = Color.FromArgb(235, 99, 6);
+                    pictureBox_close.BackColor = Color.FromArgb(32, 98, 174);
                 }
-            }
-            else
-            {
-                Environment.Exit(0);
-                Cef.Shutdown();
             }
         }
          
@@ -1190,7 +1043,7 @@ namespace Safety_Browser
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            SolidBrush defaultColor = new SolidBrush(Color.FromArgb(235, 99, 6));
+            SolidBrush defaultColor = new SolidBrush(Color.FromArgb(32, 98, 174));
             e.Graphics.FillRectangle(defaultColor, Top);
             e.Graphics.FillRectangle(defaultColor, Left);
             e.Graphics.FillRectangle(defaultColor, Right);

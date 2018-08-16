@@ -87,16 +87,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowserLifeSpanHandler.cs" />
     <Compile Include="CustomMenuHandler.cs" />
+    <Compile Include="Form_CL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CL.Designer.cs">
+      <DependentUpon>Form_CL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_YB.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_YB.Designer.cs">
       <DependentUpon>Form_YB.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalKeyboardHook.cs" />
     <Compile Include="IpInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_CL.resx">
+      <DependentUpon>Form_CL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_YB.resx">
       <DependentUpon>Form_YB.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\safety_browser_desktop.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\safety_browser.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
