@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -68,7 +68,10 @@
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_version = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox_menu = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox_back = new System.Windows.Forms.PictureBox();
+            this.pictureBox_forward = new System.Windows.Forms.PictureBox();
+            this.pictureBox_reload = new System.Windows.Forms.PictureBox();
+            this.timer_mouse = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -79,6 +82,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_close)).BeginInit();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_menu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_back)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_forward)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_reload)).BeginInit();
             this.SuspendLayout();
             // 
             // domain
@@ -92,44 +98,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle22.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridView_domain.Location = new System.Drawing.Point(1292, 46);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -283,6 +289,7 @@
             // pictureBox_hover
             // 
             this.pictureBox_hover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_hover.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_hover.Location = new System.Drawing.Point(1, 1);
             this.pictureBox_hover.Name = "pictureBox_hover";
             this.pictureBox_hover.Size = new System.Drawing.Size(58, 37);
@@ -385,6 +392,7 @@
             // 
             // goBackToolStripMenuItem
             // 
+            this.goBackToolStripMenuItem.Enabled = false;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
             this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Left Key";
             this.goBackToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
@@ -393,6 +401,7 @@
             // 
             // forwardToolStripMenuItem
             // 
+            this.forwardToolStripMenuItem.Enabled = false;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
             this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "Right Key";
             this.forwardToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
@@ -401,6 +410,7 @@
             // 
             // reloadToolStripMenuItem
             // 
+            this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             this.reloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.reloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
@@ -409,6 +419,7 @@
             // 
             // cleanAndReloadToolStripMenuItem
             // 
+            this.cleanAndReloadToolStripMenuItem.Enabled = false;
             this.cleanAndReloadToolStripMenuItem.Name = "cleanAndReloadToolStripMenuItem";
             this.cleanAndReloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
@@ -423,6 +434,7 @@
             // 
             // resetZoomToolStripMenuItem
             // 
+            this.resetZoomToolStripMenuItem.Enabled = false;
             this.resetZoomToolStripMenuItem.Name = "resetZoomToolStripMenuItem";
             this.resetZoomToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
             this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
@@ -431,6 +443,7 @@
             // 
             // zoomInToolStripMenuItem
             // 
+            this.zoomInToolStripMenuItem.Enabled = false;
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
             this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
             this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
@@ -439,6 +452,7 @@
             // 
             // zoomOutToolStripMenuItem
             // 
+            this.zoomOutToolStripMenuItem.Enabled = false;
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
             this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
             this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
@@ -463,25 +477,71 @@
             // pictureBox_menu
             // 
             this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.pictureBox_menu.Image = global::Safety_Browser.Properties.Resources.menu;
-            this.pictureBox_menu.Location = new System.Drawing.Point(16, 9);
+            this.pictureBox_menu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_menu.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_menu.Image")));
+            this.pictureBox_menu.Location = new System.Drawing.Point(14, 6);
             this.pictureBox_menu.Name = "pictureBox_menu";
-            this.pictureBox_menu.Size = new System.Drawing.Size(29, 18);
+            this.pictureBox_menu.Size = new System.Drawing.Size(34, 22);
             this.pictureBox_menu.TabIndex = 45;
             this.pictureBox_menu.TabStop = false;
             this.pictureBox_menu.Click += new System.EventHandler(this.pictureBox_menu_Click);
             this.pictureBox_menu.MouseLeave += new System.EventHandler(this.pictureBox_menu_MouseLeave);
             this.pictureBox_menu.MouseHover += new System.EventHandler(this.pictureBox_menu_MouseHover);
             // 
-            // button1
+            // pictureBox_back
             // 
-            this.button1.Location = new System.Drawing.Point(790, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 50;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pictureBox_back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_back.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_back.Enabled = false;
+            this.pictureBox_back.Image = global::Safety_Browser.Properties.Resources.back_visible;
+            this.pictureBox_back.Location = new System.Drawing.Point(61, 1);
+            this.pictureBox_back.Name = "pictureBox_back";
+            this.pictureBox_back.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_back.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_back.TabIndex = 50;
+            this.pictureBox_back.TabStop = false;
+            this.pictureBox_back.Click += new System.EventHandler(this.pictureBox_back_Click);
+            this.pictureBox_back.MouseLeave += new System.EventHandler(this.pictureBox_back_MouseLeave);
+            this.pictureBox_back.MouseHover += new System.EventHandler(this.pictureBox_back_MouseHover);
+            // 
+            // pictureBox_forward
+            // 
+            this.pictureBox_forward.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_forward.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_forward.Enabled = false;
+            this.pictureBox_forward.Image = global::Safety_Browser.Properties.Resources.forward_visible;
+            this.pictureBox_forward.Location = new System.Drawing.Point(90, 1);
+            this.pictureBox_forward.Name = "pictureBox_forward";
+            this.pictureBox_forward.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_forward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_forward.TabIndex = 51;
+            this.pictureBox_forward.TabStop = false;
+            this.pictureBox_forward.Click += new System.EventHandler(this.pictureBox_forward_Click);
+            this.pictureBox_forward.MouseLeave += new System.EventHandler(this.pictureBox_forward_MouseLeave);
+            this.pictureBox_forward.MouseHover += new System.EventHandler(this.pictureBox_forward_MouseHover);
+            // 
+            // pictureBox_reload
+            // 
+            this.pictureBox_reload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_reload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_reload.Enabled = false;
+            this.pictureBox_reload.Image = global::Safety_Browser.Properties.Resources.refresh_visible;
+            this.pictureBox_reload.Location = new System.Drawing.Point(119, 1);
+            this.pictureBox_reload.Name = "pictureBox_reload";
+            this.pictureBox_reload.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_reload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_reload.TabIndex = 52;
+            this.pictureBox_reload.TabStop = false;
+            this.pictureBox_reload.Click += new System.EventHandler(this.pictureBox_reload_Click);
+            this.pictureBox_reload.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_reload_MouseDown);
+            this.pictureBox_reload.MouseLeave += new System.EventHandler(this.pictureBox_reload_MouseLeave);
+            this.pictureBox_reload.MouseHover += new System.EventHandler(this.pictureBox_reload_MouseHover);
+            this.pictureBox_reload.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_reload_MouseUp);
+            // 
+            // timer_mouse
+            // 
+            this.timer_mouse.Interval = 3000;
+            this.timer_mouse.Tick += new System.EventHandler(this.timer_mouse_Tick);
             // 
             // Form_YB
             // 
@@ -490,7 +550,9 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox_reload);
+            this.Controls.Add(this.pictureBox_forward);
+            this.Controls.Add(this.pictureBox_back);
             this.Controls.Add(this.pictureBox_menu);
             this.Controls.Add(this.pictureBox_hover);
             this.Controls.Add(this.menuStrip);
@@ -526,6 +588,9 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_menu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_back)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_forward)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_reload)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,7 +631,10 @@
         private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_version;
         private System.Windows.Forms.PictureBox pictureBox_menu;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox_back;
+        private System.Windows.Forms.PictureBox pictureBox_forward;
+        private System.Windows.Forms.PictureBox pictureBox_reload;
+        private System.Windows.Forms.Timer timer_mouse;
     }
 }
 

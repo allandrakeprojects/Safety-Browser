@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Safety_Browser
@@ -43,7 +44,6 @@ namespace Safety_Browser
         private string _mac_address;
         private string _external_ip;
         private string _city;
-        private string _region;
         private string _country;
         private string BRAND_CODE = "YB";
         private string API_KEY = "6b8c7e5617414bf2d4ace37600b6ab71";
@@ -70,9 +70,10 @@ namespace Safety_Browser
         Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
         Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - _, _, _); } }
         Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
-        public bool IsMenuVisible { get; private set; }
         public bool IsCloseVisible { get; private set; }
         public bool not_hijacked = false;
+        private bool hard_refresh;
+
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
@@ -624,6 +625,15 @@ namespace Safety_Browser
                                     not_hijacked = true;
 
                                     chromeBrowser.Load(domain_get);
+                                    pictureBox_reload.Enabled = true;
+                                    pictureBox_reload.Image = Properties.Resources.refresh;
+                                    goBackToolStripMenuItem.Enabled = true;
+                                    forwardToolStripMenuItem.Enabled = true;
+                                    reloadToolStripMenuItem.Enabled = true;
+                                    cleanAndReloadToolStripMenuItem.Enabled = true;
+                                    resetZoomToolStripMenuItem.Enabled = true;
+                                    zoomInToolStripMenuItem.Enabled = true;
+                                    zoomOutToolStripMenuItem.Enabled = true;
                                 }
                                 else
                                 {
@@ -642,6 +652,15 @@ namespace Safety_Browser
                                 not_hijacked = true;
 
                                 chromeBrowser.Load(domain_get);
+                                pictureBox_reload.Enabled = true;
+                                pictureBox_reload.Image = Properties.Resources.refresh;
+                                goBackToolStripMenuItem.Enabled = true;
+                                forwardToolStripMenuItem.Enabled = true;
+                                reloadToolStripMenuItem.Enabled = true;
+                                cleanAndReloadToolStripMenuItem.Enabled = true;
+                                resetZoomToolStripMenuItem.Enabled = true;
+                                zoomInToolStripMenuItem.Enabled = true;
+                                zoomOutToolStripMenuItem.Enabled = true;
                             }
                         }
                     }
@@ -737,6 +756,15 @@ namespace Safety_Browser
                             panel_cefsharp.Visible = true;
 
                             chromeBrowser.Load(domain_get);
+                            pictureBox_reload.Enabled = true;
+                            pictureBox_reload.Image = Properties.Resources.refresh;
+                            goBackToolStripMenuItem.Enabled = true;
+                            forwardToolStripMenuItem.Enabled = true;
+                            reloadToolStripMenuItem.Enabled = true;
+                            cleanAndReloadToolStripMenuItem.Enabled = true;
+                            resetZoomToolStripMenuItem.Enabled = true;
+                            zoomInToolStripMenuItem.Enabled = true;
+                            zoomOutToolStripMenuItem.Enabled = true;
                         }
                         else
                         {
@@ -753,6 +781,16 @@ namespace Safety_Browser
                         panel_cefsharp.Visible = true;
 
                         chromeBrowser.Load(domain_get);
+                        pictureBox_reload.Enabled = true;
+                        pictureBox_reload.Image = Properties.Resources.refresh;
+                        pictureBox_reload.Enabled = true;
+                        goBackToolStripMenuItem.Enabled = true;
+                        forwardToolStripMenuItem.Enabled = true;
+                        reloadToolStripMenuItem.Enabled = true;
+                        cleanAndReloadToolStripMenuItem.Enabled = true;
+                        resetZoomToolStripMenuItem.Enabled = true;
+                        zoomInToolStripMenuItem.Enabled = true;
+                        zoomOutToolStripMenuItem.Enabled = true;
                     }
                 }
             }
@@ -771,16 +809,43 @@ namespace Safety_Browser
         private void InitializeChromium()
         {
             CefSettings settings = new CefSettings();
-            //settings.CefCommandLineArgs.Add("ppapi-flash-path", @"C:\WINDOWS\SysWOW64\Macromed\Flash\pepflashplayer32_18_0_0_209.dll"); //Load a specific pepper flash version (Step 1 of 2)
-            //settings.CefCommandLineArgs.Add("ppapi-flash-version", "18.0.0.209"); //Load a specific pepper flash version (Step 2 of 2)
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
-            //chromeBrowser.LifeSpanHandler = new BrowserLifeSpanHandler();
+            chromeBrowser.LifeSpanHandler = new BrowserLifeSpanHandler();
             panel_cefsharp.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
+
+            chromeBrowser.LoadingStateChanged += BrowserLoadingStateChanged;
         }
-        
+
+        private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            Invoke(new Action(() =>
+            {
+                pictureBox_forward.Enabled = e.CanGoForward;
+                pictureBox_back.Enabled = e.CanGoBack;
+
+                if (pictureBox_forward.Enabled == true)
+                {
+                    pictureBox_forward.Image = Properties.Resources.forward;
+                }
+                else
+                {
+                    pictureBox_forward.Image = Properties.Resources.forward_visible;
+                }
+
+                if (pictureBox_back.Enabled == true)
+                {
+                    pictureBox_back.Image = Properties.Resources.back;
+                }
+                else
+                {
+                    pictureBox_back.Image = Properties.Resources.back_visible;
+                }
+            }));
+        }
+
         // Loading State Changed
         private void Label_loadingstate_TextChanged(object sender, EventArgs e)
         {
@@ -911,8 +976,7 @@ namespace Safety_Browser
                             _external_ip = GetExternalIp();
                             _city = locationDetails.city.Replace("'", "''");
                             _country = locationDetails.country.Replace("'", "''");
-                            //MessageBox.Show(_mac_address + "\n" + _external_ip + "\n" + _city + "\n" + _country);
-                            //InsertDevice(send_service[current_web_service], _external_ip, _mac_address, _city, _country);
+                            InsertDevice(send_service[current_web_service], _external_ip, _mac_address, _city, _country);
                         }
                     }
                 }
@@ -1003,11 +1067,8 @@ namespace Safety_Browser
 
         private void pictureBox_menu_MouseLeave(object sender, EventArgs e)
         {
-            if (!IsMenuVisible)
-            {
-                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
-                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
-            }
+            pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
         }
 
         private void pictureBox_hover_MouseHover(object sender, EventArgs e)
@@ -1021,11 +1082,8 @@ namespace Safety_Browser
 
         private void pictureBox_hover_MouseLeave(object sender, EventArgs e)
         {
-            if (!IsMenuVisible)
-            {
-                pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
-                pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
-            }
+            pictureBox_hover.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_menu.BackColor = Color.FromArgb(235, 99, 6);
         }
 
         private void pictureBox_menu_Click(object sender, EventArgs e)
@@ -1129,6 +1187,75 @@ namespace Safety_Browser
             }
             MessageBox.Show(asdText);
             MessageBox.Show(asd);
+        }
+
+        private void pictureBox_reload_Click(object sender, EventArgs e)
+        {
+            if (!hard_refresh)
+            {
+                chromeBrowser.Reload(true);
+            }
+
+            hard_refresh = false;
+        }
+
+        private void pictureBox_forward_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Forward();
+        }
+
+        private void pictureBox_back_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Back();
+        }
+
+        private void pictureBox_forward_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_forward.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_forward_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_forward.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_back_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_back.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_back_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_back.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_reload_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_reload.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_reload_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_reload.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_reload_MouseDown(object sender, MouseEventArgs e)
+        {
+            timer_mouse.Start();
+        }
+
+        private void pictureBox_reload_MouseUp(object sender, MouseEventArgs e)
+        {
+            timer_mouse.Stop();
+        }
+
+        private void timer_mouse_Tick(object sender, EventArgs e)
+        {
+            chromeBrowser.Reload(false);
+            pictureBox_reload.BackColor = Color.FromArgb(235, 99, 6);
+            Cursor.Current = Cursors.Default;
+            timer_mouse.Stop();
+            hard_refresh = true;
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)

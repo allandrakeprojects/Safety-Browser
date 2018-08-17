@@ -154,9 +154,6 @@
     <None Include="Resources\connection.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\menu.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\minimize.png" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +167,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back_visible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_visible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_visible.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
