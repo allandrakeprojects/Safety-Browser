@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace Safety_Browser
 {
-    public partial class Form_YB : Form
+    public partial class Form_YB_NewTab : Form
     {
         private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "http://www.ssitectonic.com/GetTxt2Search", "http://www.ssihedonic.com/GetTxt2Search" };
         private string[] domain_service = { "http://www.ssicortex.com/GetDomains", "http://www.ssitectonic.com/GetText2Search", "http://www.ssihedonic.com/GetText2Search" };
@@ -80,7 +80,7 @@ namespace Safety_Browser
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
 
-        public Form_YB()
+        public Form_YB_NewTab()
         {
             InitializeComponent();
             InitializeChromium();

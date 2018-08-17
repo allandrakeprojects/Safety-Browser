@@ -101,6 +101,12 @@
     <Compile Include="Form_YB.Designer.cs">
       <DependentUpon>Form_YB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_YB_NewTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_YB_NewTab.Designer.cs">
+      <DependentUpon>Form_YB_NewTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalKeyboardHook.cs" />
     <Compile Include="IpInfo.cs" />
     <Compile Include="Program.cs" />
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_YB.resx">
       <DependentUpon>Form_YB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_YB_NewTab.resx">
+      <DependentUpon>Form_YB_NewTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -145,9 +154,6 @@
     <None Include="Resources\connection.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\maximize.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\menu.png" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\safety_browser.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

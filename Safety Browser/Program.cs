@@ -13,7 +13,7 @@ namespace Safety_Browser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_YB());
+            Application.Run(new Form_YB_NewTab());
         }
     }
 }

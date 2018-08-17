@@ -1,6 +1,6 @@
 ﻿namespace Safety_Browser
 {
-    partial class Form_YB
+    partial class Form_YB_NewTab
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB_NewTab));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
             this.label_current_web_service = new System.Windows.Forms.Label();
@@ -178,7 +178,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.connection;
             this.pictureBox1.Location = new System.Drawing.Point(81, 47);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(180, 140);
@@ -254,6 +253,7 @@
             // 
             this.pictureBox_minimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_minimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_minimize.ErrorImage = null;
             this.pictureBox_minimize.Image = global::Safety_Browser.Properties.Resources.minimize;
             this.pictureBox_minimize.Location = new System.Drawing.Point(1140, 1);
             this.pictureBox_minimize.Name = "pictureBox_minimize";
@@ -310,7 +310,7 @@
             // 
             this.pictureBox_close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.pictureBox_close.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_close.Image")));
+            this.pictureBox_close.Image = global::Safety_Browser.Properties.Resources.close;
             this.pictureBox_close.Location = new System.Drawing.Point(1226, 1);
             this.pictureBox_close.Name = "pictureBox_close";
             this.pictureBox_close.Size = new System.Drawing.Size(43, 37);
@@ -463,7 +463,6 @@
             // pictureBox_menu
             // 
             this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.pictureBox_menu.Image = global::Safety_Browser.Properties.Resources.menu;
             this.pictureBox_menu.Location = new System.Drawing.Point(16, 9);
             this.pictureBox_menu.Name = "pictureBox_menu";
             this.pictureBox_menu.Size = new System.Drawing.Size(29, 18);
@@ -483,7 +482,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form_YB
+            // Form_YB_NewTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -507,10 +506,9 @@
             this.Controls.Add(this.panel_cefsharp);
             this.Controls.Add(this.label_titlebar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(1270, 764);
-            this.Name = "Form_YB";
+            this.Name = "Form_YB_NewTab";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
