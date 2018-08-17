@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 
 namespace Safety_Browser
@@ -84,10 +83,19 @@ namespace Safety_Browser
         public Form_YB()
         {
             InitializeComponent();
+        }
+
+        // Form Load
+        private void Form_Main_Load(object sender, EventArgs e)
+        {
             InitializeChromium();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
-
+            NetworkAvailability();
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            GetTextToTextAsync(web_service[current_web_service]);
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            PictureBoxCenter();
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
@@ -185,15 +193,6 @@ namespace Safety_Browser
             }
         }
 
-        // Form Load
-        private void Form_Main_Load(object sender, EventArgs e)
-        {
-            NetworkAvailability();
-            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            GetTextToTextAsync(web_service[current_web_service]);
-            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            PictureBoxCenter();
-        }
 
         // Network Handler
         private void NetworkAvailability()
@@ -209,7 +208,7 @@ namespace Safety_Browser
                     networkIsAvailable = true;
                 }
             }
-
+            
             if (networkIsAvailable)
             {
                 GetIPInfo();
@@ -1174,19 +1173,6 @@ namespace Safety_Browser
             {
                 chromeBrowser.Forward();
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string asd = String.Empty;
-            string asdText = Application.OpenForms.Count.ToString();
-            //label1.Text = "";
-            foreach (Form frm in Application.OpenForms)
-            {
-                asd += frm.Name + "\n";
-            }
-            MessageBox.Show(asdText);
-            MessageBox.Show(asd);
         }
 
         private void pictureBox_reload_Click(object sender, EventArgs e)
