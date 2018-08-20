@@ -14,31 +14,8 @@ namespace Safety_Browser
         private string[] web_service = { "http://www.ssicortex.com/GetTxt2Search", "http://www.ssitectonic.com/GetTxt2Search", "http://www.ssihedonic.com/GetTxt2Search" };
         private string[] domain_service = { "http://www.ssicortex.com/GetDomains", "http://www.ssitectonic.com/GetText2Search", "http://www.ssihedonic.com/GetText2Search" };
         private string[] send_service = { "http://www.ssicortex.com/SendDetails", "http://www.ssitectonic.com/SendDetails", "http://www.ssihedonic.com/SendDetails" };
-        private string text_search;
         private bool close = true;
-        private bool isHijacked;
-        private int current_domain_index = 0;
-        private int total_domain_index;
-        private int current_web_service = 0;
-        private int current_domain = 0;
-        private string domain_get;
-        private bool last_index_hijacked_get = false;
         private bool networkIsAvailable;
-        private bool completed = true;
-        private bool timeout = true;
-        private string webbrowser_handler_title;
-        private Uri webbrowser_handler_url;
-        private string replace_domain_get;
-        private bool domain_one_time = true;
-        private bool load_not_hijacked = false;
-        private bool connection_handler = false;
-        private string _mac_address;
-        private string _external_ip;
-        private string _city;
-        private string _region;
-        private string _country;
-        private string BRAND_CODE = "YB";
-        private string API_KEY = "6b8c7e5617414bf2d4ace37600b6ab71";
         private ChromiumWebBrowser chromeBrowser;
         private double defaultValue = 0;
         private GlobalKeyboardHook gHook;
@@ -480,7 +457,7 @@ namespace Safety_Browser
         private void timer_mouse_Tick(object sender, EventArgs e)
         {
             chromeBrowser.Reload(false);
-            pictureBox_reload.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_reload.BackColor = Color.FromArgb(74, 84, 89);
             Cursor.Current = Cursors.Default;
             timer_mouse.Stop();
             hard_refresh = true;

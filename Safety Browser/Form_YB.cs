@@ -564,11 +564,9 @@ namespace Safety_Browser
 
                             string strValue = text_search;
                             string[] strArray = strValue.Split(',');
-
                             foreach (string obj in strArray)
                             {
-                                bool contains = webbrowser_handler_title.Contains(obj);
-
+                                bool contains = webbrowser_handler_title.Contains(obj.Replace(" ", ""));
                                 if (contains == true)
                                 {
                                     Invoke(new Action(() =>
@@ -622,7 +620,7 @@ namespace Safety_Browser
                                     pictureBox_loader.Visible = false;
                                     panel_cefsharp.Visible = true;
                                     not_hijacked = true;
-
+                                    
                                     chromeBrowser.Load(domain_get);
                                     pictureBox_reload.Enabled = true;
                                     pictureBox_reload.Image = Properties.Resources.refresh;
@@ -649,7 +647,7 @@ namespace Safety_Browser
                                 pictureBox_loader.Visible = false;
                                 panel_cefsharp.Visible = true;
                                 not_hijacked = true;
-
+                                
                                 chromeBrowser.Load(domain_get);
                                 pictureBox_reload.Enabled = true;
                                 pictureBox_reload.Image = Properties.Resources.refresh;
@@ -699,7 +697,7 @@ namespace Safety_Browser
 
                     foreach (string obj in strArray)
                     {
-                        bool contains = webbrowser_handler_title.Contains(obj);
+                        bool contains = webbrowser_handler_title.Contains(obj.Replace(" ", ""));
 
                         if (contains == true)
                         {
@@ -753,7 +751,7 @@ namespace Safety_Browser
                             last_index_hijacked_get = false;
                             pictureBox_loader.Visible = false;
                             panel_cefsharp.Visible = true;
-
+                            
                             chromeBrowser.Load(domain_get);
                             pictureBox_reload.Enabled = true;
                             pictureBox_reload.Image = Properties.Resources.refresh;
@@ -778,7 +776,7 @@ namespace Safety_Browser
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
                         panel_cefsharp.Visible = true;
-
+                        
                         chromeBrowser.Load(domain_get);
                         pictureBox_reload.Enabled = true;
                         pictureBox_reload.Image = Properties.Resources.refresh;
