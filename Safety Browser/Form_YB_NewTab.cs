@@ -20,6 +20,7 @@ namespace Safety_Browser
         private double defaultValue = 0;
         private GlobalKeyboardHook gHook;
         public static bool SetClose = false;
+        public static bool Main_SetClose = false;
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         private const int
@@ -421,6 +422,11 @@ namespace Safety_Browser
                 close = false;
                 Close();
                 SetClose = false;
+            } else if (Main_SetClose)
+            {
+                close = false;
+                Close();
+                Main_SetClose = false;
             }
         }
 
