@@ -527,7 +527,7 @@ namespace Safety_Browser
 
                         //webBrowser_handler.Navigate(domain_get);
                         string replace_domain_get = String.Empty;
-                        MessageBox.Show(domain_get);
+
                         if (domain_get.Contains(".com"))
                         {
                             replace_domain_get = domain_get.Replace(".com", ".com/speed.png");
@@ -536,8 +536,7 @@ namespace Safety_Browser
                         {
                             replace_domain_get = domain_get.Replace(".com/", ".com/speed.png");
                         }
-
-                        MessageBox.Show(replace_domain_get);
+                        
                         chromeBrowser.Load(replace_domain_get);
                     }
                     catch (Exception)
@@ -602,6 +601,7 @@ namespace Safety_Browser
             {
                 Invoke(new Action(() =>
                 {
+                    fully_loaded = 0;
                     elseloaded_i = 0;
                     timer_elseloaded.Stop();
 
@@ -651,8 +651,6 @@ namespace Safety_Browser
 
                         if (fully_loaded == 1)
                         {
-                            panel_cefsharp.Visible = false;
-
                             var html = "";
 
                             await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
@@ -661,23 +659,20 @@ namespace Safety_Browser
                              });
 
                             if (html.Contains("speed.png"))
-                            {
-                                MessageBox.Show("image found");
-
-                                if (domain_get.Contains("/speed.png"))
-                                {
-                                    string replace_domain_get = domain_get.Replace("/speed.png", "");
-                                    chromeBrowser.Load(replace_domain_get);
-                                }
+                            {                                
+                                chromeBrowser.Load(domain_get);
 
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
-                                panel_cefsharp.Visible = true;
                                 not_hijacked = true;
 
                                 pictureBox_reload.Enabled = true;
                                 pictureBox_reload.Image = Properties.Resources.refresh;
+                                pictureBox_browserhome.Enabled = true;
+                                pictureBox_browserhomehover.Enabled = true;
+                                pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                                homeToolStripMenuItem.Enabled = true;
                                 reloadToolStripMenuItem.Enabled = true;
                                 cleanAndReloadToolStripMenuItem.Enabled = true;
                                 resetZoomToolStripMenuItem.Enabled = true;
@@ -686,7 +681,6 @@ namespace Safety_Browser
                             }
                             else
                             {
-                                MessageBox.Show("not found");
                                 last_index_hijacked_get = true;
                                 not_hijacked = false;
                                 label_loadingstate.Text = "1";
