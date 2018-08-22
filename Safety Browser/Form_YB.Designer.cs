@@ -43,12 +43,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label_loadingstate = new System.Windows.Forms.Label();
             this.label_titlebar = new System.Windows.Forms.Label();
             this.pictureBox_minimize = new System.Windows.Forms.PictureBox();
             this.pictureBox_maximize = new System.Windows.Forms.PictureBox();
             this.pictureBox_hover = new System.Windows.Forms.PictureBox();
-            this.pictureBox_loader = new System.Windows.Forms.PictureBox();
             this.pictureBox_close = new System.Windows.Forms.PictureBox();
             this.panel_cefsharp = new System.Windows.Forms.Panel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -78,13 +76,18 @@
             this.pictureBox_browserstop = new System.Windows.Forms.PictureBox();
             this.pictureBox_browserhome = new System.Windows.Forms.PictureBox();
             this.pictureBox_browserhomehover = new System.Windows.Forms.PictureBox();
+            this.label_loadingstate = new System.Windows.Forms.Label();
+            this.pictureBox_loader = new System.Windows.Forms.PictureBox();
+            this.pictureBox_help = new System.Windows.Forms.PictureBox();
+            this.pictureBox_helphover = new System.Windows.Forms.PictureBox();
+            this.pictureBox_nofication = new System.Windows.Forms.PictureBox();
+            this.pictureBox_noficationhover = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_close)).BeginInit();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_menu)).BeginInit();
@@ -94,6 +97,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserstop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserhome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserhomehover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_help)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helphover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).BeginInit();
             this.SuspendLayout();
             // 
             // domain
@@ -133,7 +141,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView_domain.Location = new System.Drawing.Point(1290, 43);
+            this.dataGridView_domain.Location = new System.Drawing.Point(1284, 44);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
@@ -156,23 +164,21 @@
             // 
             this.label_current_web_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_web_service.AutoSize = true;
-            this.label_current_web_service.Location = new System.Drawing.Point(1290, 345);
+            this.label_current_web_service.Location = new System.Drawing.Point(1284, 346);
             this.label_current_web_service.Name = "label_current_web_service";
             this.label_current_web_service.Size = new System.Drawing.Size(106, 13);
             this.label_current_web_service.TabIndex = 27;
             this.label_current_web_service.Text = "current_web_service";
-            this.label_current_web_service.Visible = false;
             // 
             // label_current_domain_service
             // 
             this.label_current_domain_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_domain_service.AutoSize = true;
-            this.label_current_domain_service.Location = new System.Drawing.Point(1290, 362);
+            this.label_current_domain_service.Location = new System.Drawing.Point(1284, 363);
             this.label_current_domain_service.Name = "label_current_domain_service";
             this.label_current_domain_service.Size = new System.Drawing.Size(120, 13);
             this.label_current_domain_service.TabIndex = 28;
             this.label_current_domain_service.Text = "current_domain_service";
-            this.label_current_domain_service.Visible = false;
             // 
             // timer_handler
             // 
@@ -222,18 +228,6 @@
             this.label8.TabIndex = 34;
             this.label8.Text = "Check you Internet connection.";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_loadingstate
-            // 
-            this.label_loadingstate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_loadingstate.AutoSize = true;
-            this.label_loadingstate.Location = new System.Drawing.Point(1290, 326);
-            this.label_loadingstate.Name = "label_loadingstate";
-            this.label_loadingstate.Size = new System.Drawing.Size(64, 13);
-            this.label_loadingstate.TabIndex = 21;
-            this.label_loadingstate.Text = "loadingstate";
-            this.label_loadingstate.Visible = false;
-            this.label_loadingstate.TextChanged += new System.EventHandler(this.Label_loadingstate_TextChanged);
             // 
             // label_titlebar
             // 
@@ -292,19 +286,6 @@
             this.pictureBox_hover.Click += new System.EventHandler(this.pictureBox_hover_Click);
             this.pictureBox_hover.MouseLeave += new System.EventHandler(this.pictureBox_hover_MouseLeave);
             this.pictureBox_hover.MouseHover += new System.EventHandler(this.pictureBox_hover_MouseHover);
-            // 
-            // pictureBox_loader
-            // 
-            this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_loader.ErrorImage = null;
-            this.pictureBox_loader.Image = global::Safety_Browser.Properties.Resources.loader;
-            this.pictureBox_loader.Location = new System.Drawing.Point(503, 289);
-            this.pictureBox_loader.Name = "pictureBox_loader";
-            this.pictureBox_loader.Size = new System.Drawing.Size(265, 265);
-            this.pictureBox_loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox_loader.TabIndex = 38;
-            this.pictureBox_loader.TabStop = false;
             // 
             // pictureBox_close
             // 
@@ -474,7 +455,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(104, 22);
-            this.toolStripMenuItem_version.Text = "0.0.21";
+            this.toolStripMenuItem_version.Text = "0.0.22";
             // 
             // pictureBox_menu
             // 
@@ -498,7 +479,7 @@
             this.pictureBox_back.Image = global::Safety_Browser.Properties.Resources.back_visible;
             this.pictureBox_back.Location = new System.Drawing.Point(61, 1);
             this.pictureBox_back.Name = "pictureBox_back";
-            this.pictureBox_back.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_back.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_back.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_back.TabIndex = 50;
             this.pictureBox_back.TabStop = false;
@@ -512,9 +493,9 @@
             this.pictureBox_forward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_forward.Enabled = false;
             this.pictureBox_forward.Image = global::Safety_Browser.Properties.Resources.forward_visible;
-            this.pictureBox_forward.Location = new System.Drawing.Point(90, 1);
+            this.pictureBox_forward.Location = new System.Drawing.Point(97, 1);
             this.pictureBox_forward.Name = "pictureBox_forward";
-            this.pictureBox_forward.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_forward.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_forward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_forward.TabIndex = 51;
             this.pictureBox_forward.TabStop = false;
@@ -528,9 +509,9 @@
             this.pictureBox_reload.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_reload.Enabled = false;
             this.pictureBox_reload.Image = global::Safety_Browser.Properties.Resources.refresh_visible;
-            this.pictureBox_reload.Location = new System.Drawing.Point(119, 1);
+            this.pictureBox_reload.Location = new System.Drawing.Point(133, 1);
             this.pictureBox_reload.Name = "pictureBox_reload";
-            this.pictureBox_reload.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_reload.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_reload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_reload.TabIndex = 52;
             this.pictureBox_reload.TabStop = false;
@@ -553,7 +534,7 @@
             // webBrowser_handler
             // 
             this.webBrowser_handler.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser_handler.Location = new System.Drawing.Point(1290, 386);
+            this.webBrowser_handler.Location = new System.Drawing.Point(1284, 387);
             this.webBrowser_handler.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser_handler.Name = "webBrowser_handler";
             this.webBrowser_handler.ScriptErrorsSuppressed = true;
@@ -571,9 +552,9 @@
             this.pictureBox_browserstop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_browserstop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_browserstop.Image = global::Safety_Browser.Properties.Resources.browser_stop;
-            this.pictureBox_browserstop.Location = new System.Drawing.Point(119, 1);
+            this.pictureBox_browserstop.Location = new System.Drawing.Point(133, 1);
             this.pictureBox_browserstop.Name = "pictureBox_browserstop";
-            this.pictureBox_browserstop.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_browserstop.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_browserstop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_browserstop.TabIndex = 54;
             this.pictureBox_browserstop.TabStop = false;
@@ -588,7 +569,7 @@
             this.pictureBox_browserhome.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_browserhome.Enabled = false;
             this.pictureBox_browserhome.Image = global::Safety_Browser.Properties.Resources.browser_homehover;
-            this.pictureBox_browserhome.Location = new System.Drawing.Point(151, 8);
+            this.pictureBox_browserhome.Location = new System.Drawing.Point(176, 8);
             this.pictureBox_browserhome.Name = "pictureBox_browserhome";
             this.pictureBox_browserhome.Size = new System.Drawing.Size(21, 21);
             this.pictureBox_browserhome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -603,15 +584,94 @@
             this.pictureBox_browserhomehover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_browserhomehover.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_browserhomehover.Enabled = false;
-            this.pictureBox_browserhomehover.Location = new System.Drawing.Point(148, 1);
+            this.pictureBox_browserhomehover.Location = new System.Drawing.Point(169, 1);
             this.pictureBox_browserhomehover.Name = "pictureBox_browserhomehover";
-            this.pictureBox_browserhomehover.Size = new System.Drawing.Size(28, 37);
+            this.pictureBox_browserhomehover.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_browserhomehover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_browserhomehover.TabIndex = 56;
             this.pictureBox_browserhomehover.TabStop = false;
             this.pictureBox_browserhomehover.Click += new System.EventHandler(this.pictureBox_browserhomehover_Click);
             this.pictureBox_browserhomehover.MouseLeave += new System.EventHandler(this.pictureBox_browserhomehover_MouseLeave);
             this.pictureBox_browserhomehover.MouseHover += new System.EventHandler(this.pictureBox_browserhomehover_MouseHover);
+            // 
+            // label_loadingstate
+            // 
+            this.label_loadingstate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_loadingstate.AutoSize = true;
+            this.label_loadingstate.Location = new System.Drawing.Point(1284, 327);
+            this.label_loadingstate.Name = "label_loadingstate";
+            this.label_loadingstate.Size = new System.Drawing.Size(64, 13);
+            this.label_loadingstate.TabIndex = 21;
+            this.label_loadingstate.Text = "loadingstate";
+            this.label_loadingstate.TextChanged += new System.EventHandler(this.Label_loadingstate_TextChanged);
+            // 
+            // pictureBox_loader
+            // 
+            this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_loader.ErrorImage = null;
+            this.pictureBox_loader.Image = global::Safety_Browser.Properties.Resources.loader;
+            this.pictureBox_loader.Location = new System.Drawing.Point(503, 250);
+            this.pictureBox_loader.Name = "pictureBox_loader";
+            this.pictureBox_loader.Size = new System.Drawing.Size(265, 265);
+            this.pictureBox_loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_loader.TabIndex = 57;
+            this.pictureBox_loader.TabStop = false;
+            // 
+            // pictureBox_help
+            // 
+            this.pictureBox_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_help.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_help.Image = global::Safety_Browser.Properties.Resources.help;
+            this.pictureBox_help.Location = new System.Drawing.Point(213, 10);
+            this.pictureBox_help.Name = "pictureBox_help";
+            this.pictureBox_help.Size = new System.Drawing.Size(18, 18);
+            this.pictureBox_help.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_help.TabIndex = 59;
+            this.pictureBox_help.TabStop = false;
+            this.pictureBox_help.Click += new System.EventHandler(this.pictureBox_help_Click);
+            this.pictureBox_help.MouseLeave += new System.EventHandler(this.pictureBox_help_MouseLeave);
+            this.pictureBox_help.MouseHover += new System.EventHandler(this.pictureBox_help_MouseHover);
+            // 
+            // pictureBox_helphover
+            // 
+            this.pictureBox_helphover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_helphover.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_helphover.Location = new System.Drawing.Point(205, 1);
+            this.pictureBox_helphover.Name = "pictureBox_helphover";
+            this.pictureBox_helphover.Size = new System.Drawing.Size(35, 37);
+            this.pictureBox_helphover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_helphover.TabIndex = 60;
+            this.pictureBox_helphover.TabStop = false;
+            this.pictureBox_helphover.MouseLeave += new System.EventHandler(this.pictureBox_helphover_MouseLeave);
+            this.pictureBox_helphover.MouseHover += new System.EventHandler(this.pictureBox_helphover_MouseHover);
+            // 
+            // pictureBox_nofication
+            // 
+            this.pictureBox_nofication.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_nofication.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_nofication.Image = global::Safety_Browser.Properties.Resources.notification;
+            this.pictureBox_nofication.Location = new System.Drawing.Point(249, 10);
+            this.pictureBox_nofication.Name = "pictureBox_nofication";
+            this.pictureBox_nofication.Size = new System.Drawing.Size(18, 18);
+            this.pictureBox_nofication.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_nofication.TabIndex = 61;
+            this.pictureBox_nofication.TabStop = false;
+            this.pictureBox_nofication.MouseLeave += new System.EventHandler(this.pictureBox_nofication_MouseLeave);
+            this.pictureBox_nofication.MouseHover += new System.EventHandler(this.pictureBox_nofication_MouseHover);
+            // 
+            // pictureBox_noficationhover
+            // 
+            this.pictureBox_noficationhover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.pictureBox_noficationhover.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_noficationhover.Location = new System.Drawing.Point(241, 1);
+            this.pictureBox_noficationhover.Name = "pictureBox_noficationhover";
+            this.pictureBox_noficationhover.Size = new System.Drawing.Size(35, 37);
+            this.pictureBox_noficationhover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_noficationhover.TabIndex = 62;
+            this.pictureBox_noficationhover.TabStop = false;
+            this.pictureBox_noficationhover.MouseLeave += new System.EventHandler(this.pictureBox_noficationhover_MouseLeave);
+            this.pictureBox_noficationhover.MouseHover += new System.EventHandler(this.pictureBox_noficationhover_MouseHover);
             // 
             // Form_YB
             // 
@@ -620,6 +680,11 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
+            this.Controls.Add(this.pictureBox_nofication);
+            this.Controls.Add(this.pictureBox_noficationhover);
+            this.Controls.Add(this.pictureBox_help);
+            this.Controls.Add(this.pictureBox_helphover);
+            this.Controls.Add(this.pictureBox_loader);
             this.Controls.Add(this.pictureBox_browserhome);
             this.Controls.Add(this.pictureBox_browserhomehover);
             this.Controls.Add(this.webBrowser_handler);
@@ -632,7 +697,6 @@
             this.Controls.Add(this.pictureBox_minimize);
             this.Controls.Add(this.pictureBox_maximize);
             this.Controls.Add(this.panel_connection);
-            this.Controls.Add(this.pictureBox_loader);
             this.Controls.Add(this.label_current_domain_service);
             this.Controls.Add(this.label_current_web_service);
             this.Controls.Add(this.label_loadingstate);
@@ -656,7 +720,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_minimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_close)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -667,6 +730,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserstop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserhome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserhomehover)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_help)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helphover)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -678,12 +746,10 @@
         private System.Windows.Forms.Label label_current_web_service;
         private System.Windows.Forms.Label label_current_domain_service;
         private System.Windows.Forms.Timer timer_handler;
-        private System.Windows.Forms.PictureBox pictureBox_loader;
         private System.Windows.Forms.Panel panel_connection;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label_loadingstate;
         private System.Windows.Forms.Label label_titlebar;
         private System.Windows.Forms.PictureBox pictureBox_hover;
         private System.Windows.Forms.PictureBox pictureBox_maximize;
@@ -717,6 +783,12 @@
         private System.Windows.Forms.PictureBox pictureBox_browserhome;
         private System.Windows.Forms.PictureBox pictureBox_browserhomehover;
         private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
+        private System.Windows.Forms.Label label_loadingstate;
+        private System.Windows.Forms.PictureBox pictureBox_loader;
+        private System.Windows.Forms.PictureBox pictureBox_help;
+        private System.Windows.Forms.PictureBox pictureBox_helphover;
+        private System.Windows.Forms.PictureBox pictureBox_nofication;
+        private System.Windows.Forms.PictureBox pictureBox_noficationhover;
     }
 }
 

@@ -524,21 +524,8 @@ namespace Safety_Browser
 
                         completed = true;
                         timeout = true;
-
-                        //webBrowser_handler.Navigate(domain_get);
-                        string replace_domain_get = String.Empty;
-
                         
-                        if (domain_get.Contains(".com/"))
-                        {
-                            replace_domain_get = domain_get.Replace(".com/", ".com/speed.png");
-                        }
-                        else if (domain_get.Contains(".com"))
-                        {
-                            replace_domain_get = domain_get.Replace(".com", ".com/speed.png");
-                        }
-
-                        chromeBrowser.Load(replace_domain_get);
+                        chromeBrowser.Load(domain_get);
                     }
                     catch (Exception)
                     {
@@ -634,15 +621,12 @@ namespace Safety_Browser
 
             if (domain_one_time)
             {
-                Invoke(new Action(() =>
-                {
-                    chromeBrowser.Dock = DockStyle.Fill;
-                }));
-
                 if (!e.IsLoading)
                 {
                     Invoke(new Action(async () =>
                     {
+                        chromeBrowser.Dock = DockStyle.Fill;
+
                         await Task.Run(async () =>
                         {
                             await Task.Delay(2000);
@@ -652,22 +636,82 @@ namespace Safety_Browser
 
                         if (fully_loaded == 1)
                         {
-                            var html = "";
+                            string strValue = text_search;
+                            string[] strArray = strValue.Split(',');
 
-                            await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
-                             {
-                                 html = taskHtml.Result;
-                             });
+                            if (!String.IsNullOrEmpty(handler_title))
+                            {
+                                foreach (string obj in strArray)
+                                {
+                                    bool contains = handler_title.Contains(obj);
+                                    if (contains == true)
+                                    {
+                                        Invoke(new Action(() =>
+                                        {
+                                            isHijacked = false;
+                                        }));
 
-                            if (html.Contains("speed.png"))
-                            {                                
-                                chromeBrowser.Load(domain_get);
+                                        break;
+                                    }
+                                    else if (!contains)
+                                    {
+                                        Invoke(new Action(() =>
+                                        {
+                                            isHijacked = true;
+                                        }));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                isHijacked = true;
+                            }
 
+                            if (isHijacked)
+                            {
+                                var html = "";
+
+                                await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
+                                {
+                                    html = taskHtml.Result;
+                                });
+
+                                if (html.Contains("landing_image"))
+                                {
+                                    timer_detectifhijacked.Start();
+                                    domain_one_time = false;
+                                    last_index_hijacked_get = false;
+                                    pictureBox_loader.Visible = false;
+                                    not_hijacked = true;
+
+                                    pictureBox_reload.Enabled = true;
+                                    pictureBox_reload.Image = Properties.Resources.refresh;
+                                    pictureBox_browserhome.Enabled = true;
+                                    pictureBox_browserhomehover.Enabled = true;
+                                    pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                                    homeToolStripMenuItem.Enabled = true;
+                                    reloadToolStripMenuItem.Enabled = true;
+                                    cleanAndReloadToolStripMenuItem.Enabled = true;
+                                    resetZoomToolStripMenuItem.Enabled = true;
+                                    zoomInToolStripMenuItem.Enabled = true;
+                                    zoomOutToolStripMenuItem.Enabled = true;
+                                }
+                                else
+                                {
+                                    last_index_hijacked_get = true;
+                                    not_hijacked = false;
+                                    label_loadingstate.Text = "1";
+                                    label_loadingstate.Text = "0";
+                                }
+                            }
+                            else
+                            {
+                                timer_detectifhijacked.Start();
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
+                                panel_cefsharp.Visible = true;
                                 not_hijacked = true;
-                                timer_detectifhijacked.Start();
 
                                 pictureBox_reload.Enabled = true;
                                 pictureBox_reload.Image = Properties.Resources.refresh;
@@ -680,13 +724,6 @@ namespace Safety_Browser
                                 resetZoomToolStripMenuItem.Enabled = true;
                                 zoomInToolStripMenuItem.Enabled = true;
                                 zoomOutToolStripMenuItem.Enabled = true;
-                            }
-                            else
-                            {
-                                last_index_hijacked_get = true;
-                                not_hijacked = false;
-                                label_loadingstate.Text = "1";
-                                label_loadingstate.Text = "0";
                             }
                         }
                         else
@@ -1151,10 +1188,11 @@ namespace Safety_Browser
                             }));
                         }
                     }
-
+                    
                     if (isHijacked)
                     {
                         var html = "";
+
 
                         if (!domain_get.Contains("http"))
                         {
@@ -1218,22 +1256,82 @@ namespace Safety_Browser
 
                 if (elseloaded_i++ == 1)
                 {
-                    var html = "";
+                    string strValue = text_search;
+                    string[] strArray = strValue.Split(',');
 
-                    await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
+                    if (!String.IsNullOrEmpty(handler_title))
                     {
-                        html = taskHtml.Result;
-                    });
+                        foreach (string obj in strArray)
+                        {
+                            bool contains = handler_title.Contains(obj);
+                            if (contains == true)
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    isHijacked = false;
+                                }));
 
-                    if (html.Contains("speed.png"))
+                                break;
+                            }
+                            else if (!contains)
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    isHijacked = true;
+                                }));
+                            }
+                        }
+                    }
+                    else
                     {
-                        chromeBrowser.Load(domain_get);
+                        isHijacked = true;
+                    }
 
+                    if (isHijacked)
+                    {
+                        var html = "";
+
+                        await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
+                        {
+                            html = taskHtml.Result;
+                        });
+
+                        if (html.Contains("landing_image"))
+                        {
+                            timer_detectifhijacked.Start();
+                            domain_one_time = false;
+                            last_index_hijacked_get = false;
+                            pictureBox_loader.Visible = false;
+                            not_hijacked = true;
+
+                            pictureBox_reload.Enabled = true;
+                            pictureBox_reload.Image = Properties.Resources.refresh;
+                            pictureBox_browserhome.Enabled = true;
+                            pictureBox_browserhomehover.Enabled = true;
+                            pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                            homeToolStripMenuItem.Enabled = true;
+                            reloadToolStripMenuItem.Enabled = true;
+                            cleanAndReloadToolStripMenuItem.Enabled = true;
+                            resetZoomToolStripMenuItem.Enabled = true;
+                            zoomInToolStripMenuItem.Enabled = true;
+                            zoomOutToolStripMenuItem.Enabled = true;
+                        }
+                        else
+                        {
+                            last_index_hijacked_get = true;
+                            not_hijacked = false;
+                            label_loadingstate.Text = "1";
+                            label_loadingstate.Text = "0";
+                        }
+                    }
+                    else
+                    {
+                        timer_detectifhijacked.Start();
                         domain_one_time = false;
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
+                        panel_cefsharp.Visible = true;
                         not_hijacked = true;
-                        timer_detectifhijacked.Start();
 
                         pictureBox_reload.Enabled = true;
                         pictureBox_reload.Image = Properties.Resources.refresh;
@@ -1246,13 +1344,6 @@ namespace Safety_Browser
                         resetZoomToolStripMenuItem.Enabled = true;
                         zoomInToolStripMenuItem.Enabled = true;
                         zoomOutToolStripMenuItem.Enabled = true;
-                    }
-                    else
-                    {
-                        last_index_hijacked_get = true;
-                        not_hijacked = false;
-                        label_loadingstate.Text = "1";
-                        label_loadingstate.Text = "0";
                     }
                 }
             }));
@@ -1310,6 +1401,60 @@ namespace Safety_Browser
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             chromeBrowser.Load(domain_get);
+        }
+
+        private void pictureBox_help_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_help.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_helphover.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_help_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_helphover_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_help.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_helphover.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_helphover_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_nofication_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_nofication.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_noficationhover.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_nofication_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_nofication.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_noficationhover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_noficationhover_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_nofication.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_noficationhover.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_noficationhover_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_nofication.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_noficationhover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_help_Click(object sender, EventArgs e)
+        {
+            Form_Help form_help = new Form_Help();
+            form_help.ShowDialog();
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
