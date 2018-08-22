@@ -624,7 +624,11 @@ namespace Safety_Browser
                                     try
                                     {
                                         replace_domain_get = "http://" + domain_get;
-                                        html = new WebClient().DownloadString(replace_domain_get);
+                                        using (WebClient client = new WebClient())
+                                        {
+                                            html = await Task.Run(() => client.DownloadString(replace_domain_get));
+                                            //html = new WebClient().DownloadString(replace_domain_get);
+                                        }
                                     }
                                     catch (Exception)
                                     {
@@ -635,7 +639,11 @@ namespace Safety_Browser
                                 {
                                     try
                                     {
-                                        html = new WebClient().DownloadString(domain_get);
+                                        using (WebClient client = new WebClient())
+                                        {
+                                            html = await Task.Run(() => client.DownloadString(domain_get));
+                                            //html = new WebClient().DownloadString(replace_domain_get);
+                                        }
                                     }
                                     catch (Exception)
                                     {
@@ -696,142 +704,6 @@ namespace Safety_Browser
                     }));
                 }
             }
-            //Invoke(new Action(() =>
-            //{
-            //    pictureBox_forward.Enabled = e.CanGoForward;
-            //    forwardToolStripMenuItem.Enabled = e.CanGoForward;
-            //    pictureBox_back.Enabled = e.CanGoBack;
-            //    goBackToolStripMenuItem.Enabled = e.CanGoBack;
-
-            //    if (pictureBox_forward.Enabled == true)
-            //    {
-            //        pictureBox_forward.Image = Properties.Resources.forward;
-            //    }
-            //    else
-            //    {
-            //        pictureBox_forward.Image = Properties.Resources.forward_visible;
-            //    }
-
-            //    if (pictureBox_back.Enabled == true)
-            //    {
-            //        pictureBox_back.Image = Properties.Resources.back;
-            //    }
-            //    else
-            //    {
-            //        pictureBox_back.Image = Properties.Resources.back_visible;
-            //    }
-
-            //    if (domain_one_time)
-            //    {
-            //        chromeBrowser.Dock = DockStyle.Fill;
-
-            //        if (!e.IsLoading)
-            //        {
-            //            chromeBrowser.Stop();
-            //            string strValue = text_search;
-            //            string[] strArray = strValue.Split(',');
-
-            //            if (!String.IsNullOrEmpty(handler_title))
-            //            {
-            //                foreach (string obj in strArray)
-            //                {
-            //                    bool contains = handler_title.Contains(obj);
-            //                    if (contains == true)
-            //                    {
-            //                        Invoke(new Action(() =>
-            //                        {
-            //                            isHijacked = false;
-            //                        }));
-
-            //                        break;
-            //                    }
-            //                    else if (!contains)
-            //                    {
-            //                        Invoke(new Action(() =>
-            //                        {
-            //                            isHijacked = true;
-            //                        }));
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                isHijacked = true;
-            //            }
-
-            //            if (isHijacked)
-            //            {
-            //                var html = "";
-
-            //                if (!domain_get.Contains("http"))
-            //                {
-            //                    try
-            //                    {
-            //                        replace_domain_get = "http://" + domain_get;
-            //                        html = new WebClient().DownloadString(replace_domain_get);
-            //                    }
-            //                    catch (Exception)
-            //                    {
-            //                        html = "";
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    try
-            //                    {
-            //                        html = new WebClient().DownloadString(domain_get);
-            //                    }
-            //                    catch (Exception)
-            //                    {
-            //                        html = "";
-            //                    }
-            //                }
-
-            //                if (html.Contains("landing_image"))
-            //                {
-            //                    timer_detectifhijacked.Start();
-            //                    domain_one_time = false;
-            //                    last_index_hijacked_get = false;
-            //                    pictureBox_loader.Visible = false;
-            //                    panel_cefsharp.Visible = true;
-            //                    not_hijacked = true;
-
-            //                    pictureBox_reload.Enabled = true;
-            //                    pictureBox_reload.Image = Properties.Resources.refresh;
-            //                    reloadToolStripMenuItem.Enabled = true;
-            //                    cleanAndReloadToolStripMenuItem.Enabled = true;
-            //                    resetZoomToolStripMenuItem.Enabled = true;
-            //                    zoomInToolStripMenuItem.Enabled = true;
-            //                    zoomOutToolStripMenuItem.Enabled = true;
-            //                }
-            //                else
-            //                {
-            //                    last_index_hijacked_get = true;
-            //                    not_hijacked = false;
-            //                    label_loadingstate.Text = "1";
-            //                    label_loadingstate.Text = "0";
-            //                }
-            //            }
-            //            else
-            //            {
-            //                timer_detectifhijacked.Start();
-            //                domain_one_time = false;
-            //                last_index_hijacked_get = false;
-            //                pictureBox_loader.Visible = false;
-            //                panel_cefsharp.Visible = true;
-            //                not_hijacked = true;
-
-            //                pictureBox_reload.Enabled = true;
-            //                pictureBox_reload.Image = Properties.Resources.refresh;
-            //                reloadToolStripMenuItem.Enabled = true;
-            //                cleanAndReloadToolStripMenuItem.Enabled = true;
-            //                resetZoomToolStripMenuItem.Enabled = true;
-            //                zoomInToolStripMenuItem.Enabled = true;
-            //                zoomOutToolStripMenuItem.Enabled = true;
-            //            }
-            //        }
-            //    }
-            //}));
         }
 
         private void BrowserTitleChanged(object sender, TitleChangedEventArgs e)
@@ -1247,7 +1119,7 @@ namespace Safety_Browser
         }
 
         // Web Browser Loaded
-        private void WebBrowser_handler_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private async void WebBrowser_handler_DocumentCompletedAsync(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (webBrowser_handler.ReadyState == WebBrowserReadyState.Complete)
             {
@@ -1294,7 +1166,11 @@ namespace Safety_Browser
                             try
                             {
                                 replace_domain_get = "http://" + domain_get;
-                                html = new WebClient().DownloadString(replace_domain_get);
+                                using (WebClient client = new WebClient())
+                                {
+                                    html = await Task.Run(() => client.DownloadString(replace_domain_get));
+                                    //html = new WebClient().DownloadString(replace_domain_get);
+                                }
                             }
                             catch (Exception)
                             {
@@ -1305,7 +1181,11 @@ namespace Safety_Browser
                         {
                             try
                             {
-                                html = new WebClient().DownloadString(domain_get);
+                                using (WebClient client = new WebClient())
+                                {
+                                    html = await Task.Run(() => client.DownloadString(domain_get));
+                                    //html = new WebClient().DownloadString(replace_domain_get);
+                                }
                             }
                             catch (Exception)
                             {
@@ -1339,7 +1219,7 @@ namespace Safety_Browser
 
         private void timer_elseloaded_Tick(object sender, EventArgs e)
         {
-            Invoke(new Action(() =>
+            Invoke(new Action(async () =>
             {
                 elseloaded_i++;
 
@@ -1387,7 +1267,11 @@ namespace Safety_Browser
                             try
                             {
                                 replace_domain_get = "http://" + domain_get;
-                                html = new WebClient().DownloadString(replace_domain_get);
+                                using (WebClient client = new WebClient())
+                                {
+                                    html = await Task.Run(() => client.DownloadString(replace_domain_get));
+                                    //html = new WebClient().DownloadString(replace_domain_get);
+                                }
                             }
                             catch (Exception)
                             {
@@ -1398,14 +1282,18 @@ namespace Safety_Browser
                         {
                             try
                             {
-                                html = new WebClient().DownloadString(domain_get);
+                                using (WebClient client = new WebClient())
+                                {
+                                    html = await Task.Run(() => client.DownloadString(domain_get));
+                                    //html = new WebClient().DownloadString(replace_domain_get);
+                                }
                             }
                             catch (Exception)
                             {
                                 html = "";
                             }
                         }
-
+                        
                         if (html.Contains("landing_image"))
                         {
                             timer_detectifhijacked.Start();
