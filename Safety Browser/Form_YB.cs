@@ -74,6 +74,8 @@ namespace Safety_Browser
         public bool not_hijacked = false;
         private bool hard_refresh;
         private string handler_title;
+        private int fully_loaded;
+        private int elseloaded_i;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -558,98 +560,115 @@ namespace Safety_Browser
         // asd123
         private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
-            Invoke(new Action(() =>
+            if (e.IsLoading)
             {
-                pictureBox_forward.Enabled = e.CanGoForward;
-                forwardToolStripMenuItem.Enabled = e.CanGoForward;
-                pictureBox_back.Enabled = e.CanGoBack;
-                goBackToolStripMenuItem.Enabled = e.CanGoBack;
+                elseloaded_i = 0;
+                timer_elseloaded.Stop();
+            }
 
-                if (pictureBox_forward.Enabled == true)
-                {
-                    pictureBox_forward.Image = Properties.Resources.forward;
-                }
-                else
-                {
-                    pictureBox_forward.Image = Properties.Resources.forward_visible;
-                }
+            if (domain_one_time)
+            {
 
-                if (pictureBox_back.Enabled == true)
+                if (!e.IsLoading)
                 {
-                    pictureBox_back.Image = Properties.Resources.back;
-                }
-                else
-                {
-                    pictureBox_back.Image = Properties.Resources.back_visible;
-                }
-
-                if (domain_one_time)
-                {
-                    chromeBrowser.Dock = DockStyle.Fill;
-
-                    if (!e.IsLoading)
+                    Invoke(new Action(async () =>
                     {
-                        chromeBrowser.Stop();
-                        string strValue = text_search;
-                        string[] strArray = strValue.Split(',');
+                        chromeBrowser.Dock = DockStyle.Fill;
 
-                        if (!String.IsNullOrEmpty(handler_title))
+                        await Task.Run(async () =>
                         {
-                            foreach (string obj in strArray)
+                            await Task.Delay(2000);
+                        });
+
+                        fully_loaded++;
+
+                        if (fully_loaded == 1)
+                        {
+                            string strValue = text_search;
+                            string[] strArray = strValue.Split(',');
+                            
+                            if (!String.IsNullOrEmpty(handler_title))
                             {
-                                bool contains = handler_title.Contains(obj);
-                                if (contains == true)
+                                foreach (string obj in strArray)
                                 {
-                                    Invoke(new Action(() =>
+                                    bool contains = handler_title.Contains(obj);
+                                    if (contains == true)
                                     {
-                                        isHijacked = false;
-                                    }));
+                                        Invoke(new Action(() =>
+                                        {
+                                            isHijacked = false;
+                                        }));
 
-                                    break;
-                                }
-                                else if (!contains)
-                                {
-                                    Invoke(new Action(() =>
+                                        break;
+                                    }
+                                    else if (!contains)
                                     {
-                                        isHijacked = true;
-                                    }));
-                                }
-                            }
-                        }
-                        else
-                        {
-                            isHijacked = true;
-                        }
-
-                        if (isHijacked)
-                        {
-                            var html = "";
-
-                            if (!domain_get.Contains("http"))
-                            {
-                                try
-                                {
-                                    replace_domain_get = "http://" + domain_get;
-                                    html = new WebClient().DownloadString(replace_domain_get);
-                                }
-                                catch (Exception)
-                                {
-                                    html = "";
+                                        Invoke(new Action(() =>
+                                        {
+                                            isHijacked = true;
+                                        }));
+                                    }
                                 }
                             }
                             else
                             {
-                                try
+                                isHijacked = true;
+                            }
+
+                            if (isHijacked)
+                            {
+                                var html = "";
+
+                                if (!domain_get.Contains("http"))
                                 {
-                                    html = new WebClient().DownloadString(domain_get);
+                                    try
+                                    {
+                                        replace_domain_get = "http://" + domain_get;
+                                        html = new WebClient().DownloadString(replace_domain_get);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        html = "";
+                                    }
                                 }
-                                catch (Exception)
+                                else
                                 {
-                                    html = "";
+                                    try
+                                    {
+                                        html = new WebClient().DownloadString(domain_get);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        html = "";
+                                    }
+                                }
+
+                                if (html.Contains("landing_image"))
+                                {
+                                    timer_detectifhijacked.Start();
+                                    domain_one_time = false;
+                                    last_index_hijacked_get = false;
+                                    pictureBox_loader.Visible = false;
+                                    panel_cefsharp.Visible = true;
+                                    not_hijacked = true;
+
+                                    pictureBox_reload.Enabled = true;
+                                    pictureBox_reload.Image = Properties.Resources.refresh;
+                                    reloadToolStripMenuItem.Enabled = true;
+                                    cleanAndReloadToolStripMenuItem.Enabled = true;
+                                    resetZoomToolStripMenuItem.Enabled = true;
+                                    zoomInToolStripMenuItem.Enabled = true;
+                                    zoomOutToolStripMenuItem.Enabled = true;
+                                }
+                                else
+                                {
+                                    last_index_hijacked_get = true;
+                                    not_hijacked = false;
+                                    label_loadingstate.Text = "1";
+                                    label_loadingstate.Text = "0";
                                 }
                             }
-                           
-                            if (html.Contains("landing_image"))
+                            else
                             {
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
@@ -666,36 +685,155 @@ namespace Safety_Browser
                                 zoomInToolStripMenuItem.Enabled = true;
                                 zoomOutToolStripMenuItem.Enabled = true;
                             }
-                            else
-                            {
-                                last_index_hijacked_get = true;
-                                not_hijacked = false;
-                                label_loadingstate.Text = "1";
-                                label_loadingstate.Text = "0";
-                            }
                         }
                         else
                         {
-                            timer_detectifhijacked.Start();
-                            domain_one_time = false;
-                            last_index_hijacked_get = false;
-                            pictureBox_loader.Visible = false;
-                            panel_cefsharp.Visible = true;
-                            not_hijacked = true;
-
-                            pictureBox_reload.Enabled = true;
-                            pictureBox_reload.Image = Properties.Resources.refresh;
-                            reloadToolStripMenuItem.Enabled = true;
-                            cleanAndReloadToolStripMenuItem.Enabled = true;
-                            resetZoomToolStripMenuItem.Enabled = true;
-                            zoomInToolStripMenuItem.Enabled = true;
-                            zoomOutToolStripMenuItem.Enabled = true;
+                            Invoke(new Action(() =>
+                            {
+                                timer_elseloaded.Start();
+                            }));
                         }
-                    }
+                    }));
                 }
-            }));
+            }
+            //Invoke(new Action(() =>
+            //{
+            //    pictureBox_forward.Enabled = e.CanGoForward;
+            //    forwardToolStripMenuItem.Enabled = e.CanGoForward;
+            //    pictureBox_back.Enabled = e.CanGoBack;
+            //    goBackToolStripMenuItem.Enabled = e.CanGoBack;
+
+            //    if (pictureBox_forward.Enabled == true)
+            //    {
+            //        pictureBox_forward.Image = Properties.Resources.forward;
+            //    }
+            //    else
+            //    {
+            //        pictureBox_forward.Image = Properties.Resources.forward_visible;
+            //    }
+
+            //    if (pictureBox_back.Enabled == true)
+            //    {
+            //        pictureBox_back.Image = Properties.Resources.back;
+            //    }
+            //    else
+            //    {
+            //        pictureBox_back.Image = Properties.Resources.back_visible;
+            //    }
+
+            //    if (domain_one_time)
+            //    {
+            //        chromeBrowser.Dock = DockStyle.Fill;
+
+            //        if (!e.IsLoading)
+            //        {
+            //            chromeBrowser.Stop();
+            //            string strValue = text_search;
+            //            string[] strArray = strValue.Split(',');
+
+            //            if (!String.IsNullOrEmpty(handler_title))
+            //            {
+            //                foreach (string obj in strArray)
+            //                {
+            //                    bool contains = handler_title.Contains(obj);
+            //                    if (contains == true)
+            //                    {
+            //                        Invoke(new Action(() =>
+            //                        {
+            //                            isHijacked = false;
+            //                        }));
+
+            //                        break;
+            //                    }
+            //                    else if (!contains)
+            //                    {
+            //                        Invoke(new Action(() =>
+            //                        {
+            //                            isHijacked = true;
+            //                        }));
+            //                    }
+            //                }
+            //            }
+            //            else
+            //            {
+            //                isHijacked = true;
+            //            }
+
+            //            if (isHijacked)
+            //            {
+            //                var html = "";
+
+            //                if (!domain_get.Contains("http"))
+            //                {
+            //                    try
+            //                    {
+            //                        replace_domain_get = "http://" + domain_get;
+            //                        html = new WebClient().DownloadString(replace_domain_get);
+            //                    }
+            //                    catch (Exception)
+            //                    {
+            //                        html = "";
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    try
+            //                    {
+            //                        html = new WebClient().DownloadString(domain_get);
+            //                    }
+            //                    catch (Exception)
+            //                    {
+            //                        html = "";
+            //                    }
+            //                }
+
+            //                if (html.Contains("landing_image"))
+            //                {
+            //                    timer_detectifhijacked.Start();
+            //                    domain_one_time = false;
+            //                    last_index_hijacked_get = false;
+            //                    pictureBox_loader.Visible = false;
+            //                    panel_cefsharp.Visible = true;
+            //                    not_hijacked = true;
+
+            //                    pictureBox_reload.Enabled = true;
+            //                    pictureBox_reload.Image = Properties.Resources.refresh;
+            //                    reloadToolStripMenuItem.Enabled = true;
+            //                    cleanAndReloadToolStripMenuItem.Enabled = true;
+            //                    resetZoomToolStripMenuItem.Enabled = true;
+            //                    zoomInToolStripMenuItem.Enabled = true;
+            //                    zoomOutToolStripMenuItem.Enabled = true;
+            //                }
+            //                else
+            //                {
+            //                    last_index_hijacked_get = true;
+            //                    not_hijacked = false;
+            //                    label_loadingstate.Text = "1";
+            //                    label_loadingstate.Text = "0";
+            //                }
+            //            }
+            //            else
+            //            {
+            //                timer_detectifhijacked.Start();
+            //                domain_one_time = false;
+            //                last_index_hijacked_get = false;
+            //                pictureBox_loader.Visible = false;
+            //                panel_cefsharp.Visible = true;
+            //                not_hijacked = true;
+
+            //                pictureBox_reload.Enabled = true;
+            //                pictureBox_reload.Image = Properties.Resources.refresh;
+            //                reloadToolStripMenuItem.Enabled = true;
+            //                cleanAndReloadToolStripMenuItem.Enabled = true;
+            //                resetZoomToolStripMenuItem.Enabled = true;
+            //                zoomInToolStripMenuItem.Enabled = true;
+            //                zoomOutToolStripMenuItem.Enabled = true;
+            //            }
+            //        }
+            //    }
+            //}));
         }
-        
+
         private void BrowserTitleChanged(object sender, TitleChangedEventArgs e)
         {
             handler_title = e.Title;
@@ -1197,6 +1335,121 @@ namespace Safety_Browser
                     }
                 }
             }
+        }
+
+        private void timer_elseloaded_Tick(object sender, EventArgs e)
+        {
+            Invoke(new Action(() =>
+            {
+                elseloaded_i++;
+
+                if (elseloaded_i++ == 1)
+                {
+                    fully_loaded = 0;
+
+                    string strValue = text_search;
+                    string[] strArray = strValue.Split(',');
+
+                    if (!String.IsNullOrEmpty(handler_title))
+                    {
+                        foreach (string obj in strArray)
+                        {
+                            bool contains = handler_title.Contains(obj);
+                            if (contains == true)
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    isHijacked = false;
+                                }));
+
+                                break;
+                            }
+                            else if (!contains)
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    isHijacked = true;
+                                }));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        isHijacked = true;
+                    }
+
+                    if (isHijacked)
+                    {
+                        var html = "";
+
+                        if (!domain_get.Contains("http"))
+                        {
+                            try
+                            {
+                                replace_domain_get = "http://" + domain_get;
+                                html = new WebClient().DownloadString(replace_domain_get);
+                            }
+                            catch (Exception)
+                            {
+                                html = "";
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                html = new WebClient().DownloadString(domain_get);
+                            }
+                            catch (Exception)
+                            {
+                                html = "";
+                            }
+                        }
+
+                        if (html.Contains("landing_image"))
+                        {
+                            timer_detectifhijacked.Start();
+                            domain_one_time = false;
+                            last_index_hijacked_get = false;
+                            pictureBox_loader.Visible = false;
+                            panel_cefsharp.Visible = true;
+                            not_hijacked = true;
+
+                            pictureBox_reload.Enabled = true;
+                            pictureBox_reload.Image = Properties.Resources.refresh;
+                            reloadToolStripMenuItem.Enabled = true;
+                            cleanAndReloadToolStripMenuItem.Enabled = true;
+                            resetZoomToolStripMenuItem.Enabled = true;
+                            zoomInToolStripMenuItem.Enabled = true;
+                            zoomOutToolStripMenuItem.Enabled = true;
+                        }
+                        else
+                        {
+                            last_index_hijacked_get = true;
+                            not_hijacked = false;
+                            label_loadingstate.Text = "1";
+                            label_loadingstate.Text = "0";
+                        }
+                    }
+                    else
+                    {
+                        timer_detectifhijacked.Start();
+                        domain_one_time = false;
+                        last_index_hijacked_get = false;
+                        pictureBox_loader.Visible = false;
+                        panel_cefsharp.Visible = true;
+                        not_hijacked = true;
+
+                        pictureBox_reload.Enabled = true;
+                        pictureBox_reload.Image = Properties.Resources.refresh;
+                        reloadToolStripMenuItem.Enabled = true;
+                        cleanAndReloadToolStripMenuItem.Enabled = true;
+                        resetZoomToolStripMenuItem.Enabled = true;
+                        zoomInToolStripMenuItem.Enabled = true;
+                        zoomOutToolStripMenuItem.Enabled = true;
+                    }
+                }
+            }));
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)

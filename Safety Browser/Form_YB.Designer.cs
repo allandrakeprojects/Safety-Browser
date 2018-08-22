@@ -73,6 +73,7 @@
             this.timer_mouse = new System.Windows.Forms.Timer(this.components);
             this.timer_detectifhijacked = new System.Windows.Forms.Timer(this.components);
             this.webBrowser_handler = new System.Windows.Forms.WebBrowser();
+            this.timer_elseloaded = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -125,7 +126,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dataGridView_domain.Location = new System.Drawing.Point(1276, 45);
+            this.dataGridView_domain.Location = new System.Drawing.Point(1275, 44);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
@@ -148,7 +149,7 @@
             // 
             this.label_current_web_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_web_service.AutoSize = true;
-            this.label_current_web_service.Location = new System.Drawing.Point(1276, 348);
+            this.label_current_web_service.Location = new System.Drawing.Point(1275, 347);
             this.label_current_web_service.Name = "label_current_web_service";
             this.label_current_web_service.Size = new System.Drawing.Size(106, 13);
             this.label_current_web_service.TabIndex = 27;
@@ -159,7 +160,7 @@
             // 
             this.label_current_domain_service.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_current_domain_service.AutoSize = true;
-            this.label_current_domain_service.Location = new System.Drawing.Point(1276, 365);
+            this.label_current_domain_service.Location = new System.Drawing.Point(1275, 364);
             this.label_current_domain_service.Name = "label_current_domain_service";
             this.label_current_domain_service.Size = new System.Drawing.Size(120, 13);
             this.label_current_domain_service.TabIndex = 28;
@@ -219,7 +220,7 @@
             // 
             this.label_loadingstate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_loadingstate.AutoSize = true;
-            this.label_loadingstate.Location = new System.Drawing.Point(1276, 329);
+            this.label_loadingstate.Location = new System.Drawing.Point(1275, 328);
             this.label_loadingstate.Name = "label_loadingstate";
             this.label_loadingstate.Size = new System.Drawing.Size(64, 13);
             this.label_loadingstate.TabIndex = 21;
@@ -349,13 +350,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -371,7 +372,7 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // goBackToolStripMenuItem
@@ -456,7 +457,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_version.Text = "0.0.18";
+            this.toolStripMenuItem_version.Text = "0.0.19";
             // 
             // pictureBox_menu
             // 
@@ -534,12 +535,17 @@
             // 
             // webBrowser_handler
             // 
-            this.webBrowser_handler.Location = new System.Drawing.Point(1276, 417);
+            this.webBrowser_handler.Location = new System.Drawing.Point(1275, 416);
             this.webBrowser_handler.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser_handler.Name = "webBrowser_handler";
             this.webBrowser_handler.Size = new System.Drawing.Size(103, 142);
             this.webBrowser_handler.TabIndex = 53;
             this.webBrowser_handler.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser_handler_DocumentCompleted);
+            // 
+            // timer_elseloaded
+            // 
+            this.timer_elseloaded.Interval = 1000;
+            this.timer_elseloaded.Tick += new System.EventHandler(this.timer_elseloaded_Tick);
             // 
             // Form_YB
             // 
@@ -634,6 +640,7 @@
         private System.Windows.Forms.Timer timer_mouse;
         private System.Windows.Forms.Timer timer_detectifhijacked;
         private System.Windows.Forms.WebBrowser webBrowser_handler;
+        private System.Windows.Forms.Timer timer_elseloaded;
     }
 }
 
