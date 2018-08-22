@@ -526,7 +526,19 @@ namespace Safety_Browser
                         timeout = true;
 
                         //webBrowser_handler.Navigate(domain_get);
-                        chromeBrowser.Load(domain_get);
+                        string replace_domain_get = String.Empty;
+                        MessageBox.Show(domain_get);
+                        if (domain_get.Contains(".com"))
+                        {
+                            replace_domain_get = domain_get.Replace(".com", ".com/speed.png");
+                        }
+                        else if (domain_get.Contains(".com/"))
+                        {
+                            replace_domain_get = domain_get.Replace(".com/", ".com/speed.png");
+                        }
+
+                        MessageBox.Show(replace_domain_get);
+                        chromeBrowser.Load(replace_domain_get);
                     }
                     catch (Exception)
                     {
@@ -560,21 +572,76 @@ namespace Safety_Browser
         // asd123
         private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
+            Invoke(new Action(() =>
+            {
+                pictureBox_forward.Enabled = e.CanGoForward;
+                forwardToolStripMenuItem.Enabled = e.CanGoForward;
+                pictureBox_back.Enabled = e.CanGoBack;
+                goBackToolStripMenuItem.Enabled = e.CanGoBack;
+
+                if (pictureBox_forward.Enabled == true)
+                {
+                    pictureBox_forward.Image = Properties.Resources.forward;
+                }
+                else
+                {
+                    pictureBox_forward.Image = Properties.Resources.forward_visible;
+                }
+
+                if (pictureBox_back.Enabled == true)
+                {
+                    pictureBox_back.Image = Properties.Resources.back;
+                }
+                else
+                {
+                    pictureBox_back.Image = Properties.Resources.back_visible;
+                }
+            }));
+
             if (e.IsLoading)
             {
-                elseloaded_i = 0;
-                timer_elseloaded.Stop();
+                Invoke(new Action(() =>
+                {
+                    elseloaded_i = 0;
+                    timer_elseloaded.Stop();
+
+                    if (!domain_one_time)
+                    {
+                        pictureBox_loader.Visible = true;
+                        panel_cefsharp.Visible = false;
+
+                        pictureBox_browserstop.Visible = true;
+                        pictureBox_reload.Visible = false;
+                    }
+                }));
+            }
+
+            if (!e.IsLoading)
+            {
+                Invoke(new Action(() =>
+                {
+                    if (!domain_one_time)
+                    {
+                        pictureBox_loader.Visible = false;
+                        panel_cefsharp.Visible = true;
+
+                        pictureBox_reload.Visible = true;
+                        pictureBox_browserstop.Visible = false;
+                    }
+                }));
             }
 
             if (domain_one_time)
             {
+                Invoke(new Action(() =>
+                {
+                    chromeBrowser.Dock = DockStyle.Fill;
+                }));
 
                 if (!e.IsLoading)
                 {
                     Invoke(new Action(async () =>
                     {
-                        chromeBrowser.Dock = DockStyle.Fill;
-
                         await Task.Run(async () =>
                         {
                             await Task.Delay(2000);
@@ -584,101 +651,25 @@ namespace Safety_Browser
 
                         if (fully_loaded == 1)
                         {
-                            string strValue = text_search;
-                            string[] strArray = strValue.Split(',');
-                            
-                            if (!String.IsNullOrEmpty(handler_title))
+                            panel_cefsharp.Visible = false;
+
+                            var html = "";
+
+                            await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
+                             {
+                                 html = taskHtml.Result;
+                             });
+
+                            if (html.Contains("speed.png"))
                             {
-                                foreach (string obj in strArray)
-                                {
-                                    bool contains = handler_title.Contains(obj);
-                                    if (contains == true)
-                                    {
-                                        Invoke(new Action(() =>
-                                        {
-                                            isHijacked = false;
-                                        }));
+                                MessageBox.Show("image found");
 
-                                        break;
-                                    }
-                                    else if (!contains)
-                                    {
-                                        Invoke(new Action(() =>
-                                        {
-                                            isHijacked = true;
-                                        }));
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                isHijacked = true;
-                            }
-
-                            if (isHijacked)
-                            {
-                                var html = "";
-
-                                if (!domain_get.Contains("http"))
+                                if (domain_get.Contains("/speed.png"))
                                 {
-                                    try
-                                    {
-                                        replace_domain_get = "http://" + domain_get;
-                                        using (WebClient client = new WebClient())
-                                        {
-                                            html = await Task.Run(() => client.DownloadString(replace_domain_get));
-                                            //html = new WebClient().DownloadString(replace_domain_get);
-                                        }
-                                    }
-                                    catch (Exception)
-                                    {
-                                        html = "";
-                                    }
-                                }
-                                else
-                                {
-                                    try
-                                    {
-                                        using (WebClient client = new WebClient())
-                                        {
-                                            html = await Task.Run(() => client.DownloadString(domain_get));
-                                            //html = new WebClient().DownloadString(replace_domain_get);
-                                        }
-                                    }
-                                    catch (Exception)
-                                    {
-                                        html = "";
-                                    }
+                                    string replace_domain_get = domain_get.Replace("/speed.png", "");
+                                    chromeBrowser.Load(replace_domain_get);
                                 }
 
-                                if (html.Contains("landing_image"))
-                                {
-                                    timer_detectifhijacked.Start();
-                                    domain_one_time = false;
-                                    last_index_hijacked_get = false;
-                                    pictureBox_loader.Visible = false;
-                                    panel_cefsharp.Visible = true;
-                                    not_hijacked = true;
-
-                                    pictureBox_reload.Enabled = true;
-                                    pictureBox_reload.Image = Properties.Resources.refresh;
-                                    reloadToolStripMenuItem.Enabled = true;
-                                    cleanAndReloadToolStripMenuItem.Enabled = true;
-                                    resetZoomToolStripMenuItem.Enabled = true;
-                                    zoomInToolStripMenuItem.Enabled = true;
-                                    zoomOutToolStripMenuItem.Enabled = true;
-                                }
-                                else
-                                {
-                                    last_index_hijacked_get = true;
-                                    not_hijacked = false;
-                                    label_loadingstate.Text = "1";
-                                    label_loadingstate.Text = "0";
-                                }
-                            }
-                            else
-                            {
-                                timer_detectifhijacked.Start();
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
@@ -693,13 +684,169 @@ namespace Safety_Browser
                                 zoomInToolStripMenuItem.Enabled = true;
                                 zoomOutToolStripMenuItem.Enabled = true;
                             }
+                            else
+                            {
+                                MessageBox.Show("not found");
+                                last_index_hijacked_get = true;
+                                not_hijacked = false;
+                                label_loadingstate.Text = "1";
+                                label_loadingstate.Text = "0";
+                            }
+
+                            //if (!domain_get.Contains("http"))
+                            //{
+                            //    try
+                            //    {
+                            //        replace_domain_get = "http://" + domain_get;
+                            //        using (WebClient client = new WebClient())
+                            //        {
+                            //            html = await Task.Run(() => client.DownloadString(replace_domain_get));
+                            //        }
+                            //    }
+                            //    catch (Exception)
+                            //    {
+                            //        html = "";
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    try
+                            //    {
+                            //        using (WebClient client = new WebClient())
+                            //        {
+                            //            MessageBox.Show(domain_get);
+                            //            html = await Task.Run(() => client.DownloadString(domain_get));
+                            //        }
+                            //    }
+                            //    catch (Exception)
+                            //    {
+                            //        html = "";
+                            //    }
+                            //}
+                            
+                            //string strValue = text_search;
+                            //string[] strArray = strValue.Split(',');
+
+                            //if (!String.IsNullOrEmpty(handler_title))
+                            //{
+                            //    foreach (string obj in strArray)
+                            //    {
+                            //        bool contains = handler_title.Contains(obj);
+                            //        if (contains == true)
+                            //        {
+                            //            Invoke(new Action(() =>
+                            //            {
+                            //                isHijacked = false;
+                            //            }));
+
+                            //            break;
+                            //        }
+                            //        else if (!contains)
+                            //        {
+                            //            Invoke(new Action(() =>
+                            //            {
+                            //                isHijacked = true;
+                            //            }));
+                            //        }
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    isHijacked = true;
+                            //}
+
+                            //if (isHijacked)
+                            //{
+                            //    var html = "";
+
+                            //    if (!domain_get.Contains("http"))
+                            //    {
+                            //        try
+                            //        {
+                            //            replace_domain_get = "http://" + domain_get;
+                            //            using (WebClient client = new WebClient())
+                            //            {
+                            //                html = await Task.Run(() => client.DownloadString(replace_domain_get));
+                            //            }
+                            //        }
+                            //        catch (Exception)
+                            //        {
+                            //            html = "";
+                            //        }
+                            //    }
+                            //    else
+                            //    {
+                            //        try
+                            //        {
+                            //            using (WebClient client = new WebClient())
+                            //            {
+                            //                html = await Task.Run(() => client.DownloadString(domain_get));
+                            //            }
+                            //        }
+                            //        catch (Exception)
+                            //        {
+                            //            html = "";
+                            //        }
+                            //    }
+
+                            //    if (html.Contains("landing_image"))
+                            //    {
+                            //        //timer_detectifhijacked.Start();
+                            //        domain_one_time = false;
+                            //        last_index_hijacked_get = false;
+                            //        pictureBox_loader.Visible = false;
+                            //        panel_cefsharp.Visible = true;
+                            //        not_hijacked = true;
+
+                            //        pictureBox_reload.Enabled = true;
+                            //        pictureBox_reload.Image = Properties.Resources.refresh;
+                            //        pictureBox_browserhome.Enabled = true;
+                            //        pictureBox_browserhomehover.Enabled = true;
+                            //        pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                            //        homeToolStripMenuItem.Enabled = true;
+                            //        reloadToolStripMenuItem.Enabled = true;
+                            //        cleanAndReloadToolStripMenuItem.Enabled = true;
+                            //        resetZoomToolStripMenuItem.Enabled = true;
+                            //        zoomInToolStripMenuItem.Enabled = true;
+                            //        zoomOutToolStripMenuItem.Enabled = true;
+                            //    }
+                            //    else
+                            //    {
+                            //        last_index_hijacked_get = true;
+                            //        not_hijacked = false;
+                            //        label_loadingstate.Text = "1";
+                            //        label_loadingstate.Text = "0";
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    //timer_detectifhijacked.Start();
+                            //    domain_one_time = false;
+                            //    last_index_hijacked_get = false;
+                            //    pictureBox_loader.Visible = false;
+                            //    panel_cefsharp.Visible = true;
+                            //    not_hijacked = true;
+
+                            //    pictureBox_reload.Enabled = true;
+                            //    pictureBox_reload.Image = Properties.Resources.refresh;
+                            //    pictureBox_browserhome.Enabled = true;
+                            //    pictureBox_browserhomehover.Enabled = true;
+                            //    pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                            //    homeToolStripMenuItem.Enabled = true;
+                            //    reloadToolStripMenuItem.Enabled = true;
+                            //    cleanAndReloadToolStripMenuItem.Enabled = true;
+                            //    resetZoomToolStripMenuItem.Enabled = true;
+                            //    zoomInToolStripMenuItem.Enabled = true;
+                            //    zoomOutToolStripMenuItem.Enabled = true;
+                            //}
                         }
                         else
                         {
-                            Invoke(new Action(() =>
-                            {
-                                timer_elseloaded.Start();
-                            }));
+                            //MessageBox.Show("asdasdsaad");
+                            //Invoke(new Action(() =>
+                            //{
+                            //    timer_elseloaded.Start();
+                            //}));
                         }
                     }));
                 }
@@ -1129,7 +1276,7 @@ namespace Safety_Browser
                     webbrowser_handler_title = webBrowser_handler.DocumentTitle;
                     webbrowser_handler_url = webBrowser_handler.Url;
 
-                    timer_detectifhijacked.Start();
+                    //timer_detectifhijacked.Start();
 
                     timeout = false;
                     timer_handler.Stop();
@@ -1169,7 +1316,6 @@ namespace Safety_Browser
                                 using (WebClient client = new WebClient())
                                 {
                                     html = await Task.Run(() => client.DownloadString(replace_domain_get));
-                                    //html = new WebClient().DownloadString(replace_domain_get);
                                 }
                             }
                             catch (Exception)
@@ -1184,7 +1330,6 @@ namespace Safety_Browser
                                 using (WebClient client = new WebClient())
                                 {
                                     html = await Task.Run(() => client.DownloadString(domain_get));
-                                    //html = new WebClient().DownloadString(replace_domain_get);
                                 }
                             }
                             catch (Exception)
@@ -1270,7 +1415,6 @@ namespace Safety_Browser
                                 using (WebClient client = new WebClient())
                                 {
                                     html = await Task.Run(() => client.DownloadString(replace_domain_get));
-                                    //html = new WebClient().DownloadString(replace_domain_get);
                                 }
                             }
                             catch (Exception)
@@ -1285,7 +1429,6 @@ namespace Safety_Browser
                                 using (WebClient client = new WebClient())
                                 {
                                     html = await Task.Run(() => client.DownloadString(domain_get));
-                                    //html = new WebClient().DownloadString(replace_domain_get);
                                 }
                             }
                             catch (Exception)
@@ -1296,7 +1439,7 @@ namespace Safety_Browser
                         
                         if (html.Contains("landing_image"))
                         {
-                            timer_detectifhijacked.Start();
+                            //timer_detectifhijacked.Start();
                             domain_one_time = false;
                             last_index_hijacked_get = false;
                             pictureBox_loader.Visible = false;
@@ -1305,6 +1448,10 @@ namespace Safety_Browser
 
                             pictureBox_reload.Enabled = true;
                             pictureBox_reload.Image = Properties.Resources.refresh;
+                            pictureBox_browserhome.Enabled = true;
+                            pictureBox_browserhomehover.Enabled = true;
+                            pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                            homeToolStripMenuItem.Enabled = true;
                             reloadToolStripMenuItem.Enabled = true;
                             cleanAndReloadToolStripMenuItem.Enabled = true;
                             resetZoomToolStripMenuItem.Enabled = true;
@@ -1321,7 +1468,7 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        timer_detectifhijacked.Start();
+                        //timer_detectifhijacked.Start();
                         domain_one_time = false;
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
@@ -1330,6 +1477,10 @@ namespace Safety_Browser
 
                         pictureBox_reload.Enabled = true;
                         pictureBox_reload.Image = Properties.Resources.refresh;
+                        pictureBox_browserhome.Enabled = true;
+                        pictureBox_browserhomehover.Enabled = true;
+                        pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                        homeToolStripMenuItem.Enabled = true;
                         reloadToolStripMenuItem.Enabled = true;
                         cleanAndReloadToolStripMenuItem.Enabled = true;
                         resetZoomToolStripMenuItem.Enabled = true;
@@ -1338,6 +1489,60 @@ namespace Safety_Browser
                     }
                 }
             }));
+        }
+
+        private void pictureBox_browserstop_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Stop();
+        }
+
+        private void pictureBox_browserstop_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_browserstop.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_browserstop_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_browserstop.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_browserhome_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_browserhome.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_browserhomehover.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_browserhome_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_browserhome.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_browserhomehover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_browserhomehover_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_browserhome.BackColor = Color.FromArgb(197, 112, 53);
+            pictureBox_browserhomehover.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_browserhomehover_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_browserhome.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_browserhomehover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_browserhome_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Load(domain_get);
+        }
+
+        private void pictureBox_browserhomehover_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Load(domain_get);
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Load(domain_get);
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)

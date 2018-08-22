@@ -190,6 +190,15 @@
   <ItemGroup>
     <None Include="Resources\refresh_visible.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser_homehover.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
