@@ -618,7 +618,15 @@ namespace Safety_Browser
                     if (!domain_one_time)
                     {
                         pictureBox_loader.Visible = false;
-                        panel_cefsharp.Visible = true;
+
+                        if (panel_help.Visible == true)
+                        {
+                            panel_cefsharp.Visible = false;
+                        }
+                        else
+                        {
+                            panel_cefsharp.Visible = true;
+                        }
 
                         pictureBox_reload.Visible = true;
                         pictureBox_browserstop.Visible = false;
@@ -717,7 +725,16 @@ namespace Safety_Browser
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
-                                panel_cefsharp.Visible = true;
+
+                                if (panel_help.Visible == true)
+                                {
+                                    panel_cefsharp.Visible = false;
+                                }
+                                else
+                                {
+                                    panel_cefsharp.Visible = true;
+                                }
+
                                 not_hijacked = true;
 
                                 pictureBox_reload.Enabled = true;
@@ -1337,7 +1354,16 @@ namespace Safety_Browser
                         domain_one_time = false;
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
-                        panel_cefsharp.Visible = true;
+
+                        if (panel_help.Visible == true)
+                        {
+                            panel_cefsharp.Visible = false;
+                        }
+                        else
+                        {
+                            panel_cefsharp.Visible = true;
+                        }
+
                         not_hijacked = true;
 
                         pictureBox_reload.Enabled = true;
@@ -1472,16 +1498,20 @@ namespace Safety_Browser
                 panel_help.Visible = true;
                 help_click = false;
                 panel_cefsharp.Visible = false;
+                panel_notification.Visible = false;
             }
             else
             {
                 panel_help.Visible = false;
                 help_click = true;
                 panel_cefsharp.Visible = true;
+                panel_notification.Visible = true;
             }
         }
 
         private int radius = 30;
+        private bool notification_click = true;
+
         [DefaultValue(30)]
         public int Radius
         {
@@ -1527,6 +1557,100 @@ namespace Safety_Browser
 
             pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
             pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+        }
+
+        private void pictureBox_nofication_Click(object sender, EventArgs e)
+        {
+            var panel_cefsharp_resize = panel_cefsharp.Width - 280;
+            var panel_cefsharp_size = panel_cefsharp.Width + 280;
+
+            if (notification_click)
+            {
+                notification_click = false;
+
+                while (panel_cefsharp.Width > panel_cefsharp_resize)
+                {
+                    if (!notification_click)
+                    {
+                        Application.DoEvents();
+                        panel_cefsharp.Width -= 6;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                panel_notification.Visible = true;
+                pictureBox_nofication.Image = Properties.Resources.notification_back;
+            }
+            else
+            {
+                notification_click = true;
+
+                while (panel_cefsharp_size > panel_cefsharp.Width)
+                {
+                    if (notification_click)
+                    {
+                        Application.DoEvents();
+                        panel_cefsharp.Width += 4;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                panel_notification.Visible = false;
+                pictureBox_nofication.Image = Properties.Resources.notification;
+            }
+        }
+
+        private void pictureBox_noficationhover_Click(object sender, EventArgs e)
+        {
+            var panel_cefsharp_resize = panel_cefsharp.Width - 280;
+            var panel_cefsharp_size = panel_cefsharp.Width + 280;
+
+            if (notification_click)
+            {
+                notification_click = false;
+
+                while (panel_cefsharp.Width >= panel_cefsharp_resize)
+                {
+                    if (!notification_click)
+                    {
+                        panel_cefsharp.Width -= 6;
+                        Application.DoEvents();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                panel_notification.Visible = true;
+                pictureBox_nofication.Image = Properties.Resources.notification_back;
+            }
+            else
+            {
+                notification_click = true;
+
+                while (panel_cefsharp_size >= panel_cefsharp.Width)
+                {
+                    if (notification_click)
+                    {
+                        panel_cefsharp.Width += 4;
+                        Application.DoEvents();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                panel_notification.Visible = false;
+                pictureBox_nofication.Image = Properties.Resources.notification;
+            }
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)

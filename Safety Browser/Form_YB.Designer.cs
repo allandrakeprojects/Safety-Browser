@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -40,7 +40,7 @@
             this.label_current_domain_service = new System.Windows.Forms.Label();
             this.timer_handler = new System.Windows.Forms.Timer(this.components);
             this.panel_connection = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label_titlebar = new System.Windows.Forms.Label();
@@ -82,25 +82,30 @@
             this.pictureBox_helphover = new System.Windows.Forms.PictureBox();
             this.pictureBox_nofication = new System.Windows.Forms.PictureBox();
             this.pictureBox_noficationhover = new System.Windows.Forms.PictureBox();
+            this.label_notificationstatus = new System.Windows.Forms.Label();
+            this.panel_notification = new System.Windows.Forms.Panel();
             this.panel_help = new System.Windows.Forms.Panel();
-            this.pictureBox_helpback = new System.Windows.Forms.PictureBox();
-            this.label_help = new System.Windows.Forms.Label();
-            this.label_chatus = new System.Windows.Forms.Label();
-            this.label_chatus1 = new System.Windows.Forms.Label();
-            this.button_chatus = new System.Windows.Forms.Button();
-            this.label_emailus1 = new System.Windows.Forms.Label();
-            this.label_emailus = new System.Windows.Forms.Label();
-            this.label_callus1 = new System.Windows.Forms.Label();
-            this.label_callus = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label_getdiagnostics = new System.Windows.Forms.Label();
+            this.label_clearcache = new System.Windows.Forms.Label();
+            this.labelsocial3 = new System.Windows.Forms.Label();
+            this.label_social2 = new System.Windows.Forms.Label();
             this.label_social1 = new System.Windows.Forms.Label();
             this.label_social = new System.Windows.Forms.Label();
-            this.label_social2 = new System.Windows.Forms.Label();
-            this.labelsocial3 = new System.Windows.Forms.Label();
-            this.label_clearcache = new System.Windows.Forms.Label();
-            this.label_getdiagnostics = new System.Windows.Forms.Label();
+            this.label_callus1 = new System.Windows.Forms.Label();
+            this.label_callus = new System.Windows.Forms.Label();
+            this.label_emailus1 = new System.Windows.Forms.Label();
+            this.label_emailus = new System.Windows.Forms.Label();
+            this.label_chatus1 = new System.Windows.Forms.Label();
+            this.label_chatus = new System.Windows.Forms.Label();
+            this.pictureBox_helpback = new System.Windows.Forms.PictureBox();
+            this.label_help = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).BeginInit();
@@ -118,8 +123,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helphover)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).BeginInit();
+            this.panel_notification.SuspendLayout();
             this.panel_help.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helpback)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // domain
@@ -133,44 +142,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle30.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle18.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridView_domain.Location = new System.Drawing.Point(1284, 44);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -206,7 +215,7 @@
             // panel_connection
             // 
             this.panel_connection.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel_connection.Controls.Add(this.pictureBox1);
+            this.panel_connection.Controls.Add(this.pictureBox_1);
             this.panel_connection.Controls.Add(this.label1);
             this.panel_connection.Controls.Add(this.label8);
             this.panel_connection.Location = new System.Drawing.Point(961, 817);
@@ -215,15 +224,15 @@
             this.panel_connection.TabIndex = 39;
             this.panel_connection.Visible = false;
             // 
-            // pictureBox1
+            // pictureBox_1
             // 
-            this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.connection;
-            this.pictureBox1.Location = new System.Drawing.Point(81, 47);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(180, 140);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox_1.Image = global::Safety_Browser.Properties.Resources.connection;
+            this.pictureBox_1.Location = new System.Drawing.Point(81, 47);
+            this.pictureBox_1.Name = "pictureBox_1";
+            this.pictureBox_1.Size = new System.Drawing.Size(180, 140);
+            this.pictureBox_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_1.TabIndex = 0;
+            this.pictureBox_1.TabStop = false;
             // 
             // label1
             // 
@@ -626,7 +635,7 @@
             // pictureBox_loader
             // 
             this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_loader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.pictureBox_loader.ErrorImage = null;
             this.pictureBox_loader.Image = global::Safety_Browser.Properties.Resources.loader;
             this.pictureBox_loader.Location = new System.Drawing.Point(503, 250);
@@ -638,10 +647,11 @@
             // 
             // pictureBox_help
             // 
+            this.pictureBox_help.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_help.Image = global::Safety_Browser.Properties.Resources.help;
-            this.pictureBox_help.Location = new System.Drawing.Point(213, 10);
+            this.pictureBox_help.Location = new System.Drawing.Point(1076, 10);
             this.pictureBox_help.Name = "pictureBox_help";
             this.pictureBox_help.Size = new System.Drawing.Size(18, 18);
             this.pictureBox_help.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -653,9 +663,10 @@
             // 
             // pictureBox_helphover
             // 
+            this.pictureBox_helphover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_helphover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_helphover.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_helphover.Location = new System.Drawing.Point(205, 1);
+            this.pictureBox_helphover.Location = new System.Drawing.Point(1068, 1);
             this.pictureBox_helphover.Name = "pictureBox_helphover";
             this.pictureBox_helphover.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_helphover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -666,35 +677,64 @@
             // 
             // pictureBox_nofication
             // 
+            this.pictureBox_nofication.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_nofication.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_nofication.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_nofication.Image = global::Safety_Browser.Properties.Resources.notification;
-            this.pictureBox_nofication.Location = new System.Drawing.Point(249, 10);
+            this.pictureBox_nofication.Location = new System.Drawing.Point(1112, 10);
             this.pictureBox_nofication.Name = "pictureBox_nofication";
             this.pictureBox_nofication.Size = new System.Drawing.Size(18, 18);
             this.pictureBox_nofication.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_nofication.TabIndex = 61;
             this.pictureBox_nofication.TabStop = false;
+            this.pictureBox_nofication.Click += new System.EventHandler(this.pictureBox_nofication_Click);
             this.pictureBox_nofication.MouseLeave += new System.EventHandler(this.pictureBox_nofication_MouseLeave);
             this.pictureBox_nofication.MouseHover += new System.EventHandler(this.pictureBox_nofication_MouseHover);
             // 
             // pictureBox_noficationhover
             // 
+            this.pictureBox_noficationhover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_noficationhover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_noficationhover.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_noficationhover.Location = new System.Drawing.Point(241, 1);
+            this.pictureBox_noficationhover.Location = new System.Drawing.Point(1104, 1);
             this.pictureBox_noficationhover.Name = "pictureBox_noficationhover";
             this.pictureBox_noficationhover.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_noficationhover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_noficationhover.TabIndex = 62;
             this.pictureBox_noficationhover.TabStop = false;
+            this.pictureBox_noficationhover.Click += new System.EventHandler(this.pictureBox_noficationhover_Click);
             this.pictureBox_noficationhover.MouseLeave += new System.EventHandler(this.pictureBox_noficationhover_MouseLeave);
             this.pictureBox_noficationhover.MouseHover += new System.EventHandler(this.pictureBox_noficationhover_MouseHover);
+            // 
+            // label_notificationstatus
+            // 
+            this.label_notificationstatus.AutoSize = true;
+            this.label_notificationstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_notificationstatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
+            this.label_notificationstatus.Location = new System.Drawing.Point(4, 10);
+            this.label_notificationstatus.Name = "label_notificationstatus";
+            this.label_notificationstatus.Size = new System.Drawing.Size(214, 16);
+            this.label_notificationstatus.TabIndex = 67;
+            this.label_notificationstatus.Text = "There are currently no notifications.";
+            // 
+            // panel_notification
+            // 
+            this.panel_notification.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_notification.Controls.Add(this.label_notificationstatus);
+            this.panel_notification.Location = new System.Drawing.Point(991, 39);
+            this.panel_notification.Name = "panel_notification";
+            this.panel_notification.Size = new System.Drawing.Size(278, 724);
+            this.panel_notification.TabIndex = 68;
+            this.panel_notification.Visible = false;
             // 
             // panel_help
             // 
             this.panel_help.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.panel_help.Controls.Add(this.pictureBox3);
+            this.panel_help.Controls.Add(this.pictureBox1);
+            this.panel_help.Controls.Add(this.label2);
             this.panel_help.Controls.Add(this.label_getdiagnostics);
             this.panel_help.Controls.Add(this.label_clearcache);
             this.panel_help.Controls.Add(this.labelsocial3);
@@ -705,17 +745,191 @@
             this.panel_help.Controls.Add(this.label_callus);
             this.panel_help.Controls.Add(this.label_emailus1);
             this.panel_help.Controls.Add(this.label_emailus);
-            this.panel_help.Controls.Add(this.button_chatus);
             this.panel_help.Controls.Add(this.label_chatus1);
             this.panel_help.Controls.Add(this.label_chatus);
             this.panel_help.Controls.Add(this.pictureBox_helpback);
             this.panel_help.Controls.Add(this.label_help);
+            this.panel_help.Controls.Add(this.pictureBox2);
             this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel_help.Location = new System.Drawing.Point(222, 146);
+            this.panel_help.Location = new System.Drawing.Point(221, 192);
             this.panel_help.Name = "panel_help";
-            this.panel_help.Size = new System.Drawing.Size(828, 413);
-            this.panel_help.TabIndex = 64;
+            this.panel_help.Size = new System.Drawing.Size(828, 380);
+            this.panel_help.TabIndex = 69;
             this.panel_help.Visible = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = global::Safety_Browser.Properties.Resources.notification_3;
+            this.pictureBox3.Location = new System.Drawing.Point(548, 152);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox3.TabIndex = 71;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.notification_2;
+            this.pictureBox1.Location = new System.Drawing.Point(502, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 70;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.label2.Location = new System.Drawing.Point(81, 123);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 12);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Chat now";
+            // 
+            // label_getdiagnostics
+            // 
+            this.label_getdiagnostics.AutoSize = true;
+            this.label_getdiagnostics.BackColor = System.Drawing.Color.Transparent;
+            this.label_getdiagnostics.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
+            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 344);
+            this.label_getdiagnostics.Name = "label_getdiagnostics";
+            this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
+            this.label_getdiagnostics.TabIndex = 14;
+            this.label_getdiagnostics.Text = "GET DIAGNOSTICS";
+            // 
+            // label_clearcache
+            // 
+            this.label_clearcache.AutoSize = true;
+            this.label_clearcache.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_clearcache.ForeColor = System.Drawing.Color.White;
+            this.label_clearcache.Location = new System.Drawing.Point(470, 344);
+            this.label_clearcache.Name = "label_clearcache";
+            this.label_clearcache.Size = new System.Drawing.Size(134, 20);
+            this.label_clearcache.TabIndex = 13;
+            this.label_clearcache.Text = "CLEAR CACHE";
+            // 
+            // labelsocial3
+            // 
+            this.labelsocial3.AutoSize = true;
+            this.labelsocial3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelsocial3.ForeColor = System.Drawing.Color.White;
+            this.labelsocial3.Location = new System.Drawing.Point(81, 320);
+            this.labelsocial3.Name = "labelsocial3";
+            this.labelsocial3.Size = new System.Drawing.Size(177, 12);
+            this.labelsocial3.TabIndex = 12;
+            this.labelsocial3.Text = "• WhatsApp: xxxxxxxxxxx / xxxxxxxxxxx";
+            // 
+            // label_social2
+            // 
+            this.label_social2.AutoSize = true;
+            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social2.ForeColor = System.Drawing.Color.White;
+            this.label_social2.Location = new System.Drawing.Point(81, 308);
+            this.label_social2.Name = "label_social2";
+            this.label_social2.Size = new System.Drawing.Size(71, 12);
+            this.label_social2.TabIndex = 11;
+            this.label_social2.Text = "• Line @johndoe";
+            // 
+            // label_social1
+            // 
+            this.label_social1.AutoSize = true;
+            this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social1.ForeColor = System.Drawing.Color.White;
+            this.label_social1.Location = new System.Drawing.Point(81, 296);
+            this.label_social1.Name = "label_social1";
+            this.label_social1.Size = new System.Drawing.Size(121, 12);
+            this.label_social1.TabIndex = 10;
+            this.label_social1.Text = "• WeChat: johndoe / janedoe";
+            // 
+            // label_social
+            // 
+            this.label_social.AutoSize = true;
+            this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social.ForeColor = System.Drawing.Color.White;
+            this.label_social.Location = new System.Drawing.Point(78, 273);
+            this.label_social.Name = "label_social";
+            this.label_social.Size = new System.Drawing.Size(61, 24);
+            this.label_social.TabIndex = 9;
+            this.label_social.Text = "Social";
+            // 
+            // label_callus1
+            // 
+            this.label_callus1.AutoSize = true;
+            this.label_callus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_callus1.ForeColor = System.Drawing.Color.White;
+            this.label_callus1.Location = new System.Drawing.Point(81, 240);
+            this.label_callus1.Name = "label_callus1";
+            this.label_callus1.Size = new System.Drawing.Size(223, 12);
+            this.label_callus1.TabIndex = 8;
+            this.label_callus1.Text = "Get in touch, free of charge. Just call x-xxx-xxx-xxxx.";
+            // 
+            // label_callus
+            // 
+            this.label_callus.AutoSize = true;
+            this.label_callus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_callus.ForeColor = System.Drawing.Color.White;
+            this.label_callus.Location = new System.Drawing.Point(78, 217);
+            this.label_callus.Name = "label_callus";
+            this.label_callus.Size = new System.Drawing.Size(66, 24);
+            this.label_callus.TabIndex = 7;
+            this.label_callus.Text = "Call us";
+            // 
+            // label_emailus1
+            // 
+            this.label_emailus1.AutoSize = true;
+            this.label_emailus1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_emailus1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.label_emailus1.Location = new System.Drawing.Point(82, 181);
+            this.label_emailus1.Name = "label_emailus1";
+            this.label_emailus1.Size = new System.Drawing.Size(84, 12);
+            this.label_emailus1.TabIndex = 6;
+            this.label_emailus1.Text = "johndoe@mail.com";
+            // 
+            // label_emailus
+            // 
+            this.label_emailus.AutoSize = true;
+            this.label_emailus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_emailus.ForeColor = System.Drawing.Color.White;
+            this.label_emailus.Location = new System.Drawing.Point(78, 158);
+            this.label_emailus.Name = "label_emailus";
+            this.label_emailus.Size = new System.Drawing.Size(82, 24);
+            this.label_emailus.TabIndex = 5;
+            this.label_emailus.Text = "Email us";
+            // 
+            // label_chatus1
+            // 
+            this.label_chatus1.AutoSize = true;
+            this.label_chatus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus1.ForeColor = System.Drawing.Color.White;
+            this.label_chatus1.Location = new System.Drawing.Point(81, 111);
+            this.label_chatus1.Name = "label_chatus1";
+            this.label_chatus1.Size = new System.Drawing.Size(285, 12);
+            this.label_chatus1.TabIndex = 3;
+            this.label_chatus1.Text = "Have questions? Get 24/7 live chat, real-time help with chat support.";
+            // 
+            // label_chatus
+            // 
+            this.label_chatus.AutoSize = true;
+            this.label_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus.ForeColor = System.Drawing.Color.White;
+            this.label_chatus.Location = new System.Drawing.Point(78, 88);
+            this.label_chatus.Name = "label_chatus";
+            this.label_chatus.Size = new System.Drawing.Size(73, 24);
+            this.label_chatus.TabIndex = 2;
+            this.label_chatus.Text = "Chat us";
             // 
             // pictureBox_helpback
             // 
@@ -741,157 +955,25 @@
             this.label_help.Text = "Help and Support";
             this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label_chatus
+            // pictureBox2
             // 
-            this.label_chatus.AutoSize = true;
-            this.label_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_chatus.ForeColor = System.Drawing.Color.White;
-            this.label_chatus.Location = new System.Drawing.Point(78, 88);
-            this.label_chatus.Name = "label_chatus";
-            this.label_chatus.Size = new System.Drawing.Size(73, 24);
-            this.label_chatus.TabIndex = 2;
-            this.label_chatus.Text = "Chat us";
-            // 
-            // label_chatus1
-            // 
-            this.label_chatus1.AutoSize = true;
-            this.label_chatus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_chatus1.ForeColor = System.Drawing.Color.White;
-            this.label_chatus1.Location = new System.Drawing.Point(81, 111);
-            this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(285, 12);
-            this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "Have questions? Get 24/7 live chat, real-time help with chat support.";
-            // 
-            // button_chatus
-            // 
-            this.button_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_chatus.Location = new System.Drawing.Point(81, 131);
-            this.button_chatus.Name = "button_chatus";
-            this.button_chatus.Size = new System.Drawing.Size(75, 23);
-            this.button_chatus.TabIndex = 4;
-            this.button_chatus.Text = "Chat now";
-            this.button_chatus.UseVisualStyleBackColor = true;
-            // 
-            // label_emailus1
-            // 
-            this.label_emailus1.AutoSize = true;
-            this.label_emailus1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_emailus1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.label_emailus1.Location = new System.Drawing.Point(81, 209);
-            this.label_emailus1.Name = "label_emailus1";
-            this.label_emailus1.Size = new System.Drawing.Size(84, 12);
-            this.label_emailus1.TabIndex = 6;
-            this.label_emailus1.Text = "johndoe@mail.com";
-            // 
-            // label_emailus
-            // 
-            this.label_emailus.AutoSize = true;
-            this.label_emailus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_emailus.ForeColor = System.Drawing.Color.White;
-            this.label_emailus.Location = new System.Drawing.Point(78, 186);
-            this.label_emailus.Name = "label_emailus";
-            this.label_emailus.Size = new System.Drawing.Size(82, 24);
-            this.label_emailus.TabIndex = 5;
-            this.label_emailus.Text = "Email us";
-            // 
-            // label_callus1
-            // 
-            this.label_callus1.AutoSize = true;
-            this.label_callus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_callus1.ForeColor = System.Drawing.Color.White;
-            this.label_callus1.Location = new System.Drawing.Point(81, 269);
-            this.label_callus1.Name = "label_callus1";
-            this.label_callus1.Size = new System.Drawing.Size(223, 12);
-            this.label_callus1.TabIndex = 8;
-            this.label_callus1.Text = "Get in touch, free of charge. Just call x-xxx-xxx-xxxx.";
-            // 
-            // label_callus
-            // 
-            this.label_callus.AutoSize = true;
-            this.label_callus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_callus.ForeColor = System.Drawing.Color.White;
-            this.label_callus.Location = new System.Drawing.Point(78, 246);
-            this.label_callus.Name = "label_callus";
-            this.label_callus.Size = new System.Drawing.Size(66, 24);
-            this.label_callus.TabIndex = 7;
-            this.label_callus.Text = "Call us";
-            // 
-            // label_social1
-            // 
-            this.label_social1.AutoSize = true;
-            this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social1.ForeColor = System.Drawing.Color.White;
-            this.label_social1.Location = new System.Drawing.Point(81, 330);
-            this.label_social1.Name = "label_social1";
-            this.label_social1.Size = new System.Drawing.Size(121, 12);
-            this.label_social1.TabIndex = 10;
-            this.label_social1.Text = "• WeChat: johndoe / janedoe";
-            // 
-            // label_social
-            // 
-            this.label_social.AutoSize = true;
-            this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social.ForeColor = System.Drawing.Color.White;
-            this.label_social.Location = new System.Drawing.Point(78, 307);
-            this.label_social.Name = "label_social";
-            this.label_social.Size = new System.Drawing.Size(61, 24);
-            this.label_social.TabIndex = 9;
-            this.label_social.Text = "Social";
-            // 
-            // label_social2
-            // 
-            this.label_social2.AutoSize = true;
-            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social2.ForeColor = System.Drawing.Color.White;
-            this.label_social2.Location = new System.Drawing.Point(81, 342);
-            this.label_social2.Name = "label_social2";
-            this.label_social2.Size = new System.Drawing.Size(71, 12);
-            this.label_social2.TabIndex = 11;
-            this.label_social2.Text = "• Line @johndoe";
-            // 
-            // labelsocial3
-            // 
-            this.labelsocial3.AutoSize = true;
-            this.labelsocial3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelsocial3.ForeColor = System.Drawing.Color.White;
-            this.labelsocial3.Location = new System.Drawing.Point(81, 354);
-            this.labelsocial3.Name = "labelsocial3";
-            this.labelsocial3.Size = new System.Drawing.Size(177, 12);
-            this.labelsocial3.TabIndex = 12;
-            this.labelsocial3.Text = "• WhatsApp: xxxxxxxxxxx / xxxxxxxxxxx";
-            // 
-            // label_clearcache
-            // 
-            this.label_clearcache.AutoSize = true;
-            this.label_clearcache.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_clearcache.ForeColor = System.Drawing.Color.White;
-            this.label_clearcache.Location = new System.Drawing.Point(467, 376);
-            this.label_clearcache.Name = "label_clearcache";
-            this.label_clearcache.Size = new System.Drawing.Size(134, 20);
-            this.label_clearcache.TabIndex = 13;
-            this.label_clearcache.Text = "CLEAR CACHE";
-            // 
-            // label_getdiagnostics
-            // 
-            this.label_getdiagnostics.AutoSize = true;
-            this.label_getdiagnostics.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
-            this.label_getdiagnostics.Location = new System.Drawing.Point(621, 376);
-            this.label_getdiagnostics.Name = "label_getdiagnostics";
-            this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
-            this.label_getdiagnostics.TabIndex = 14;
-            this.label_getdiagnostics.Text = "GET DIAGNOSTICS";
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = global::Safety_Browser.Properties.Resources.notification_1;
+            this.pictureBox2.Location = new System.Drawing.Point(604, 53);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(256, 256);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 69;
+            this.pictureBox2.TabStop = false;
             // 
             // Form_YB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(1270, 764);
             this.Controls.Add(this.panel_help);
             this.Controls.Add(this.pictureBox_nofication);
@@ -916,9 +998,10 @@
             this.Controls.Add(this.dataGridView_domain);
             this.Controls.Add(this.pictureBox_reload);
             this.Controls.Add(this.pictureBox_browserstop);
-            this.Controls.Add(this.label_titlebar);
             this.Controls.Add(this.pictureBox_loader);
             this.Controls.Add(this.panel_cefsharp);
+            this.Controls.Add(this.label_titlebar);
+            this.Controls.Add(this.panel_notification);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
@@ -930,7 +1013,7 @@
             this.Load += new System.EventHandler(this.Form_Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).EndInit();
             this.panel_connection.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_minimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).EndInit();
@@ -949,9 +1032,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helphover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).EndInit();
+            this.panel_notification.ResumeLayout(false);
+            this.panel_notification.PerformLayout();
             this.panel_help.ResumeLayout(false);
             this.panel_help.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helpback)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -964,7 +1052,7 @@
         private System.Windows.Forms.Label label_current_domain_service;
         private System.Windows.Forms.Timer timer_handler;
         private System.Windows.Forms.Panel panel_connection;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox_1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label_titlebar;
@@ -1006,22 +1094,27 @@
         private System.Windows.Forms.PictureBox pictureBox_helphover;
         private System.Windows.Forms.PictureBox pictureBox_nofication;
         private System.Windows.Forms.PictureBox pictureBox_noficationhover;
+        private System.Windows.Forms.Label label_notificationstatus;
+        private System.Windows.Forms.Panel panel_notification;
         private System.Windows.Forms.Panel panel_help;
-        private System.Windows.Forms.Label label_help;
-        private System.Windows.Forms.PictureBox pictureBox_helpback;
-        private System.Windows.Forms.Label label_chatus;
-        private System.Windows.Forms.Label label_chatus1;
-        private System.Windows.Forms.Button button_chatus;
-        private System.Windows.Forms.Label label_emailus1;
-        private System.Windows.Forms.Label label_emailus;
-        private System.Windows.Forms.Label label_callus1;
-        private System.Windows.Forms.Label label_callus;
-        private System.Windows.Forms.Label label_social1;
-        private System.Windows.Forms.Label label_social;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_getdiagnostics;
+        private System.Windows.Forms.Label label_clearcache;
         private System.Windows.Forms.Label labelsocial3;
         private System.Windows.Forms.Label label_social2;
-        private System.Windows.Forms.Label label_clearcache;
-        private System.Windows.Forms.Label label_getdiagnostics;
+        private System.Windows.Forms.Label label_social1;
+        private System.Windows.Forms.Label label_social;
+        private System.Windows.Forms.Label label_callus1;
+        private System.Windows.Forms.Label label_callus;
+        private System.Windows.Forms.Label label_emailus1;
+        private System.Windows.Forms.Label label_emailus;
+        private System.Windows.Forms.Label label_chatus1;
+        private System.Windows.Forms.Label label_chatus;
+        private System.Windows.Forms.PictureBox pictureBox_helpback;
+        private System.Windows.Forms.Label label_help;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
