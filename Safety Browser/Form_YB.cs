@@ -1,9 +1,11 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
+using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -704,6 +706,9 @@ namespace Safety_Browser
                                     pictureBox_browserhome.Enabled = true;
                                     pictureBox_browserhomehover.Enabled = true;
                                     pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                                    pictureBox_nofication.Enabled = true;
+                                    pictureBox_noficationhover.Enabled = true;
+                                    pictureBox_nofication.Image = Properties.Resources.notification;
                                     homeToolStripMenuItem.Enabled = true;
                                     reloadToolStripMenuItem.Enabled = true;
                                     cleanAndReloadToolStripMenuItem.Enabled = true;
@@ -742,6 +747,9 @@ namespace Safety_Browser
                                 pictureBox_browserhome.Enabled = true;
                                 pictureBox_browserhomehover.Enabled = true;
                                 pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                                pictureBox_nofication.Enabled = true;
+                                pictureBox_noficationhover.Enabled = true;
+                                pictureBox_nofication.Image = Properties.Resources.notification;
                                 homeToolStripMenuItem.Enabled = true;
                                 reloadToolStripMenuItem.Enabled = true;
                                 cleanAndReloadToolStripMenuItem.Enabled = true;
@@ -847,7 +855,7 @@ namespace Safety_Browser
             }
             catch (Exception err)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -869,7 +877,7 @@ namespace Safety_Browser
             }
             catch (Exception err)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: RC1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1005", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -905,7 +913,7 @@ namespace Safety_Browser
             }
             catch (Exception err)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1006", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1333,6 +1341,9 @@ namespace Safety_Browser
                             pictureBox_browserhome.Enabled = true;
                             pictureBox_browserhomehover.Enabled = true;
                             pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                            pictureBox_nofication.Enabled = true;
+                            pictureBox_noficationhover.Enabled = true;
+                            pictureBox_nofication.Image = Properties.Resources.notification;
                             homeToolStripMenuItem.Enabled = true;
                             reloadToolStripMenuItem.Enabled = true;
                             cleanAndReloadToolStripMenuItem.Enabled = true;
@@ -1371,6 +1382,9 @@ namespace Safety_Browser
                         pictureBox_browserhome.Enabled = true;
                         pictureBox_browserhomehover.Enabled = true;
                         pictureBox_browserhome.Image = Properties.Resources.browser_home;
+                        pictureBox_nofication.Enabled = true;
+                        pictureBox_noficationhover.Enabled = true;
+                        pictureBox_nofication.Image = Properties.Resources.notification;
                         homeToolStripMenuItem.Enabled = true;
                         reloadToolStripMenuItem.Enabled = true;
                         cleanAndReloadToolStripMenuItem.Enabled = true;
@@ -1504,8 +1518,20 @@ namespace Safety_Browser
             {
                 panel_help.Visible = false;
                 help_click = true;
-                panel_cefsharp.Visible = true;
-                panel_notification.Visible = true;
+
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                }
             }
         }
 
@@ -1524,12 +1550,18 @@ namespace Safety_Browser
                 panel_help.Visible = false;
                 help_click = true;
                 panel_cefsharp.Visible = true;
-                panel_notification.Visible = true;
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                }
             }
         }
 
         private int radius = 30;
         private bool notification_click = true;
+        private static string result_ping;
+        private static string result_traceroute;
 
         [DefaultValue(30)]
         public int Radius
@@ -1592,7 +1624,7 @@ namespace Safety_Browser
                     if (!notification_click)
                     {
                         Application.DoEvents();
-                        panel_cefsharp.Width -= 6;
+                        panel_cefsharp.Width -= 4;
                     }
                     else
                     {
@@ -1601,6 +1633,7 @@ namespace Safety_Browser
                 }
 
                 panel_notification.Visible = true;
+                label_separator.Visible = true;
                 pictureBox_nofication.Image = Properties.Resources.notification_back;
             }
             else
@@ -1621,6 +1654,7 @@ namespace Safety_Browser
                 }
 
                 panel_notification.Visible = false;
+                label_separator.Visible = false;
                 pictureBox_nofication.Image = Properties.Resources.notification;
             }
         }
@@ -1634,12 +1668,12 @@ namespace Safety_Browser
             {
                 notification_click = false;
 
-                while (panel_cefsharp.Width >= panel_cefsharp_resize)
+                while (panel_cefsharp.Width > panel_cefsharp_resize)
                 {
                     if (!notification_click)
                     {
                         Application.DoEvents();
-                        panel_cefsharp.Width -= 6;
+                        panel_cefsharp.Width -= 4;
                     }
                     else
                     {
@@ -1648,13 +1682,14 @@ namespace Safety_Browser
                 }
 
                 panel_notification.Visible = true;
+                label_separator.Visible = true;
                 pictureBox_nofication.Image = Properties.Resources.notification_back;
             }
             else
             {
                 notification_click = true;
 
-                while (panel_cefsharp_size >= panel_cefsharp.Width)
+                while (panel_cefsharp_size > panel_cefsharp.Width)
                 {
                     if (notification_click)
                     {
@@ -1668,8 +1703,14 @@ namespace Safety_Browser
                 }
 
                 panel_notification.Visible = false;
+                label_separator.Visible = false;
                 pictureBox_nofication.Image = Properties.Resources.notification;
             }
+        }
+
+        private void label_clearcache_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Reload(false);
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -1677,10 +1718,35 @@ namespace Safety_Browser
             Point position = new Point(pictureBox_menu.Left, pictureBox_menu.Height);
             ToolStripMenuItem.DropDown.Show(pictureBox_menu, position);
         }
-        
+
         private void pictureBox_minimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void label_getdiagnostics_Click(object sender, EventArgs e)
+        {
+            GetTraceRoute(domain_get);
+            GetPing(domain_get);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            saveFileDialog.Title = "Save As";
+            saveFileDialog.FileName = "Diagnostics";
+            saveFileDialog.DefaultExt = "zip";
+            saveFileDialog.Filter = "ZIP Files|*.zip";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (ZipFile zip = new ZipFile())
+                {
+                    zip.AddFile(Path.GetTempPath() + "\\sb_traceroute.txt", "");
+                    zip.AddFile(Path.GetTempPath() + "\\sb_ping.txt", "");
+                    zip.Save(saveFileDialog.FileName);
+                }
+            }
         }
 
         private void pictureBox_maximize_Click(object sender, EventArgs e)
@@ -1768,6 +1834,102 @@ namespace Safety_Browser
                 else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
                 else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
                 else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
+            }
+        }
+
+        private void GetPing(string domain)
+        {
+            StringBuilder replace_domain = new StringBuilder(domain);
+            replace_domain.Replace("https://", "");
+            replace_domain.Replace("http://", "");
+            replace_domain.Replace("www.", "");
+            replace_domain.Replace(".com/.", ".com");
+
+            var startInfo = new ProcessStartInfo(@"cmd.exe", "/c ping -n 8 " + replace_domain.ToString())
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            };
+
+            var pingProc = new Process { StartInfo = startInfo };
+            pingProc.Start();
+            
+            while (!pingProc.HasExited)
+            {
+                label_getdiagnostics.Text = "GETTING READY...";
+                pingProc.WaitForExit();
+            }
+
+            label_getdiagnostics.Text = "GET DIAGNOSTICS";
+            Cursor.Current = Cursors.Default;
+
+            result_ping = pingProc.StandardOutput.ReadToEnd();
+
+            string temp_file = Path.Combine(Path.GetTempPath(), "sb_ping.txt");
+
+            if (File.Exists(temp_file))
+            {
+                File.Delete(temp_file);
+
+                using (StreamWriter sw = new StreamWriter(temp_file))
+                {
+                    sw.WriteLine(result_ping);
+                }
+            }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(temp_file))
+                {
+                    sw.WriteLine(result_ping);
+                }
+            }
+        }
+
+        private void GetTraceRoute(string domain)
+        {
+            StringBuilder replace_domain = new StringBuilder(domain);
+            replace_domain.Replace("https://", "");
+            replace_domain.Replace("http://", "");
+            replace_domain.Replace("www.", "");
+            replace_domain.Replace(".com/.", ".com");
+
+            var startInfo = new ProcessStartInfo(@"cmd.exe", "/c tracert " + replace_domain.ToString())
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+            };
+
+            var pingProc = new Process { StartInfo = startInfo };
+            pingProc.Start();
+            
+            while (!pingProc.HasExited)
+            {
+                label_getdiagnostics.Text = "PLEASE WAIT...";
+                Cursor.Current = Cursors.WaitCursor;
+                pingProc.WaitForExit();
+            }
+            
+            result_traceroute = pingProc.StandardOutput.ReadToEnd();
+
+            string temp_file = Path.Combine(Path.GetTempPath(), "sb_traceroute.txt");
+
+            if (File.Exists(temp_file))
+            {
+                File.Delete(temp_file);
+
+                using (StreamWriter sw = new StreamWriter(temp_file))
+                {
+                    sw.WriteLine(result_traceroute);
+                }
+            }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(temp_file))
+                {
+                    sw.WriteLine(result_traceroute);
+                }
             }
         }
     }
