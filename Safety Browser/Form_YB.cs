@@ -1509,6 +1509,25 @@ namespace Safety_Browser
             }
         }
 
+        private void pictureBox_helphover_Click(object sender, EventArgs e)
+        {
+            if (help_click)
+            {
+                panel_help.BringToFront();
+                panel_help.Visible = true;
+                help_click = false;
+                panel_cefsharp.Visible = false;
+                panel_notification.Visible = false;
+            }
+            else
+            {
+                panel_help.Visible = false;
+                help_click = true;
+                panel_cefsharp.Visible = true;
+                panel_notification.Visible = true;
+            }
+        }
+
         private int radius = 30;
         private bool notification_click = true;
 
@@ -1619,8 +1638,8 @@ namespace Safety_Browser
                 {
                     if (!notification_click)
                     {
-                        panel_cefsharp.Width -= 6;
                         Application.DoEvents();
+                        panel_cefsharp.Width -= 6;
                     }
                     else
                     {
@@ -1639,8 +1658,8 @@ namespace Safety_Browser
                 {
                     if (notification_click)
                     {
-                        panel_cefsharp.Width += 4;
                         Application.DoEvents();
+                        panel_cefsharp.Width += 4;
                     }
                     else
                     {
