@@ -715,6 +715,7 @@ namespace Safety_Browser
                                     resetZoomToolStripMenuItem.Enabled = true;
                                     zoomInToolStripMenuItem.Enabled = true;
                                     zoomOutToolStripMenuItem.Enabled = true;
+                                    label_clearcache.Enabled = true;
                                 }
                                 else
                                 {
@@ -756,6 +757,7 @@ namespace Safety_Browser
                                 resetZoomToolStripMenuItem.Enabled = true;
                                 zoomInToolStripMenuItem.Enabled = true;
                                 zoomOutToolStripMenuItem.Enabled = true;
+                                label_clearcache.Enabled = true;
                             }
                         }
                         else
@@ -1350,6 +1352,7 @@ namespace Safety_Browser
                             resetZoomToolStripMenuItem.Enabled = true;
                             zoomInToolStripMenuItem.Enabled = true;
                             zoomOutToolStripMenuItem.Enabled = true;
+                            label_clearcache.Enabled = true;
                         }
                         else
                         {
@@ -1391,6 +1394,7 @@ namespace Safety_Browser
                         resetZoomToolStripMenuItem.Enabled = true;
                         zoomInToolStripMenuItem.Enabled = true;
                         zoomOutToolStripMenuItem.Enabled = true;
+                        label_clearcache.Enabled = true;
                     }
                 }
             }));
@@ -1742,8 +1746,8 @@ namespace Safety_Browser
             {
                 using (ZipFile zip = new ZipFile())
                 {
-                    zip.AddFile(Path.GetTempPath() + "\\sb_traceroute.txt", "");
-                    zip.AddFile(Path.GetTempPath() + "\\sb_ping.txt", "");
+                    zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
+                    zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
                     zip.Save(saveFileDialog.FileName);
                 }
             }
@@ -1866,7 +1870,7 @@ namespace Safety_Browser
 
             result_ping = pingProc.StandardOutput.ReadToEnd();
 
-            string temp_file = Path.Combine(Path.GetTempPath(), "sb_ping.txt");
+            string temp_file = Path.Combine(Path.GetTempPath(), "ping.txt");
 
             if (File.Exists(temp_file))
             {
@@ -1913,7 +1917,7 @@ namespace Safety_Browser
             
             result_traceroute = pingProc.StandardOutput.ReadToEnd();
 
-            string temp_file = Path.Combine(Path.GetTempPath(), "sb_traceroute.txt");
+            string temp_file = Path.Combine(Path.GetTempPath(), "traceroute.txt");
 
             if (File.Exists(temp_file))
             {
