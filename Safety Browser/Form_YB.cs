@@ -3,8 +3,11 @@ using CefSharp.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
@@ -76,6 +79,7 @@ namespace Safety_Browser
         private string handler_title;
         private int fully_loaded;
         private int elseloaded_i;
+        private bool help_click = true;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -328,6 +332,9 @@ namespace Safety_Browser
 
             panel_connection.Left = (ClientSize.Width - panel_connection.Width) / 2;
             panel_connection.Top = (ClientSize.Height - panel_connection.Height) / 2;
+            
+            panel_help.Left = (ClientSize.Width - panel_help.Width) / 2;
+            panel_help.Top = (ClientSize.Height - panel_help.Height) / 2;
         }
 
         // Get Text to Search
@@ -1411,8 +1418,11 @@ namespace Safety_Browser
 
         private void pictureBox_help_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
-            pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            if (help_click)
+            {
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            }
         }
 
         private void pictureBox_helphover_MouseHover(object sender, EventArgs e)
@@ -1423,8 +1433,11 @@ namespace Safety_Browser
 
         private void pictureBox_helphover_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
-            pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            if (help_click)
+            {
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            }
         }
 
         private void pictureBox_nofication_MouseHover(object sender, EventArgs e)
@@ -1453,8 +1466,67 @@ namespace Safety_Browser
 
         private void pictureBox_help_Click(object sender, EventArgs e)
         {
-            Form_Help form_help = new Form_Help();
-            form_help.ShowDialog();
+            if (help_click)
+            {
+                panel_help.BringToFront();
+                panel_help.Visible = true;
+                help_click = false;
+                panel_cefsharp.Visible = false;
+            }
+            else
+            {
+                panel_help.Visible = false;
+                help_click = true;
+                panel_cefsharp.Visible = true;
+            }
+        }
+
+        private int radius = 30;
+        [DefaultValue(30)]
+        public int Radius
+        {
+            get { return radius; }
+            set
+            {
+                radius = value;
+                this.RecreateRegion();
+            }
+        }
+        private GraphicsPath GetRoundRectagle(Rectangle bounds, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(bounds.X, bounds.Y, radius, radius, 180, 90);
+            path.AddArc(bounds.X + bounds.Width - radius, bounds.Y, radius, radius, 270, 90);
+            path.AddArc(bounds.X + bounds.Width - radius, bounds.Y + bounds.Height - radius,
+                        radius, radius, 0, 90);
+            path.AddArc(bounds.X, bounds.Y + bounds.Height - radius, radius, radius, 90, 90);
+            path.CloseAllFigures();
+            return path;
+        }
+
+        private void RecreateRegion()
+        {
+            var bounds = new Rectangle(panel_help.ClientRectangle.Location, panel_help.ClientRectangle.Size);
+            bounds.Inflate(-1, -1);
+            using (var path = GetRoundRectagle(bounds, this.Radius))
+                panel_help.Region = new Region(path);
+            panel_help.Invalidate();
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            this.RecreateRegion();
+        }
+
+        private void pictureBox_helpback_Click(object sender, EventArgs e)
+        {
+            panel_help.Visible = false;
+            help_click = true;
+            panel_cefsharp.Visible = true;
+
+            pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+            pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
