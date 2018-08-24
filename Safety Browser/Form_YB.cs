@@ -570,19 +570,10 @@ namespace Safety_Browser
         {
             Invoke(new Action(() =>
             {
-                pictureBox_back.Enabled = e.CanGoBack;
-                goBackToolStripMenuItem.Enabled = e.CanGoBack;
-
-                if (e.CanGoBack && !domain_one_time && !button_back)
-                {
-                    pictureBox_back.Enabled = false;
-                    goBackToolStripMenuItem.Enabled = false;
-
-                    button_back = true;
-                }
-
                 pictureBox_forward.Enabled = e.CanGoForward;
                 forwardToolStripMenuItem.Enabled = e.CanGoForward;
+                pictureBox_back.Enabled = e.CanGoBack;
+                goBackToolStripMenuItem.Enabled = e.CanGoBack;
 
                 if (pictureBox_forward.Enabled == true)
                 {
@@ -626,66 +617,22 @@ namespace Safety_Browser
             {
                 Invoke(new Action(() =>
                 {
-                    if (button_back)
+                    if (!domain_one_time)
                     {
-                        string strValue = text_search;
-                        string[] strArray = strValue.Split(',');
+                        pictureBox_loader.Visible = false;
 
-                        if (!String.IsNullOrEmpty(handler_title))
-                        {
-                            foreach (string obj in strArray)
-                            {
-                                bool contains = handler_title.Contains(obj);
-                                if (contains == true)
-                                {
-                                    Invoke(new Action(() =>
-                                    {
-                                        isHijacked = false;
-                                    }));
-
-                                    break;
-                                }
-                                else if (!contains)
-                                {
-                                    Invoke(new Action(() =>
-                                    {
-                                        isHijacked = true;
-                                    }));
-                                }
-                            }
-                        }
-                        else
-                        {
-                            isHijacked = true;
-                        }
-
-                        if (isHijacked)
+                        if (panel_help.Visible == true)
                         {
                             panel_cefsharp.Visible = false;
-                            chromeBrowser.Stop();
-                            chromeBrowser.Forward();
                         }
                         else
                         {
-                            pictureBox_loader.Visible = false;
-
-                            if (panel_help.Visible == true)
-                            {
-                                panel_cefsharp.Visible = false;
-                            }
-                            else
-                            {
-                                panel_cefsharp.Visible = true;
-                            }
-
-                            pictureBox_reload.Visible = true;
-                            pictureBox_browserstop.Visible = false;
+                            panel_cefsharp.Visible = true;
                         }
-                    }
 
-                    //if (!domain_one_time)
-                    //{
-                    //}
+                        pictureBox_reload.Visible = true;
+                        pictureBox_browserstop.Visible = false;
+                    }
                 }));
             }
 
@@ -1640,7 +1587,6 @@ namespace Safety_Browser
         private bool notification_click = true;
         private static string result_ping;
         private static string result_traceroute;
-        private bool button_back = false;
 
         [DefaultValue(30)]
         public int Radius
@@ -1844,6 +1790,22 @@ namespace Safety_Browser
                 cp.Style |= WS_MINIMIZEBOX;
                 cp.ClassStyle |= CS_DBLCLKS;
                 return cp;
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Form_YB_NewTab form_newtab = new Form_YB_NewTab("https://static.meiqia.com/dist/standalone.html?_=t&eid=109551", "help");
+            int open_form = Application.OpenForms.Count;
+
+            if (open_form == 1)
+            {
+                form_newtab.Show();
+            }
+            else
+            {
+                Form_YB_NewTab.SetClose = true;
+                form_newtab.Show();
             }
         }
 

@@ -45,6 +45,7 @@ namespace Safety_Browser
         public bool not_hijacked = true;
         private string newtab_link;
         private bool hard_refresh;
+        private string get_status;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -53,7 +54,7 @@ namespace Safety_Browser
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
 
-        public Form_YB_NewTab(string newtab_link_get)
+        public Form_YB_NewTab(string newtab_link_get, string status)
         {
             InitializeComponent();
             newtab_link = newtab_link_get;
@@ -68,6 +69,8 @@ namespace Safety_Browser
                 gHook.HookedKeys.Add(key);
             }
             gHook.hook();
+
+            get_status = status;
         }
 
         public void gHook_KeyDown(object sender, KeyEventArgs e)
@@ -163,7 +166,16 @@ namespace Safety_Browser
         {
             NetworkAvailability();
             PictureBoxCenter();
-            WindowState = FormWindowState.Maximized;
+            
+            if (get_status == "help")
+            {
+                MinimumSize = new Size(710, 710);
+                Size = new Size(710, 710);
+            }
+            else
+            {
+                WindowState = FormWindowState.Maximized;
+            }
         }
 
         // Network Handler
