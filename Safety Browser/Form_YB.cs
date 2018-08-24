@@ -570,10 +570,19 @@ namespace Safety_Browser
         {
             Invoke(new Action(() =>
             {
-                pictureBox_forward.Enabled = e.CanGoForward;
-                forwardToolStripMenuItem.Enabled = e.CanGoForward;
                 pictureBox_back.Enabled = e.CanGoBack;
                 goBackToolStripMenuItem.Enabled = e.CanGoBack;
+
+                if (e.CanGoBack && !domain_one_time && !button_back)
+                {
+                    pictureBox_back.Enabled = false;
+                    goBackToolStripMenuItem.Enabled = false;
+
+                    button_back = true;
+                }
+
+                pictureBox_forward.Enabled = e.CanGoForward;
+                forwardToolStripMenuItem.Enabled = e.CanGoForward;
 
                 if (pictureBox_forward.Enabled == true)
                 {
@@ -617,22 +626,66 @@ namespace Safety_Browser
             {
                 Invoke(new Action(() =>
                 {
-                    if (!domain_one_time)
+                    if (button_back)
                     {
-                        pictureBox_loader.Visible = false;
+                        string strValue = text_search;
+                        string[] strArray = strValue.Split(',');
 
-                        if (panel_help.Visible == true)
+                        if (!String.IsNullOrEmpty(handler_title))
                         {
-                            panel_cefsharp.Visible = false;
+                            foreach (string obj in strArray)
+                            {
+                                bool contains = handler_title.Contains(obj);
+                                if (contains == true)
+                                {
+                                    Invoke(new Action(() =>
+                                    {
+                                        isHijacked = false;
+                                    }));
+
+                                    break;
+                                }
+                                else if (!contains)
+                                {
+                                    Invoke(new Action(() =>
+                                    {
+                                        isHijacked = true;
+                                    }));
+                                }
+                            }
                         }
                         else
                         {
-                            panel_cefsharp.Visible = true;
+                            isHijacked = true;
                         }
 
-                        pictureBox_reload.Visible = true;
-                        pictureBox_browserstop.Visible = false;
+                        if (isHijacked)
+                        {
+                            panel_cefsharp.Visible = false;
+                            chromeBrowser.Stop();
+                            chromeBrowser.Forward();
+                        }
+                        else
+                        {
+                            pictureBox_loader.Visible = false;
+
+                            if (panel_help.Visible == true)
+                            {
+                                panel_cefsharp.Visible = false;
+                            }
+                            else
+                            {
+                                panel_cefsharp.Visible = true;
+                            }
+
+                            pictureBox_reload.Visible = true;
+                            pictureBox_browserstop.Visible = false;
+                        }
                     }
+
+                    //if (!domain_one_time)
+                    //{
+                    //}
                 }));
             }
 
@@ -716,6 +769,7 @@ namespace Safety_Browser
                                     zoomInToolStripMenuItem.Enabled = true;
                                     zoomOutToolStripMenuItem.Enabled = true;
                                     label_clearcache.Enabled = true;
+                                    label_getdiagnostics.Enabled = true;
                                 }
                                 else
                                 {
@@ -758,6 +812,7 @@ namespace Safety_Browser
                                 zoomInToolStripMenuItem.Enabled = true;
                                 zoomOutToolStripMenuItem.Enabled = true;
                                 label_clearcache.Enabled = true;
+                                label_getdiagnostics.Enabled = true;
                             }
                         }
                         else
@@ -1266,9 +1321,12 @@ namespace Safety_Browser
                             domain_one_time = true;
                             label_loadingstate.Text = "1";
                             label_loadingstate.Text = "0";
-
+                            
                             pictureBox_reload.Enabled = false;
                             pictureBox_reload.Image = Properties.Resources.refresh_visible;
+                            pictureBox_browserhome.Enabled = false;
+                            pictureBox_browserhomehover.Enabled = false;
+                            pictureBox_browserhome.Image = Properties.Resources.browser_homehover;
                             reloadToolStripMenuItem.Enabled = false;
                             cleanAndReloadToolStripMenuItem.Enabled = false;
                             resetZoomToolStripMenuItem.Enabled = false;
@@ -1276,6 +1334,8 @@ namespace Safety_Browser
                             zoomOutToolStripMenuItem.Enabled = false;
                             Form_YB_NewTab.Main_SetClose = true;
                             timer_detectifhijacked.Stop();
+                            label_clearcache.Enabled = false;
+                            label_getdiagnostics.Enabled = false;
                         }
                     }
                 }
@@ -1353,6 +1413,7 @@ namespace Safety_Browser
                             zoomInToolStripMenuItem.Enabled = true;
                             zoomOutToolStripMenuItem.Enabled = true;
                             label_clearcache.Enabled = true;
+                            label_getdiagnostics.Enabled = true;
                         }
                         else
                         {
@@ -1395,6 +1456,7 @@ namespace Safety_Browser
                         zoomInToolStripMenuItem.Enabled = true;
                         zoomOutToolStripMenuItem.Enabled = true;
                         label_clearcache.Enabled = true;
+                        label_getdiagnostics.Enabled = true;
                     }
                 }
             }));
@@ -1517,6 +1579,7 @@ namespace Safety_Browser
                 help_click = false;
                 panel_cefsharp.Visible = false;
                 panel_notification.Visible = false;
+                label_separator.Visible = false;
             }
             else
             {
@@ -1535,6 +1598,7 @@ namespace Safety_Browser
                 if (!notification_click)
                 {
                     panel_notification.Visible = true;
+                    label_separator.Visible = true;
                 }
             }
         }
@@ -1548,16 +1612,26 @@ namespace Safety_Browser
                 help_click = false;
                 panel_cefsharp.Visible = false;
                 panel_notification.Visible = false;
+                label_separator.Visible = false;
             }
             else
             {
                 panel_help.Visible = false;
                 help_click = true;
-                panel_cefsharp.Visible = true;
+
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
 
                 if (!notification_click)
                 {
                     panel_notification.Visible = true;
+                    label_separator.Visible = true;
                 }
             }
         }
@@ -1566,6 +1640,7 @@ namespace Safety_Browser
         private bool notification_click = true;
         private static string result_ping;
         private static string result_traceroute;
+        private bool button_back = false;
 
         [DefaultValue(30)]
         public int Radius
@@ -1616,99 +1691,105 @@ namespace Safety_Browser
 
         private void pictureBox_nofication_Click(object sender, EventArgs e)
         {
-            var panel_cefsharp_resize = panel_cefsharp.Width - 280;
-            var panel_cefsharp_size = panel_cefsharp.Width + 280;
-
-            if (notification_click)
+            if(help_click)
             {
-                notification_click = false;
+                var panel_cefsharp_resize = panel_cefsharp.Width - 280;
+                var panel_cefsharp_size = panel_cefsharp.Width + 280;
 
-                while (panel_cefsharp.Width > panel_cefsharp_resize)
+                if (notification_click)
                 {
-                    if (!notification_click)
+                    notification_click = false;
+
+                    while (panel_cefsharp.Width > panel_cefsharp_resize)
                     {
-                        Application.DoEvents();
-                        panel_cefsharp.Width -= 4;
+                        if (!notification_click)
+                        {
+                            Application.DoEvents();
+                            panel_cefsharp.Width -= 4;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        break;
-                    }
+
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    pictureBox_nofication.Image = Properties.Resources.notification_back;
                 }
-
-                panel_notification.Visible = true;
-                label_separator.Visible = true;
-                pictureBox_nofication.Image = Properties.Resources.notification_back;
-            }
-            else
-            {
-                notification_click = true;
-
-                while (panel_cefsharp_size > panel_cefsharp.Width)
+                else
                 {
-                    if (notification_click)
-                    {
-                        Application.DoEvents();
-                        panel_cefsharp.Width += 4;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+                    notification_click = true;
 
-                panel_notification.Visible = false;
-                label_separator.Visible = false;
-                pictureBox_nofication.Image = Properties.Resources.notification;
+                    while (panel_cefsharp_size > panel_cefsharp.Width)
+                    {
+                        if (notification_click)
+                        {
+                            Application.DoEvents();
+                            panel_cefsharp.Width += 4;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    panel_notification.Visible = false;
+                    label_separator.Visible = false;
+                    pictureBox_nofication.Image = Properties.Resources.notification;
+                }
             }
         }
 
         private void pictureBox_noficationhover_Click(object sender, EventArgs e)
         {
-            var panel_cefsharp_resize = panel_cefsharp.Width - 280;
-            var panel_cefsharp_size = panel_cefsharp.Width + 280;
-
-            if (notification_click)
+            if (help_click)
             {
-                notification_click = false;
+                var panel_cefsharp_resize = panel_cefsharp.Width - 280;
+                var panel_cefsharp_size = panel_cefsharp.Width + 280;
 
-                while (panel_cefsharp.Width > panel_cefsharp_resize)
+                if (notification_click)
                 {
-                    if (!notification_click)
+                    notification_click = false;
+
+                    while (panel_cefsharp.Width > panel_cefsharp_resize)
                     {
-                        Application.DoEvents();
-                        panel_cefsharp.Width -= 4;
+                        if (!notification_click)
+                        {
+                            Application.DoEvents();
+                            panel_cefsharp.Width -= 4;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        break;
-                    }
+
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    pictureBox_nofication.Image = Properties.Resources.notification_back;
                 }
-
-                panel_notification.Visible = true;
-                label_separator.Visible = true;
-                pictureBox_nofication.Image = Properties.Resources.notification_back;
-            }
-            else
-            {
-                notification_click = true;
-
-                while (panel_cefsharp_size > panel_cefsharp.Width)
+                else
                 {
-                    if (notification_click)
-                    {
-                        Application.DoEvents();
-                        panel_cefsharp.Width += 4;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+                    notification_click = true;
 
-                panel_notification.Visible = false;
-                label_separator.Visible = false;
-                pictureBox_nofication.Image = Properties.Resources.notification;
+                    while (panel_cefsharp_size > panel_cefsharp.Width)
+                    {
+                        if (notification_click)
+                        {
+                            Application.DoEvents();
+                            panel_cefsharp.Width += 4;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    panel_notification.Visible = false;
+                    label_separator.Visible = false;
+                    pictureBox_nofication.Image = Properties.Resources.notification;
+                }
             }
         }
 
@@ -1750,6 +1831,19 @@ namespace Safety_Browser
                     zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
                     zip.Save(saveFileDialog.FileName);
                 }
+            }
+        }
+
+        const int WS_MINIMIZEBOX = 0x20000;
+        const int CS_DBLCLKS = 0x8;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.Style |= WS_MINIMIZEBOX;
+                cp.ClassStyle |= CS_DBLCLKS;
+                return cp;
             }
         }
 
