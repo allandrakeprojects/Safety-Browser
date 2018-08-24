@@ -573,19 +573,10 @@ namespace Safety_Browser
         {
             Invoke(new Action(() =>
             {
-                if (back_button_i > 1)
-                {
-                    pictureBox_back.Enabled = false;
-                    goBackToolStripMenuItem.Enabled = false;
-                }
-                else
-                {
-                    pictureBox_back.Enabled = e.CanGoBack;
-                    goBackToolStripMenuItem.Enabled = e.CanGoBack;
-                }
-
                 pictureBox_forward.Enabled = e.CanGoForward;
                 forwardToolStripMenuItem.Enabled = e.CanGoForward;
+                pictureBox_back.Enabled = e.CanGoBack;
+                goBackToolStripMenuItem.Enabled = e.CanGoBack;
 
                 if (pictureBox_forward.Enabled == true)
                 {
@@ -709,7 +700,7 @@ namespace Safety_Browser
                                 {
                                     await Task.Run(async () =>
                                     {
-                                        await Task.Delay(1000);
+                                        await Task.Delay(2000);
                                     });
                                     
                                     back_button_i++;
@@ -751,7 +742,7 @@ namespace Safety_Browser
                             {
                                 await Task.Run(async () =>
                                 {
-                                    await Task.Delay(1000);
+                                    await Task.Delay(2000);
                                 });
                                 
                                 back_button_i++;
@@ -1371,7 +1362,7 @@ namespace Safety_Browser
                         {
                             await Task.Run(async () =>
                             {
-                                await Task.Delay(1000);
+                                await Task.Delay(2000);
                             });
                             
                             back_button_i++;
@@ -1413,7 +1404,7 @@ namespace Safety_Browser
                     {
                         await Task.Run(async () =>
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(2000);
                         });
                         
                         back_button_i++;
