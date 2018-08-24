@@ -116,6 +116,7 @@
     <Compile Include="IpInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadFile.cs" />
     <EmbeddedResource Include="Form_CL.resx">
       <DependentUpon>Form_CL.cs</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\notification_visible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -90,20 +90,18 @@
             this.label_chatus1 = new System.Windows.Forms.Label();
             this.label_emailus = new System.Windows.Forms.Label();
             this.label_emailus1 = new System.Windows.Forms.Label();
-            this.label_callus = new System.Windows.Forms.Label();
-            this.label_callus1 = new System.Windows.Forms.Label();
             this.label_social = new System.Windows.Forms.Label();
             this.label_social1 = new System.Windows.Forms.Label();
-            this.label_social2 = new System.Windows.Forms.Label();
-            this.labelsocial3 = new System.Windows.Forms.Label();
             this.label_clearcache = new System.Windows.Forms.Label();
             this.label_getdiagnostics = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel_help = new System.Windows.Forms.Panel();
+            this.pictureBox_qr = new System.Windows.Forms.PictureBox();
             this.pictureBox_loader = new System.Windows.Forms.PictureBox();
             this.label_separator = new System.Windows.Forms.Label();
+            this.label_social2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
@@ -129,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel_help.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_qr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,44 +142,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle22.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridView_domain.Location = new System.Drawing.Point(1284, 44);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -476,15 +475,15 @@
             this.versionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_version});
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.versionToolStripMenuItem.Text = "Version";
             // 
             // toolStripMenuItem_version
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(104, 22);
-            this.toolStripMenuItem_version.Text = "0.0.23";
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_version.Text = "0.0.25";
             // 
             // pictureBox_menu
             // 
@@ -727,7 +726,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = global::Safety_Browser.Properties.Resources.notification_1;
-            this.pictureBox2.Location = new System.Drawing.Point(604, 53);
+            this.pictureBox2.Location = new System.Drawing.Point(605, 54);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(256, 256);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -802,35 +801,14 @@
             this.label_emailus1.Size = new System.Drawing.Size(85, 12);
             this.label_emailus1.TabIndex = 6;
             this.label_emailus1.Text = "cs@yb188188.com";
-            // 
-            // label_callus
-            // 
-            this.label_callus.AutoSize = true;
-            this.label_callus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_callus.ForeColor = System.Drawing.Color.White;
-            this.label_callus.Location = new System.Drawing.Point(82, 217);
-            this.label_callus.Name = "label_callus";
-            this.label_callus.Size = new System.Drawing.Size(66, 24);
-            this.label_callus.TabIndex = 7;
-            this.label_callus.Text = "Call us";
-            // 
-            // label_callus1
-            // 
-            this.label_callus1.AutoSize = true;
-            this.label_callus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_callus1.ForeColor = System.Drawing.Color.White;
-            this.label_callus1.Location = new System.Drawing.Point(85, 240);
-            this.label_callus1.Name = "label_callus1";
-            this.label_callus1.Size = new System.Drawing.Size(223, 12);
-            this.label_callus1.TabIndex = 8;
-            this.label_callus1.Text = "Get in touch, free of charge. Just call x-xxx-xxx-xxxx.";
+            this.label_emailus1.Click += new System.EventHandler(this.label_emailus1_Click);
             // 
             // label_social
             // 
             this.label_social.AutoSize = true;
             this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_social.ForeColor = System.Drawing.Color.White;
-            this.label_social.Location = new System.Drawing.Point(82, 273);
+            this.label_social.Location = new System.Drawing.Point(82, 214);
             this.label_social.Name = "label_social";
             this.label_social.Size = new System.Drawing.Size(61, 24);
             this.label_social.TabIndex = 9;
@@ -841,33 +819,11 @@
             this.label_social1.AutoSize = true;
             this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_social1.ForeColor = System.Drawing.Color.White;
-            this.label_social1.Location = new System.Drawing.Point(83, 296);
+            this.label_social1.Location = new System.Drawing.Point(83, 237);
             this.label_social1.Name = "label_social1";
-            this.label_social1.Size = new System.Drawing.Size(121, 12);
+            this.label_social1.Size = new System.Drawing.Size(80, 12);
             this.label_social1.TabIndex = 10;
-            this.label_social1.Text = "• WeChat: johndoe / janedoe";
-            // 
-            // label_social2
-            // 
-            this.label_social2.AutoSize = true;
-            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social2.ForeColor = System.Drawing.Color.White;
-            this.label_social2.Location = new System.Drawing.Point(83, 309);
-            this.label_social2.Name = "label_social2";
-            this.label_social2.Size = new System.Drawing.Size(71, 12);
-            this.label_social2.TabIndex = 11;
-            this.label_social2.Text = "• Line @johndoe";
-            // 
-            // labelsocial3
-            // 
-            this.labelsocial3.AutoSize = true;
-            this.labelsocial3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelsocial3.ForeColor = System.Drawing.Color.White;
-            this.labelsocial3.Location = new System.Drawing.Point(83, 322);
-            this.labelsocial3.Name = "labelsocial3";
-            this.labelsocial3.Size = new System.Drawing.Size(177, 12);
-            this.labelsocial3.TabIndex = 12;
-            this.labelsocial3.Text = "• WhatsApp: xxxxxxxxxxx / xxxxxxxxxxx";
+            this.label_social1.Text = "• QQ: 2715693882";
             // 
             // label_clearcache
             // 
@@ -875,7 +831,7 @@
             this.label_clearcache.Enabled = false;
             this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_clearcache.ForeColor = System.Drawing.Color.White;
-            this.label_clearcache.Location = new System.Drawing.Point(452, 344);
+            this.label_clearcache.Location = new System.Drawing.Point(452, 401);
             this.label_clearcache.Name = "label_clearcache";
             this.label_clearcache.Size = new System.Drawing.Size(160, 20);
             this.label_clearcache.TabIndex = 13;
@@ -890,7 +846,7 @@
             this.label_getdiagnostics.Enabled = false;
             this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
-            this.label_getdiagnostics.Location = new System.Drawing.Point(621, 344);
+            this.label_getdiagnostics.Location = new System.Drawing.Point(621, 401);
             this.label_getdiagnostics.Name = "label_getdiagnostics";
             this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
             this.label_getdiagnostics.TabIndex = 14;
@@ -917,7 +873,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.notification_2;
-            this.pictureBox1.Location = new System.Drawing.Point(502, 21);
+            this.pictureBox1.Location = new System.Drawing.Point(503, 22);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(128, 128);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -930,7 +886,7 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Image = global::Safety_Browser.Properties.Resources.notification_3;
-            this.pictureBox3.Location = new System.Drawing.Point(548, 158);
+            this.pictureBox3.Location = new System.Drawing.Point(549, 159);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(64, 64);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -941,17 +897,15 @@
             // 
             this.panel_help.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.panel_help.Controls.Add(this.label_social2);
+            this.panel_help.Controls.Add(this.pictureBox_qr);
             this.panel_help.Controls.Add(this.pictureBox3);
             this.panel_help.Controls.Add(this.pictureBox1);
             this.panel_help.Controls.Add(this.label2);
             this.panel_help.Controls.Add(this.label_getdiagnostics);
             this.panel_help.Controls.Add(this.label_clearcache);
-            this.panel_help.Controls.Add(this.labelsocial3);
-            this.panel_help.Controls.Add(this.label_social2);
             this.panel_help.Controls.Add(this.label_social1);
             this.panel_help.Controls.Add(this.label_social);
-            this.panel_help.Controls.Add(this.label_callus1);
-            this.panel_help.Controls.Add(this.label_callus);
             this.panel_help.Controls.Add(this.label_emailus1);
             this.panel_help.Controls.Add(this.label_emailus);
             this.panel_help.Controls.Add(this.label_chatus1);
@@ -962,9 +916,20 @@
             this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel_help.Location = new System.Drawing.Point(264, 152);
             this.panel_help.Name = "panel_help";
-            this.panel_help.Size = new System.Drawing.Size(828, 380);
+            this.panel_help.Size = new System.Drawing.Size(828, 435);
             this.panel_help.TabIndex = 69;
             this.panel_help.Visible = false;
+            // 
+            // pictureBox_qr
+            // 
+            this.pictureBox_qr.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox_qr.Image = global::Safety_Browser.Properties.Resources.qr;
+            this.pictureBox_qr.Location = new System.Drawing.Point(87, 264);
+            this.pictureBox_qr.Name = "pictureBox_qr";
+            this.pictureBox_qr.Size = new System.Drawing.Size(123, 123);
+            this.pictureBox_qr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox_qr.TabIndex = 72;
+            this.pictureBox_qr.TabStop = false;
             // 
             // pictureBox_loader
             // 
@@ -989,6 +954,17 @@
             this.label_separator.Size = new System.Drawing.Size(1, 725);
             this.label_separator.TabIndex = 75;
             this.label_separator.Visible = false;
+            // 
+            // label_social2
+            // 
+            this.label_social2.AutoSize = true;
+            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social2.ForeColor = System.Drawing.Color.White;
+            this.label_social2.Location = new System.Drawing.Point(83, 250);
+            this.label_social2.Name = "label_social2";
+            this.label_social2.Size = new System.Drawing.Size(85, 12);
+            this.label_social2.TabIndex = 73;
+            this.label_social2.Text = "• WeChat: yb188yb";
             // 
             // Form_YB
             // 
@@ -1062,6 +1038,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel_help.ResumeLayout(false);
             this.panel_help.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_qr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1123,12 +1100,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_getdiagnostics;
         private System.Windows.Forms.Label label_clearcache;
-        private System.Windows.Forms.Label labelsocial3;
-        private System.Windows.Forms.Label label_social2;
         private System.Windows.Forms.Label label_social1;
         private System.Windows.Forms.Label label_social;
-        private System.Windows.Forms.Label label_callus1;
-        private System.Windows.Forms.Label label_callus;
         private System.Windows.Forms.Label label_emailus1;
         private System.Windows.Forms.Label label_emailus;
         private System.Windows.Forms.Label label_chatus1;
@@ -1139,6 +1112,8 @@
         private System.Windows.Forms.Label label_notificationstatus;
         private System.Windows.Forms.PictureBox pictureBox_loader;
         private System.Windows.Forms.Label label_separator;
+        private System.Windows.Forms.PictureBox pictureBox_qr;
+        private System.Windows.Forms.Label label_social2;
     }
 }
 
