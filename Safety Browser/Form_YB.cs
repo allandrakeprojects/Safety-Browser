@@ -573,10 +573,19 @@ namespace Safety_Browser
         {
             Invoke(new Action(() =>
             {
+                if (back_button_i > 1)
+                {
+                    pictureBox_back.Enabled = false;
+                    goBackToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    pictureBox_back.Enabled = e.CanGoBack;
+                    goBackToolStripMenuItem.Enabled = e.CanGoBack;
+                }
+
                 pictureBox_forward.Enabled = e.CanGoForward;
                 forwardToolStripMenuItem.Enabled = e.CanGoForward;
-                pictureBox_back.Enabled = e.CanGoBack;
-                goBackToolStripMenuItem.Enabled = e.CanGoBack;
 
                 if (pictureBox_forward.Enabled == true)
                 {
@@ -702,7 +711,8 @@ namespace Safety_Browser
                                     {
                                         await Task.Delay(1000);
                                     });
-
+                                    
+                                    back_button_i++;
                                     timer_detectifhijacked.Start();
                                     domain_one_time = false;
                                     last_index_hijacked_get = false;
@@ -725,13 +735,16 @@ namespace Safety_Browser
                                     zoomOutToolStripMenuItem.Enabled = true;
                                     label_clearcache.Enabled = true;
                                     label_getdiagnostics.Enabled = true;
+                                    elseload_return = false;
                                 }
                                 else
                                 {
+                                    back_button_i++;
                                     last_index_hijacked_get = true;
                                     not_hijacked = false;
                                     label_loadingstate.Text = "1";
                                     label_loadingstate.Text = "0";
+                                    elseload_return = true;
                                 }
                             }
                             else
@@ -740,7 +753,8 @@ namespace Safety_Browser
                                 {
                                     await Task.Delay(1000);
                                 });
-
+                                
+                                back_button_i++;
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
@@ -773,13 +787,17 @@ namespace Safety_Browser
                                 zoomOutToolStripMenuItem.Enabled = true;
                                 label_clearcache.Enabled = true;
                                 label_getdiagnostics.Enabled = true;
+                                elseload_return = false;
                             }
                         }
                         else
                         {
                             Invoke(new Action(() =>
                             {
-                                timer_elseloaded.Start();
+                                if (elseload_return)
+                                {
+                                    timer_elseloaded.Start();
+                                }
                             }));
                         }
                     }));
@@ -1355,7 +1373,8 @@ namespace Safety_Browser
                             {
                                 await Task.Delay(1000);
                             });
-
+                            
+                            back_button_i++;
                             timer_detectifhijacked.Start();
                             domain_one_time = false;
                             last_index_hijacked_get = false;
@@ -1378,13 +1397,16 @@ namespace Safety_Browser
                             zoomOutToolStripMenuItem.Enabled = true;
                             label_clearcache.Enabled = true;
                             label_getdiagnostics.Enabled = true;
+                            elseload_return = false;
                         }
                         else
                         {
+                            back_button_i++;
                             last_index_hijacked_get = true;
                             not_hijacked = false;
                             label_loadingstate.Text = "1";
                             label_loadingstate.Text = "0";
+                            elseload_return = true;
                         }
                     }
                     else
@@ -1393,7 +1415,8 @@ namespace Safety_Browser
                         {
                             await Task.Delay(1000);
                         });
-
+                        
+                        back_button_i++;
                         timer_detectifhijacked.Start();
                         domain_one_time = false;
                         last_index_hijacked_get = false;
@@ -1426,6 +1449,7 @@ namespace Safety_Browser
                         zoomOutToolStripMenuItem.Enabled = true;
                         label_clearcache.Enabled = true;
                         label_getdiagnostics.Enabled = true;
+                        elseload_return = false;
                     }
                 }
             }));
@@ -1610,6 +1634,8 @@ namespace Safety_Browser
         private static string result_ping;
         private static string result_traceroute;
         private string dumpPath;
+        private int back_button_i;
+        private bool elseload_return;
 
         [DefaultValue(30)]
         public int Radius
