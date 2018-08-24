@@ -603,6 +603,7 @@ namespace Safety_Browser
                 {
                     fully_loaded = 0;
                     elseloaded_i = 0;
+                    back_button_fully_loaded = 0;
                     timer_elseloaded.Stop();
 
                     if (!domain_one_time)
@@ -623,18 +624,60 @@ namespace Safety_Browser
                     if (!domain_one_time)
                     {
                         pictureBox_loader.Visible = false;
+                        
+                        pictureBox_reload.Visible = true;
+                        pictureBox_browserstop.Visible = false;
+                        
+                        string strValue = text_search;
+                        string[] strArray = strValue.Split(',');
 
-                        if (panel_help.Visible == true)
+                        if (!String.IsNullOrEmpty(handler_title))
                         {
+                            foreach (string obj in strArray)
+                            {
+                                bool contains = handler_title.Contains(obj);
+                                if (contains == true)
+                                {
+                                    Invoke(new Action(() =>
+                                    {
+                                        isHijacked = false;
+                                    }));
+
+                                    break;
+                                }
+                                else if (!contains)
+                                {
+                                    Invoke(new Action(() =>
+                                    {
+                                        isHijacked = true;
+                                    }));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            isHijacked = true;
+                        }
+
+                        MessageBox.Show(handler_title);
+
+                        if (isHijacked)
+                        {
+                            MessageBox.Show("hijacked");
                             panel_cefsharp.Visible = false;
                         }
                         else
                         {
-                            panel_cefsharp.Visible = true;
+                            MessageBox.Show("not hijacked");
+                            if (panel_help.Visible == true)
+                            {
+                                panel_cefsharp.Visible = false;
+                            }
+                            else
+                            {
+                                panel_cefsharp.Visible = true;
+                            }
                         }
-
-                        pictureBox_reload.Visible = true;
-                        pictureBox_browserstop.Visible = false;
                     }
                 }));
             }
@@ -1590,6 +1633,7 @@ namespace Safety_Browser
         private static string result_ping;
         private static string result_traceroute;
         private string dumpPath;
+        private int back_button_fully_loaded;
 
         [DefaultValue(30)]
         public int Radius
@@ -1760,8 +1804,8 @@ namespace Safety_Browser
 
         private void label_getdiagnostics_Click(object sender, EventArgs e)
         {
-            //GetTraceRoute(domain_get);
-            //GetPing(domain_get);
+            GetTraceRoute(domain_get);
+            GetPing(domain_get);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
