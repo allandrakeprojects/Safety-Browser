@@ -603,7 +603,6 @@ namespace Safety_Browser
                 {
                     fully_loaded = 0;
                     elseloaded_i = 0;
-                    back_button_fully_loaded = 0;
                     timer_elseloaded.Stop();
 
                     if (!domain_one_time)
@@ -624,60 +623,18 @@ namespace Safety_Browser
                     if (!domain_one_time)
                     {
                         pictureBox_loader.Visible = false;
-                        
-                        pictureBox_reload.Visible = true;
-                        pictureBox_browserstop.Visible = false;
-                        
-                        string strValue = text_search;
-                        string[] strArray = strValue.Split(',');
 
-                        if (!String.IsNullOrEmpty(handler_title))
+                        if (panel_help.Visible == true)
                         {
-                            foreach (string obj in strArray)
-                            {
-                                bool contains = handler_title.Contains(obj);
-                                if (contains == true)
-                                {
-                                    Invoke(new Action(() =>
-                                    {
-                                        isHijacked = false;
-                                    }));
-
-                                    break;
-                                }
-                                else if (!contains)
-                                {
-                                    Invoke(new Action(() =>
-                                    {
-                                        isHijacked = true;
-                                    }));
-                                }
-                            }
-                        }
-                        else
-                        {
-                            isHijacked = true;
-                        }
-
-                        MessageBox.Show(handler_title);
-
-                        if (isHijacked)
-                        {
-                            MessageBox.Show("hijacked");
                             panel_cefsharp.Visible = false;
                         }
                         else
                         {
-                            MessageBox.Show("not hijacked");
-                            if (panel_help.Visible == true)
-                            {
-                                panel_cefsharp.Visible = false;
-                            }
-                            else
-                            {
-                                panel_cefsharp.Visible = true;
-                            }
+                            panel_cefsharp.Visible = true;
                         }
+
+                        pictureBox_reload.Visible = true;
+                        pictureBox_browserstop.Visible = false;
                     }
                 }));
             }
@@ -741,6 +698,11 @@ namespace Safety_Browser
 
                                 if (html.Contains("landing_image"))
                                 {
+                                    await Task.Run(async () =>
+                                    {
+                                        await Task.Delay(1000);
+                                    });
+
                                     timer_detectifhijacked.Start();
                                     domain_one_time = false;
                                     last_index_hijacked_get = false;
@@ -774,6 +736,11 @@ namespace Safety_Browser
                             }
                             else
                             {
+                                await Task.Run(async () =>
+                                {
+                                    await Task.Delay(1000);
+                                });
+
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
@@ -1384,6 +1351,11 @@ namespace Safety_Browser
 
                         if (html.Contains("landing_image"))
                         {
+                            await Task.Run(async () =>
+                            {
+                                await Task.Delay(1000);
+                            });
+
                             timer_detectifhijacked.Start();
                             domain_one_time = false;
                             last_index_hijacked_get = false;
@@ -1417,6 +1389,11 @@ namespace Safety_Browser
                     }
                     else
                     {
+                        await Task.Run(async () =>
+                        {
+                            await Task.Delay(1000);
+                        });
+
                         timer_detectifhijacked.Start();
                         domain_one_time = false;
                         last_index_hijacked_get = false;
@@ -1633,7 +1610,6 @@ namespace Safety_Browser
         private static string result_ping;
         private static string result_traceroute;
         private string dumpPath;
-        private int back_button_fully_loaded;
 
         [DefaultValue(30)]
         public int Radius
