@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle141 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle142 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle143 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle144 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -83,6 +83,7 @@
             this.pictureBox_noficationhover = new System.Windows.Forms.PictureBox();
             this.panel_notification = new System.Windows.Forms.Panel();
             this.label_notificationstatus = new System.Windows.Forms.Label();
+            this.label_notifications = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label_help = new System.Windows.Forms.Label();
             this.pictureBox_helpback = new System.Windows.Forms.PictureBox();
@@ -102,6 +103,8 @@
             this.pictureBox_qr = new System.Windows.Forms.PictureBox();
             this.pictureBox_loader = new System.Windows.Forms.PictureBox();
             this.label_separator = new System.Windows.Forms.Label();
+            this.flowLayoutPanel_notifications = new System.Windows.Forms.FlowLayoutPanel();
+            this.label_notificationscount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
@@ -142,44 +145,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle141.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle141;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle142.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle142.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle142.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle142.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle142.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle142.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle142.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle142.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle142;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle143.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle143.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle143.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle143.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle143.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle143.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle143.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle143;
             this.dataGridView_domain.Location = new System.Drawing.Point(1284, 44);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle144.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle144.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle144.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle144.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle144.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle144.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle144.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle144;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -366,7 +369,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -389,7 +392,7 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // goBackToolStripMenuItem
@@ -483,7 +486,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_version.Text = "0.0.26";
+            this.toolStripMenuItem_version.Text = "0.0.27";
             // 
             // pictureBox_menu
             // 
@@ -639,7 +642,7 @@
             this.pictureBox_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_help.Image = global::Safety_Browser.Properties.Resources.help;
-            this.pictureBox_help.Location = new System.Drawing.Point(1076, 10);
+            this.pictureBox_help.Location = new System.Drawing.Point(1067, 10);
             this.pictureBox_help.Name = "pictureBox_help";
             this.pictureBox_help.Size = new System.Drawing.Size(18, 18);
             this.pictureBox_help.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -654,7 +657,7 @@
             this.pictureBox_helphover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_helphover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_helphover.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_helphover.Location = new System.Drawing.Point(1068, 1);
+            this.pictureBox_helphover.Location = new System.Drawing.Point(1059, 1);
             this.pictureBox_helphover.Name = "pictureBox_helphover";
             this.pictureBox_helphover.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_helphover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -671,7 +674,7 @@
             this.pictureBox_nofication.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_nofication.Enabled = false;
             this.pictureBox_nofication.Image = global::Safety_Browser.Properties.Resources.notification_visible;
-            this.pictureBox_nofication.Location = new System.Drawing.Point(1112, 10);
+            this.pictureBox_nofication.Location = new System.Drawing.Point(1103, 10);
             this.pictureBox_nofication.Name = "pictureBox_nofication";
             this.pictureBox_nofication.Size = new System.Drawing.Size(18, 18);
             this.pictureBox_nofication.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -687,7 +690,7 @@
             this.pictureBox_noficationhover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.pictureBox_noficationhover.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_noficationhover.Enabled = false;
-            this.pictureBox_noficationhover.Location = new System.Drawing.Point(1104, 1);
+            this.pictureBox_noficationhover.Location = new System.Drawing.Point(1095, 1);
             this.pictureBox_noficationhover.Name = "pictureBox_noficationhover";
             this.pictureBox_noficationhover.Size = new System.Drawing.Size(35, 37);
             this.pictureBox_noficationhover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -702,23 +705,37 @@
             this.panel_notification.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_notification.BackColor = System.Drawing.Color.White;
+            this.panel_notification.Controls.Add(this.flowLayoutPanel_notifications);
+            this.panel_notification.Controls.Add(this.label_notifications);
             this.panel_notification.Controls.Add(this.label_notificationstatus);
-            this.panel_notification.Location = new System.Drawing.Point(991, 39);
+            this.panel_notification.Location = new System.Drawing.Point(991, 38);
             this.panel_notification.Name = "panel_notification";
-            this.panel_notification.Size = new System.Drawing.Size(278, 724);
+            this.panel_notification.Size = new System.Drawing.Size(278, 726);
             this.panel_notification.TabIndex = 68;
             this.panel_notification.Visible = false;
             // 
             // label_notificationstatus
             // 
-            this.label_notificationstatus.AutoSize = true;
             this.label_notificationstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_notificationstatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
-            this.label_notificationstatus.Location = new System.Drawing.Point(3, 12);
+            this.label_notificationstatus.Location = new System.Drawing.Point(7, 32);
             this.label_notificationstatus.Name = "label_notificationstatus";
-            this.label_notificationstatus.Size = new System.Drawing.Size(214, 16);
-            this.label_notificationstatus.TabIndex = 69;
+            this.label_notificationstatus.Size = new System.Drawing.Size(268, 16);
+            this.label_notificationstatus.TabIndex = 73;
             this.label_notificationstatus.Text = "There are currently no notifications.";
+            this.label_notificationstatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_notificationstatus.Visible = false;
+            // 
+            // label_notifications
+            // 
+            this.label_notifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_notifications.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.label_notifications.Location = new System.Drawing.Point(5, 7);
+            this.label_notifications.Name = "label_notifications";
+            this.label_notifications.Size = new System.Drawing.Size(270, 18);
+            this.label_notifications.TabIndex = 72;
+            this.label_notifications.Text = "Notifications";
+            this.label_notifications.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
             // 
@@ -914,7 +931,7 @@
             this.panel_help.Controls.Add(this.label_help);
             this.panel_help.Controls.Add(this.pictureBox2);
             this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel_help.Location = new System.Drawing.Point(264, 152);
+            this.panel_help.Location = new System.Drawing.Point(116, 137);
             this.panel_help.Name = "panel_help";
             this.panel_help.Size = new System.Drawing.Size(828, 435);
             this.panel_help.TabIndex = 69;
@@ -966,6 +983,28 @@
             this.label_separator.TabIndex = 75;
             this.label_separator.Visible = false;
             // 
+            // flowLayoutPanel_notifications
+            // 
+            this.flowLayoutPanel_notifications.Location = new System.Drawing.Point(0, 25);
+            this.flowLayoutPanel_notifications.Name = "flowLayoutPanel_notifications";
+            this.flowLayoutPanel_notifications.Size = new System.Drawing.Size(275, 697);
+            this.flowLayoutPanel_notifications.TabIndex = 74;
+            // 
+            // label_notificationscount
+            // 
+            this.label_notificationscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_notificationscount.AutoSize = true;
+            this.label_notificationscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.label_notificationscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_notificationscount.ForeColor = System.Drawing.Color.White;
+            this.label_notificationscount.Location = new System.Drawing.Point(1118, 1);
+            this.label_notificationscount.Name = "label_notificationscount";
+            this.label_notificationscount.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.label_notificationscount.Size = new System.Drawing.Size(0, 18);
+            this.label_notificationscount.TabIndex = 76;
+            this.label_notificationscount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_notificationscount.Visible = false;
+            // 
             // Form_YB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -973,9 +1012,10 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
+            this.Controls.Add(this.label_notificationscount);
+            this.Controls.Add(this.pictureBox_nofication);
             this.Controls.Add(this.panel_help);
             this.Controls.Add(this.pictureBox_loader);
-            this.Controls.Add(this.pictureBox_nofication);
             this.Controls.Add(this.pictureBox_noficationhover);
             this.Controls.Add(this.pictureBox_help);
             this.Controls.Add(this.pictureBox_helphover);
@@ -1031,7 +1071,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).EndInit();
             this.panel_notification.ResumeLayout(false);
-            this.panel_notification.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helpback)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1109,11 +1148,14 @@
         private System.Windows.Forms.PictureBox pictureBox_helpback;
         private System.Windows.Forms.Label label_help;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label_notificationstatus;
         private System.Windows.Forms.PictureBox pictureBox_loader;
         private System.Windows.Forms.Label label_separator;
         private System.Windows.Forms.PictureBox pictureBox_qr;
         private System.Windows.Forms.Label label_social2;
+        private System.Windows.Forms.Label label_notifications;
+        private System.Windows.Forms.Label label_notificationstatus;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_notifications;
+        private System.Windows.Forms.Label label_notificationscount;
     }
 }
 

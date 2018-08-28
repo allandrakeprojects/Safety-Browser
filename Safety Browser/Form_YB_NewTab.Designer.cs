@@ -341,7 +341,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_version.Text = "0.0.26";
+            this.toolStripMenuItem_version.Text = "0.0.27";
             // 
             // timer_mouse
             // 

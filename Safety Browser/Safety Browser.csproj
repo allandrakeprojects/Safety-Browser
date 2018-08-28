@@ -125,7 +125,6 @@
     </Compile>
     <Compile Include="GlobalKeyboardHook.cs" />
     <Compile Include="IpInfo.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UploadFile.cs" />
