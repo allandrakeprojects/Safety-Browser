@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
+using ChoETL;
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 
 namespace Safety_Browser
@@ -30,6 +30,7 @@ namespace Safety_Browser
         private string[] domain_service = { "http://www.ssicortex.com/GetDomains", "http://www.ssitectonic.com/GetDomains", "http://www.ssihedonic.com/GetDomains" };
         private string[] send_service = { "http://www.ssicortex.com/SendDetails", "http://www.ssitectonic.com/SendDetails", "http://www.ssihedonic.com/SendDetails" };
         private string[] diagnostics_service = { "http://www.ssicortex.com/SendDiagnostic", "http://www.ssitectonic.com/SendDiagnostic", "http://www.ssihedonic.com/SendDiagnostic" };
+        private string[] notifications_service = { "http://www.ssicortex.com/GetNotifications", "http://www.ssitectonic.com/GetNotifications", "http://www.ssihedonic.com/GetNotifications" };
         private string text_search;
         private bool close = true;
         private bool isHijacked;
@@ -107,6 +108,9 @@ namespace Safety_Browser
             NetworkAvailability();
             #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetTextToTextAsync(web_service[current_web_service]);
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            GetNotificationAsync(notifications_service[current_web_service]);
             #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             PictureBoxCenter();
             gHook = new GlobalKeyboardHook();
@@ -508,10 +512,75 @@ namespace Safety_Browser
             catch (Exception err)
             {
                 MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                close = false;
                 Close();
             }
         }
-        
+
+        // Get Notifications
+        private async Task GetNotificationAsync(string webservice_notifications)
+        {
+            try
+            {
+                var client = new HttpClient();
+                var requestContent = new FormUrlEncodedContent(new[] {
+                    new KeyValuePair<string, string>("macid", GetMACAddress()),
+                    new KeyValuePair<string, string>("api_key", API_KEY),
+                    new KeyValuePair<string, string>("brand_code", BRAND_CODE),
+                });
+
+                HttpResponseMessage response = await client.PostAsync(
+                    webservice_notifications,
+                    requestContent);
+                HttpContent responseContent = response.Content;
+
+                using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
+                {
+                    string json = await reader.ReadToEndAsync();
+
+                    StringBuilder sb = new StringBuilder();
+                    using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
+                    {
+                        using (var w = new ChoCSVWriter(sb))
+                        {
+                            w.Write(p);
+                        }
+                    }
+
+                    notifications_get = sb.ToString();
+
+                    if (!String.IsNullOrEmpty(notifications_get))
+                    {
+                        string temp_file = Path.Combine(Path.GetTempPath(), "sb_notification.txt");
+                        StreamWriter sw = new StreamWriter(temp_file, true);
+                        sw.Close();
+
+                        // Header
+                        string contain_text_header = "id, message_date, message_title, message_content, status, read_status";
+                        if (File.ReadLines(temp_file).Any(line => line.Contains(contain_text_header)))
+                        {
+                            StreamWriter sww = new StreamWriter(temp_file, true);
+                            sww.WriteLine(notifications_get);
+                            sww.Close();
+                        }
+                        else
+                        {
+                            StreamWriter sww = new StreamWriter(temp_file, true);
+                            sww.WriteLine("id, message_date, message_title, message_content, status, read_status");
+                            sww.WriteLine(notifications_get);
+                            sww.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                close = false;
+                Close();
+            }
+        }
+
         // Domain Selection Changed
         private void DataGridView_domain_SelectionChanged(object sender, EventArgs e)
         {
@@ -1627,6 +1696,7 @@ namespace Safety_Browser
         private string dumpPath;
         private int back_button_i;
         private bool elseload_return;
+        private string notifications_get;
 
         [DefaultValue(30)]
         public int Radius
