@@ -32,6 +32,7 @@ namespace Safety_Browser
         private string[] send_service = { "http://www.ssicortex.com/SendDetails", "http://www.ssitectonic.com/SendDetails", "http://www.ssihedonic.com/SendDetails" };
         private string[] diagnostics_service = { "http://www.ssicortex.com/SendDiagnostic", "http://www.ssitectonic.com/SendDiagnostic", "http://www.ssihedonic.com/SendDiagnostic" };
         private string[] notifications_service = { "http://www.ssicortex.com/GetNotifications", "http://www.ssitectonic.com/GetNotifications", "http://www.ssihedonic.com/GetNotifications" };
+        private string[] notifications_delete_service = { "http://www.ssicortex.com/GetMessageX", "http://www.ssitectonic.com/GetMessageX", "http://www.ssihedonic.com/GetMessageX" };
         private string text_search;
         private bool close = true;
         private bool isHijacked;
@@ -637,69 +638,6 @@ namespace Safety_Browser
                     {
                         if (File.Exists(notifications_file))
                         {
-                            //update
-                            List<string> line_to_delete = new List<string>();
-                            int line_count = 0;
-                            string line;
-                            StreamReader sr = new StreamReader(notifications_file);
-                            while ((line = sr.ReadLine()) != null)
-                            {
-                                if (line != "")
-                                {
-                                    string[] strArray = line.Split("*|*");
-
-                                    int count_update = 0;
-                                    foreach (object obj in strArray)
-                                    {
-                                        count_update++;
-
-                                        if (count_update == 7)
-                                        {
-                                            if (obj.ToString() != "0")
-                                            {
-                                                string delete_id = obj.ToString();
-                                                string line_delete;
-                                                StreamReader sr_delete = new StreamReader(notifications_file);
-                                                while ((line_delete = sr_delete.ReadLine()) != null)
-                                                {
-                                                    if (line_delete != "")
-                                                    {
-                                                        string[] strArray_inner = line_delete.Split("*|*");
-
-                                                        int count_update_inner = 0;
-                                                        foreach (object obje in strArray_inner)
-                                                        {
-                                                            count_update_inner++;
-
-                                                            if (count_update_inner == 1)
-                                                            {
-                                                                if (delete_id == obje.ToString())
-                                                                {
-                                                                    line_to_delete.Add(line_delete);
-                                                                    line_count++;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                sr_delete.Close();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            sr.Close();
-
-                            for (int i = 0; i < line_count; i++)
-                            {
-                                MessageBox.Show(line_to_delete[i]);
-                                string text = File.ReadAllText(notifications_file);
-                                text = text.Replace(line_to_delete[i], "");
-                                File.WriteAllText(notifications_file, text);
-                            }
-
                             Notifications();
                         }
                         else
@@ -722,7 +660,75 @@ namespace Safety_Browser
 
         private void Notifications()
         {
+            //update
             string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
+            List<string> line_to_delete = new List<string>();
+            int line_count = 0;
+            string line_update;
+            StreamReader sr_update = new StreamReader(notifications_file);
+            while ((line_update = sr_update.ReadLine()) != null)
+            {
+                if (line_update != "")
+                {
+                    string[] strArray = line_update.Split("*|*");
+
+                    int count_update = 0;
+                    foreach (object obj in strArray)
+                    {
+                        count_update++;
+
+                        if (count_update == 7)
+                        {
+                            if (obj.ToString() != "0")
+                            {
+                                string delete_id = obj.ToString();
+                                string line_delete;
+                                StreamReader sr_delete = new StreamReader(notifications_file);
+                                while ((line_delete = sr_delete.ReadLine()) != null)
+                                {
+                                    if (line_delete != "")
+                                    {
+                                        string[] strArray_inner = line_delete.Split("*|*");
+
+                                        int count_update_inner = 0;
+                                        foreach (object obje in strArray_inner)
+                                        {
+                                            count_update_inner++;
+
+                                            if (count_update_inner == 1)
+                                            {
+                                                if (delete_id == obje.ToString())
+                                                {
+                                                    line_to_delete.Add(line_delete);
+                                                    line_count++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                sr_delete.Close();
+                            }
+                        }
+                    }
+                }
+            }
+
+            sr_update.Close();
+
+            for (int i = 0; i < line_count; i++)
+            {
+                string text = File.ReadAllText(notifications_file);
+                text = text.Replace(line_to_delete[i], "");
+                File.WriteAllText(notifications_file, text);
+            }
+
+            // delete
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            GetNotificationDeleteAsync(notifications_delete_service[current_web_service]);
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            // end delete
+
             string line;
             StreamReader sr = new StreamReader(notifications_file);
             while ((line = sr.ReadLine()) != null)
@@ -1125,6 +1131,83 @@ namespace Safety_Browser
         private static string Ellipsis(string value, int maxChars)
         {
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+        }
+
+        // Delete Notifications
+        private async Task GetNotificationDeleteAsync(string webservice_notifications_delete)
+        {
+            try
+            {
+                var client = new HttpClient();
+                var requestContent = new FormUrlEncodedContent(new[] {
+                    new KeyValuePair<string, string>("macid", GetMACAddress()),
+                    new KeyValuePair<string, string>("api_key", API_KEY),
+                    new KeyValuePair<string, string>("brand_code", BRAND_CODE),
+                });
+
+                //notifications_delete_service
+                HttpResponseMessage response = await client.PostAsync(
+                    webservice_notifications_delete,
+                    requestContent);
+                HttpContent responseContent = response.Content;
+
+                using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
+                {
+                    string json = await reader.ReadToEndAsync();
+                    string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
+                    string temp_file = Path.Combine(Path.GetTempPath(), "sb_notifications_temp.txt");
+
+                    StringBuilder sb = new StringBuilder();
+                    using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
+                    {
+                        using (var w = new ChoCSVWriter(sb))
+                            w.Write(p);
+                    }
+
+                    string id_to_delete = sb.ToString();
+                    string get_line_delete = string.Empty;
+                    if (id_to_delete != "0")
+                    {
+                        // delete
+                        string line_delete;
+                        
+                        StreamReader sr_delete = new StreamReader(notifications_file);
+                        while ((line_delete = sr_delete.ReadLine()) != null)
+                        {
+                            if (line_delete != "")
+                            {
+                                string[] strArray_inner = line_delete.Split("*|*");
+
+                                int count_update_inner = 0;
+                                foreach (object obje in strArray_inner)
+                                {
+                                    count_update_inner++;
+
+                                    if (count_update_inner == 1)
+                                    {
+                                        if (id_to_delete == obje.ToString())
+                                        {
+                                            get_line_delete = line_delete;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        sr_delete.Close();
+                        
+                        string text = File.ReadAllText(notifications_file);
+                        text = text.Replace(get_line_delete, "");
+                        File.WriteAllText(notifications_file, text);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                close = false;
+                Close();
+            }
         }
 
         // Domain Selection Changed
@@ -2554,6 +2637,10 @@ namespace Safety_Browser
         private void label_emailus1_Click(object sender, EventArgs e)
         {
             Process.Start("mailto:cs@yb188188.com");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
 
         private void pictureBox_maximize_Click(object sender, EventArgs e)
