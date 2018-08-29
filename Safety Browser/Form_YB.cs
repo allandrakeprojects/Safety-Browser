@@ -1177,6 +1177,8 @@ namespace Safety_Browser
         private void click_event_update(object sender, EventArgs e)
         {
             Process.Start(@"updater.exe");
+            close = false;
+            timer_close.Start();
         }
 
         private void click_event(object sender, EventArgs e)
@@ -2982,6 +2984,11 @@ namespace Safety_Browser
             #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetNotificationAsync(notifications_service[current_web_service]);
             #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        }
+
+        private void timer_close_Tick(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void pictureBox_maximize_Click(object sender, EventArgs e)
