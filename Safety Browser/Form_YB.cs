@@ -20,6 +20,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace Safety_Browser
@@ -131,12 +132,12 @@ namespace Safety_Browser
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
             NetworkAvailability();
-            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetTextToTextAsync(web_service[current_web_service]);
-            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetNotificationAsync(notifications_service[current_web_service]);
-            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             PictureBoxCenter();
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
@@ -163,7 +164,7 @@ namespace Safety_Browser
                             }));
 
                         }).Start();
-                    } 
+                    }
                     else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.R)
                     {
                         new Thread(() =>
@@ -234,7 +235,7 @@ namespace Safety_Browser
                 }
             }
         }
-        
+
         // Network Handler
         private void NetworkAvailability()
         {
@@ -249,7 +250,7 @@ namespace Safety_Browser
                     networkIsAvailable = true;
                 }
             }
-            
+
             if (networkIsAvailable)
             {
                 GetIPInfo();
@@ -282,7 +283,7 @@ namespace Safety_Browser
                         if (current_web_service < web_service.Length)
                         {
                             ByPassCalling();
-                        
+
                             panel_connection.Visible = false;
                             panel_connection.Enabled = false;
                         }
@@ -297,9 +298,9 @@ namespace Safety_Browser
                     }
                     else if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
-                        #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         GetTextToTextAsync(web_service[current_web_service]);
-                        #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
@@ -312,7 +313,7 @@ namespace Safety_Browser
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
                         pictureBox_loader.Visible = false;
-                        
+
                         panel_cefsharp.Visible = true;
                     }
                     else
@@ -366,7 +367,7 @@ namespace Safety_Browser
 
             panel_connection.Left = (ClientSize.Width - panel_connection.Width) / 2;
             panel_connection.Top = (ClientSize.Height - panel_connection.Height) / 2;
-            
+
             panel_help.Left = (ClientSize.Width - panel_help.Width) / 2;
             panel_help.Top = (ClientSize.Height - panel_help.Height) / 2;
         }
@@ -483,9 +484,9 @@ namespace Safety_Browser
         // ByPass Calling
         private void ByPassCalling()
         {
-            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetTextToTextAsync(web_service[current_web_service]);
-            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         // Get Domain
@@ -518,14 +519,14 @@ namespace Safety_Browser
                     {
                         domain_get = Regex.Unescape(m.Groups[1].ToString().Replace("\"", ""));
                     }
-                    
+
                     StringBuilder sb = new StringBuilder(domain_get);
                     sb.Replace("domain_ur", "");
                     sb.Replace("\"", "");
                     sb.Replace("l:", "");
                     sb.Replace("{", "");
                     sb.Replace("}", "");
-                    
+
                     var elements = sb.ToString().Split(new[]
                     { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string items in elements)
@@ -591,14 +592,20 @@ namespace Safety_Browser
                             StreamReader streamReader = new StreamReader(temp_file);
                             while ((line_sr = streamReader.ReadLine()) != null)
                             {
-                                if (!line_sr.Contains("Header_Test_Header"))
+                                if (line_sr != "")
                                 {
-                                    StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
-                                    sw.WriteLine(line_sr);
-                                    sw.Close();
+                                    if (!line_sr.Contains("Header_Test_Header"))
+                                    {
+                                        StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
+                                        sw.WriteLine(line_sr);
+                                        sw.Close();
+                                    }
                                 }
                             }
+
                             streamReader.Close();
+
+                            // update
 
                             Notifications();
                         }
@@ -608,14 +615,20 @@ namespace Safety_Browser
                             StreamReader streamReader = new StreamReader(temp_file);
                             while ((line_sr = streamReader.ReadLine()) != null)
                             {
-                                if (!line_sr.Contains("Header_Test_Header"))
+                                if (line_sr != "")
                                 {
-                                    StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
-                                    sw.WriteLine(line_sr);
-                                    sw.Close();
+                                    if (!line_sr.Contains("Header_Test_Header"))
+                                    {
+                                        StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
+                                        sw.WriteLine(line_sr);
+                                        sw.Close();
+                                    }
                                 }
                             }
+
                             streamReader.Close();
+
+                            // update
 
                             Notifications();
                         }
@@ -624,6 +637,69 @@ namespace Safety_Browser
                     {
                         if (File.Exists(notifications_file))
                         {
+                            //update
+                            List<string> line_to_delete = new List<string>();
+                            int line_count = 0;
+                            string line;
+                            StreamReader sr = new StreamReader(notifications_file);
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                if (line != "")
+                                {
+                                    string[] strArray = line.Split("*|*");
+
+                                    int count_update = 0;
+                                    foreach (object obj in strArray)
+                                    {
+                                        count_update++;
+
+                                        if (count_update == 7)
+                                        {
+                                            if (obj.ToString() != "0")
+                                            {
+                                                string delete_id = obj.ToString();
+                                                string line_delete;
+                                                StreamReader sr_delete = new StreamReader(notifications_file);
+                                                while ((line_delete = sr_delete.ReadLine()) != null)
+                                                {
+                                                    if (line_delete != "")
+                                                    {
+                                                        string[] strArray_inner = line_delete.Split("*|*");
+
+                                                        int count_update_inner = 0;
+                                                        foreach (object obje in strArray_inner)
+                                                        {
+                                                            count_update_inner++;
+
+                                                            if (count_update_inner == 1)
+                                                            {
+                                                                if (delete_id == obje.ToString())
+                                                                {
+                                                                    line_to_delete.Add(line_delete);
+                                                                    line_count++;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                sr_delete.Close();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            sr.Close();
+
+                            for (int i = 0; i < line_count; i++)
+                            {
+                                MessageBox.Show(line_to_delete[i]);
+                                string text = File.ReadAllText(notifications_file);
+                                text = text.Replace(line_to_delete[i], "");
+                                File.WriteAllText(notifications_file, text);
+                            }
+
                             Notifications();
                         }
                         else
@@ -651,153 +727,178 @@ namespace Safety_Browser
             StreamReader sr = new StreamReader(notifications_file);
             while ((line = sr.ReadLine()) != null)
             {
-                string[] strArray = line.Split("*|*");
-
-                int count = 0;
-                foreach (object obj in strArray)
+                if (line != "")
                 {
-                    count++;
+                    string[] strArray = line.Split("*|*");
 
-                    if (count == 1)
+                    int count = 0;
+                    foreach (object obj in strArray)
                     {
-                        _message_id = obj.ToString();
+                        count++;
+
+                        if (count == 1)
+                        {
+                            _message_id = obj.ToString().Replace("\"", "");
+                        }
+                        else if (count == 2)
+                        {
+                            _message_date = obj.ToString();
+                        }
+                        else if (count == 3)
+                        {
+                            _message_title = obj.ToString();
+                        }
+                        else if (count == 4)
+                        {
+                            _message_content = @obj.ToString();
+                        }
+                        else if (count == 5)
+                        {
+                            _message_status = obj.ToString();
+                        }
+                        else if (count == 6)
+                        {
+                            _message_type = obj.ToString();
+                        }
+                        else if (count == 7)
+                        {
+                            _message_edited_id = obj.ToString();
+                        }
+                        else if (count == 8)
+                        {
+                            _message_unread = obj.ToString();
+                        }
                     }
-                    else if (count == 2)
+
+                    Panel p = new Panel();
+                    p.Name = "panel_notification_" + _message_id;
+                    p.BackColor = Color.White;
+                    p.Size = new Size(270, 83);
+                    flowLayoutPanel_notifications.Controls.Add(p);
+                    flowLayoutPanel_notifications.Controls.SetChildIndex(p, 0);
+
+                    Label label_title = new Label();
+                    label_title.Name = "label_title_notification_" + _message_id;
+                    label_title.Text = Ellipsis(_message_title, 20);
+
+                    if (_message_unread.Contains("U"))
                     {
-                        _message_date = obj.ToString();
+                        label_notificationscount.Text = notificationscount++.ToString();
                     }
-                    else if (count == 3)
+
+                    label_title.Location = new Point(3, 5);
+                    label_title.AutoSize = true;
+                    label_title.ForeColor = Color.FromArgb(72, 72, 72);
+                    label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
+
+                    Label label_content = new Label();
+                    label_content.Name = "label_content_notification_" + _message_id;
+                    label_content.Text = Ellipsis(_message_content, 130);
+                    label_content.Location = new Point(4, 24);
+                    label_content.AutoSize = true;
+                    label_content.MaximumSize = new Size(248, 0);
+                    label_content.ForeColor = Color.FromArgb(72, 72, 72);
+                    label_content.Font = new Font("Microsoft Sans Serif", 8);
+
+                    Label label_date = new Label();
+                    label_date.Name = "label_date_notification_" + _message_id;
+
+                    const int SECOND = 1;
+                    const int MINUTE = 60 * SECOND;
+                    const int HOUR = 60 * MINUTE;
+                    const int DAY = 24 * HOUR;
+                    const int MONTH = 30 * DAY;
+
+                    string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                    string get_date_parse = _message_date;
+                    DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                    var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
+                    double delta = Math.Abs(ts.TotalSeconds);
+
+                    if (delta < 1 * MINUTE)
                     {
-                        _message_title = obj.ToString();
+                        label_date.Text = "Just now";
                     }
-                    else if (count == 4)
+                    else if (delta < 2 * MINUTE)
                     {
-                        _message_content = obj.ToString();
+                        label_date.Text = "a minute ago";
                     }
-                    else if (count == 5)
+                    else if (delta < 45 * MINUTE)
                     {
-                        _message_status = obj.ToString();
+                        if (ts.Minutes == 1)
+                        {
+                            label_date.Text = ts.Minutes + " minute ago";
+                        }
+                        else
+                        {
+                            label_date.Text = ts.Minutes + " minutes ago";
+                        }
                     }
-                    else if (count == 6)
+                    else if (delta < 90 * MINUTE)
                     {
-                        _message_type = obj.ToString();
+                        label_date.Text = "An hour ago";
                     }
-                    else if (count == 7)
+                    else if (delta < 24 * HOUR)
                     {
-                        _message_edited_id = obj.ToString();
-                    } else if (count == 8)
-                    {
-                        _message_unread = obj.ToString();
+                        if (ts.Hours == 1)
+                        {
+                            label_date.Text = ts.Hours + " hour ago";
+                        }
+                        else
+                        {
+                            label_date.Text = ts.Hours + " hours ago";
+                        }
                     }
-                }
-                
-                Panel p = new Panel();
-                p.Name = "panel_notification_" + _message_id;
-                p.BackColor = Color.White;
-                p.Size = new Size(270, 83);
-                flowLayoutPanel_notifications.Controls.Add(p);
-                flowLayoutPanel_notifications.Controls.SetChildIndex(p, 0);
+                    else if (delta < 48 * HOUR)
+                    {
+                        label_date.Text = "Yesterday";
+                    }
+                    else if (delta < 30 * DAY)
+                    {
+                        if (ts.Days == 1)
+                        {
+                            label_date.Text = ts.Days + " day ago";
+                        }
+                        else
+                        {
+                            label_date.Text = ts.Days + " days ago";
+                        }
+                    }
+                    else if (delta < 12 * MONTH)
+                    {
+                        int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                        label_date.Text = months <= 1 ? "One month ago" : months + " months ago";
+                    }
+                    else
+                    {
+                        int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+                        label_date.Text = years <= 1 ? "One year ago" : years + " years ago";
+                    }
 
-                Label label_title = new Label();
-                label_title.Name = "label_title_notification_" + _message_id;
-                label_title.Text = Ellipsis(_message_title, 20);
+                    label_date.AutoSize = true;
+                    label_date.Location = new Point(4, 65);
+                    label_date.ForeColor = Color.FromArgb(168, 168, 168);
+                    label_date.Font = new Font("Microsoft Sans Serif", 8);
 
-                if (_message_unread.Contains("U"))
-                {
-                    label_notificationscount.Text = notificationscount++.ToString();
-                }
+                    Label label_view = new Label();
+                    label_view.Name = "label_view_notification_" + _message_id;
+                    label_view.Text = "View";
+                    label_view.Location = new Point(232, 64);
+                    label_view.AutoSize = true;
+                    label_view.ForeColor = Color.FromArgb(72, 72, 72);
+                    label_view.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Underline);
+                    label_view.Cursor = Cursors.Hand;
+                    label_view.Click += new EventHandler(click_event);
 
-                label_title.Location = new Point(3, 5);
-                label_title.AutoSize = true;
-                label_title.ForeColor = Color.FromArgb(72, 72, 72);
-                label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
-
-                Label label_content = new Label();
-                label_content.Name = "label_content_notification_" + _message_id;
-                label_content.Text = Ellipsis(_message_content, 130);
-                label_content.Location = new Point(4, 24);
-                label_content.AutoSize = true;
-                label_content.MaximumSize = new Size(248, 0);
-                label_content.ForeColor = Color.FromArgb(72, 72, 72);
-                label_content.Font = new Font("Microsoft Sans Serif", 8);
-                
-                Label label_date = new Label();
-                label_date.Name = "label_date_notification_" + _message_id;
-
-                const int SECOND = 1;
-                const int MINUTE = 60 * SECOND;
-                const int HOUR = 60 * MINUTE;
-                const int DAY = 24 * HOUR;
-                const int MONTH = 30 * DAY;
-                
-                string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-                string get_date_parse = _message_date;
-                DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-                var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
-                double delta = Math.Abs(ts.TotalSeconds);
-
-                if (delta < 1 * MINUTE)
-                {
-                    label_date.Text = "Just now";
+                    p.Controls.Add(label_title);
+                    p.Controls.Add(label_content);
+                    p.Controls.Add(label_date);
+                    p.Controls.Add(label_view);
+                    flowLayoutPanel_notifications.Invalidate();
                 }
-                else if (delta < 2 * MINUTE)
-                {
-                    label_date.Text = "a minute ago";
-                }
-                else if (delta < 45 * MINUTE)
-                {
-                    label_date.Text = ts.Minutes + " minutes ago";
-                }
-                else if (delta < 90 * MINUTE)
-                {
-                    label_date.Text = "An hour ago";
-                }
-                else if (delta < 24 * HOUR)
-                {
-                    label_date.Text = ts.Hours + " hours ago";
-                }
-                else if (delta < 48 * HOUR)
-                {
-                    label_date.Text = "Yesterday";
-                }
-                else if (delta < 30 * DAY)
-                { 
-                    label_date.Text = ts.Days + " days ago";
-                }
-                else if (delta < 12 * MONTH)
-                {
-                    int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                    label_date.Text = months <= 1 ? "One month ago" : months + " months ago";
-                }
-                else
-                {
-                    int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-                    label_date.Text = years <= 1 ? "One year ago" : years + " years ago";
-                }
-
-                label_date.AutoSize = true;
-                label_date.Location = new Point(4, 65);
-                label_date.ForeColor = Color.FromArgb(168, 168, 168);
-                label_date.Font = new Font("Microsoft Sans Serif", 8);
-
-                Label label_view = new Label();
-                label_view.Name = "label_view_notification_" + _message_id;
-                label_view.Text = "View";
-                label_view.Location = new Point(232, 64);
-                label_view.AutoSize = true;
-                label_view.ForeColor = Color.FromArgb(72, 72, 72);
-                label_view.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Underline);
-                label_view.Cursor = Cursors.Hand;
-                label_view.Click += new EventHandler(click_event);
-
-                p.Controls.Add(label_title);
-                p.Controls.Add(label_content);
-                p.Controls.Add(label_date);
-                p.Controls.Add(label_view);
-                flowLayoutPanel_notifications.Invalidate();
             }
 
             sr.Close();
@@ -816,118 +917,176 @@ namespace Safety_Browser
                 StreamReader sr = new StreamReader(notifications_file);
                 while ((line = sr.ReadLine()) != null)
                 {
-                    string[] strArray = line.Split("*|*");
-
-                    int count = 0;
-                    int count_inner = 0;
-                    foreach (object obj in strArray)
+                    if (line != "")
                     {
-                        count++;
+                        string[] strArray = line.Split("*|*");
 
-                        if (count == 1)
+                        int count = 0;
+                        int count_inner = 0;
+                        foreach (object obj in strArray)
                         {
-                            if (output == obj.ToString())
+                            count++;
+
+                            if (count == 1)
                             {
-                                foreach (object obje in strArray)
+                                if (output == obj.ToString().Replace("\"", ""))
                                 {
-                                    count_inner++;
+                                    foreach (object obje in strArray)
+                                    {
+                                        count_inner++;
 
-                                    if (count_inner == 1)
-                                    {
-                                        _message_id_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 2)
-                                    {
-                                        _message_date_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 3)
-                                    {
-                                        _message_title_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 4)
-                                    {
-                                        _message_content_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 5)
-                                    {
-                                        _message_status_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 6)
-                                    {
-                                        _message_type_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 7)
-                                    {
-                                        _message_edited_id_inner = obje.ToString();
-                                    }
-                                    else if (count_inner == 8)
-                                    {
-                                        const int SECOND = 1;
-                                        const int MINUTE = 60 * SECOND;
-                                        const int HOUR = 60 * MINUTE;
-                                        const int DAY = 24 * HOUR;
-                                        const int MONTH = 30 * DAY;
+                                        if (count_inner == 1)
+                                        {
+                                            _message_id_inner = obje.ToString().Replace("\"", "");
+                                        }
+                                        else if (count_inner == 2)
+                                        {
+                                            _message_date_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 3)
+                                        {
+                                            _message_title_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 4)
+                                        {
+                                            _message_content_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 5)
+                                        {
+                                            _message_status_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 6)
+                                        {
+                                            _message_type_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 7)
+                                        {
+                                            _message_edited_id_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 8)
+                                        {
+                                            const int SECOND = 1;
+                                            const int MINUTE = 60 * SECOND;
+                                            const int HOUR = 60 * MINUTE;
+                                            const int DAY = 24 * HOUR;
+                                            const int MONTH = 30 * DAY;
 
-                                        string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                                        DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                                            string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                            DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
-                                        string get_date_parse = _message_date_inner;
-                                        DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                                            string get_date_parse = _message_date_inner;
+                                            DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
-                                        var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
-                                        double delta = Math.Abs(ts.TotalSeconds);
+                                            var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
+                                            double delta = Math.Abs(ts.TotalSeconds);
 
-                                        if (delta < 1 * MINUTE)
-                                        {
-                                            _message_date_inner = "Just now";
+                                            if (delta < 1 * MINUTE)
+                                            {
+                                                _message_date_inner = "Just now";
+                                            }
+                                            else if (delta < 2 * MINUTE)
+                                            {
+                                                _message_date_inner = "a minute ago";
+                                            }
+                                            else if (delta < 45 * MINUTE)
+                                            {
+                                                if (ts.Minutes == 1)
+                                                {
+                                                    _message_date_inner = ts.Minutes + " minute ago";
+                                                }
+                                                else
+                                                {
+                                                    _message_date_inner = ts.Minutes + " minutes ago";
+                                                }
+                                            }
+                                            else if (delta < 90 * MINUTE)
+                                            {
+                                                _message_date_inner = "An hour ago";
+                                            }
+                                            else if (delta < 24 * HOUR)
+                                            {
+                                                if (ts.Hours == 1)
+                                                {
+                                                    _message_date_inner = ts.Hours + " hour ago";
+                                                }
+                                                else
+                                                {
+                                                    _message_date_inner = ts.Hours + " hours ago";
+                                                }
+                                            }
+                                            else if (delta < 48 * HOUR)
+                                            {
+                                                _message_date_inner = "Yesterday";
+                                            }
+                                            else if (delta < 30 * DAY)
+                                            {
+                                                if (ts.Days == 1)
+                                                {
+                                                    _message_date_inner = ts.Days + " day ago";
+                                                }
+                                                else
+                                                {
+                                                    _message_date_inner = ts.Days + " days ago";
+                                                }
+                                            }
+                                            else if (delta < 12 * MONTH)
+                                            {
+                                                int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                                                _message_date_inner = months <= 1 ? "One month ago" : months + " months ago";
+                                            }
+                                            else
+                                            {
+                                                int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+                                                _message_date_inner = years <= 1 ? "One year ago" : years + " years ago";
+                                            }
                                         }
-                                        else if (delta < 2 * MINUTE)
+                                    }
+
+                                    text = File.ReadAllText(notifications_file);
+                                    string get_last_char = line.Substring(line.Length - 1, 1);
+                                    string output_line = string.Empty;
+                                    if (get_last_char == "\"")
+                                    {
+                                        output_line = line.Remove(line.Length - 2);
+                                        if (output_line.Substring(0, 1) == "\"")
                                         {
-                                            _message_date_inner = "a minute ago";
-                                        }
-                                        else if (delta < 45 * MINUTE)
-                                        {
-                                            _message_date_inner = ts.Minutes + " minutes ago";
-                                        }
-                                        else if (delta < 90 * MINUTE)
-                                        {
-                                            _message_date_inner = "An hour ago";
-                                        }
-                                        else if (delta < 24 * HOUR)
-                                        {
-                                            _message_date_inner = ts.Hours + " hours ago";
-                                        }
-                                        else if (delta < 48 * HOUR)
-                                        {
-                                            _message_date_inner = "Yesterday";
-                                        }
-                                        else if (delta < 30 * DAY)
-                                        {
-                                            _message_date_inner = ts.Days + " days ago";
-                                        }
-                                        else if (delta < 12 * MONTH)
-                                        {
-                                            int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                                            _message_date_inner = months <= 1 ? "One month ago" : months + " months ago";
+                                            string replace_output_line = output_line.Remove(0, 1);
+                                            text = text.Replace(line, replace_output_line + "R");
                                         }
                                         else
                                         {
-                                            int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-                                            _message_date_inner = years <= 1 ? "One year ago" : years + " years ago";
+                                            text = text.Replace(line, output_line + "R");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        output_line = line.Remove(line.Length - 1);
+
+                                        if (output_line.Substring(0, 1) == "\"")
+                                        {
+                                            string replace_output_line = output_line.Remove(0, 1);
+                                            text = text.Replace(line, replace_output_line + "R");
+                                        }
+                                        else
+                                        {
+                                            text = text.Replace(line, output_line + "R");
                                         }
                                     }
                                 }
-
-                                text = File.ReadAllText(notifications_file);
-                                string output_line = line.Remove(line.Length - 1);
-                                text = text.Replace(line, output_line + "R");
                             }
                         }
                     }
                 }
 
                 MessageBox.Show(_message_content_inner + "\n\n" + _message_date_inner, _message_title_inner.Replace("•", ""), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //((TextBox)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).Text = _message_title_inner.Replace("•", "");
+
+                string final_replace_message_title_inner = string.Empty;
+                if (_message_title_inner.Contains("•"))
+                {
+                    string replace_message_title_inner = _message_title_inner.Replace("•", "");
+                    final_replace_message_title_inner = "" + replace_message_title_inner.Remove(0, 1);
+                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).Text = final_replace_message_title_inner;
+                }
 
                 sr.Close();
                 File.WriteAllText(notifications_file, text);
@@ -935,10 +1094,17 @@ namespace Safety_Browser
                 if (_message_title_inner.Contains("•"))
                 {
                     string text_get = File.ReadAllText(notifications_file);
-                    text_get = text.Replace(_message_title_inner, _message_title_inner.Replace("•", ""));
-                    File.WriteAllText(notifications_file, text_get);
-                    
-                    int get_notifcount = Convert.ToInt32(label_notificationscount.Text) -1; 
+
+                    string final_replace_message_title_inner_text_file = string.Empty;
+                    if (_message_title_inner.Contains("•"))
+                    {
+                        string replace_message_title_inner_text_file = _message_title_inner.Replace("•", "");
+                        final_replace_message_title_inner_text_file = "" + replace_message_title_inner_text_file.Remove(0, 1);
+                        text_get = text.Replace(_message_title_inner, final_replace_message_title_inner_text_file);
+                        File.WriteAllText(notifications_file, text_get);
+                    }
+
+                    int get_notifcount = Convert.ToInt32(label_notificationscount.Text) - 1;
 
                     if (get_notifcount != 0)
                     {
@@ -985,7 +1151,7 @@ namespace Safety_Browser
 
                         completed = true;
                         timeout = true;
-                        
+
                         chromeBrowser.Load(domain_get);
                     }
                     catch (Exception)
@@ -1151,7 +1317,7 @@ namespace Safety_Browser
                                     {
                                         await Task.Delay(2000);
                                     });
-                                    
+
                                     back_button_i++;
                                     timer_detectifhijacked.Start();
                                     domain_one_time = false;
@@ -1194,7 +1360,7 @@ namespace Safety_Browser
                                 {
                                     await Task.Delay(2000);
                                 });
-                                
+
                                 back_button_i++;
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
@@ -1258,7 +1424,7 @@ namespace Safety_Browser
             if (label_loadingstate.Text == "0")
             {
                 current_domain_index = dataGridView_domain.SelectedRows[0].Index + 1;
-                
+
                 if (current_domain_index == total_domain_index)
                 {
                     if (domain_one_time)
@@ -1277,9 +1443,9 @@ namespace Safety_Browser
 
                         if (current_web_service < web_service.Length)
                         {
-                            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                             GetTextToTextAsync(web_service[current_web_service]);
-                            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         }
                         else
                         {
@@ -1327,7 +1493,7 @@ namespace Safety_Browser
                 externalIP = (new WebClient()).DownloadString("https://canihazip.com/s");
                 externalIP = (new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"))
                              .Matches(externalIP)[0].ToString();
-                
+
                 return externalIP;
             }
             catch (Exception err)
@@ -1696,7 +1862,7 @@ namespace Safety_Browser
                             }));
                         }
                     }
-                    
+
                     if (isHijacked)
                     {
                         var html = "";
@@ -1740,7 +1906,7 @@ namespace Safety_Browser
                             domain_one_time = true;
                             label_loadingstate.Text = "1";
                             label_loadingstate.Text = "0";
-                            
+
                             pictureBox_reload.Enabled = false;
                             pictureBox_reload.Image = Properties.Resources.refresh_visible;
                             pictureBox_browserhome.Enabled = false;
@@ -1815,7 +1981,7 @@ namespace Safety_Browser
                             {
                                 await Task.Delay(2000);
                             });
-                            
+
                             back_button_i++;
                             timer_detectifhijacked.Start();
                             domain_one_time = false;
@@ -1858,7 +2024,7 @@ namespace Safety_Browser
                         {
                             await Task.Delay(2000);
                         });
-                        
+
                         back_button_i++;
                         timer_detectifhijacked.Start();
                         domain_one_time = false;
@@ -2076,7 +2242,7 @@ namespace Safety_Browser
                 }
             }
         }
-        
+
         [DefaultValue(30)]
         public int Radius
         {
@@ -2126,7 +2292,7 @@ namespace Safety_Browser
 
         private void pictureBox_nofication_Click(object sender, EventArgs e)
         {
-            if(help_click)
+            if (help_click)
             {
                 var panel_cefsharp_resize = panel_cefsharp.Width - 280;
                 var panel_cefsharp_size = panel_cefsharp.Width + 280;
@@ -2266,7 +2432,7 @@ namespace Safety_Browser
                     zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
                     zip.Save(saveFileDialog.FileName);
                 }
-                
+
                 using (var stream = File.Open(saveFileDialog.FileName, FileMode.Open))
                 {
                     try
@@ -2427,7 +2593,7 @@ namespace Safety_Browser
                 Environment.Exit(0);
             }
         }
-         
+
         private void label_titlebar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && e.Clicks >= 2)
@@ -2456,8 +2622,8 @@ namespace Safety_Browser
             e.Graphics.FillRectangle(defaultColor, Left);
             e.Graphics.FillRectangle(defaultColor, Right);
             e.Graphics.FillRectangle(defaultColor, Bottom);
-        }  
-        
+        }
+
         protected override void WndProc(ref Message message)
         {
             base.WndProc(ref message);
@@ -2495,7 +2661,7 @@ namespace Safety_Browser
 
             var pingProc = new Process { StartInfo = startInfo };
             pingProc.Start();
-            
+
             while (!pingProc.HasExited)
             {
                 label_getdiagnostics.Text = "GETTING READY...";
@@ -2544,14 +2710,14 @@ namespace Safety_Browser
 
             var pingProc = new Process { StartInfo = startInfo };
             pingProc.Start();
-            
+
             while (!pingProc.HasExited)
             {
                 label_getdiagnostics.Text = "PLEASE WAIT...";
                 Cursor.Current = Cursors.WaitCursor;
                 pingProc.WaitForExit();
             }
-            
+
             result_traceroute = pingProc.StandardOutput.ReadToEnd();
 
             string temp_file = Path.Combine(Path.GetTempPath(), "traceroute.txt");
