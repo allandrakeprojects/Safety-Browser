@@ -257,7 +257,7 @@ namespace Safety_Browser
         {            
             if (close)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to close?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("你確定要關閉嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -353,7 +353,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Are you sure you want to close?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("你確定要關閉嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Hide();
@@ -521,7 +521,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Are you sure you want to close?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("你確定要關閉嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Hide();

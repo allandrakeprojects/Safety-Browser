@@ -1955,19 +1955,25 @@ namespace Safety_Browser
         {
             if (close)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("您確定要退出該計劃嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
                 else
                 {
-                    Cef.Shutdown();
+                    Invoke(new Action(() =>
+                    {
+                        Cef.Shutdown();
+                    }));
                 }
             }
             else
             {
-                Cef.Shutdown();
+                Invoke(new Action(() =>
+                {
+                    Cef.Shutdown();
+                }));
             }
         }
 
@@ -2160,11 +2166,14 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("您確定要退出該計劃嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    Cef.Shutdown();
-                    Environment.Exit(0);
+                    Invoke(new Action(() =>
+                    {
+                        Cef.Shutdown();
+                        Environment.Exit(0);
+                    }));
                 }
                 else
                 {
@@ -2175,8 +2184,11 @@ namespace Safety_Browser
             }
             else
             {
-                Cef.Shutdown();
-                Environment.Exit(0);
+                Invoke(new Action(() =>
+                {
+                    Cef.Shutdown();
+                    Environment.Exit(0);
+                }));
             }
         }
 
@@ -3090,11 +3102,14 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Are you sure you want to exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("您確定要退出該計劃嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    Cef.Shutdown();
-                    Environment.Exit(0);
+                    Invoke(new Action(() =>
+                    {
+                        Cef.Shutdown();
+                        Environment.Exit(0);
+                    }));
                 }
                 else
                 {
@@ -3104,8 +3119,11 @@ namespace Safety_Browser
             }
             else
             {
-                Cef.Shutdown();
-                Environment.Exit(0);
+                Invoke(new Action(() =>
+                {
+                    Cef.Shutdown();
+                    Environment.Exit(0);
+                }));
             }
         }
 
@@ -3179,11 +3197,11 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "GETTING READY...";
+                label_getdiagnostics.Text = "準備好了...";
                 pingProc.WaitForExit();
             }
 
-            label_getdiagnostics.Text = "GET DIAGNOSTICS";
+            label_getdiagnostics.Text = "得到診斷";
             Cursor.Current = Cursors.Default;
 
             result_ping = pingProc.StandardOutput.ReadToEnd();
@@ -3228,7 +3246,7 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "PLEASE WAIT...";
+                label_getdiagnostics.Text = "請稍候...";
                 Cursor.Current = Cursors.WaitCursor;
                 pingProc.WaitForExit();
             }

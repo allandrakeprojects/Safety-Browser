@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -147,44 +147,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_domain.Location = new System.Drawing.Point(1307, 47);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -371,13 +371,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fileToolStripMenuItem.Text = "文件";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "出口";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -394,7 +394,7 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewToolStripMenuItem.Text = "視圖";
             // 
             // goBackToolStripMenuItem
@@ -402,8 +402,8 @@
             this.goBackToolStripMenuItem.Enabled = false;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
             this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Left Key";
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.goBackToolStripMenuItem.Text = "Go back";
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.goBackToolStripMenuItem.Text = "回去";
             this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
             // 
             // forwardToolStripMenuItem
@@ -411,8 +411,8 @@
             this.forwardToolStripMenuItem.Enabled = false;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
             this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "Right Key";
-            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.forwardToolStripMenuItem.Text = "Forward";
+            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.forwardToolStripMenuItem.Text = "前鋒";
             this.forwardToolStripMenuItem.Click += new System.EventHandler(this.forwardToolStripMenuItem_Click);
             // 
             // homeToolStripMenuItem
@@ -420,8 +420,8 @@
             this.homeToolStripMenuItem.Enabled = false;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
             this.homeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.homeToolStripMenuItem.Text = "Home";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.homeToolStripMenuItem.Text = "家";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
             // reloadToolStripMenuItem
@@ -429,8 +429,8 @@
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             this.reloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.reloadToolStripMenuItem.Text = "Reload";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.reloadToolStripMenuItem.Text = "刷新";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // cleanAndReloadToolStripMenuItem
@@ -439,22 +439,22 @@
             this.cleanAndReloadToolStripMenuItem.Name = "cleanAndReloadToolStripMenuItem";
             this.cleanAndReloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.cleanAndReloadToolStripMenuItem.Text = "Clean and Reload";
+            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.cleanAndReloadToolStripMenuItem.Text = "清潔和重新加載";
             this.cleanAndReloadToolStripMenuItem.Click += new System.EventHandler(this.cleanAndReloadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(236, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(228, 6);
             // 
             // resetZoomToolStripMenuItem
             // 
             this.resetZoomToolStripMenuItem.Enabled = false;
             this.resetZoomToolStripMenuItem.Name = "resetZoomToolStripMenuItem";
             this.resetZoomToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.resetZoomToolStripMenuItem.Text = "Reset Zoom";
+            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.resetZoomToolStripMenuItem.Text = "重置縮放";
             this.resetZoomToolStripMenuItem.Click += new System.EventHandler(this.resetZoomToolStripMenuItem_Click);
             // 
             // zoomInToolStripMenuItem
@@ -462,8 +462,8 @@
             this.zoomInToolStripMenuItem.Enabled = false;
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
             this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.zoomInToolStripMenuItem.Text = "Zoom in";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.zoomInToolStripMenuItem.Text = "放大";
             this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
             // zoomOutToolStripMenuItem
@@ -471,8 +471,8 @@
             this.zoomOutToolStripMenuItem.Enabled = false;
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
             this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.zoomOutToolStripMenuItem.Text = "Zoom out";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.zoomOutToolStripMenuItem.Text = "縮小";
             this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
@@ -769,9 +769,9 @@
             this.label_help.ForeColor = System.Drawing.Color.White;
             this.label_help.Location = new System.Drawing.Point(80, 23);
             this.label_help.Name = "label_help";
-            this.label_help.Size = new System.Drawing.Size(240, 33);
+            this.label_help.Size = new System.Drawing.Size(160, 33);
             this.label_help.TabIndex = 0;
-            this.label_help.Text = "Help and Support";
+            this.label_help.Text = "幫助和支持";
             this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox_helpback
@@ -789,45 +789,45 @@
             // label_chatus
             // 
             this.label_chatus.AutoSize = true;
-            this.label_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_chatus.ForeColor = System.Drawing.Color.White;
             this.label_chatus.Location = new System.Drawing.Point(82, 88);
             this.label_chatus.Name = "label_chatus";
-            this.label_chatus.Size = new System.Drawing.Size(73, 24);
+            this.label_chatus.Size = new System.Drawing.Size(92, 25);
             this.label_chatus.TabIndex = 2;
-            this.label_chatus.Text = "Chat us";
+            this.label_chatus.Text = "聊天我們";
             // 
             // label_chatus1
             // 
             this.label_chatus1.AutoSize = true;
-            this.label_chatus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_chatus1.ForeColor = System.Drawing.Color.White;
-            this.label_chatus1.Location = new System.Drawing.Point(85, 111);
+            this.label_chatus1.Location = new System.Drawing.Point(84, 112);
             this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(285, 12);
+            this.label_chatus1.Size = new System.Drawing.Size(287, 13);
             this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "Have questions? Get 24/7 live chat, real-time help with chat support.";
+            this.label_chatus1.Text = "有疑問嗎？獲得全天候實時聊天，實時幫助聊天支持。";
             // 
             // label_emailus
             // 
             this.label_emailus.AutoSize = true;
-            this.label_emailus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_emailus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_emailus.ForeColor = System.Drawing.Color.White;
             this.label_emailus.Location = new System.Drawing.Point(82, 158);
             this.label_emailus.Name = "label_emailus";
-            this.label_emailus.Size = new System.Drawing.Size(82, 24);
+            this.label_emailus.Size = new System.Drawing.Size(92, 25);
             this.label_emailus.TabIndex = 5;
-            this.label_emailus.Text = "Email us";
+            this.label_emailus.Text = "電郵我們";
             // 
             // label_emailus1
             // 
             this.label_emailus1.AutoSize = true;
             this.label_emailus1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_emailus1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.label_emailus1.Location = new System.Drawing.Point(85, 181);
+            this.label_emailus1.Location = new System.Drawing.Point(85, 182);
             this.label_emailus1.Name = "label_emailus1";
-            this.label_emailus1.Size = new System.Drawing.Size(85, 12);
+            this.label_emailus1.Size = new System.Drawing.Size(99, 13);
             this.label_emailus1.TabIndex = 6;
             this.label_emailus1.Text = "cs@yb188188.com";
             this.label_emailus1.Click += new System.EventHandler(this.label_emailus1_Click);
@@ -835,22 +835,22 @@
             // label_social
             // 
             this.label_social.AutoSize = true;
-            this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_social.ForeColor = System.Drawing.Color.White;
             this.label_social.Location = new System.Drawing.Point(82, 214);
             this.label_social.Name = "label_social";
-            this.label_social.Size = new System.Drawing.Size(61, 24);
+            this.label_social.Size = new System.Drawing.Size(52, 25);
             this.label_social.TabIndex = 9;
-            this.label_social.Text = "Social";
+            this.label_social.Text = "社會";
             // 
             // label_social1
             // 
             this.label_social1.AutoSize = true;
-            this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_social1.ForeColor = System.Drawing.Color.White;
-            this.label_social1.Location = new System.Drawing.Point(83, 237);
+            this.label_social1.Location = new System.Drawing.Point(83, 238);
             this.label_social1.Name = "label_social1";
-            this.label_social1.Size = new System.Drawing.Size(80, 12);
+            this.label_social1.Size = new System.Drawing.Size(98, 13);
             this.label_social1.TabIndex = 10;
             this.label_social1.Text = "• QQ: 2715693882";
             // 
@@ -860,11 +860,11 @@
             this.label_clearcache.Enabled = false;
             this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_clearcache.ForeColor = System.Drawing.Color.White;
-            this.label_clearcache.Location = new System.Drawing.Point(452, 401);
+            this.label_clearcache.Location = new System.Drawing.Point(491, 401);
             this.label_clearcache.Name = "label_clearcache";
             this.label_clearcache.Size = new System.Drawing.Size(160, 20);
             this.label_clearcache.TabIndex = 13;
-            this.label_clearcache.Text = "CLEAR CACHE";
+            this.label_clearcache.Text = "清除緩存";
             this.label_clearcache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_clearcache.Click += new System.EventHandler(this.label_clearcache_Click);
             // 
@@ -875,11 +875,11 @@
             this.label_getdiagnostics.Enabled = false;
             this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
-            this.label_getdiagnostics.Location = new System.Drawing.Point(621, 401);
+            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 401);
             this.label_getdiagnostics.Name = "label_getdiagnostics";
             this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
             this.label_getdiagnostics.TabIndex = 14;
-            this.label_getdiagnostics.Text = "GET DIAGNOSTICS";
+            this.label_getdiagnostics.Text = "得到診斷";
             this.label_getdiagnostics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_getdiagnostics.Click += new System.EventHandler(this.label_getdiagnostics_Click);
             // 
@@ -887,13 +887,13 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.label2.Location = new System.Drawing.Point(85, 124);
+            this.label2.Location = new System.Drawing.Point(85, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 12);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Chat now";
+            this.label2.Text = "現在聊天";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pictureBox1
@@ -943,7 +943,7 @@
             this.panel_help.Controls.Add(this.label_help);
             this.panel_help.Controls.Add(this.pictureBox2);
             this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel_help.Location = new System.Drawing.Point(130, 131);
+            this.panel_help.Location = new System.Drawing.Point(219, 177);
             this.panel_help.Name = "panel_help";
             this.panel_help.Size = new System.Drawing.Size(828, 435);
             this.panel_help.TabIndex = 69;
@@ -952,19 +952,19 @@
             // label_social2
             // 
             this.label_social2.AutoSize = true;
-            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_social2.ForeColor = System.Drawing.Color.White;
-            this.label_social2.Location = new System.Drawing.Point(83, 250);
+            this.label_social2.Location = new System.Drawing.Point(83, 251);
             this.label_social2.Name = "label_social2";
-            this.label_social2.Size = new System.Drawing.Size(85, 12);
+            this.label_social2.Size = new System.Drawing.Size(86, 13);
             this.label_social2.TabIndex = 73;
-            this.label_social2.Text = "• WeChat: yb188yb";
+            this.label_social2.Text = "• 微信: yb188yb";
             // 
             // pictureBox_qr
             // 
             this.pictureBox_qr.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBox_qr.Image = global::Safety_Browser.Properties.Resources.qr;
-            this.pictureBox_qr.Location = new System.Drawing.Point(87, 264);
+            this.pictureBox_qr.Location = new System.Drawing.Point(87, 268);
             this.pictureBox_qr.Name = "pictureBox_qr";
             this.pictureBox_qr.Size = new System.Drawing.Size(123, 123);
             this.pictureBox_qr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
