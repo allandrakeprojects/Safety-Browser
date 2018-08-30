@@ -113,6 +113,7 @@ namespace Safety_Browser
         private string _message_type_inner;
         private string _message_edited_id_inner;
         private string _message_unread_inner;
+        private string get_back_button_i = String.Empty;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -179,25 +180,31 @@ namespace Safety_Browser
                     }
                     else if (e.KeyCode == Keys.Left)
                     {
-                        new Thread(() =>
+                        if (pictureBox_back.Enabled == true)
                         {
-                            Invoke(new Action(delegate
+                            new Thread(() =>
                             {
-                                chromeBrowser.Back();
-                            }));
+                                Invoke(new Action(delegate
+                                {
+                                    chromeBrowser.Back();
+                                }));
 
-                        }).Start();
+                            }).Start();
+                        }
                     }
                     else if (e.KeyCode == Keys.Right)
                     {
-                        new Thread(() =>
+                        if (pictureBox_forward.Enabled == true)
                         {
-                            Invoke(new Action(delegate
+                            new Thread(() =>
                             {
-                                chromeBrowser.Forward();
-                            }));
+                                Invoke(new Action(delegate
+                                {
+                                    chromeBrowser.Forward();
+                                }));
 
-                        }).Start();
+                            }).Start();
+                        }
                     }
                     else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.D0)
                     {
@@ -1620,32 +1627,6 @@ namespace Safety_Browser
         // asd123
         private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
-            Invoke(new Action(() =>
-            {
-                pictureBox_forward.Enabled = e.CanGoForward;
-                forwardToolStripMenuItem.Enabled = e.CanGoForward;
-                pictureBox_back.Enabled = e.CanGoBack;
-                goBackToolStripMenuItem.Enabled = e.CanGoBack;
-
-                if (pictureBox_forward.Enabled == true)
-                {
-                    pictureBox_forward.Image = Properties.Resources.forward;
-                }
-                else
-                {
-                    pictureBox_forward.Image = Properties.Resources.forward_visible;
-                }
-
-                if (pictureBox_back.Enabled == true)
-                {
-                    pictureBox_back.Image = Properties.Resources.back;
-                }
-                else
-                {
-                    pictureBox_back.Image = Properties.Resources.back_visible;
-                }
-            }));
-
             if (e.IsLoading)
             {
                 Invoke(new Action(() =>
@@ -1688,19 +1669,19 @@ namespace Safety_Browser
                 }));
             }
 
-            if (domain_one_time)
+            if (!e.IsLoading)
             {
-                if (!e.IsLoading)
+                Invoke(new Action(async () =>
                 {
-                    Invoke(new Action(async () =>
+                    chromeBrowser.Dock = DockStyle.Fill;
+
+                    await Task.Run(async () =>
                     {
-                        chromeBrowser.Dock = DockStyle.Fill;
+                        await Task.Delay(2000);
+                    });
 
-                        await Task.Run(async () =>
-                        {
-                            await Task.Delay(2000);
-                        });
-
+                    if (domain_one_time)
+                    {
                         fully_loaded++;
 
                         if (fully_loaded == 1)
@@ -1751,12 +1732,22 @@ namespace Safety_Browser
                                     {
                                         await Task.Delay(2000);
                                     });
-
+                                    
                                     back_button_i++;
                                     timer_detectifhijacked.Start();
                                     domain_one_time = false;
                                     last_index_hijacked_get = false;
                                     pictureBox_loader.Visible = false;
+
+                                    if (panel_help.Visible == true)
+                                    {
+                                        panel_cefsharp.Visible = false;
+                                    }
+                                    else
+                                    {
+                                        panel_cefsharp.Visible = true;
+                                    }
+
                                     not_hijacked = true;
 
                                     pictureBox_reload.Enabled = true;
@@ -1780,6 +1771,11 @@ namespace Safety_Browser
                                 }
                                 else
                                 {
+                                    await Task.Run(async () =>
+                                    {
+                                        await Task.Delay(2000);
+                                    });
+
                                     back_button_i++;
                                     last_index_hijacked_get = true;
                                     not_hijacked = false;
@@ -1794,7 +1790,7 @@ namespace Safety_Browser
                                 {
                                     await Task.Delay(2000);
                                 });
-
+                                
                                 back_button_i++;
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
@@ -1838,12 +1834,69 @@ namespace Safety_Browser
                             {
                                 if (elseload_return)
                                 {
+                                    elseload_return = false;
                                     timer_elseloaded.Start();
                                 }
                             }));
                         }
-                    }));
-                }
+                    }
+                    else
+                    {
+                        fully_loaded++;
+
+                        if (fully_loaded == 1)
+                        {
+                            pictureBox_forward.Enabled = e.CanGoForward;
+                            forwardToolStripMenuItem.Enabled = e.CanGoForward;
+
+
+                            if (String.IsNullOrEmpty(get_back_button_i))
+                            {
+                                get_back_button_i = back_button_i.ToString();
+                            }
+                            
+                            if (!e.CanGoForward)
+                            {
+                                back_button_i++;
+                            }
+
+                            if (pictureBox_back.Enabled == true)
+                            {
+                                back_button_i--;
+                            }
+
+                            if (get_back_button_i != back_button_i.ToString())
+                            {
+                                pictureBox_back.Enabled = true;
+                                goBackToolStripMenuItem.Enabled = true;
+                            }
+
+                            if (get_back_button_i == back_button_i.ToString())
+                            {
+                                pictureBox_back.Enabled = false;
+                                goBackToolStripMenuItem.Enabled = false;
+                            }
+
+                            if (pictureBox_forward.Enabled == true)
+                            {
+                                pictureBox_forward.Image = Properties.Resources.forward;
+                            }
+                            else
+                            {
+                                pictureBox_forward.Image = Properties.Resources.forward_visible;
+                            }
+
+                            if (pictureBox_back.Enabled == true)
+                            {
+                                pictureBox_back.Image = Properties.Resources.back;
+                            }
+                            else
+                            {
+                                pictureBox_back.Image = Properties.Resources.back_visible;
+                            }
+                        }
+                    }
+                }));
             }
         }
 
@@ -1877,9 +1930,9 @@ namespace Safety_Browser
 
                         if (current_web_service < web_service.Length)
                         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                             GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         }
                         else
                         {
@@ -2416,11 +2469,21 @@ namespace Safety_Browser
                                 await Task.Delay(2000);
                             });
 
-                            back_button_i++;
+                            //back_button_i++;
                             timer_detectifhijacked.Start();
                             domain_one_time = false;
                             last_index_hijacked_get = false;
                             pictureBox_loader.Visible = false;
+
+                            if (panel_help.Visible == true)
+                            {
+                                panel_cefsharp.Visible = false;
+                            }
+                            else
+                            {
+                                panel_cefsharp.Visible = true;
+                            }
+
                             not_hijacked = true;
 
                             pictureBox_reload.Enabled = true;
@@ -2444,7 +2507,12 @@ namespace Safety_Browser
                         }
                         else
                         {
-                            back_button_i++;
+                            await Task.Run(async () =>
+                            {
+                                await Task.Delay(2000);
+                            });
+
+                            //back_button_i++;
                             last_index_hijacked_get = true;
                             not_hijacked = false;
                             label_loadingstate.Text = "1";
@@ -2459,7 +2527,7 @@ namespace Safety_Browser
                             await Task.Delay(2000);
                         });
 
-                        back_button_i++;
+                        //back_button_i++;
                         timer_detectifhijacked.Start();
                         domain_one_time = false;
                         last_index_hijacked_get = false;
