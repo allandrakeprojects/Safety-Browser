@@ -775,7 +775,7 @@ namespace Safety_Browser
                         }
                         else if (count == 4)
                         {
-                            _message_content = @obj.ToString();
+                            _message_content = ReplaceBRwithNewline(obj.ToString());
                         }
                         else if (count == 5)
                         {
@@ -821,7 +821,7 @@ namespace Safety_Browser
                         label_content.Text = Ellipsis(_message_content, 130);
                         label_content.Location = new Point(4, 19);
                         label_content.AutoSize = true;
-                        label_content.MaximumSize = new Size(248, 0);
+                        label_content.MaximumSize = new Size(248, 40);
                         label_content.ForeColor = Color.FromArgb(72, 72, 72);
                         label_content.Font = new Font("Microsoft Sans Serif", 8);
 
@@ -916,7 +916,7 @@ namespace Safety_Browser
                         {
                             label_view.Location = new Point(220, 61);
                             p.Size = new Size(250, 83);
-                            label_content.MaximumSize = new Size(230, 0);
+                            label_content.MaximumSize = new Size(230, 40);
                             flowLayoutPanel_notifications.AutoScroll = true;
                         }
                         else
@@ -1001,7 +1001,7 @@ namespace Safety_Browser
                         }
                         else if (count == 4)
                         {
-                            _message_content = @obj.ToString();
+                            _message_content = ReplaceBRwithNewline(obj.ToString());
                         }
                         else if (count == 5)
                         {
@@ -1047,7 +1047,7 @@ namespace Safety_Browser
                         label_content.Text = Ellipsis(_message_content, 130);
                         label_content.Location = new Point(4, 19);
                         label_content.AutoSize = true;
-                        label_content.MaximumSize = new Size(248, 0);
+                        label_content.MaximumSize = new Size(248, 40);
                         label_content.ForeColor = Color.FromArgb(72, 72, 72);
                         label_content.Font = new Font("Microsoft Sans Serif", 8);
 
@@ -1142,7 +1142,7 @@ namespace Safety_Browser
                         {
                             label_view.Location = new Point(220, 61);
                             p.Size = new Size(250, 83);
-                            label_content.MaximumSize = new Size(230, 0);
+                            label_content.MaximumSize = new Size(230, 40);
                             flowLayoutPanel_notifications.AutoScroll = true;
                         }
                         else
@@ -1233,7 +1233,7 @@ namespace Safety_Browser
                                         }
                                         else if (count_inner == 4)
                                         {
-                                            _message_content_inner = obje.ToString();
+                                            _message_content_inner = ReplaceBRwithNewline(obje.ToString());
                                         }
                                         else if (count_inner == 5)
                                         {
@@ -1409,6 +1409,15 @@ namespace Safety_Browser
         private static string Ellipsis(string value, int maxChars)
         {
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+        }
+
+        public string ReplaceBRwithNewline(string txtVal)
+        {
+            string newText = "";  
+            Regex regex = new Regex(@"(<br />|<br/>|</ br>|</br>)");
+            newText = regex.Replace(txtVal, "\r\n");
+            // Result    
+            return newText;
         }
 
         // Delete Notifications
@@ -2791,7 +2800,7 @@ namespace Safety_Browser
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-            this.RecreateRegion();
+            RecreateRegion();
         }
 
         private void pictureBox_helpback_Click(object sender, EventArgs e)
