@@ -345,7 +345,7 @@
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_version.Text = "0.0.1";
             // 
             // timer_mouse
@@ -371,8 +371,10 @@
             this.Controls.Add(this.label_titlebar);
             this.Controls.Add(this.panel_cefsharp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1270, 764);
             this.Name = "Form_YB_NewTab";
+            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
