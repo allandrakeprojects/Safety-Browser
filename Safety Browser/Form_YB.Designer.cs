@@ -488,7 +488,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_version.Text = "0.0.2";
+            this.toolStripMenuItem_version.Text = "0.0.1";
             // 
             // pictureBox_menu
             // 
@@ -860,7 +860,7 @@
             this.label_clearcache.Enabled = false;
             this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_clearcache.ForeColor = System.Drawing.Color.White;
-            this.label_clearcache.Location = new System.Drawing.Point(491, 401);
+            this.label_clearcache.Location = new System.Drawing.Point(491, 400);
             this.label_clearcache.Name = "label_clearcache";
             this.label_clearcache.Size = new System.Drawing.Size(160, 20);
             this.label_clearcache.TabIndex = 13;
@@ -875,7 +875,7 @@
             this.label_getdiagnostics.Enabled = false;
             this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
-            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 401);
+            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 400);
             this.label_getdiagnostics.Name = "label_getdiagnostics";
             this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
             this.label_getdiagnostics.TabIndex = 14;

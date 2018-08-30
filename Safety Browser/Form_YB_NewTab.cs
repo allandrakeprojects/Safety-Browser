@@ -379,6 +379,7 @@ namespace Safety_Browser
                 chromeBrowser.Reload(true);
             }
         }
+        
         private void cleanAndReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (not_hijacked)

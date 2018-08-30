@@ -289,6 +289,7 @@
             this.reloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.reloadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.reloadToolStripMenuItem.Text = "刷新";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // cleanAndReloadToolStripMenuItem
             // 
@@ -298,6 +299,7 @@
             | System.Windows.Forms.Keys.R)));
             this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.cleanAndReloadToolStripMenuItem.Text = "清潔和重新加載";
+            this.cleanAndReloadToolStripMenuItem.Click += new System.EventHandler(this.cleanAndReloadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -311,6 +313,7 @@
             this.resetZoomToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
             this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.resetZoomToolStripMenuItem.Text = "重置縮放";
+            this.resetZoomToolStripMenuItem.Click += new System.EventHandler(this.resetZoomToolStripMenuItem_Click);
             // 
             // zoomInToolStripMenuItem
             // 
@@ -319,6 +322,7 @@
             this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
             this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.zoomInToolStripMenuItem.Text = "放大";
+            this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
             // zoomOutToolStripMenuItem
             // 
@@ -327,6 +331,7 @@
             this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
             this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.zoomOutToolStripMenuItem.Text = "縮小";
+            this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
             // 
@@ -340,8 +345,8 @@
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_version.Text = "0.0.2";
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem_version.Text = "0.0.1";
             // 
             // timer_mouse
             // 
