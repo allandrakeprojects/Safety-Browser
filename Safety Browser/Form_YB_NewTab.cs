@@ -174,6 +174,7 @@ namespace Safety_Browser
             }
             else
             {
+                MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -510,6 +511,7 @@ namespace Safety_Browser
             }
             else
             {
+                MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -548,6 +550,7 @@ namespace Safety_Browser
                 }
                 else
                 {
+                    MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
                     WindowState = FormWindowState.Maximized;
                 }
             }
