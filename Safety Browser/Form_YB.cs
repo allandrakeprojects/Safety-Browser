@@ -1427,64 +1427,76 @@ namespace Safety_Browser
                 {
                     string json = await reader.ReadToEndAsync();
                     string temp_file = Path.Combine(Path.GetTempPath(), "sb_notifications_temp.txt");
+                    List<string> line_to_delete_1 = new List<string>();
+                    int line_count_1 = 0;
 
                     StringBuilder sb = new StringBuilder();
-                    using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
+                    using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..id"))
                     {
                         using (var w = new ChoCSVWriter(sb))
                             w.Write(p);
                     }
 
                     string id_to_delete = sb.ToString();
+
                     string get_line_delete = string.Empty;
-                    if (id_to_delete != "0")
+
+                    string[] array = id_to_delete.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (String item in array)
                     {
-                        // delete
-                        string line_delete;
-                        
-                        StreamReader sr_delete = new StreamReader(notifications_file);
-                        while ((line_delete = sr_delete.ReadLine()) != null)
+                        string[] strArray_id = item.Split(",");
+
+                        foreach (object obje in strArray_id)
                         {
-                            if (line_delete != "")
+                            string get_id = obje.ToString();
+                            
+                            // delete
+                            string line_delete;
+                            StreamReader sr_delete = new StreamReader(notifications_file);
+                            while ((line_delete = sr_delete.ReadLine()) != null)
                             {
-                                string[] strArray_inner = line_delete.Split("*|*");
-
-                                int count_update_inner = 0;
-                                foreach (object obje in strArray_inner)
+                                if (line_delete != "")
                                 {
-                                    count_update_inner++;
+                                    string[] strArray_inner = line_delete.Split("*|*");
 
-                                    if (count_update_inner == 1)
+                                    int count_update_inner = 0;
+                                    foreach (object objec in strArray_inner)
                                     {
-                                        if (id_to_delete == obje.ToString())
+                                        count_update_inner++;
+
+                                        if (count_update_inner == 1)
                                         {
-                                            get_line_delete = line_delete;
+                                            if (get_id == objec.ToString() && get_id != "")
+                                            {
+                                                line_to_delete_1.Add(line_delete);
+                                                line_count_1++;
+                                                get_line_delete = line_delete;
+                                            }
                                         }
                                     }
                                 }
                             }
+
+                            sr_delete.Close();
                         }
-
-                        sr_delete.Close();
-
-                        if (!String.IsNullOrEmpty(get_line_delete))
+                    }
+                    
+                    if (!String.IsNullOrEmpty(get_line_delete))
+                    {
+                        for (int i = 0; i < line_count_1; i++)
                         {
                             string text = File.ReadAllText(notifications_file);
-                            text = text.Replace(get_line_delete, "");
+                            text = text.Replace(line_to_delete_1[i], "");
                             File.WriteAllText(notifications_file, text);
-
-                            if (label_notificationscount.Text == "1")
-                            {
-                                label_notificationscount.Text = "";
-                            }
                         }
                     }
                 }
 
                 // version
                 string path_version = Path.Combine(Path.GetTempPath(), "sb_version.txt");
-                int line_count = 0;
                 List<string> line_to_delete = new List<string>();
+                int line_count = 0;
                 if (File.Exists(path_version))
                 {
                     string version = File.ReadAllText(path_version);
