@@ -259,7 +259,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.fileToolStripMenuItem.Text = "文件";
             // 
             // exitToolStripMenuItem
@@ -279,7 +279,7 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.viewToolStripMenuItem.Text = "視圖";
             // 
             // reloadToolStripMenuItem
@@ -338,14 +338,14 @@
             this.versionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_version});
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.versionToolStripMenuItem.Text = "版";
             // 
             // toolStripMenuItem_version
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem_version.Text = "0.0.1";
             // 
             // timer_mouse

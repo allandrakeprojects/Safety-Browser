@@ -107,6 +107,7 @@
             this.label_notificationscount = new System.Windows.Forms.Label();
             this.timer_notifications = new System.Windows.Forms.Timer(this.components);
             this.timer_close = new System.Windows.Forms.Timer(this.components);
+            this.timer_notifications_detect = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
@@ -371,13 +372,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.fileToolStripMenuItem.Text = "文件";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "出口";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -394,7 +395,7 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.viewToolStripMenuItem.Text = "視圖";
             // 
             // goBackToolStripMenuItem
@@ -480,14 +481,14 @@
             this.versionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_version});
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.versionToolStripMenuItem.Text = "版";
             // 
             // toolStripMenuItem_version
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem_version.Text = "0.0.1";
             // 
             // pictureBox_menu
@@ -562,7 +563,7 @@
             // timer_detectifhijacked
             // 
             this.timer_detectifhijacked.Interval = 5000;
-            this.timer_detectifhijacked.Tick += new System.EventHandler(this.timer_detectifhijacked_Tick);
+            this.timer_detectifhijacked.Tick += new System.EventHandler(this.timer_detectifhijacked_TickAsync);
             // 
             // webBrowser_handler
             // 
@@ -719,7 +720,7 @@
             // label_notifications
             // 
             this.label_notifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_notifications.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.label_notifications.ForeColor = System.Drawing.Color.Black;
             this.label_notifications.Location = new System.Drawing.Point(5, 2);
             this.label_notifications.Name = "label_notifications";
             this.label_notifications.Size = new System.Drawing.Size(270, 31);
@@ -1012,13 +1013,18 @@
             // 
             // timer_notifications
             // 
-            this.timer_notifications.Interval = 15000;
+            this.timer_notifications.Interval = 10000;
             this.timer_notifications.Tick += new System.EventHandler(this.timer_notifications_Tick);
             // 
             // timer_close
             // 
             this.timer_close.Interval = 2000;
             this.timer_close.Tick += new System.EventHandler(this.timer_close_Tick);
+            // 
+            // timer_notifications_detect
+            // 
+            this.timer_notifications_detect.Interval = 2000;
+            this.timer_notifications_detect.Tick += new System.EventHandler(this.timer_notifications_detect_Tick);
             // 
             // Form_YB
             // 
@@ -1173,6 +1179,7 @@
         private System.Windows.Forms.Label label_notificationscount;
         private System.Windows.Forms.Timer timer_notifications;
         private System.Windows.Forms.Timer timer_close;
+        private System.Windows.Forms.Timer timer_notifications_detect;
     }
 }
 

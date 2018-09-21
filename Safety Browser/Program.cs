@@ -15,7 +15,7 @@ namespace Safety_Browser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_YB());
+            Application.Run(new Form_Landing());
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN");
