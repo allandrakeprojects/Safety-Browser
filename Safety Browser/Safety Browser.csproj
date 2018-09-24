@@ -128,6 +128,11 @@
     <Compile Include="IpInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UploadFile.cs" />
     <EmbeddedResource Include="Form_Landing.resx">
       <DependentUpon>Form_Landing.cs</DependentUpon>
@@ -148,11 +153,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -163,91 +163,39 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\exit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\loader.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\connection.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\minimize.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="logo.ico" />
+    <None Include="Resources\refresh_notification.png" />
+    <None Include="Resources\logo_yb.png" />
     <None Include="Resources\safety_browser_desktop.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\safety_browser.ico" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\refresh_visible.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\qr.png" />
+    <None Include="Resources\notification_visible.png" />
+    <None Include="Resources\notification_back.png" />
+    <None Include="Resources\notification_3.png" />
+    <None Include="Resources\notification_2.png" />
+    <None Include="Resources\notification_1.png" />
+    <None Include="Resources\notification.png" />
+    <None Include="Resources\minimize.png" />
+    <None Include="Resources\menu.png" />
     <None Include="Resources\maximize.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\back_visible.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\logo.ico" />
+    <None Include="Resources\loader.gif" />
+    <None Include="Resources\help_back.png" />
+    <None Include="Resources\help.png" />
     <None Include="Resources\forward_visible.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\forward.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\connection.gif" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\browser_stop.png" />
+    <None Include="Resources\browser_homehover.png" />
+    <None Include="Resources\browser_home.png" />
+    <None Include="Resources\back_visible.png" />
     <None Include="Resources\back.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\forward.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\refresh_visible.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\browser_stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\browser_home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\browser_homehover.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\notification.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\help_back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\notification_back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\notification_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\notification_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\notification_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\notification_visible.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\qr.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="logo.ico" />
-    <None Include="Resources\ic_logo_yb.png" />
-    <None Include="Resources\logo.ico" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -209,6 +209,7 @@ namespace Safety_Browser
                                     {
                                         panel_notification.Visible = true;
                                         label_separator.Visible = true;
+                                        button_notification.Visible = true;
                                     }
                                 }
 
@@ -624,6 +625,7 @@ namespace Safety_Browser
                     if (!String.IsNullOrEmpty(notifications_get))
                     {
                         isNewEntry = true;
+
                         using (var csv = new ChoCSVWriter(temp_file).WithFirstLineHeader())
                         {
                             using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
@@ -709,6 +711,8 @@ namespace Safety_Browser
 
                             if (isNewEntry)
                             {
+                                isNewEntry = false;
+
                                 if (File.Exists(notifications_file))
                                 {
                                     label_notificationstatus.Visible = false;
@@ -786,7 +790,7 @@ namespace Safety_Browser
 
                                             if (count_update_inner == 1)
                                             {
-                                                if (delete_id == obje.ToString())
+                                                if (delete_id == obje.ToString().Replace("\"", ""))
                                                 {
                                                     line_to_delete.Add(line_delete);
                                                     line_count++;
@@ -1631,6 +1635,7 @@ namespace Safety_Browser
                         if (!String.IsNullOrEmpty(get_line_delete))
                         {
                             isNewEntry = true;
+
                             for (int i = 0; i < line_count_1; i++)
                             {
                                 string text = File.ReadAllText(notifications_file);
@@ -1644,23 +1649,6 @@ namespace Safety_Browser
                         }
                     }
                 }
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 // version
                 string path_version = Path.Combine(Path.GetTempPath(), "sb_version.txt");
@@ -2916,6 +2904,7 @@ namespace Safety_Browser
                 {
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
+                    button_notification.Visible = true;
                 }
             }
 
@@ -2990,6 +2979,7 @@ namespace Safety_Browser
                 panel_cefsharp.Visible = false;
                 panel_notification.Visible = false;
                 label_separator.Visible = false;
+                button_notification.Visible = false;
             }
             else
             {
@@ -3009,6 +2999,7 @@ namespace Safety_Browser
                 {
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
+                    button_notification.Visible = true;
                 }
             }
         }
@@ -3023,6 +3014,7 @@ namespace Safety_Browser
                 panel_cefsharp.Visible = false;
                 panel_notification.Visible = false;
                 label_separator.Visible = false;
+                button_notification.Visible = false;
             }
             else
             {
@@ -3042,6 +3034,7 @@ namespace Safety_Browser
                 {
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
+                    button_notification.Visible = true;
                 }
             }
         }
@@ -3085,12 +3078,37 @@ namespace Safety_Browser
 
         private void pictureBox_helpback_Click(object sender, EventArgs e)
         {
-            panel_help.Visible = false;
-            help_click = true;
-            panel_cefsharp.Visible = true;
+            if (help_click)
+            {
+                panel_help.BringToFront();
+                panel_help.Visible = true;
+                help_click = false;
+                panel_cefsharp.Visible = false;
+                panel_notification.Visible = false;
+                label_separator.Visible = false;
+                button_notification.Visible = false;
+            }
+            else
+            {
+                panel_help.Visible = false;
+                help_click = true;
 
-            pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
-            pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    button_notification.Visible = true;
+                }
+            }
         }
 
         private void pictureBox_nofication_Click(object sender, EventArgs e)
@@ -3119,6 +3137,7 @@ namespace Safety_Browser
 
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
+                    button_notification.Visible = true;
                     pictureBox_nofication.Image = Properties.Resources.notification_back;
                 }
                 else
@@ -3140,6 +3159,7 @@ namespace Safety_Browser
 
                     panel_notification.Visible = false;
                     label_separator.Visible = false;
+                    button_notification.Visible = false;
                     pictureBox_nofication.Image = Properties.Resources.notification;
                 }
             }
@@ -3171,6 +3191,7 @@ namespace Safety_Browser
 
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
+                    button_notification.Visible = true;
                     pictureBox_nofication.Image = Properties.Resources.notification_back;
                 }
                 else
@@ -3192,6 +3213,7 @@ namespace Safety_Browser
 
                     panel_notification.Visible = false;
                     label_separator.Visible = false;
+                    button_notification.Visible = false;
                     pictureBox_nofication.Image = Properties.Resources.notification;
                 }
             }
@@ -3375,6 +3397,43 @@ namespace Safety_Browser
         private void timer_notifications_detect_Tick(object sender, EventArgs e)
         {
             //fdgfdg
+        }
+
+        private void button_notification_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath p = new GraphicsPath();
+            p.AddEllipse(1, 1, button_notification.Width - 4, button_notification.Height - 4);
+            button_notification.Region = new Region(p);
+        }
+
+        private void button_notification_Click(object sender, EventArgs e)
+        {
+            string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
+
+            if (isNewEntry)
+            {
+                isNewEntry = false;
+
+                if (File.Exists(notifications_file))
+                {
+                    label_notificationstatus.Visible = false;
+                    flowLayoutPanel_notifications.Visible = true;
+                    flowLayoutPanel_notifications.BringToFront();
+
+                    NotificationsAsync();
+                }
+                else
+                {
+                    label_notificationstatus.Location = new Point(7, 32);
+                    label_notificationstatus.Visible = true;
+                    label_notificationstatus.BringToFront();
+                    flowLayoutPanel_notifications.Visible = false;
+                }
+            }
+            else
+            {
+                isNewEntry = false;
+            }
         }
 
         private void pictureBox_maximize_Click(object sender, EventArgs e)

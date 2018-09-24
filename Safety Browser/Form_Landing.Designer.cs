@@ -36,7 +36,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.ic_logo_yb;
+            this.pictureBox1.Image = global::Safety_Browser.Properties.Resources.logo_yb;
             this.pictureBox1.Location = new System.Drawing.Point(192, 89);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(139, 109);
