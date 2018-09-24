@@ -309,6 +309,7 @@ namespace Safety_Browser
 
                 panel_cefsharp.Visible = false;
                 pictureBox_loader.Visible = false;
+                label_loader.Visible = false;
 
                 panel_connection.Visible = true;
                 panel_connection.Enabled = true;
@@ -342,25 +343,28 @@ namespace Safety_Browser
 
                             panel_cefsharp.Visible = false;
                             pictureBox_loader.Visible = false;
+                            label_loader.Visible = false;
                         }
                     }
                     else if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
 
                         panel_cefsharp.Visible = false;
                         pictureBox_loader.Visible = false;
+                        label_loader.Visible = false;
                     }
                     else if (!last_index_hijacked_get)
                     {
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
                         pictureBox_loader.Visible = false;
+                        label_loader.Visible = false;
 
                         panel_cefsharp.Visible = true;
                     }
@@ -373,12 +377,14 @@ namespace Safety_Browser
                         if (panel_cefsharp.Visible == true)
                         {
                             pictureBox_loader.Visible = false;
+                            label_loader.Visible = false;
                         }
                         else
                         {
                             if (!connection_handler)
                             {
                                 pictureBox_loader.Visible = true;
+                                label_loader.Visible = true;
                             }
                             else
                             {
@@ -400,6 +406,7 @@ namespace Safety_Browser
 
                     panel_cefsharp.Visible = false;
                     pictureBox_loader.Visible = false;
+                    label_loader.Visible = false;
 
                     panel_connection.Visible = true;
                     panel_connection.Enabled = true;
@@ -429,6 +436,7 @@ namespace Safety_Browser
 
                 try
                 {
+                    WebRequest.DefaultWebProxy = new WebProxy();
                     var client = new HttpClient();
                     var requestContent = new FormUrlEncodedContent(new[] {
                         new KeyValuePair<string, string>("api_key", API_KEY),
@@ -457,6 +465,7 @@ namespace Safety_Browser
                         else
                         {
                             pictureBox_loader.Visible = false;
+                            label_loader.Visible = false;
                             pictureBox_loader.Enabled = false;
                             connection_handler = true;
                         }
@@ -504,6 +513,7 @@ namespace Safety_Browser
                             else
                             {
                                 pictureBox_loader.Visible = false;
+                                label_loader.Visible = false;
                                 pictureBox_loader.Enabled = false;
                                 connection_handler = true;
                             }
@@ -523,6 +533,7 @@ namespace Safety_Browser
 
                 panel_cefsharp.Visible = false;
                 pictureBox_loader.Visible = false;
+                label_loader.Visible = false;
 
                 panel_connection.Visible = true;
                 panel_connection.Enabled = true;
@@ -544,6 +555,7 @@ namespace Safety_Browser
 
             try
             {
+                WebRequest.DefaultWebProxy = new WebProxy();
                 var client = new HttpClient();
                 var requestContent = new FormUrlEncodedContent(new[] {
                     new KeyValuePair<string, string>("api_key", API_KEY),
@@ -596,6 +608,7 @@ namespace Safety_Browser
         {
             try
             {
+                WebRequest.DefaultWebProxy = new WebProxy();
                 var client = new HttpClient();
                 var requestContent = new FormUrlEncodedContent(new[] {
                     new KeyValuePair<string, string>("macid", GetMACAddress()),
@@ -1560,6 +1573,7 @@ namespace Safety_Browser
                 string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
                 if (File.Exists(notifications_file))
                 {
+                    WebRequest.DefaultWebProxy = new WebProxy();
                     var client = new HttpClient();
                     var requestContent = new FormUrlEncodedContent(new[] {
                         new KeyValuePair<string, string>("macid", GetMACAddress()),
@@ -1736,6 +1750,7 @@ namespace Safety_Browser
                         panel_cefsharp.Visible = false;
 
                         pictureBox_loader.Visible = true;
+                        label_loader.Visible = true;
 
                         timer_handler.Stop();
                         timer_handler.Start();
@@ -1763,12 +1778,12 @@ namespace Safety_Browser
         // Initialize Chromium
         private void InitializeChromium()
         {
-            //CefSettings settings = new CefSettings();
-            ////settings.BrowserSubprocessPath = Environment.CurrentDirectory + "/CefSharp.BrowserSubprocess.exe"; // **Path where the CefSharp.BrowserSubprocess.exe exists**
-            ////settings.CachePath = "ChromiumBrowserControlCache";
-            ////settings.IgnoreCertificateErrors = true;
-            //settings.CefCommandLineArgs.Add("no-proxy-server", "1");
-            //Cef.Initialize(settings);
+            CefSettings settings = new CefSettings();
+            //settings.BrowserSubprocessPath = Environment.CurrentDirectory + "/CefSharp.BrowserSubprocess.exe"; // **Path where the CefSharp.BrowserSubprocess.exe exists**
+            //settings.CachePath = "ChromiumBrowserControlCache";
+            //settings.IgnoreCertificateErrors = true;
+            settings.CefCommandLineArgs.Add("no-proxy-server", "1");
+            Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
             chromeBrowser.LifeSpanHandler = new BrowserLifeSpanHandler();
@@ -1793,11 +1808,15 @@ namespace Safety_Browser
                     if (!domain_one_time)
                     {
                         pictureBox_loader.Visible = true;
+                        label_loader.Visible = true;
                         panel_cefsharp.Visible = false;
 
                         pictureBox_browserstop.Visible = true;
                         pictureBox_reload.Visible = false;
                     }
+
+                    timer_loader_i = 1;
+                    timer_loader.Start();
                 }));
             }
 
@@ -1808,6 +1827,7 @@ namespace Safety_Browser
                     if (!domain_one_time)
                     {
                         pictureBox_loader.Visible = false;
+                        label_loader.Visible = false;
 
                         if (panel_help.Visible == true)
                         {
@@ -1820,6 +1840,9 @@ namespace Safety_Browser
 
                         pictureBox_reload.Visible = true;
                         pictureBox_browserstop.Visible = false;
+                        
+                        timer_loader.Stop();
+                        label_loader.Text = "loading...";
                     }
                 }));
             }
@@ -1893,6 +1916,7 @@ namespace Safety_Browser
                                     domain_one_time = false;
                                     last_index_hijacked_get = false;
                                     pictureBox_loader.Visible = false;
+                                    label_loader.Visible = false;
 
                                     if (panel_help.Visible == true)
                                     {
@@ -1928,6 +1952,9 @@ namespace Safety_Browser
                                     label_clearcache.Enabled = true;
                                     label_getdiagnostics.Enabled = true;
                                     elseload_return = false;
+
+                                    timer_loader.Stop();
+                                    label_loader.Text = "loading...";
                                 }
                                 else
                                 {
@@ -1956,6 +1983,7 @@ namespace Safety_Browser
                                 domain_one_time = false;
                                 last_index_hijacked_get = false;
                                 pictureBox_loader.Visible = false;
+                                label_loader.Visible = false;
 
                                 if (panel_help.Visible == true)
                                 {
@@ -1992,6 +2020,9 @@ namespace Safety_Browser
                                 label_getdiagnostics.Enabled = true;
                                 elseload_return = false;
                                 isNotHijackedLoaded = true;
+
+                                timer_loader.Stop();
+                                label_loader.Text = "loading...";
                             }
                         }
                         else
@@ -2103,6 +2134,7 @@ namespace Safety_Browser
                         else
                         {
                             pictureBox_loader.Visible = false;
+                            label_loader.Visible = false;
                             pictureBox_loader.Enabled = false;
                             connection_handler = true;
                         }
@@ -2149,6 +2181,7 @@ namespace Safety_Browser
             try
             {
                 string externalIP;
+                WebRequest.DefaultWebProxy = new WebProxy();
                 externalIP = (new WebClient()).DownloadString("https://canihazip.com/s");
                 externalIP = (new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"))
                              .Matches(externalIP)[0].ToString();
@@ -2191,6 +2224,7 @@ namespace Safety_Browser
             {
                 var API_PATH_IP_API = "http://ip-api.com/json/" + GetExternalIp();
 
+                WebRequest.DefaultWebProxy = new WebProxy();
                 using (HttpClient client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
@@ -2223,6 +2257,7 @@ namespace Safety_Browser
         {
             try
             {
+                WebRequest.DefaultWebProxy = new WebProxy();
                 using (var wb = new WebClient())
                 {
                     var data = new NameValueCollection
@@ -2648,6 +2683,7 @@ namespace Safety_Browser
                             chromeBrowser.Dock = DockStyle.None;
                             pictureBox_loader.BringToFront();
                             pictureBox_loader.Visible = true;
+                            label_loader.Visible = true;
                             domain_one_time = true;
                             label_loadingstate.Text = "1";
                             label_loadingstate.Text = "0";
@@ -2732,6 +2768,7 @@ namespace Safety_Browser
                             domain_one_time = false;
                             last_index_hijacked_get = false;
                             pictureBox_loader.Visible = false;
+                            label_loader.Visible = false;
 
                             if (panel_help.Visible == true)
                             {
@@ -2767,6 +2804,9 @@ namespace Safety_Browser
                             label_clearcache.Enabled = true;
                             label_getdiagnostics.Enabled = true;
                             elseload_return = false;
+
+                            timer_loader.Stop();
+                            label_loader.Text = "loading...";
                         }
                         else
                         {
@@ -2795,6 +2835,7 @@ namespace Safety_Browser
                         domain_one_time = false;
                         last_index_hijacked_get = false;
                         pictureBox_loader.Visible = false;
+                        label_loader.Visible = false;
 
                         if (panel_help.Visible == true)
                         {
@@ -2830,6 +2871,9 @@ namespace Safety_Browser
                         label_clearcache.Enabled = true;
                         label_getdiagnostics.Enabled = true;
                         elseload_return = false;
+
+                        timer_loader.Stop();
+                        label_loader.Text = "loading...";
                     }
                 }
             }));
@@ -3433,6 +3477,25 @@ namespace Safety_Browser
             else
             {
                 isNewEntry = false;
+            }
+        }
+
+        int timer_loader_i = 1;
+        private void timer_loader_Tick(object sender, EventArgs e)
+        {
+            timer_loader_i++;
+
+            if (timer_loader_i < 5)
+            {
+                label_loader.Text = "loading...";
+            }
+            else if (timer_loader_i < 10)
+            {
+                label_loader.Text = "getting data to the server...";
+            }
+            else if (timer_loader_i > 15)
+            {
+                label_loader.Text = "getting ready...";
             }
         }
 

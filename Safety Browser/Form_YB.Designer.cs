@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -45,6 +45,23 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label_titlebar = new System.Windows.Forms.Label();
             this.panel_cefsharp = new System.Windows.Forms.Panel();
+            this.panel_help = new System.Windows.Forms.Panel();
+            this.label_social2 = new System.Windows.Forms.Label();
+            this.pictureBox_qr = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label_getdiagnostics = new System.Windows.Forms.Label();
+            this.label_clearcache = new System.Windows.Forms.Label();
+            this.label_social1 = new System.Windows.Forms.Label();
+            this.label_social = new System.Windows.Forms.Label();
+            this.label_emailus1 = new System.Windows.Forms.Label();
+            this.label_emailus = new System.Windows.Forms.Label();
+            this.label_chatus1 = new System.Windows.Forms.Label();
+            this.label_chatus = new System.Windows.Forms.Label();
+            this.pictureBox_helpback = new System.Windows.Forms.PictureBox();
+            this.label_help = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,23 +87,6 @@
             this.label_notifications = new System.Windows.Forms.Label();
             this.flowLayoutPanel_notifications = new System.Windows.Forms.FlowLayoutPanel();
             this.label_notificationstatus = new System.Windows.Forms.Label();
-            this.label_help = new System.Windows.Forms.Label();
-            this.label_chatus = new System.Windows.Forms.Label();
-            this.label_chatus1 = new System.Windows.Forms.Label();
-            this.label_emailus = new System.Windows.Forms.Label();
-            this.label_emailus1 = new System.Windows.Forms.Label();
-            this.label_social = new System.Windows.Forms.Label();
-            this.label_social1 = new System.Windows.Forms.Label();
-            this.label_clearcache = new System.Windows.Forms.Label();
-            this.label_getdiagnostics = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel_help = new System.Windows.Forms.Panel();
-            this.label_social2 = new System.Windows.Forms.Label();
-            this.pictureBox_qr = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_helpback = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label_separator = new System.Windows.Forms.Label();
             this.label_notificationscount = new System.Windows.Forms.Label();
             this.timer_notifications = new System.Windows.Forms.Timer(this.components);
@@ -94,7 +94,6 @@
             this.timer_notifications_detect = new System.Windows.Forms.Timer(this.components);
             this.button_notification = new System.Windows.Forms.Button();
             this.pictureBox_nofication = new System.Windows.Forms.PictureBox();
-            this.pictureBox_loader = new System.Windows.Forms.PictureBox();
             this.pictureBox_noficationhover = new System.Windows.Forms.PictureBox();
             this.pictureBox_help = new System.Windows.Forms.PictureBox();
             this.pictureBox_helphover = new System.Windows.Forms.PictureBox();
@@ -109,19 +108,21 @@
             this.pictureBox_maximize = new System.Windows.Forms.PictureBox();
             this.pictureBox_reload = new System.Windows.Forms.PictureBox();
             this.pictureBox_browserstop = new System.Windows.Forms.PictureBox();
+            this.pictureBox_loader = new System.Windows.Forms.PictureBox();
+            this.label_loader = new System.Windows.Forms.Label();
+            this.timer_loader = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
-            this.menuStrip.SuspendLayout();
-            this.panel_notification.SuspendLayout();
             this.panel_help.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_qr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helpback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.menuStrip.SuspendLayout();
+            this.panel_notification.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_help)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helphover)).BeginInit();
@@ -136,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_reload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserstop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).BeginInit();
             this.SuspendLayout();
             // 
             // domain
@@ -149,44 +151,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle18.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridView_domain.Location = new System.Drawing.Point(1307, 47);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -287,6 +289,228 @@
             this.panel_cefsharp.Name = "panel_cefsharp";
             this.panel_cefsharp.Size = new System.Drawing.Size(1268, 725);
             this.panel_cefsharp.TabIndex = 48;
+            // 
+            // panel_help
+            // 
+            this.panel_help.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.panel_help.Controls.Add(this.label_social2);
+            this.panel_help.Controls.Add(this.pictureBox_qr);
+            this.panel_help.Controls.Add(this.pictureBox3);
+            this.panel_help.Controls.Add(this.pictureBox1);
+            this.panel_help.Controls.Add(this.label2);
+            this.panel_help.Controls.Add(this.label_getdiagnostics);
+            this.panel_help.Controls.Add(this.label_clearcache);
+            this.panel_help.Controls.Add(this.label_social1);
+            this.panel_help.Controls.Add(this.label_social);
+            this.panel_help.Controls.Add(this.label_emailus1);
+            this.panel_help.Controls.Add(this.label_emailus);
+            this.panel_help.Controls.Add(this.label_chatus1);
+            this.panel_help.Controls.Add(this.label_chatus);
+            this.panel_help.Controls.Add(this.pictureBox_helpback);
+            this.panel_help.Controls.Add(this.label_help);
+            this.panel_help.Controls.Add(this.pictureBox2);
+            this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel_help.Location = new System.Drawing.Point(302, 560);
+            this.panel_help.Name = "panel_help";
+            this.panel_help.Size = new System.Drawing.Size(828, 435);
+            this.panel_help.TabIndex = 69;
+            this.panel_help.Visible = false;
+            // 
+            // label_social2
+            // 
+            this.label_social2.AutoSize = true;
+            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social2.ForeColor = System.Drawing.Color.White;
+            this.label_social2.Location = new System.Drawing.Point(83, 251);
+            this.label_social2.Name = "label_social2";
+            this.label_social2.Size = new System.Drawing.Size(86, 13);
+            this.label_social2.TabIndex = 73;
+            this.label_social2.Text = "• 微信: yb188yb";
+            // 
+            // pictureBox_qr
+            // 
+            this.pictureBox_qr.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox_qr.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_qr.Image")));
+            this.pictureBox_qr.Location = new System.Drawing.Point(87, 268);
+            this.pictureBox_qr.Name = "pictureBox_qr";
+            this.pictureBox_qr.Size = new System.Drawing.Size(123, 123);
+            this.pictureBox_qr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox_qr.TabIndex = 72;
+            this.pictureBox_qr.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(549, 159);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox3.TabIndex = 71;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(503, 22);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 70;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.label2.Location = new System.Drawing.Point(85, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "現在聊天";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label_getdiagnostics
+            // 
+            this.label_getdiagnostics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.label_getdiagnostics.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_getdiagnostics.Enabled = false;
+            this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
+            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 400);
+            this.label_getdiagnostics.Name = "label_getdiagnostics";
+            this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
+            this.label_getdiagnostics.TabIndex = 14;
+            this.label_getdiagnostics.Text = "得到診斷";
+            this.label_getdiagnostics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_getdiagnostics.Click += new System.EventHandler(this.label_getdiagnostics_Click);
+            // 
+            // label_clearcache
+            // 
+            this.label_clearcache.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_clearcache.Enabled = false;
+            this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_clearcache.ForeColor = System.Drawing.Color.White;
+            this.label_clearcache.Location = new System.Drawing.Point(491, 400);
+            this.label_clearcache.Name = "label_clearcache";
+            this.label_clearcache.Size = new System.Drawing.Size(160, 20);
+            this.label_clearcache.TabIndex = 13;
+            this.label_clearcache.Text = "清除緩存";
+            this.label_clearcache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_clearcache.Click += new System.EventHandler(this.label_clearcache_Click);
+            // 
+            // label_social1
+            // 
+            this.label_social1.AutoSize = true;
+            this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social1.ForeColor = System.Drawing.Color.White;
+            this.label_social1.Location = new System.Drawing.Point(83, 238);
+            this.label_social1.Name = "label_social1";
+            this.label_social1.Size = new System.Drawing.Size(98, 13);
+            this.label_social1.TabIndex = 10;
+            this.label_social1.Text = "• QQ: 2715693882";
+            // 
+            // label_social
+            // 
+            this.label_social.AutoSize = true;
+            this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_social.ForeColor = System.Drawing.Color.White;
+            this.label_social.Location = new System.Drawing.Point(82, 214);
+            this.label_social.Name = "label_social";
+            this.label_social.Size = new System.Drawing.Size(52, 25);
+            this.label_social.TabIndex = 9;
+            this.label_social.Text = "社會";
+            // 
+            // label_emailus1
+            // 
+            this.label_emailus1.AutoSize = true;
+            this.label_emailus1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_emailus1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.label_emailus1.Location = new System.Drawing.Point(85, 182);
+            this.label_emailus1.Name = "label_emailus1";
+            this.label_emailus1.Size = new System.Drawing.Size(99, 13);
+            this.label_emailus1.TabIndex = 6;
+            this.label_emailus1.Text = "cs@yb188188.com";
+            this.label_emailus1.Click += new System.EventHandler(this.label_emailus1_Click);
+            // 
+            // label_emailus
+            // 
+            this.label_emailus.AutoSize = true;
+            this.label_emailus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_emailus.ForeColor = System.Drawing.Color.White;
+            this.label_emailus.Location = new System.Drawing.Point(82, 158);
+            this.label_emailus.Name = "label_emailus";
+            this.label_emailus.Size = new System.Drawing.Size(92, 25);
+            this.label_emailus.TabIndex = 5;
+            this.label_emailus.Text = "電郵我們";
+            // 
+            // label_chatus1
+            // 
+            this.label_chatus1.AutoSize = true;
+            this.label_chatus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus1.ForeColor = System.Drawing.Color.White;
+            this.label_chatus1.Location = new System.Drawing.Point(84, 112);
+            this.label_chatus1.Name = "label_chatus1";
+            this.label_chatus1.Size = new System.Drawing.Size(287, 13);
+            this.label_chatus1.TabIndex = 3;
+            this.label_chatus1.Text = "有疑問嗎？獲得全天候實時聊天，實時幫助聊天支持。";
+            // 
+            // label_chatus
+            // 
+            this.label_chatus.AutoSize = true;
+            this.label_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus.ForeColor = System.Drawing.Color.White;
+            this.label_chatus.Location = new System.Drawing.Point(82, 88);
+            this.label_chatus.Name = "label_chatus";
+            this.label_chatus.Size = new System.Drawing.Size(92, 25);
+            this.label_chatus.TabIndex = 2;
+            this.label_chatus.Text = "聊天我們";
+            // 
+            // pictureBox_helpback
+            // 
+            this.pictureBox_helpback.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_helpback.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_helpback.Image")));
+            this.pictureBox_helpback.Location = new System.Drawing.Point(32, 24);
+            this.pictureBox_helpback.Name = "pictureBox_helpback";
+            this.pictureBox_helpback.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox_helpback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox_helpback.TabIndex = 1;
+            this.pictureBox_helpback.TabStop = false;
+            this.pictureBox_helpback.Click += new System.EventHandler(this.pictureBox_helpback_Click);
+            // 
+            // label_help
+            // 
+            this.label_help.AutoSize = true;
+            this.label_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_help.ForeColor = System.Drawing.Color.White;
+            this.label_help.Location = new System.Drawing.Point(80, 23);
+            this.label_help.Name = "label_help";
+            this.label_help.Size = new System.Drawing.Size(160, 33);
+            this.label_help.TabIndex = 0;
+            this.label_help.Text = "幫助和支持";
+            this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(605, 54);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(256, 256);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 69;
+            this.pictureBox2.TabStop = false;
             // 
             // menuStrip
             // 
@@ -517,228 +741,6 @@
             this.label_notificationstatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_notificationstatus.Visible = false;
             // 
-            // label_help
-            // 
-            this.label_help.AutoSize = true;
-            this.label_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_help.ForeColor = System.Drawing.Color.White;
-            this.label_help.Location = new System.Drawing.Point(80, 23);
-            this.label_help.Name = "label_help";
-            this.label_help.Size = new System.Drawing.Size(160, 33);
-            this.label_help.TabIndex = 0;
-            this.label_help.Text = "幫助和支持";
-            this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_chatus
-            // 
-            this.label_chatus.AutoSize = true;
-            this.label_chatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_chatus.ForeColor = System.Drawing.Color.White;
-            this.label_chatus.Location = new System.Drawing.Point(82, 88);
-            this.label_chatus.Name = "label_chatus";
-            this.label_chatus.Size = new System.Drawing.Size(92, 25);
-            this.label_chatus.TabIndex = 2;
-            this.label_chatus.Text = "聊天我們";
-            // 
-            // label_chatus1
-            // 
-            this.label_chatus1.AutoSize = true;
-            this.label_chatus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_chatus1.ForeColor = System.Drawing.Color.White;
-            this.label_chatus1.Location = new System.Drawing.Point(84, 112);
-            this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(287, 13);
-            this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "有疑問嗎？獲得全天候實時聊天，實時幫助聊天支持。";
-            // 
-            // label_emailus
-            // 
-            this.label_emailus.AutoSize = true;
-            this.label_emailus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_emailus.ForeColor = System.Drawing.Color.White;
-            this.label_emailus.Location = new System.Drawing.Point(82, 158);
-            this.label_emailus.Name = "label_emailus";
-            this.label_emailus.Size = new System.Drawing.Size(92, 25);
-            this.label_emailus.TabIndex = 5;
-            this.label_emailus.Text = "電郵我們";
-            // 
-            // label_emailus1
-            // 
-            this.label_emailus1.AutoSize = true;
-            this.label_emailus1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_emailus1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.label_emailus1.Location = new System.Drawing.Point(85, 182);
-            this.label_emailus1.Name = "label_emailus1";
-            this.label_emailus1.Size = new System.Drawing.Size(99, 13);
-            this.label_emailus1.TabIndex = 6;
-            this.label_emailus1.Text = "cs@yb188188.com";
-            this.label_emailus1.Click += new System.EventHandler(this.label_emailus1_Click);
-            // 
-            // label_social
-            // 
-            this.label_social.AutoSize = true;
-            this.label_social.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social.ForeColor = System.Drawing.Color.White;
-            this.label_social.Location = new System.Drawing.Point(82, 214);
-            this.label_social.Name = "label_social";
-            this.label_social.Size = new System.Drawing.Size(52, 25);
-            this.label_social.TabIndex = 9;
-            this.label_social.Text = "社會";
-            // 
-            // label_social1
-            // 
-            this.label_social1.AutoSize = true;
-            this.label_social1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social1.ForeColor = System.Drawing.Color.White;
-            this.label_social1.Location = new System.Drawing.Point(83, 238);
-            this.label_social1.Name = "label_social1";
-            this.label_social1.Size = new System.Drawing.Size(98, 13);
-            this.label_social1.TabIndex = 10;
-            this.label_social1.Text = "• QQ: 2715693882";
-            // 
-            // label_clearcache
-            // 
-            this.label_clearcache.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_clearcache.Enabled = false;
-            this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_clearcache.ForeColor = System.Drawing.Color.White;
-            this.label_clearcache.Location = new System.Drawing.Point(491, 400);
-            this.label_clearcache.Name = "label_clearcache";
-            this.label_clearcache.Size = new System.Drawing.Size(160, 20);
-            this.label_clearcache.TabIndex = 13;
-            this.label_clearcache.Text = "清除緩存";
-            this.label_clearcache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_clearcache.Click += new System.EventHandler(this.label_clearcache_Click);
-            // 
-            // label_getdiagnostics
-            // 
-            this.label_getdiagnostics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
-            this.label_getdiagnostics.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_getdiagnostics.Enabled = false;
-            this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
-            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 400);
-            this.label_getdiagnostics.Name = "label_getdiagnostics";
-            this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
-            this.label_getdiagnostics.TabIndex = 14;
-            this.label_getdiagnostics.Text = "得到診斷";
-            this.label_getdiagnostics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_getdiagnostics.Click += new System.EventHandler(this.label_getdiagnostics_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.label2.Location = new System.Drawing.Point(85, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "現在聊天";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // panel_help
-            // 
-            this.panel_help.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
-            this.panel_help.Controls.Add(this.label_social2);
-            this.panel_help.Controls.Add(this.pictureBox_qr);
-            this.panel_help.Controls.Add(this.pictureBox3);
-            this.panel_help.Controls.Add(this.pictureBox1);
-            this.panel_help.Controls.Add(this.label2);
-            this.panel_help.Controls.Add(this.label_getdiagnostics);
-            this.panel_help.Controls.Add(this.label_clearcache);
-            this.panel_help.Controls.Add(this.label_social1);
-            this.panel_help.Controls.Add(this.label_social);
-            this.panel_help.Controls.Add(this.label_emailus1);
-            this.panel_help.Controls.Add(this.label_emailus);
-            this.panel_help.Controls.Add(this.label_chatus1);
-            this.panel_help.Controls.Add(this.label_chatus);
-            this.panel_help.Controls.Add(this.pictureBox_helpback);
-            this.panel_help.Controls.Add(this.label_help);
-            this.panel_help.Controls.Add(this.pictureBox2);
-            this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel_help.Location = new System.Drawing.Point(219, 177);
-            this.panel_help.Name = "panel_help";
-            this.panel_help.Size = new System.Drawing.Size(828, 435);
-            this.panel_help.TabIndex = 69;
-            this.panel_help.Visible = false;
-            // 
-            // label_social2
-            // 
-            this.label_social2.AutoSize = true;
-            this.label_social2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_social2.ForeColor = System.Drawing.Color.White;
-            this.label_social2.Location = new System.Drawing.Point(83, 251);
-            this.label_social2.Name = "label_social2";
-            this.label_social2.Size = new System.Drawing.Size(86, 13);
-            this.label_social2.TabIndex = 73;
-            this.label_social2.Text = "• 微信: yb188yb";
-            // 
-            // pictureBox_qr
-            // 
-            this.pictureBox_qr.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox_qr.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_qr.Image")));
-            this.pictureBox_qr.Location = new System.Drawing.Point(87, 268);
-            this.pictureBox_qr.Name = "pictureBox_qr";
-            this.pictureBox_qr.Size = new System.Drawing.Size(123, 123);
-            this.pictureBox_qr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox_qr.TabIndex = 72;
-            this.pictureBox_qr.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(549, 159);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(64, 64);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox3.TabIndex = 71;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(503, 22);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 70;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox_helpback
-            // 
-            this.pictureBox_helpback.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_helpback.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_helpback.Image")));
-            this.pictureBox_helpback.Location = new System.Drawing.Point(32, 24);
-            this.pictureBox_helpback.Name = "pictureBox_helpback";
-            this.pictureBox_helpback.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox_helpback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox_helpback.TabIndex = 1;
-            this.pictureBox_helpback.TabStop = false;
-            this.pictureBox_helpback.Click += new System.EventHandler(this.pictureBox_helpback_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(605, 54);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(256, 256);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 69;
-            this.pictureBox2.TabStop = false;
-            // 
             // label_separator
             // 
             this.label_separator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -810,19 +812,6 @@
             this.pictureBox_nofication.Click += new System.EventHandler(this.pictureBox_nofication_Click);
             this.pictureBox_nofication.MouseLeave += new System.EventHandler(this.pictureBox_nofication_MouseLeave);
             this.pictureBox_nofication.MouseHover += new System.EventHandler(this.pictureBox_nofication_MouseHover);
-            // 
-            // pictureBox_loader
-            // 
-            this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_loader.ErrorImage = null;
-            this.pictureBox_loader.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_loader.Image")));
-            this.pictureBox_loader.Location = new System.Drawing.Point(503, 250);
-            this.pictureBox_loader.Name = "pictureBox_loader";
-            this.pictureBox_loader.Size = new System.Drawing.Size(265, 265);
-            this.pictureBox_loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox_loader.TabIndex = 74;
-            this.pictureBox_loader.TabStop = false;
             // 
             // pictureBox_noficationhover
             // 
@@ -1041,6 +1030,35 @@
             this.pictureBox_browserstop.MouseLeave += new System.EventHandler(this.pictureBox_browserstop_MouseLeave);
             this.pictureBox_browserstop.MouseHover += new System.EventHandler(this.pictureBox_browserstop_MouseHover);
             // 
+            // pictureBox_loader
+            // 
+            this.pictureBox_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox_loader.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_loader.ErrorImage = null;
+            this.pictureBox_loader.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_loader.Image")));
+            this.pictureBox_loader.Location = new System.Drawing.Point(443, 1);
+            this.pictureBox_loader.Name = "pictureBox_loader";
+            this.pictureBox_loader.Size = new System.Drawing.Size(193, 170);
+            this.pictureBox_loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_loader.TabIndex = 74;
+            this.pictureBox_loader.TabStop = false;
+            // 
+            // label_loader
+            // 
+            this.label_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label_loader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loader.Location = new System.Drawing.Point(1, 481);
+            this.label_loader.Name = "label_loader";
+            this.label_loader.Size = new System.Drawing.Size(1268, 16);
+            this.label_loader.TabIndex = 78;
+            this.label_loader.Text = "loading...";
+            this.label_loader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer_loader
+            // 
+            this.timer_loader.Interval = 1000;
+            this.timer_loader.Tick += new System.EventHandler(this.timer_loader_Tick);
+            // 
             // Form_YB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1048,12 +1066,13 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
+            this.Controls.Add(this.pictureBox_loader);
+            this.Controls.Add(this.label_loader);
             this.Controls.Add(this.button_notification);
+            this.Controls.Add(this.panel_help);
             this.Controls.Add(this.dataGridView_domain);
             this.Controls.Add(this.label_notificationscount);
             this.Controls.Add(this.pictureBox_nofication);
-            this.Controls.Add(this.panel_help);
-            this.Controls.Add(this.pictureBox_loader);
             this.Controls.Add(this.pictureBox_noficationhover);
             this.Controls.Add(this.pictureBox_help);
             this.Controls.Add(this.pictureBox_helphover);
@@ -1090,9 +1109,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).EndInit();
             this.panel_connection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).EndInit();
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.panel_notification.ResumeLayout(false);
             this.panel_help.ResumeLayout(false);
             this.panel_help.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_qr)).EndInit();
@@ -1100,8 +1116,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helpback)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.panel_notification.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_nofication)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_noficationhover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_help)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_helphover)).EndInit();
@@ -1116,6 +1134,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_reload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserstop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1185,7 +1204,6 @@
         private System.Windows.Forms.PictureBox pictureBox_helpback;
         private System.Windows.Forms.Label label_help;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox_loader;
         private System.Windows.Forms.Label label_separator;
         private System.Windows.Forms.PictureBox pictureBox_qr;
         private System.Windows.Forms.Label label_social2;
@@ -1197,6 +1215,9 @@
         private System.Windows.Forms.Timer timer_close;
         private System.Windows.Forms.Timer timer_notifications_detect;
         private System.Windows.Forms.Button button_notification;
+        private System.Windows.Forms.PictureBox pictureBox_loader;
+        private System.Windows.Forms.Label label_loader;
+        private System.Windows.Forms.Timer timer_loader;
     }
 }
 
