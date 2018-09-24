@@ -2148,6 +2148,7 @@ namespace Safety_Browser
                 }
             }
         }
+
         // Form Closing
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
