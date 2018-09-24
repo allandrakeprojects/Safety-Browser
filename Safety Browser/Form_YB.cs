@@ -1842,7 +1842,7 @@ namespace Safety_Browser
                         pictureBox_browserstop.Visible = false;
                         
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "裝載...";
                     }
                 }));
             }
@@ -1954,7 +1954,7 @@ namespace Safety_Browser
                                     elseload_return = false;
 
                                     timer_loader.Stop();
-                                    label_loader.Text = "loading...";
+                                    label_loader.Text = "裝載...";
                                 }
                                 else
                                 {
@@ -2022,7 +2022,7 @@ namespace Safety_Browser
                                 isNotHijackedLoaded = true;
 
                                 timer_loader.Stop();
-                                label_loader.Text = "loading...";
+                                label_loader.Text = "裝載...";
                             }
                         }
                         else
@@ -2807,7 +2807,7 @@ namespace Safety_Browser
                             elseload_return = false;
 
                             timer_loader.Stop();
-                            label_loader.Text = "loading...";
+                            label_loader.Text = "裝載...";
                         }
                         else
                         {
@@ -2874,7 +2874,7 @@ namespace Safety_Browser
                         elseload_return = false;
 
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "裝載...";
                     }
                 }
             }));
@@ -3488,15 +3488,15 @@ namespace Safety_Browser
 
             if (timer_loader_i < 5)
             {
-                label_loader.Text = "loading...";
+                label_loader.Text = "裝載...";
             }
             else if (timer_loader_i < 10)
             {
-                label_loader.Text = "getting data to the server...";
+                label_loader.Text = "將數據提供給服務器...";
             }
             else if (timer_loader_i > 15)
             {
-                label_loader.Text = "getting ready...";
+                label_loader.Text = "做好準備...";
             }
         }
 
