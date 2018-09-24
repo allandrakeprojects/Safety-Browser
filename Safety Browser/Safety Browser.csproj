@@ -106,12 +106,6 @@
     <Compile Include="BrowserLifeSpanHandler.cs" />
     <Compile Include="CustomMenuHandler.cs" />
     <Compile Include="DownloadHandler.cs" />
-    <Compile Include="Form_Landing.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Landing.Designer.cs">
-      <DependentUpon>Form_Landing.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_YB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,9 +128,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UploadFile.cs" />
-    <EmbeddedResource Include="Form_Landing.resx">
-      <DependentUpon>Form_Landing.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_YB.resx">
       <DependentUpon>Form_YB.cs</DependentUpon>
     </EmbeddedResource>

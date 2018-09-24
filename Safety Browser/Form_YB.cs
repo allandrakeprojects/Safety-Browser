@@ -2,7 +2,6 @@
 using CefSharp.WinForms;
 using ChoETL;
 using Ionic.Zip;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -55,6 +54,7 @@ namespace Safety_Browser
         private bool connection_handler = false;
         private string _mac_address;
         private string _external_ip;
+        private string _isp;
         private string _city;
         private string _country;
         private string _province;
@@ -121,6 +121,7 @@ namespace Safety_Browser
         private bool isNewEntry = false;
         private bool isFirstOpened = true;
         private bool isNoNotification;
+        static List<string> inaccessble_lists = new List<string>();
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -133,10 +134,19 @@ namespace Safety_Browser
         {
             InitializeComponent();
         }
+        
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         // Form Load
         private void Form_Main_Load(object sender, EventArgs e)
         {
+            string path_result = Path.GetTempPath() + "\\sb_result.txt";
+
+            if (File.Exists(path_result))
+            {
+                File.Delete(path_result);
+            }
+
             InitializeChromium();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -155,6 +165,57 @@ namespace Safety_Browser
                 gHook.HookedKeys.Add(key);
             }
             gHook.hook();
+            
+            GetInaccessibleLists();
+
+            Opacity = 0;
+
+            timer.Interval = 20;
+            timer.Tick += new EventHandler(fadeIn);
+            timer.Start();
+        }
+        
+        void fadeIn(object sender, EventArgs e)
+        {
+            if (Opacity >= 1)
+            {
+                timer_landing.Start();
+            }
+            else
+            {
+                Opacity += 0.05;
+            }
+        }
+
+        private void GetInaccessibleLists()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    string auth = "r@inCh3ckd234b70";
+                    string type = "category";
+                    string request = "http://raincheck.ssitex.com/api/api.php";
+                    string mac_id = GetMACAddress();
+
+                    NameValueCollection postData = new NameValueCollection()
+                    {
+                        { "auth", auth },
+                        { "type", type }
+                    };
+
+                    string pagesource = Encoding.UTF8.GetString(client.UploadValues(request, postData));
+                    inaccessble_lists.Add(pagesource);
+                }
+            }
+            catch (Exception ex)
+            {
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1004", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }
         }
 
         public void gHook_KeyDown(object sender, KeyEventArgs e)
@@ -1779,21 +1840,29 @@ namespace Safety_Browser
         private void InitializeChromium()
         {
             CefSettings settings = new CefSettings();
-            //settings.BrowserSubprocessPath = Environment.CurrentDirectory + "/CefSharp.BrowserSubprocess.exe"; // **Path where the CefSharp.BrowserSubprocess.exe exists**
-            //settings.CachePath = "ChromiumBrowserControlCache";
-            //settings.IgnoreCertificateErrors = true;
             settings.CefCommandLineArgs.Add("no-proxy-server", "1");
+            settings.CefCommandLineArgs.Add("enable-npapi", "1");
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
             chromeBrowser.LifeSpanHandler = new BrowserLifeSpanHandler();
+            chromeBrowser.DownloadHandler = new DownloadHandler();
             panel_cefsharp.Controls.Add(chromeBrowser);
 
             chromeBrowser.LoadingStateChanged += BrowserLoadingStateChanged;
             chromeBrowser.TitleChanged += BrowserTitleChanged;
-            chromeBrowser.DownloadHandler = new DownloadHandler();
+            chromeBrowser.AddressChanged += BrowserAddressChanged;
         }
-                
+
+        private void BrowserAddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            handler_url = e.Address;
+        }
+
+        string start_load = "";
+        string end_load = "";
+        string datetime = "";
+
         // asd123
         private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
@@ -1817,6 +1886,8 @@ namespace Safety_Browser
 
                     timer_loader_i = 1;
                     timer_loader.Start();
+
+                    start_load = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
                 }));
             }
 
@@ -1855,7 +1926,7 @@ namespace Safety_Browser
 
                     await Task.Run(async () =>
                     {
-                        await Task.Delay(2000);
+                        await Task.Delay(100);
                     });
 
                     if (domain_one_time)
@@ -1897,6 +1968,83 @@ namespace Safety_Browser
 
                             if (isHijacked)
                             {
+                                end_load = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                                datetime = DateTime.Now.ToString("HH");
+
+                                if (handler_title == "")
+                                {
+                                    string search_replace = handler_title;
+                                    string upper_search = search_replace.ToUpper().ToString();
+
+                                    StringBuilder sb = new StringBuilder(upper_search);
+                                    sb.Replace("-", "");
+                                    sb.Replace(".", "");
+                                    sb.Replace(",", "");
+                                    sb.Replace("!", "");
+
+                                    string final_search = Regex.Replace(sb.ToString(), " {2,}", " ");
+                                    var final_inaccessble_lists = inaccessble_lists.Select(m => m.ToUpper());
+                                    string[] words = final_search.Split(' ');
+                                    int i = 0;
+
+                                    foreach (string word in words)
+                                    {
+                                        i++;
+
+                                        if (word != "")
+                                        {
+                                            var match = final_inaccessble_lists.FirstOrDefault(stringToCheck => stringToCheck.Contains(word));
+
+                                            if (match != null)
+                                            {
+                                                isInaccessible = true;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                isInaccessible = false;
+                                            }
+                                        }
+
+                                        if (i == 1 && search_replace == "")
+                                        {
+                                            isInaccessible = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    isInaccessible = true;
+                                }
+
+                                char firstDigit = datetime[0];
+
+                                if (int.Parse(datetime) % 2 == 0)
+                                {
+                                    if (firstDigit == '0')
+                                    {
+                                        datetime_created = DateTime.Now.ToString("yyyy-MM-dd 0" + datetime + ":00:00");
+                                    }
+                                    else
+                                    {
+                                        int final_get_hour = int.Parse(datetime) - 1;
+                                        datetime_created = DateTime.Now.ToString("yyyy-MM-dd " + datetime + ":00:00");
+                                    }
+                                }
+                                else
+                                {
+                                    if (firstDigit == '0')
+                                    {
+                                        int final_get_hour = int.Parse(datetime) - 1;
+                                        datetime_created = DateTime.Now.ToString("yyyy-MM-dd 0" + final_get_hour + ":00:00");
+                                    }
+                                    else
+                                    {
+                                        int final_get_hour = int.Parse(datetime) - 1;
+                                        datetime_created = DateTime.Now.ToString("yyyy-MM-dd " + final_get_hour + ":00:00");
+                                    }
+                                }
+
                                 var html = "";
 
                                 await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
@@ -1908,9 +2056,9 @@ namespace Safety_Browser
                                 {
                                     await Task.Run(async () =>
                                     {
-                                        await Task.Delay(2000);
+                                        await Task.Delay(100);
                                     });
-                                    
+
                                     back_button_i++;
                                     timer_detectifhijacked.Start();
                                     domain_one_time = false;
@@ -1963,6 +2111,15 @@ namespace Safety_Browser
                                         await Task.Delay(2000);
                                     });
 
+                                    if (isInaccessible)
+                                    {
+                                        DataToTextFileInaccessible();
+                                    }
+                                    else
+                                    {
+                                        DataToTextFileHijacked();
+                                    }
+
                                     back_button_i++;
                                     last_index_hijacked_get = true;
                                     not_hijacked = false;
@@ -1975,9 +2132,9 @@ namespace Safety_Browser
                             {
                                 await Task.Run(async () =>
                                 {
-                                    await Task.Delay(2000);
+                                    await Task.Delay(100);
                                 });
-                                
+                                                                
                                 back_button_i++;
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
@@ -2023,6 +2180,12 @@ namespace Safety_Browser
 
                                 timer_loader.Stop();
                                 label_loader.Text = "裝載...";
+                                
+                                string path_result = Path.GetTempPath() + "\\sb_result.txt";
+                                if (File.Exists(path_result))
+                                {
+                                    UploadResult();
+                                }
                             }
                         }
                         else
@@ -2094,6 +2257,288 @@ namespace Safety_Browser
                         }
                     }
                 }));
+            }
+        }
+
+        private void UploadResult()
+        {
+            String read = "";
+            // Insert
+            string path_result = Path.GetTempPath() + "\\sb_result.txt";
+            if (File.Exists(path_result))
+            {
+                read = File.ReadAllText(path_result);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            using (var p = ChoCSVReader.LoadText(read).WithFirstLineHeader())
+            {
+                using (var w = new ChoJSONWriter(sb))
+                {
+                    w.Write(p);
+                }
+            }
+
+            int upload = 1;
+            while (upload <= 5)
+            {
+                try
+                {
+                    using (var client = new WebClient())
+                    {
+                        string auth = "r@inCh3ckd234b70";
+                        string type = "reports_normal";
+                        string request = "http://raincheck.ssitex.com/api/api.php";
+                        string reports = sb.ToString();
+
+                        NameValueCollection postData = new NameValueCollection()
+                                    {
+                                        { "auth", auth },
+                                        { "type", type },
+                                        { "reports", reports },
+                                    };
+
+                        pagesource_history = Encoding.UTF8.GetString(client.UploadValues(request, postData));
+
+                        if (pagesource_history == "SUCCESS")
+                        {
+                            break;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    upload++;
+                }
+            }
+
+        }
+
+        private void DataToTextFileHijacked()
+        {
+            try
+            {
+                string path_result = Path.GetTempPath() + "\\sb_result.txt";
+
+                if (File.Exists(path_result))
+                {
+                    StreamWriter sw = new StreamWriter(path_result, true, Encoding.UTF8);
+                    sw.Close();
+
+                    // Header
+                    string contain_text_header = "id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type";
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_text_header)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swww = new StreamWriter(path_result, true, Encoding.UTF8);
+                        //swww.WriteLine("," + label_domainhide.Text + ",S" + "," + label_brandhide.Text + "," + start_load + "," + end_load + "," + label_webtitle.Text + "," + textBox_domain.Text + "," + "," + "," + "," + isp_get + "," + city_get + "," + datetime + "," + ",N");
+                        swww.WriteLine("id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type");
+
+                        swww.Close();
+                    }
+
+                    string contain_start_load = start_load;
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_start_load)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swwww = new StreamWriter(path_result, true, Encoding.UTF8);
+
+                        if (string.IsNullOrEmpty(_isp))
+                        {
+                            _isp = "-";
+                        }
+
+                        if (string.IsNullOrEmpty(_city))
+                        {
+                            _city = "-";
+                        }
+
+                        string webtitle_replace = handler_title;
+                        StringBuilder webtitle = new StringBuilder(webtitle_replace);
+                        webtitle.Replace(",", "");
+                        webtitle.Replace("，", " ");
+
+                        swwww.WriteLine("," + domain_get + ",H" + ",5" + "," + start_load + "," + end_load + "," + webtitle.ToString() + "," + handler_url + ",-" + ",-" + ",-" + "," + _isp + "," + _city + ",-," + datetime_created + "," + ",S");
+                        swwww.Close();
+                    }
+                }
+                else
+                {
+                    StreamWriter sw = new StreamWriter(path_result, true, Encoding.UTF8);
+                    sw.Close();
+
+                    // Header
+                    string contain_text_header = "id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type";
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_text_header)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swww = new StreamWriter(path_result, true, Encoding.UTF8);
+                        //swww.WriteLine("," + label_domainhide.Text + ",S" + "," + label_brandhide.Text + "," + start_load + "," + end_load + "," + label_webtitle.Text + "," + textBox_domain.Text + "," + "," + "," + "," + isp_get + "," + city_get + "," + datetime + "," + ",N");
+                        swww.WriteLine("id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type");
+
+                        swww.Close();
+                    }
+
+                    string contain_start_load = start_load;
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_start_load)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swwww = new StreamWriter(path_result, true, Encoding.UTF8);
+
+                        if (string.IsNullOrEmpty(_isp))
+                        {
+                            _isp = "-";
+                        }
+
+                        if (string.IsNullOrEmpty(_city))
+                        {
+                            _city = "-";
+                        }
+
+                        string webtitle_replace = handler_title;
+                        StringBuilder webtitle = new StringBuilder(webtitle_replace);
+                        webtitle.Replace(",", "");
+                        webtitle.Replace("，", " ");
+
+                        swwww.WriteLine("," + domain_get + ",H" + ",5" + "," + start_load + "," + end_load + "," + webtitle.ToString() + "," + handler_url + ",-" + ",-" + ",-" + "," + _isp + "," + _city + ",-," + datetime_created + "," + ",S");
+                        swwww.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Close();
+            }
+        }
+
+        private void DataToTextFileInaccessible()
+        {
+            try
+            {
+                string path_result = Path.GetTempPath() + "\\sb_result.txt";
+
+                if (File.Exists(path_result))
+                {
+                    StreamWriter sw = new StreamWriter(path_result, true, Encoding.UTF8);
+                    sw.Close();
+
+                    // Header
+                    string contain_text_header = "id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type";
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_text_header)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swww = new StreamWriter(path_result, true, Encoding.UTF8);
+                        //swww.WriteLine("," + label_domainhide.Text + ",S" + "," + label_brandhide.Text + "," + start_load + "," + end_load + "," + label_webtitle.Text + "," + textBox_domain.Text + "," + "," + "," + "," + isp_get + "," + city_get + "," + datetime + "," + ",N");
+                        swww.WriteLine("id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type");
+
+                        swww.Close();
+                    }
+
+                    string contain_start_load = start_load;
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_start_load)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swwww = new StreamWriter(path_result, true, Encoding.UTF8);
+
+                        if (string.IsNullOrEmpty(_isp))
+                        {
+                            _isp = "-";
+                        }
+
+                        if (string.IsNullOrEmpty(_city))
+                        {
+                            _city = "-";
+                        }
+
+                        string webtitle_replace = handler_title;
+                        StringBuilder webtitle = new StringBuilder(webtitle_replace);
+                        webtitle.Replace(",", "");
+                        webtitle.Replace("，", " ");
+
+                        swwww.WriteLine("," + domain_get + ",I" + ",5" + "," + start_load + "," + end_load + "," + webtitle.ToString() + ",-" + ",-" + handler_url + ",-" + ",-" + "," + _isp + "," + _city + ",-," + datetime_created + "," + ",S");
+                        swwww.Close();
+                    }
+                }
+                else
+                {
+                    StreamWriter sw = new StreamWriter(path_result, true, Encoding.UTF8);
+                    sw.Close();
+
+                    // Header
+                    string contain_text_header = "id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type";
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_text_header)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swww = new StreamWriter(path_result, true, Encoding.UTF8);
+                        //swww.WriteLine("," + label_domainhide.Text + ",S" + "," + label_brandhide.Text + "," + start_load + "," + end_load + "," + label_webtitle.Text + "," + textBox_domain.Text + "," + "," + "," + "," + isp_get + "," + city_get + "," + datetime + "," + ",N");
+                        swww.WriteLine("id, domain_name, status, brand, start_load, end_load, text_search, url_hijacker, hijacker, remarks, printscreen, isp, city, t_id, datetime_created, action_by, type");
+
+                        swww.Close();
+                    }
+
+                    string contain_start_load = start_load;
+                    if (File.ReadLines(path_result).Any(line => line.Contains(contain_start_load)))
+                    {
+                        // Leave for blank
+                    }
+                    else
+                    {
+                        StreamWriter swwww = new StreamWriter(path_result, true, Encoding.UTF8);
+
+                        if (string.IsNullOrEmpty(_isp))
+                        {
+                            _isp = "-";
+                        }
+
+                        if (string.IsNullOrEmpty(_city))
+                        {
+                            _city = "-";
+                        }
+
+                        string webtitle_replace = handler_title;
+                        StringBuilder webtitle = new StringBuilder(webtitle_replace);
+                        webtitle.Replace(",", "");
+                        webtitle.Replace("，", " ");
+
+                        swwww.WriteLine("," + domain_get + ",I" + ",5" + "," + start_load + "," + end_load + "," + webtitle.ToString() + ",-" + ",-" + handler_url + ",-" + ",-" + "," + _isp + "," + _city + ",-," + datetime_created + "," + ",S");
+                        swwww.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Close();
             }
         }
 
@@ -2240,6 +2685,7 @@ namespace Safety_Browser
                         {
                             _mac_address = GetMACAddress();
                             _external_ip = GetExternalIp();
+                            _isp = locationDetails.isp.Replace("'", "''");
                             _city = locationDetails.city.Replace("'", "''");
                             _province = locationDetails.regionName.Replace("'", "''");
                             _country = locationDetails.country.Replace("'", "''");
@@ -2750,6 +3196,83 @@ namespace Safety_Browser
 
                     if (isHijacked)
                     {
+                        end_load = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                        datetime = DateTime.Now.ToString("HH");
+
+                        if (handler_title == "")
+                        {
+                            string search_replace = handler_title;
+                            string upper_search = search_replace.ToUpper().ToString();
+
+                            StringBuilder sb = new StringBuilder(upper_search);
+                            sb.Replace("-", "");
+                            sb.Replace(".", "");
+                            sb.Replace(",", "");
+                            sb.Replace("!", "");
+
+                            string final_search = Regex.Replace(sb.ToString(), " {2,}", " ");
+                            var final_inaccessble_lists = inaccessble_lists.Select(m => m.ToUpper());
+                            string[] words = final_search.Split(' ');
+                            int i = 0;
+
+                            foreach (string word in words)
+                            {
+                                i++;
+
+                                if (word != "")
+                                {
+                                    var match = final_inaccessble_lists.FirstOrDefault(stringToCheck => stringToCheck.Contains(word));
+
+                                    if (match != null)
+                                    {
+                                        isInaccessible = true;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        isInaccessible = false;
+                                    }
+                                }
+
+                                if (i == 1 && search_replace == "")
+                                {
+                                    isInaccessible = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            isInaccessible = true;
+                        }                        
+
+                        char firstDigit = datetime[0];
+
+                        if (int.Parse(datetime) % 2 == 0)
+                        {
+                            if (firstDigit == '0')
+                            {
+                                datetime_created = DateTime.Now.ToString("yyyy-MM-dd 0" + datetime + ":00:00");
+                            }
+                            else
+                            {
+                                int final_get_hour = int.Parse(datetime) - 1;
+                                datetime_created = DateTime.Now.ToString("yyyy-MM-dd " + datetime + ":00:00");
+                            }
+                        }
+                        else
+                        {
+                            if (firstDigit == '0')
+                            {
+                                int final_get_hour = int.Parse(datetime) - 1;
+                                datetime_created = DateTime.Now.ToString("yyyy-MM-dd 0" + final_get_hour + ":00:00");
+                            }
+                            else
+                            {
+                                int final_get_hour = int.Parse(datetime) - 1;
+                                datetime_created = DateTime.Now.ToString("yyyy-MM-dd " + final_get_hour + ":00:00");
+                            }
+                        }
+
                         var html = "";
 
                         await chromeBrowser.GetSourceAsync().ContinueWith(taskHtml =>
@@ -2761,7 +3284,7 @@ namespace Safety_Browser
                         {
                             await Task.Run(async () =>
                             {
-                                await Task.Delay(2000);
+                                await Task.Delay(100);
                             });
 
                             //back_button_i++;
@@ -2816,6 +3339,15 @@ namespace Safety_Browser
                                 await Task.Delay(2000);
                             });
 
+                            if (isInaccessible)
+                            {
+                                DataToTextFileInaccessible();
+                            }
+                            else
+                            {
+                                DataToTextFileHijacked();
+                            }
+
                             //back_button_i++;
                             last_index_hijacked_get = true;
                             not_hijacked = false;
@@ -2828,7 +3360,7 @@ namespace Safety_Browser
                     {
                         await Task.Run(async () =>
                         {
-                            await Task.Delay(2000);
+                            await Task.Delay(100);
                         });
 
                         //back_button_i++;
@@ -2875,6 +3407,12 @@ namespace Safety_Browser
 
                         timer_loader.Stop();
                         label_loader.Text = "裝載...";
+
+                        string path_result = Path.GetTempPath() + "\\sb_result.txt";
+                        if (File.Exists(path_result))
+                        {
+                            UploadResult();
+                        }
                     }
                 }
             }));
@@ -3482,6 +4020,11 @@ namespace Safety_Browser
         }
 
         int timer_loader_i = 1;
+        private string handler_url;
+        private string pagesource_history;
+        private string datetime_created;
+        private bool isInaccessible;
+
         private void timer_loader_Tick(object sender, EventArgs e)
         {
             timer_loader_i++;
@@ -3498,6 +4041,12 @@ namespace Safety_Browser
             {
                 label_loader.Text = "做好準備...";
             }
+        }
+
+        private void timer_yb_Tick(object sender, EventArgs e)
+        {
+            panel_landing.Visible = false;
+            timer_landing.Stop();
         }
 
         private void pictureBox_maximize_Click(object sender, EventArgs e)
