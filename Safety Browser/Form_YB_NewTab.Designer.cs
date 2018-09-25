@@ -211,10 +211,11 @@
             // 
             this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
             this.pictureBox_menu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_menu.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_menu.Image")));
-            this.pictureBox_menu.Location = new System.Drawing.Point(14, 6);
+            this.pictureBox_menu.Image = global::Safety_Browser.Properties.Resources.menu;
+            this.pictureBox_menu.Location = new System.Drawing.Point(15, 4);
             this.pictureBox_menu.Name = "pictureBox_menu";
-            this.pictureBox_menu.Size = new System.Drawing.Size(34, 22);
+            this.pictureBox_menu.Size = new System.Drawing.Size(33, 29);
+            this.pictureBox_menu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_menu.TabIndex = 54;
             this.pictureBox_menu.TabStop = false;
             this.pictureBox_menu.Click += new System.EventHandler(this.pictureBox_menu_Click);

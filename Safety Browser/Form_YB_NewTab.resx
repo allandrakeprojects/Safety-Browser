@@ -166,16 +166,6 @@
   <metadata name="pictureBox_menu.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="pictureBox_menu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJ
-        TUUH4ggRBikDlk/Z8QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAACeSURBVFhH
-        7ZfBDYAgEASpjE4oxRa0AerQToxV8ONFAu4KT7+yJjDJmPN1mwMJmomcUoqFK9w6y56WAQJUERhACgPk
-        WkrIDOBZPK99YU/ftuLIYAwO7vDoLHs6BohQRfzFZ5hqKSExwAJPeHWWPZe2FUeGY2jjeBvTl9YlwEO+
-        CaUwgPwg0h7FE4xBeyFphYrnSiaFAeTXcu2PyUSLMTfFNLiQcE33zAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="pictureBox_hover.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
