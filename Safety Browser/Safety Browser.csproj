@@ -60,7 +60,14 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Safety_Browser.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChoETL, Version=1.0.8.4, Culture=neutral, processorArchitecture=MSIL">
@@ -155,6 +162,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <Content Include="logo_yb.ico" />
+    <None Include="Resources\menu.png" />
     <None Include="Resources\refresh_notification.png" />
     <None Include="Resources\logo_yb.png" />
     <None Include="Resources\safety_browser_desktop.ico" />
@@ -169,7 +178,6 @@
     <None Include="Resources\notification_1.png" />
     <None Include="Resources\notification.png" />
     <None Include="Resources\minimize.png" />
-    <None Include="Resources\menu.png" />
     <None Include="Resources\maximize.png" />
     <None Include="Resources\logo.ico" />
     <None Include="Resources\loader.gif" />

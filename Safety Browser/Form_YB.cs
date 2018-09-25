@@ -15,13 +15,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.UI;
 using System.Windows.Forms;
 
 namespace Safety_Browser
@@ -133,6 +131,12 @@ namespace Safety_Browser
         public Form_YB()
         {
             InitializeComponent();
+            
+            Opacity = 0;
+
+            timer.Interval = 20;
+            timer.Tick += new EventHandler(fadeIn);
+            timer.Start();
         }
         
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -167,12 +171,6 @@ namespace Safety_Browser
             gHook.hook();
             
             GetInaccessibleLists();
-
-            Opacity = 0;
-
-            timer.Interval = 20;
-            timer.Tick += new EventHandler(fadeIn);
-            timer.Start();
         }
         
         void fadeIn(object sender, EventArgs e)
@@ -210,11 +208,11 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                var st = new StackTrace(ex, true);
-                var frame = st.GetFrame(0);
-                var line = frame.GetFileLineNumber();
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1004", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
+                //var st = new StackTrace(ex, true);
+                //var frame = st.GetFrame(0);
+                //var line = frame.GetFileLineNumber();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1004", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Close();
             }
         }
 
@@ -272,6 +270,9 @@ namespace Safety_Browser
                                         label_separator.Visible = true;
                                         button_notification.Visible = true;
                                     }
+
+                                    pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                                    pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
                                 }
 
                                 chromeBrowser.Load(domain_get);
@@ -581,9 +582,9 @@ namespace Safety_Browser
                         }
                     }
                 }
-                catch (Exception err)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1001", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1001", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     close = false;
                     Close();
                 }
@@ -656,9 +657,9 @@ namespace Safety_Browser
                     }
                 }
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 close = false;
                 Close();
             }
@@ -815,11 +816,11 @@ namespace Safety_Browser
                 timer_notifications.Start();
                 timer_notifications_detect.Start();
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                close = false;
-                Close();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //close = false;
+                //Close();
             }
         }
 
@@ -1254,7 +1255,7 @@ namespace Safety_Browser
 
                         label_title.Location = new Point(3, 0);
                         label_title.AutoSize = true;
-                        label_title.ForeColor = Color.FromArgb(0, 0, 0);
+                        label_title.ForeColor = Color.FromArgb(235, 99, 6);
                         label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
 
                         Label label_content = new Label();
@@ -1263,7 +1264,7 @@ namespace Safety_Browser
                         label_content.Location = new Point(4, 19);
                         label_content.AutoSize = true;
                         label_content.MaximumSize = new Size(248, 40);
-                        label_content.ForeColor = Color.FromArgb(0, 0, 0);
+                        label_content.ForeColor = Color.FromArgb(235, 99, 6);
                         label_content.Font = new Font("Microsoft Sans Serif", 8);
 
                         Label label_date = new Label();
@@ -1785,11 +1786,11 @@ namespace Safety_Browser
                     sw.Close();
                 }
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                close = false;
-                Close();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //close = false;
+                //Close();
             }
         }
 
@@ -1829,7 +1830,7 @@ namespace Safety_Browser
             }
         }
 
-        // Timeout timeasd
+        // Timeout
         private void Timer_handler_Tick(object sender, EventArgs e)
         {
             chromeBrowser.Stop();
@@ -1874,12 +1875,14 @@ namespace Safety_Browser
                     elseloaded_i = 0;
                     timer_elseloaded.Stop();
 
-                    if (!domain_one_time)
+                    if (domain_one_time)
                     {
                         pictureBox_loader.Visible = true;
                         label_loader.Visible = true;
                         panel_cefsharp.Visible = false;
-
+                    }
+                    else
+                    {
                         pictureBox_browserstop.Visible = true;
                         pictureBox_reload.Visible = false;
                     }
@@ -2471,10 +2474,10 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                var st = new StackTrace(ex, true);
-                var frame = st.GetFrame(0);
-                var line = frame.GetFileLineNumber();
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var st = new StackTrace(ex, true);
+                //var frame = st.GetFrame(0);
+                //var line = frame.GetFileLineNumber();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2583,10 +2586,10 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                var st = new StackTrace(ex, true);
-                var frame = st.GetFrame(0);
-                var line = frame.GetFileLineNumber();
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var st = new StackTrace(ex, true);
+                //var frame = st.GetFrame(0);
+                //var line = frame.GetFileLineNumber();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2695,10 +2698,10 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                var st = new StackTrace(ex, true);
-                var frame = st.GetFrame(0);
-                var line = frame.GetFileLineNumber();
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var st = new StackTrace(ex, true);
+                //var frame = st.GetFrame(0);
+                //var line = frame.GetFileLineNumber();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2796,9 +2799,9 @@ namespace Safety_Browser
 
                 return externalIP;
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -2818,9 +2821,9 @@ namespace Safety_Browser
 
                 return macAddress;
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1005", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1005", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -2856,9 +2859,9 @@ namespace Safety_Browser
                     }
                 }
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1006", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1006", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2884,11 +2887,11 @@ namespace Safety_Browser
                     string responseInString = Encoding.UTF8.GetString(response);
                 }
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                close = false;
-                Close();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //close = false;
+                //Close();
             }
         }
         
@@ -3186,9 +3189,6 @@ namespace Safety_Browser
                     // handlers
                     webbrowser_handler_title = webBrowser_handler.DocumentTitle;
                     webbrowser_handler_url = webBrowser_handler.Url;
-
-
-                    MessageBox.Show(webbrowser_handler_url + " " + webbrowser_handler_title);
 
                     timer_detectifhijacked.Start();
 
@@ -3634,11 +3634,61 @@ namespace Safety_Browser
 
         private void pictureBox_browserhome_Click(object sender, EventArgs e)
         {
+            if (!help_click)
+            {
+                panel_help.Visible = false;
+                help_click = true;
+
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    button_notification.Visible = true;
+                }
+
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            }
+
             chromeBrowser.Load(domain_get);
         }
 
         private void pictureBox_browserhomehover_Click(object sender, EventArgs e)
         {
+            if (!help_click)
+            {
+                panel_help.Visible = false;
+                help_click = true;
+
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    button_notification.Visible = true;
+                }
+
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            }
+
             chromeBrowser.Load(domain_get);
         }
 
@@ -3759,6 +3809,9 @@ namespace Safety_Browser
                     label_separator.Visible = true;
                     button_notification.Visible = true;
                 }
+
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
             }
         }
 
@@ -3867,6 +3920,9 @@ namespace Safety_Browser
                     label_separator.Visible = true;
                     button_notification.Visible = true;
                 }
+
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
             }
         }
 
@@ -4046,9 +4102,9 @@ namespace Safety_Browser
                     }
                     catch (Exception err)
                     {
-                        MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        close = false;
-                        Close();
+                        //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //close = false;
+                        //Close();
                     }
 
                 }

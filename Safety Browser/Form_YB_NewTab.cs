@@ -164,6 +164,7 @@ namespace Safety_Browser
         // Form Load
         private void Form_Main_Load(object sender, EventArgs e)
         {
+            chromeBrowser.LoadingStateChanged += BrowserLoadingStateChanged;
             NetworkAvailability();
             PictureBoxCenter();
             
@@ -176,6 +177,27 @@ namespace Safety_Browser
             {
                 MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
                 WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            if (e.IsLoading)
+            {
+                Invoke(new Action(() =>
+                {
+                    pictureBox_browserstop.Visible = true;
+                    pictureBox_reload.Visible = false;
+                }));
+            }
+
+            if (!e.IsLoading)
+            {
+                Invoke(new Action(() =>
+                {
+                    pictureBox_browserstop.Visible = false;
+                    pictureBox_reload.Visible = true;
+                }));
             }
         }
 
@@ -491,6 +513,21 @@ namespace Safety_Browser
         private void pictureBox_reload_MouseLeave(object sender, EventArgs e)
         {
             pictureBox_reload.BackColor = Color.FromArgb(74, 84, 89);
+        }
+
+        private void pictureBox_browserstop_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Stop();
+        }
+
+        private void pictureBox_browserstop_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox_browserstop.BackColor = Color.FromArgb(197, 112, 53);
+        }
+
+        private void pictureBox_browserstop_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_browserstop.BackColor = Color.FromArgb(74, 84, 89);
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
