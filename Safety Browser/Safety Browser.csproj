@@ -136,11 +136,6 @@
     <Compile Include="IpInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form_Notification.resx">
       <DependentUpon>Form_Notification.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +155,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -172,6 +172,8 @@
   <ItemGroup>
     <Content Include="logo.ico" />
     <Content Include="logo_yb.ico" />
+    <None Include="Resources\loader_nav.gif" />
+    <None Include="Resources\ezgif.com-crop %289%29.gif" />
     <None Include="Resources\menu.png" />
     <None Include="Resources\refresh_notification.png" />
     <None Include="Resources\logo_yb.png" />

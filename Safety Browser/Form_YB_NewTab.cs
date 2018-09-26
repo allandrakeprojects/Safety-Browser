@@ -188,6 +188,9 @@ namespace Safety_Browser
                 {
                     pictureBox_browserstop.Visible = true;
                     pictureBox_reload.Visible = false;
+
+                    pictureBox_loader_nav.Enabled = true;
+                    pictureBox_loader_nav.Visible = true;
                 }));
             }
 
@@ -197,6 +200,8 @@ namespace Safety_Browser
                 {
                     pictureBox_browserstop.Visible = false;
                     pictureBox_reload.Visible = true;
+
+                    pictureBox_loader_nav.Visible = false;
                 }));
             }
         }
@@ -435,22 +440,6 @@ namespace Safety_Browser
             }
         }
 
-        private void goBackToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.Back();
-            }
-        }
-
-        private void forwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (not_hijacked)
-            {
-                chromeBrowser.Forward();
-            }
-        }
-
         private void timer_close_Tick(object sender, EventArgs e)
         {
             if (SetClose)
@@ -464,16 +453,6 @@ namespace Safety_Browser
                 Close();
                 Main_SetClose = false;
             }
-        }
-
-        private void pictureBox_forward_Click(object sender, EventArgs e)
-        {
-            chromeBrowser.Forward();
-        }
-
-        private void pictureBox_back_Click(object sender, EventArgs e)
-        {
-            chromeBrowser.Back();
         }
 
         private void pictureBox_reload_Click(object sender, EventArgs e)
@@ -630,4 +609,3 @@ namespace Safety_Browser
         }
     }
 }
-

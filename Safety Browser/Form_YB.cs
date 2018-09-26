@@ -1909,6 +1909,9 @@ namespace Safety_Browser
                     }
                     else
                     {
+                        pictureBox_loader_nav.Enabled = true;
+                        pictureBox_loader_nav.Visible = true;
+
                         pictureBox_browserstop.Visible = true;
                         pictureBox_reload.Visible = false;
                     }
@@ -1945,6 +1948,8 @@ namespace Safety_Browser
                         
                         timer_loader.Stop();
                         label_loader.Text = "裝載...";
+                        
+                        pictureBox_loader_nav.Visible = false;
                     }
                 }));
             }
@@ -4372,4 +4377,3 @@ namespace Safety_Browser
         }
     }
 }
-

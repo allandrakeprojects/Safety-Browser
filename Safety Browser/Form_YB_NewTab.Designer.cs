@@ -58,6 +58,7 @@
             this.toolStripMenuItem_version = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_mouse = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_browserstop = new System.Windows.Forms.PictureBox();
+            this.pictureBox_loader_nav = new System.Windows.Forms.PictureBox();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_maximize)).BeginInit();
@@ -68,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hover)).BeginInit();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserstop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader_nav)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_connection
@@ -212,7 +214,7 @@
             this.pictureBox_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
             this.pictureBox_menu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_menu.Image = global::Safety_Browser.Properties.Resources.menu;
-            this.pictureBox_menu.Location = new System.Drawing.Point(15, 4);
+            this.pictureBox_menu.Location = new System.Drawing.Point(13, 4);
             this.pictureBox_menu.Name = "pictureBox_menu";
             this.pictureBox_menu.Size = new System.Drawing.Size(33, 29);
             this.pictureBox_menu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -349,7 +351,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
-            this.toolStripMenuItem_version.Text = "0.0.2";
+            this.toolStripMenuItem_version.Text = "0.0.1";
             // 
             // timer_mouse
             // 
@@ -372,6 +374,20 @@
             this.pictureBox_browserstop.MouseLeave += new System.EventHandler(this.pictureBox_browserstop_MouseLeave);
             this.pictureBox_browserstop.MouseHover += new System.EventHandler(this.pictureBox_browserstop_MouseHover);
             // 
+            // pictureBox_loader_nav
+            // 
+            this.pictureBox_loader_nav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
+            this.pictureBox_loader_nav.Enabled = false;
+            this.pictureBox_loader_nav.ErrorImage = null;
+            this.pictureBox_loader_nav.Image = global::Safety_Browser.Properties.Resources.loader_nav;
+            this.pictureBox_loader_nav.Location = new System.Drawing.Point(102, 12);
+            this.pictureBox_loader_nav.Name = "pictureBox_loader_nav";
+            this.pictureBox_loader_nav.Size = new System.Drawing.Size(36, 14);
+            this.pictureBox_loader_nav.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_loader_nav.TabIndex = 82;
+            this.pictureBox_loader_nav.TabStop = false;
+            this.pictureBox_loader_nav.Visible = false;
+            // 
             // Form_YB_NewTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,6 +395,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
+            this.Controls.Add(this.pictureBox_loader_nav);
             this.Controls.Add(this.pictureBox_reload);
             this.Controls.Add(this.pictureBox_browserstop);
             this.Controls.Add(this.pictureBox_menu);
@@ -410,6 +427,7 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_browserstop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_loader_nav)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,6 +462,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_version;
         private System.Windows.Forms.Timer timer_mouse;
         private System.Windows.Forms.PictureBox pictureBox_browserstop;
+        private System.Windows.Forms.PictureBox pictureBox_loader_nav;
     }
 }
 
