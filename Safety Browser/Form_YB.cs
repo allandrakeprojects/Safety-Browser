@@ -58,6 +58,7 @@ namespace Safety_Browser
         private string _province;
         private string BRAND_CODE = "YB";
         private string API_KEY = "6b8c7e5617414bf2d4ace37600b6ab71";
+        private string BRAND_ID = "1";
         private ChromiumWebBrowser chromeBrowser;
         private double defaultValue = 0;
         private GlobalKeyboardHook gHook;
@@ -706,7 +707,7 @@ namespace Safety_Browser
                             using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
                             {
                                 csv.Write(p.Select(i => new {
-                                    Header_Test_Header = i.id + "*|*" + i.message_date + "*|*" + "★ " + i.message_title + "*|*" + i.message_content + "*|*" + i.status + "*|*" + i.message_type + "*|*" + i.edited_id + "*|*U"
+                                    Header_Test_Header = i.id + "*|*" + i.message_date + "*|*" + "★ " + i.message_title + "*|*" + i.message_content + "*|*" + i.status + "*|*" + i.message_type + "*|*" + i.edited_id + "*|*U" + i.brand_id
                                 }));
                             }
                         }
@@ -721,9 +722,15 @@ namespace Safety_Browser
                                 {
                                     if (!line_sr.Contains("Header_Test_Header"))
                                     {
-                                        StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
-                                        sw.WriteLine(line_sr);
-                                        sw.Close();
+                                        char last = line_sr[line_sr.Length - 1];
+                                        string replace_line = line_sr.Remove(line_sr.Length - 1);
+
+                                        if (BRAND_ID == last.ToString())
+                                        {
+                                            StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
+                                            sw.WriteLine(replace_line);
+                                            sw.Close();
+                                        }
                                     }
                                 }
                             }
@@ -746,9 +753,15 @@ namespace Safety_Browser
                                 {
                                     if (!line_sr.Contains("Header_Test_Header"))
                                     {
-                                        StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
-                                        sw.WriteLine(line_sr);
-                                        sw.Close();
+                                        char last = line_sr[line_sr.Length - 1];
+                                        string replace_line = line_sr.Remove(line_sr.Length - 1);
+
+                                        if (BRAND_ID == last.ToString())
+                                        {
+                                            StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
+                                            sw.WriteLine(replace_line);
+                                            sw.Close();
+                                        }
                                     }
                                 }
                             }
@@ -845,6 +858,7 @@ namespace Safety_Browser
                     {
                         count_update++;
 
+                        // Message Type
                         if (count_update == 7)
                         {
                             if (obj.ToString() != "0")
