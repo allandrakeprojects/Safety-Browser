@@ -1867,6 +1867,32 @@ namespace Safety_Browser
         // asd123
         private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
+            Invoke(new Action(() =>
+            {
+                pictureBox_back.Enabled = e.CanGoBack;
+                goBackToolStripMenuItem.Enabled = e.CanGoBack;
+                pictureBox_forward.Enabled = e.CanGoForward;
+                forwardToolStripMenuItem.Enabled = e.CanGoForward;
+
+                if (pictureBox_forward.Enabled == true)
+                {
+                    pictureBox_forward.Image = Properties.Resources.forward;
+                }
+                else
+                {
+                    pictureBox_forward.Image = Properties.Resources.forward_visible;
+                }
+
+                if (pictureBox_back.Enabled == true)
+                {
+                    pictureBox_back.Image = Properties.Resources.back;
+                }
+                else
+                {
+                    pictureBox_back.Image = Properties.Resources.back_visible;
+                }
+            }));
+
             if (e.IsLoading)
             {
                 Invoke(new Action(() =>
@@ -2250,61 +2276,6 @@ namespace Safety_Browser
                                     timer_elseloaded.Start();
                                 }
                             }));
-                        }
-                    }
-                    else
-                    {
-                        fully_loaded++;
-
-                        if (fully_loaded == 1)
-                        {
-                            pictureBox_forward.Enabled = e.CanGoForward;
-                            forwardToolStripMenuItem.Enabled = e.CanGoForward;
-                            
-                            if (String.IsNullOrEmpty(get_back_button_i))
-                            {
-                                get_back_button_i = back_button_i.ToString();
-                            }
-                            
-                            if (!e.CanGoForward)
-                            {
-                                back_button_i++;
-                            }
-
-                            if (pictureBox_back.Enabled == true)
-                            {
-                                back_button_i--;
-                            }
-
-                            if (get_back_button_i != back_button_i.ToString())
-                            {
-                                pictureBox_back.Enabled = true;
-                                goBackToolStripMenuItem.Enabled = true;
-                            }
-
-                            if (get_back_button_i == back_button_i.ToString())
-                            {
-                                pictureBox_back.Enabled = false;
-                                goBackToolStripMenuItem.Enabled = false;
-                            }
-
-                            if (pictureBox_forward.Enabled == true)
-                            {
-                                pictureBox_forward.Image = Properties.Resources.forward;
-                            }
-                            else
-                            {
-                                pictureBox_forward.Image = Properties.Resources.forward_visible;
-                            }
-
-                            if (pictureBox_back.Enabled == true)
-                            {
-                                pictureBox_back.Image = Properties.Resources.back;
-                            }
-                            else
-                            {
-                                pictureBox_back.Image = Properties.Resources.back_visible;
-                            }
                         }
                     }
                 }));
@@ -4054,112 +4025,38 @@ namespace Safety_Browser
         {
             GetTraceRoute(domain_get);
             GetPing(domain_get);
+            ZipFile zip = new ZipFile();
 
-            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            saveFileDialog.Title = "Save As";
-            saveFileDialog.FileName = "Diagnostics";
-            saveFileDialog.DefaultExt = "zip";
-            saveFileDialog.Filter = "ZIP Files|*.zip";
-            saveFileDialog.FilterIndex = 2;
-            saveFileDialog.RestoreDirectory = true;
+            zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
+            zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
+            zip.Save(Path.GetTempPath() + "\\Diagnostics.zip");
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                using (ZipFile zip = new ZipFile())
-                {
-                    zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
-                    zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
-                    zip.Save(saveFileDialog.FileName);
-                }
+            // Read file data
+            FileStream fs = new FileStream(Path.GetTempPath() + "\\Diagnostics.zip", FileMode.Open, FileAccess.Read);
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, data.Length);
+            fs.Close();
 
-                using (var stream = File.Open(saveFileDialog.FileName, FileMode.Open))
-                {
-                    try
-                    {
-                        using (var wb = new WebClient())
-                        {
-                            var files = new[]
-                            {
-                                new UploadFile
-                                {
-                                    Name = "zipfile",
-                                    Filename = Path.GetFileName(saveFileDialog.FileName),
-                                    ContentType = "application/zip",
-                                    Stream = stream
-                                }
-                            };
+            // Generate post objects
+            Dictionary<string, object> postParameters = new Dictionary<string, object>();
+            postParameters.Add("api_key", API_KEY);
+            postParameters.Add("brand_code", BRAND_CODE);
+            postParameters.Add("macid", _mac_address);
+            postParameters.Add("zipfile", new FormUpload.FileParameter(data, "Diagnostics.zip", "application/zip"));
 
-                            var data = new NameValueCollection
-                            {
-                                ["api_key"] = API_KEY,
-                                ["brand_code"] = BRAND_CODE,
-                                ["macid"] = _mac_address
-                            };
+            // Create request and receive response
+            string postURL = diagnostics_service[current_web_service];
+            string userAgent = "admin";
+            HttpWebResponse webResponse = FormUpload.MultipartFormDataPost(postURL, userAgent, postParameters);
 
-                            byte[] result = UploadFiles(diagnostics_service[current_web_service], files, data);
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        //close = false;
-                        //Close();
-                    }
+            // Process response
+            StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
+            //string fullResponse = responseReader.ReadToEnd();
+            //MessageBox.Show(fullResponse);
 
-                }
-
-                //InsertDiagnostics(diagnostics_service[current_web_service], saveFileDialog.FileName);
-            }
-
-        }
-
-        private byte[] UploadFiles(string address, IEnumerable<UploadFile> files, NameValueCollection values)
-        {
-            var request = WebRequest.Create(address);
-            request.Method = "POST";
-            var boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x", NumberFormatInfo.InvariantInfo);
-            request.ContentType = "multipart/form-data; boundary=" + boundary;
-            boundary = "--" + boundary;
-
-            using (var requestStream = request.GetRequestStream())
-            {
-                // Write the values
-                foreach (string name in values.Keys)
-                {
-                    var buffer = Encoding.ASCII.GetBytes(boundary + Environment.NewLine);
-                    requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.ASCII.GetBytes(string.Format("Content-Disposition: form-data; name=\"{0}\"{1}{1}", name, Environment.NewLine));
-                    requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.UTF8.GetBytes(values[name] + Environment.NewLine);
-                    requestStream.Write(buffer, 0, buffer.Length);
-                }
-
-                // Write the files
-                foreach (var file in files)
-                {
-                    var buffer = Encoding.ASCII.GetBytes(boundary + Environment.NewLine);
-                    requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.UTF8.GetBytes(string.Format("Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"{2}", file.Name, file.Filename, Environment.NewLine));
-                    requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.ASCII.GetBytes(string.Format("Content-Type: {0}{1}{1}", file.ContentType, Environment.NewLine));
-                    requestStream.Write(buffer, 0, buffer.Length);
-                    //file.Stream.CopyTo(requestStream);
-                    buffer = Encoding.ASCII.GetBytes(Environment.NewLine);
-                    requestStream.Write(buffer, 0, buffer.Length);
-                }
-
-                var boundaryBuffer = Encoding.ASCII.GetBytes(boundary + "--");
-                requestStream.Write(boundaryBuffer, 0, boundaryBuffer.Length);
-            }
-
-            using (var response = request.GetResponse())
-            using (var responseStream = response.GetResponseStream())
-            using (var stream = new MemoryStream())
-            {
-                responseStream.CopyTo(stream);
-                return stream.ToArray();
-            }
+            File.Delete(Path.GetTempPath() + "\\traceroute.txt");
+            File.Delete(Path.GetTempPath() + "\\ping.txt");
+            File.Delete(Path.GetTempPath() + "\\Diagnostics.zip");
         }
 
         const int WS_MINIMIZEBOX = 0x20000;
@@ -4281,7 +4178,7 @@ namespace Safety_Browser
             panel_landing.Visible = false;
             timer_landing.Stop();
         }
-        
+
         private void pictureBox_maximize_Click(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Maximized)
