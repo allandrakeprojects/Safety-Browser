@@ -700,8 +700,6 @@ namespace Safety_Browser
 
                     if (!String.IsNullOrEmpty(notifications_get))
                     {
-                        isNewEntry = true;
-
                         using (var csv = new ChoCSVWriter(temp_file).WithFirstLineHeader())
                         {
                             using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
@@ -727,9 +725,24 @@ namespace Safety_Browser
 
                                         if (BRAND_ID == last.ToString())
                                         {
-                                            StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
-                                            sw.WriteLine(replace_line);
-                                            sw.Close();
+                                            string[] strArray = replace_line.Split("*|*");
+
+                                            int count_update = 0;
+                                            foreach (object obj in strArray)
+                                            {
+                                                count_update++;
+                                                
+                                                if (count_update == 6)
+                                                {
+                                                    if (obj.ToString() == "0" || obj.ToString() == "1")
+                                                    {
+                                                        isNewEntry = true;
+                                                        StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
+                                                        sw.WriteLine(replace_line);
+                                                        sw.Close();
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -758,9 +771,23 @@ namespace Safety_Browser
 
                                         if (BRAND_ID == last.ToString())
                                         {
-                                            StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
-                                            sw.WriteLine(replace_line);
-                                            sw.Close();
+                                            string[] strArray = replace_line.Split("*|*");
+
+                                            int count_update = 0;
+                                            foreach (object obj in strArray)
+                                            {
+                                                count_update++;
+
+                                                if (count_update == 6)
+                                                {
+                                                    if (obj.ToString() == "0" || obj.ToString() == "1")
+                                                    {
+                                                        StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
+                                                        sw.WriteLine(replace_line);
+                                                        sw.Close();
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
