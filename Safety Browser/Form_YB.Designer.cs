@@ -338,7 +338,7 @@
             this.panel_help.Controls.Add(this.label_help);
             this.panel_help.Controls.Add(this.pictureBox2);
             this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel_help.Location = new System.Drawing.Point(302, 559);
+            this.panel_help.Location = new System.Drawing.Point(321, 49);
             this.panel_help.Name = "panel_help";
             this.panel_help.Size = new System.Drawing.Size(828, 435);
             this.panel_help.TabIndex = 69;
@@ -351,9 +351,9 @@
             this.label_social2.ForeColor = System.Drawing.Color.White;
             this.label_social2.Location = new System.Drawing.Point(83, 251);
             this.label_social2.Name = "label_social2";
-            this.label_social2.Size = new System.Drawing.Size(86, 13);
+            this.label_social2.Size = new System.Drawing.Size(101, 13);
             this.label_social2.TabIndex = 73;
-            this.label_social2.Text = "• 微信: yb188yb";
+            this.label_social2.Text = "• WeChat: yb188yb";
             // 
             // pictureBox_qr
             // 
@@ -487,9 +487,9 @@
             this.label_chatus1.ForeColor = System.Drawing.Color.White;
             this.label_chatus1.Location = new System.Drawing.Point(84, 112);
             this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(287, 13);
+            this.label_chatus1.Size = new System.Drawing.Size(282, 13);
             this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "有疑問嗎？獲得全天候實時聊天，實時幫助聊天支持。";
+            this.label_chatus1.Text = "有疑問嗎？獲得全天候實時聊天，實時幫助聊天支持.";
             // 
             // label_chatus
             // 
@@ -682,7 +682,7 @@
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
             this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
-            this.toolStripMenuItem_version.Text = "0.0.1";
+            this.toolStripMenuItem_version.Text = "1.0.0";
             // 
             // timer_mouse
             // 
@@ -1122,10 +1122,10 @@
             this.ClientSize = new System.Drawing.Size(1270, 764);
             this.Controls.Add(this.panel_landing);
             this.Controls.Add(this.pictureBox_loader_nav);
+            this.Controls.Add(this.panel_help);
             this.Controls.Add(this.pictureBox_loader);
             this.Controls.Add(this.label_loader);
             this.Controls.Add(this.button_notification);
-            this.Controls.Add(this.panel_help);
             this.Controls.Add(this.dataGridView_domain);
             this.Controls.Add(this.label_notificationscount);
             this.Controls.Add(this.pictureBox_nofication);

@@ -671,7 +671,6 @@ namespace Safety_Browser
         {
             try
             {
-                WebRequest.DefaultWebProxy = new WebProxy();
                 var client = new HttpClient();
                 var requestContent = new FormUrlEncodedContent(new[] {
                     new KeyValuePair<string, string>("macid", GetMACAddress()),
@@ -700,6 +699,7 @@ namespace Safety_Browser
 
                     if (!String.IsNullOrEmpty(notifications_get))
                     {
+                        //isNewEntry = true;
                         using (var csv = new ChoCSVWriter(temp_file).WithFirstLineHeader())
                         {
                             using (var p = ChoJSONReader.LoadText(json).WithJSONPath("$..data"))
@@ -722,6 +722,12 @@ namespace Safety_Browser
                                     {
                                         char last = line_sr[line_sr.Length - 1];
                                         string replace_line = line_sr.Remove(line_sr.Length - 1);
+
+                                        if (last.ToString() == "\"")
+                                        {
+                                            last = line_sr[line_sr.Length - 2];
+                                            replace_line = line_sr.Remove(line_sr.Length - 2);
+                                        }
 
                                         if (BRAND_ID == last.ToString())
                                         {
@@ -769,19 +775,26 @@ namespace Safety_Browser
                                         char last = line_sr[line_sr.Length - 1];
                                         string replace_line = line_sr.Remove(line_sr.Length - 1);
 
+                                        if (last.ToString() == "\"")
+                                        {
+                                            last = line_sr[line_sr.Length - 2];
+                                            replace_line = line_sr.Remove(line_sr.Length - 2);
+                                        }
+
                                         if (BRAND_ID == last.ToString())
                                         {
                                             string[] strArray = replace_line.Split("*|*");
-
+                                            
                                             int count_update = 0;
                                             foreach (object obj in strArray)
                                             {
                                                 count_update++;
-
+                                                
                                                 if (count_update == 6)
                                                 {
                                                     if (obj.ToString() == "0" || obj.ToString() == "1")
                                                     {
+                                                        isNewEntry = true;
                                                         StreamWriter sw = new StreamWriter(notifications_file, true, Encoding.UTF8);
                                                         sw.WriteLine(replace_line);
                                                         sw.Close();
@@ -799,7 +812,10 @@ namespace Safety_Browser
                             flowLayoutPanel_notifications.Visible = true;
                             flowLayoutPanel_notifications.BringToFront();
 
-                            NotificationsAsync();
+                            if (File.Exists(notifications_file))
+                            {
+                                NotificationsAsync();
+                            }
                         }
                     }
                     else
@@ -856,11 +872,11 @@ namespace Safety_Browser
                 timer_notifications.Start();
                 timer_notifications_detect.Start();
             }
-            catch (Exception ex)
+            catch (Exception err)
             {
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //close = false;
-                //Close();
+                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                close = false;
+                Close();
             }
         }
 
@@ -1797,47 +1813,52 @@ namespace Safety_Browser
                     string message_type = string.Empty;
                     if (version != toolStripMenuItem_version.Text)
                     {
-                        string line;
-                        StreamReader sr = new StreamReader(notifications_file);
-                        while ((line = sr.ReadLine()) != null)
+                        if (File.Exists(notifications_file))
                         {
-                            if (line != "")
+                            string line;
+                            StreamReader sr = new StreamReader(notifications_file);
+                            while ((line = sr.ReadLine()) != null)
                             {
-                                string[] strArray = line.Split("*|*");
-
-                                int count = 0;
-                                foreach (object obj in strArray)
+                                if (line != "")
                                 {
-                                    count++;
+                                    string[] strArray = line.Split("*|*");
 
-                                    if (count == 6)
+                                    int count = 0;
+                                    foreach (object obj in strArray)
                                     {
-                                        message_type = obj.ToString();
+                                        count++;
+
+                                        if (count == 6)
+                                        {
+                                            message_type = obj.ToString();
+                                        }
+                                    }
+
+                                    if (message_type == "1")
+                                    {
+                                        line_to_delete.Add(line);
+                                        line_count++;
+
+                                        File.Delete(path_version);
+                                        StreamWriter sw = new StreamWriter(path_version);
+                                        sw.Write(toolStripMenuItem_version.Text);
+                                        sw.Close();
                                     }
                                 }
-
-                                if (message_type == "1")
-                                {
-                                    line_to_delete.Add(line);
-                                    line_count++;
-                                    
-                                    File.Delete(path_version);
-                                    StreamWriter sw = new StreamWriter(path_version);
-                                    sw.Write(toolStripMenuItem_version.Text);
-                                    sw.Close();
-
-                                }
                             }
-                        }
 
-                        sr.Close();
+                            sr.Close();
+                        }
                     }
 
-                    for (int i = 0; i < line_count; i++)
+                    if (File.Exists(notifications_file))
                     {
-                        string text = File.ReadAllText(notifications_file);
-                        text = text.Replace(line_to_delete[i], "");
-                        File.WriteAllText(notifications_file, text);
+                        for (int i = 0; i < line_count; i++)
+                        {
+                            string text = File.ReadAllText(notifications_file);
+                            text = text.Replace(line_to_delete[i], "");
+                            File.WriteAllText(notifications_file, text);
+                        }
                     }
                 }
                 else
