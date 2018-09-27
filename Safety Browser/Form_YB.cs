@@ -1140,7 +1140,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "View";
+                        label_view.Text = "視圖";
 
                         if (line_count_panel > 7)
                         {
@@ -1387,7 +1387,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "GO";
+                        label_view.Text = "走";
 
                         if (line_count_panel > 7)
                         {
@@ -2324,6 +2324,10 @@ namespace Safety_Browser
                             }));
                         }
                     }
+                    else
+                    {
+                        label_clearcache.Text = "清除緩存";
+                    }
                 }));
             }
         }
@@ -3145,70 +3149,19 @@ namespace Safety_Browser
         }
 
         private async void timer_detectifhijacked_TickAsync(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    //currentUri = new Uri(domain_get);
-            //    //HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(currentUri);
-            //    //myRequest.Proxy = new WebProxy();
-            //    ////WebProxy myProxy = new WebProxy("208.52.92.160:80");
-            //    ////myRequest.Proxy = myProxy;
-
-            //    //HttpWebResponse myResponse = (HttpWebResponse)myRequest.GetResponse();
-
-            //    //WebHeaderCollection header = myResponse.Headers;
-
-            //    //var encoding = Encoding.ASCII;
-            //    //using (var reader = new System.IO.StreamReader(myResponse.GetResponseStream(), encoding))
-            //    //{
-            //    //    string responseText = reader.ReadToEnd();
-            //    //    MessageBox.Show(responseText);
-            //    //}
-
-            //    //Stream receiveStream = myResponse.GetResponseStream();
-            //    //webBrowser_handler.DocumentStream = receiveStream;
-            //    ////webBrowser_handler.Navigate(currentUri);
-            //    //MessageBox.Show(receiveStream.ToString());
-
-
-            //    var html = "";
-            //    string asfdsdfds = "http://yb188.com/";
-            //    using (WebClient client = new WebClient())
-            //    {
-            //        client.Headers.Add("user-agent", "Only a test!");
-            //        html = await Task.Run(() => client.DownloadString(asfdsdfds));
-            //    }
-
-            //    MessageBox.Show(html);
-
-
-            //    //WebClient x = new WebClient();
-            //    //string source = x.DownloadString(domain_get);
-            //    //string title = Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
-
-            //    //MessageBox.Show(title);
-            //}
-            //catch (Exception fsdfds)
-            //{
-            //    MessageBox.Show(fsdfds.ToString());
-            //}
-
-            //timer_detectifhijacked.Stop();
-        }
-        
-        // Web Browser Loaded
-        private async void WebBrowser_handler_DocumentCompletedAsync(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            if (webBrowser_handler.ReadyState == WebBrowserReadyState.Complete)
+        {            
+            timer_detectifhijacked.Stop();
+            
+            try
             {
-                if (e.Url == webBrowser_handler.Url)
+                WebRequest.DefaultWebProxy = new WebProxy();
+                using (var wc = new WebClient())
                 {
-                    // handlers
-                    webbrowser_handler_title = webBrowser_handler.DocumentTitle;
-                    webbrowser_handler_url = webBrowser_handler.Url;
-
-                    timer_detectifhijacked.Start();
-
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, "leave blank");
+                    wc.Encoding = Encoding.UTF8;
+                    string data = await wc.DownloadStringTaskAsync(domain_get);
+                    string title = Regex.Match(data, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
+                    
                     timeout = false;
                     timer_handler.Stop();
 
@@ -3216,7 +3169,7 @@ namespace Safety_Browser
                     string[] strArray = strValue.Split(',');
                     foreach (string obj in strArray)
                     {
-                        bool contains = webbrowser_handler_title.Contains(obj.Replace(" ", ""));
+                        bool contains = title.Contains(obj.Replace(" ", ""));
                         if (contains == true)
                         {
                             Invoke(new Action(() =>
@@ -3290,14 +3243,126 @@ namespace Safety_Browser
                             resetZoomToolStripMenuItem.Enabled = false;
                             zoomInToolStripMenuItem.Enabled = false;
                             zoomOutToolStripMenuItem.Enabled = false;
-                            Form_YB_NewTab.Main_SetClose = true;
+                            //Form_YB_NewTab.Main_SetClose = true;
                             timer_detectifhijacked.Stop();
                             label_clearcache.Enabled = false;
                             label_getdiagnostics.Enabled = false;
                         }
                     }
+                    else
+                    {
+                        timer_detectifhijacked.Start();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        // Web Browser Loaded
+        private async void WebBrowser_handler_DocumentCompletedAsync(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //if (webBrowser_handler.ReadyState == WebBrowserReadyState.Complete)
+            //{
+            //    if (e.Url == webBrowser_handler.Url)
+            //    {
+            //        // handlers
+            //        webbrowser_handler_title = webBrowser_handler.DocumentTitle;
+            //        webbrowser_handler_url = webBrowser_handler.Url;
+
+            //        timer_detectifhijacked.Start();
+
+            //        timeout = false;
+            //        timer_handler.Stop();
+
+            //        string strValue = text_search;
+            //        string[] strArray = strValue.Split(',');
+            //        foreach (string obj in strArray)
+            //        {
+            //            bool contains = webbrowser_handler_title.Contains(obj.Replace(" ", ""));
+            //            if (contains == true)
+            //            {
+            //                Invoke(new Action(() =>
+            //                {
+            //                    isHijacked = false;
+            //                }));
+
+            //                break;
+            //            }
+            //            else if (!contains)
+            //            {
+            //                Invoke(new Action(() =>
+            //                {
+            //                    isHijacked = true;
+            //                }));
+            //            }
+            //        }
+
+            //        if (isHijacked)
+            //        {
+            //            var html = "";
+
+
+            //            if (!domain_get.Contains("http"))
+            //            {
+            //                try
+            //                {
+            //                    replace_domain_get = "http://" + domain_get;
+            //                    using (WebClient client = new WebClient())
+            //                    {
+            //                        html = await Task.Run(() => client.DownloadString(replace_domain_get));
+            //                    }
+            //                }
+            //                catch (Exception)
+            //                {
+            //                    html = "";
+            //                }
+            //            }
+            //            else
+            //            {
+            //                try
+            //                {
+            //                    using (WebClient client = new WebClient())
+            //                    {
+            //                        html = await Task.Run(() => client.DownloadString(domain_get));
+            //                    }
+            //                }
+            //                catch (Exception)
+            //                {
+            //                    html = "";
+            //                }
+            //            }
+
+            //            if (!html.Contains("landing_image"))
+            //            {
+            //                chromeBrowser.Dock = DockStyle.None;
+            //                pictureBox_loader.BringToFront();
+            //                pictureBox_loader.Visible = true;
+            //                label_loader.Visible = true;
+            //                domain_one_time = true;
+            //                label_loadingstate.Text = "1";
+            //                label_loadingstate.Text = "0";
+
+            //                pictureBox_reload.Enabled = false;
+            //                pictureBox_reload.Image = Properties.Resources.refresh_visible;
+            //                pictureBox_browserhome.Enabled = false;
+            //                pictureBox_browserhomehover.Enabled = false;
+            //                pictureBox_browserhome.Image = Properties.Resources.browser_homehover;
+            //                reloadToolStripMenuItem.Enabled = false;
+            //                cleanAndReloadToolStripMenuItem.Enabled = false;
+            //                resetZoomToolStripMenuItem.Enabled = false;
+            //                zoomInToolStripMenuItem.Enabled = false;
+            //                zoomOutToolStripMenuItem.Enabled = false;
+            //                Form_YB_NewTab.Main_SetClose = true;
+            //                timer_detectifhijacked.Stop();
+            //                label_clearcache.Enabled = false;
+            //                label_getdiagnostics.Enabled = false;
+            //            }
+            //        }
+            //    }
+            //}
         }
         
         private void timer_elseloaded_Tick(object sender, EventArgs e)
@@ -4054,6 +4119,7 @@ namespace Safety_Browser
         private void label_clearcache_Click(object sender, EventArgs e)
         {
             chromeBrowser.Reload(false);
+            label_clearcache.Text = "清除緩存...";
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -4233,7 +4299,7 @@ namespace Safety_Browser
             }
             else
             {
-                MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+                MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -4280,7 +4346,7 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+                    MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
                     WindowState = FormWindowState.Maximized;
                 }
             }
@@ -4341,7 +4407,7 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "準備好了...";
+                label_getdiagnostics.Text = "獲得診斷...";
                 pingProc.WaitForExit();
             }
 
@@ -4390,7 +4456,7 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "請稍候...";
+                label_getdiagnostics.Text = "獲得診斷...";
                 Cursor.Current = Cursors.WaitCursor;
                 pingProc.WaitForExit();
             }
