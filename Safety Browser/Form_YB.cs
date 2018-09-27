@@ -1443,10 +1443,11 @@ namespace Safety_Browser
         {
             try
             {
+                string get_line = string.Empty;
                 string parent_name = ((Label)sender).Parent.Name;
                 string output = Regex.Match(parent_name, @"\d+").Value;
                 string text = string.Empty;
-
+                
                 string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
                 string line;
                 StreamReader sr = new StreamReader(notifications_file);
@@ -1577,6 +1578,7 @@ namespace Safety_Browser
                                     if (get_last_char == "\"")
                                     {
                                         output_line = line.Remove(line.Length - 2);
+
                                         if (output_line.Substring(0, 1) == "\"")
                                         {
                                             string replace_output_line = output_line.Remove(0, 1);
@@ -1601,6 +1603,8 @@ namespace Safety_Browser
                                             text = text.Replace(line, output_line + "R");
                                         }
                                     }
+
+                                    get_line = output_line + "R";
                                 }
                             }
                         }
@@ -1610,31 +1614,47 @@ namespace Safety_Browser
                 MessageBox.Show(_message_content_inner + "\n\n", _message_title_inner.Replace("★", ""), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 string final_replace_message_title_inner = string.Empty;
-                if (_message_title_inner.Contains("★"))
-                {
-                    string replace_message_title_inner = _message_title_inner.Replace("★", "");
-                    final_replace_message_title_inner = "" + replace_message_title_inner.Remove(0, 1);
-
-                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).Text = Ellipsis(final_replace_message_title_inner, 20);
-                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).ForeColor = Color.FromArgb(72, 72, 72);
-                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_content_notification_" + output, true)[0]).ForeColor = Color.FromArgb(72, 72, 72);
-                }
 
                 sr.Close();
                 File.WriteAllText(notifications_file, text);
 
                 if (_message_title_inner.Contains("★"))
                 {
+                    string replace_message_title_inner = _message_title_inner.Replace("★", "");
+                    final_replace_message_title_inner = "" + replace_message_title_inner.Remove(0, 1);
                     string text_get = File.ReadAllText(notifications_file);
-
                     string final_replace_message_title_inner_text_file = string.Empty;
-                    if (_message_title_inner.Contains("★"))
+                    string replace_message_title_inner_text_file = get_line.Replace("★", String.Empty);
+                    string[] strArray_inner = replace_message_title_inner_text_file.Split("*|*");
+
+                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).Text = Ellipsis(final_replace_message_title_inner, 20);
+                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).ForeColor = Color.FromArgb(72, 72, 72);
+                    ((Label)flowLayoutPanel_notifications.Controls.Find("label_content_notification_" + output, true)[0]).ForeColor = Color.FromArgb(72, 72, 72);
+                    
+                    int count = 0;
+                    string get_text = string.Empty;
+                    foreach (object obj in strArray_inner)
                     {
-                        string replace_message_title_inner_text_file = _message_title_inner.Replace("★", "");
-                        final_replace_message_title_inner_text_file = "" + replace_message_title_inner_text_file.Remove(0, 1);
-                        text_get = text.Replace(_message_title_inner, final_replace_message_title_inner_text_file);
-                        File.WriteAllText(notifications_file, text_get);
+                        count++;
+
+                        if (count == 3)
+                        {
+
+                            get_text += obj.ToString().Remove(0, 1) + "*|*";
+                        }
+                        else if (count == 8)
+                        {
+                            get_text += obj.ToString();
+                        }
+                        else
+                        {
+                            get_text += obj.ToString() + "*|*";
+                        }
+
                     }
+
+                    text_get = text_get.Replace(get_line, get_text);
+                    File.WriteAllText(notifications_file, text_get);
 
                     int get_notifcount = Convert.ToInt32(label_notificationscount.Text) - 1;
 
