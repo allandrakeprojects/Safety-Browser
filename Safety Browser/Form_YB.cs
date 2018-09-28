@@ -1403,7 +1403,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "走";
+                        label_view.Text = "視圖";
 
                         if (line_count_panel > 7)
                         {
@@ -1450,9 +1450,154 @@ namespace Safety_Browser
 
         private void click_event_update(object sender, EventArgs e)
         {
-            Process.Start(@"updater.exe");
-            close = false;
-            timer_close.Start();
+
+            try
+            {
+                string get_line = string.Empty;
+                string parent_name = ((Label)sender).Parent.Name;
+                string output = Regex.Match(parent_name, @"\d+").Value;
+                string text = string.Empty;
+
+                string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
+                string line;
+                StreamReader sr = new StreamReader(notifications_file);
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line != "")
+                    {
+                        string[] strArray = line.Split("*|*");
+
+                        int count = 0;
+                        int count_inner = 0;
+                        foreach (object obj in strArray)
+                        {
+                            count++;
+
+                            if (count == 1)
+                            {
+                                if (output == obj.ToString().Replace("\"", ""))
+                                {
+                                    foreach (object obje in strArray)
+                                    {
+                                        count_inner++;
+
+                                        if (count_inner == 1)
+                                        {
+                                            _message_id_inner = obje.ToString().Replace("\"", "");
+                                        }
+                                        else if (count_inner == 2)
+                                        {
+                                            _message_date_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 3)
+                                        {
+                                            _message_title_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 4)
+                                        {
+                                            _message_content_inner = ReplaceBRwithNewline(obje.ToString());
+                                        }
+                                        else if (count_inner == 5)
+                                        {
+                                            _message_status_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 6)
+                                        {
+                                            _message_type_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 7)
+                                        {
+                                            _message_edited_id_inner = obje.ToString();
+                                        }
+                                        else if (count_inner == 8)
+                                        {
+                                            const int SECOND = 1;
+                                            const int MINUTE = 60 * SECOND;
+                                            const int HOUR = 60 * MINUTE;
+                                            const int DAY = 24 * HOUR;
+                                            const int MONTH = 30 * DAY;
+
+                                            string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                            DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                                            string get_date_parse = _message_date_inner;
+                                            DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                                            var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
+                                            double delta = Math.Abs(ts.TotalSeconds);
+
+                                            if (delta < 1 * MINUTE)
+                                            {
+                                                _message_date_inner = "just now";
+                                            }
+                                            else if (delta < 2 * MINUTE)
+                                            {
+                                                _message_date_inner = "a minute ago";
+                                            }
+                                            else if (delta < 45 * MINUTE)
+                                            {
+                                                if (ts.Minutes == 1)
+                                                {
+                                                    _message_date_inner = ts.Minutes + " minute ago";
+                                                }
+                                                else
+                                                {
+                                                    _message_date_inner = ts.Minutes + " minutes ago";
+                                                }
+                                            }
+                                            else if (delta < 90 * MINUTE)
+                                            {
+                                                _message_date_inner = "an hour ago";
+                                            }
+                                            else if (delta < 24 * HOUR)
+                                            {
+                                                if (ts.Hours == 1)
+                                                {
+                                                    _message_date_inner = ts.Hours + " hour ago";
+                                                }
+                                                else
+                                                {
+                                                    _message_date_inner = ts.Hours + " hours ago";
+                                                }
+                                            }
+                                            else if (delta < 48 * HOUR)
+                                            {
+                                                _message_date_inner = "yesterday";
+                                            }
+                                            else if (delta < 30 * DAY)
+                                            {
+                                                if (ts.Days == 1)
+                                                {
+                                                    _message_date_inner = ts.Days + " day ago";
+                                                }
+                                                else
+                                                {
+                                                    _message_date_inner = ts.Days + " days ago";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                _message_date_inner = "older message";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }                
+
+                if(MessageBox.Show(_message_content_inner + "\n\n", _message_title_inner.Replace("★", ""), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) ==  DialogResult.OK)
+                {
+                    Process.Start(@"updater.exe");
+                    close = false;
+                    timer_close.Start();
+                }
+            }
+            catch (Exception)
+            {
+                // Leave blank
+            }
         }
 
         private void click_event(object sender, EventArgs e)
