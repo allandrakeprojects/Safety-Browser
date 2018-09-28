@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -159,44 +159,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView_domain.Location = new System.Drawing.Point(1307, 47);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -295,7 +295,7 @@
             this.panel_cefsharp.BackColor = System.Drawing.Color.White;
             this.panel_cefsharp.Location = new System.Drawing.Point(1, 38);
             this.panel_cefsharp.Name = "panel_cefsharp";
-            this.panel_cefsharp.Size = new System.Drawing.Size(1268, 725);
+            this.panel_cefsharp.Size = new System.Drawing.Size(1265, 725);
             this.panel_cefsharp.TabIndex = 48;
             // 
             // panel_landing
@@ -338,7 +338,7 @@
             this.panel_help.Controls.Add(this.label_help);
             this.panel_help.Controls.Add(this.pictureBox2);
             this.panel_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel_help.Location = new System.Drawing.Point(321, 49);
+            this.panel_help.Location = new System.Drawing.Point(266, 14);
             this.panel_help.Name = "panel_help";
             this.panel_help.Size = new System.Drawing.Size(828, 435);
             this.panel_help.TabIndex = 69;
@@ -370,7 +370,7 @@
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(549, 159);
             this.pictureBox3.Name = "pictureBox3";
@@ -383,7 +383,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(503, 22);
             this.pictureBox1.Name = "pictureBox1";
@@ -400,9 +400,9 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.label2.Location = new System.Drawing.Point(85, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "現在聊天";
+            this.label2.Text = "Chat Now";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label_getdiagnostics
@@ -412,11 +412,11 @@
             this.label_getdiagnostics.Enabled = false;
             this.label_getdiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_getdiagnostics.ForeColor = System.Drawing.Color.White;
-            this.label_getdiagnostics.Location = new System.Drawing.Point(624, 400);
+            this.label_getdiagnostics.Location = new System.Drawing.Point(605, 400);
             this.label_getdiagnostics.Name = "label_getdiagnostics";
-            this.label_getdiagnostics.Size = new System.Drawing.Size(172, 20);
+            this.label_getdiagnostics.Size = new System.Drawing.Size(191, 20);
             this.label_getdiagnostics.TabIndex = 14;
-            this.label_getdiagnostics.Text = "得到診斷";
+            this.label_getdiagnostics.Text = "Get Diagnostics";
             this.label_getdiagnostics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_getdiagnostics.Click += new System.EventHandler(this.label_getdiagnostics_Click);
             // 
@@ -426,11 +426,11 @@
             this.label_clearcache.Enabled = false;
             this.label_clearcache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_clearcache.ForeColor = System.Drawing.Color.White;
-            this.label_clearcache.Location = new System.Drawing.Point(491, 400);
+            this.label_clearcache.Location = new System.Drawing.Point(450, 400);
             this.label_clearcache.Name = "label_clearcache";
             this.label_clearcache.Size = new System.Drawing.Size(160, 20);
             this.label_clearcache.TabIndex = 13;
-            this.label_clearcache.Text = "清除緩存";
+            this.label_clearcache.Text = "Clear Cache";
             this.label_clearcache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_clearcache.Click += new System.EventHandler(this.label_clearcache_Click);
             // 
@@ -452,9 +452,9 @@
             this.label_social.ForeColor = System.Drawing.Color.White;
             this.label_social.Location = new System.Drawing.Point(82, 214);
             this.label_social.Name = "label_social";
-            this.label_social.Size = new System.Drawing.Size(52, 25);
+            this.label_social.Size = new System.Drawing.Size(66, 25);
             this.label_social.TabIndex = 9;
-            this.label_social.Text = "社會";
+            this.label_social.Text = "Social";
             // 
             // label_emailus1
             // 
@@ -476,9 +476,9 @@
             this.label_emailus.ForeColor = System.Drawing.Color.White;
             this.label_emailus.Location = new System.Drawing.Point(82, 158);
             this.label_emailus.Name = "label_emailus";
-            this.label_emailus.Size = new System.Drawing.Size(92, 25);
+            this.label_emailus.Size = new System.Drawing.Size(89, 25);
             this.label_emailus.TabIndex = 5;
-            this.label_emailus.Text = "電郵我們";
+            this.label_emailus.Text = "Email Us";
             // 
             // label_chatus1
             // 
@@ -487,9 +487,9 @@
             this.label_chatus1.ForeColor = System.Drawing.Color.White;
             this.label_chatus1.Location = new System.Drawing.Point(84, 112);
             this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(282, 13);
+            this.label_chatus1.Size = new System.Drawing.Size(331, 13);
             this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "有疑問嗎？獲得全天候實時聊天，實時幫助聊天支持.";
+            this.label_chatus1.Text = "Have questions? Get 24/7 live chat, real-time help with chat support.";
             // 
             // label_chatus
             // 
@@ -498,9 +498,9 @@
             this.label_chatus.ForeColor = System.Drawing.Color.White;
             this.label_chatus.Location = new System.Drawing.Point(82, 88);
             this.label_chatus.Name = "label_chatus";
-            this.label_chatus.Size = new System.Drawing.Size(92, 25);
+            this.label_chatus.Size = new System.Drawing.Size(83, 25);
             this.label_chatus.TabIndex = 2;
-            this.label_chatus.Text = "聊天我們";
+            this.label_chatus.Text = "Chat Us";
             // 
             // pictureBox_helpback
             // 
@@ -521,16 +521,16 @@
             this.label_help.ForeColor = System.Drawing.Color.White;
             this.label_help.Location = new System.Drawing.Point(80, 23);
             this.label_help.Name = "label_help";
-            this.label_help.Size = new System.Drawing.Size(160, 33);
+            this.label_help.Size = new System.Drawing.Size(240, 33);
             this.label_help.TabIndex = 0;
-            this.label_help.Text = "幫助和支持";
+            this.label_help.Text = "Help and Support";
             this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(605, 54);
             this.pictureBox2.Name = "pictureBox2";
@@ -565,14 +565,14 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.fileToolStripMenuItem.Text = "文件";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.exitToolStripMenuItem.Text = "出口";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
@@ -588,16 +588,16 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.viewToolStripMenuItem.Text = "視圖";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Text = "View";
             // 
             // goBackToolStripMenuItem
             // 
             this.goBackToolStripMenuItem.Enabled = false;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
             this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Left Key";
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.goBackToolStripMenuItem.Text = "回去";
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.goBackToolStripMenuItem.Text = "Go Back";
             this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
             // 
             // forwardToolStripMenuItem
@@ -605,8 +605,8 @@
             this.forwardToolStripMenuItem.Enabled = false;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
             this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "Right Key";
-            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.forwardToolStripMenuItem.Text = "前鋒";
+            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.forwardToolStripMenuItem.Text = "Forward";
             this.forwardToolStripMenuItem.Click += new System.EventHandler(this.forwardToolStripMenuItem_Click);
             // 
             // homeToolStripMenuItem
@@ -614,8 +614,8 @@
             this.homeToolStripMenuItem.Enabled = false;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
             this.homeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.homeToolStripMenuItem.Text = "家";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.homeToolStripMenuItem.Text = "Home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
             // reloadToolStripMenuItem
@@ -623,8 +623,8 @@
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             this.reloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.reloadToolStripMenuItem.Text = "刷新";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.reloadToolStripMenuItem.Text = "Reload";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // cleanAndReloadToolStripMenuItem
@@ -633,22 +633,22 @@
             this.cleanAndReloadToolStripMenuItem.Name = "cleanAndReloadToolStripMenuItem";
             this.cleanAndReloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.cleanAndReloadToolStripMenuItem.Text = "清潔和重新加載";
+            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cleanAndReloadToolStripMenuItem.Text = "Clean and Reload";
             this.cleanAndReloadToolStripMenuItem.Click += new System.EventHandler(this.cleanAndReloadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(228, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(236, 6);
             // 
             // resetZoomToolStripMenuItem
             // 
             this.resetZoomToolStripMenuItem.Enabled = false;
             this.resetZoomToolStripMenuItem.Name = "resetZoomToolStripMenuItem";
             this.resetZoomToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.resetZoomToolStripMenuItem.Text = "重置縮放";
+            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.resetZoomToolStripMenuItem.Text = "Reset Zoom";
             this.resetZoomToolStripMenuItem.Click += new System.EventHandler(this.resetZoomToolStripMenuItem_Click);
             // 
             // zoomInToolStripMenuItem
@@ -656,8 +656,8 @@
             this.zoomInToolStripMenuItem.Enabled = false;
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
             this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.zoomInToolStripMenuItem.Text = "放大";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.zoomInToolStripMenuItem.Text = "Zoom In";
             this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
             // zoomOutToolStripMenuItem
@@ -665,8 +665,8 @@
             this.zoomOutToolStripMenuItem.Enabled = false;
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
             this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.zoomOutToolStripMenuItem.Text = "縮小";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.zoomOutToolStripMenuItem.Text = "Zoom Out";
             this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
@@ -674,14 +674,14 @@
             this.versionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_version});
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.versionToolStripMenuItem.Text = "版";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.versionToolStripMenuItem.Text = "Version";
             // 
             // toolStripMenuItem_version
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_version.Text = "1.0.0";
             // 
             // timer_mouse
@@ -743,7 +743,7 @@
             this.label_notifications.Name = "label_notifications";
             this.label_notifications.Size = new System.Drawing.Size(270, 31);
             this.label_notifications.TabIndex = 72;
-            this.label_notifications.Text = "通知";
+            this.label_notifications.Text = "Notifications";
             this.label_notifications.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel_notifications
@@ -764,7 +764,7 @@
             this.label_notificationstatus.Name = "label_notificationstatus";
             this.label_notificationstatus.Size = new System.Drawing.Size(268, 16);
             this.label_notificationstatus.TabIndex = 73;
-            this.label_notificationstatus.Text = "目前沒有通知.";
+            this.label_notificationstatus.Text = "There are currently no notifications.";
             this.label_notificationstatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_notificationstatus.Visible = false;
             // 
@@ -1061,12 +1061,12 @@
             // label_loader
             // 
             this.label_loader.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label_loader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_loader.Location = new System.Drawing.Point(1, 452);
+            this.label_loader.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loader.Location = new System.Drawing.Point(1, 451);
             this.label_loader.Name = "label_loader";
-            this.label_loader.Size = new System.Drawing.Size(1268, 16);
+            this.label_loader.Size = new System.Drawing.Size(1268, 23);
             this.label_loader.TabIndex = 78;
-            this.label_loader.Text = "裝載...";
+            this.label_loader.Text = "loading...";
             this.label_loader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer_loader
@@ -1148,11 +1148,11 @@
             this.Controls.Add(this.label_loadingstate);
             this.Controls.Add(this.pictureBox_reload);
             this.Controls.Add(this.pictureBox_browserstop);
-            this.Controls.Add(this.label_titlebar);
             this.Controls.Add(this.panel_cefsharp);
             this.Controls.Add(this.label_separator);
             this.Controls.Add(this.panel_notification);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.label_titlebar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;

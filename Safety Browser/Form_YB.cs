@@ -1156,7 +1156,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "視圖";
+                        label_view.Text = "view";
 
                         if (line_count_panel > 7)
                         {
@@ -1403,7 +1403,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "視圖";
+                        label_view.Text = "view";
 
                         if (line_count_panel > 7)
                         {
@@ -2174,7 +2174,7 @@ namespace Safety_Browser
                         pictureBox_browserstop.Visible = false;
                         
                         timer_loader.Stop();
-                        label_loader.Text = "裝載...";
+                        label_loader.Text = "loading...";
                         
                         pictureBox_loader_nav.Visible = false;
                     }
@@ -2362,7 +2362,7 @@ namespace Safety_Browser
                                     elseload_return = false;
 
                                     timer_loader.Stop();
-                                    label_loader.Text = "裝載...";
+                                    label_loader.Text = "loading...";
                                 }
                                 else
                                 {
@@ -2489,7 +2489,7 @@ namespace Safety_Browser
                                 isNotHijackedLoaded = true;
 
                                 timer_loader.Stop();
-                                label_loader.Text = "裝載...";
+                                label_loader.Text = "loading...";
                                 
                                 string path_result = Path.GetTempPath() + "\\sb_result.txt";
                                 if (File.Exists(path_result))
@@ -2512,7 +2512,7 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        label_clearcache.Text = "清除緩存";
+                        label_clearcache.Text = "Clear Cache";
                     }
                 }));
             }
@@ -2971,7 +2971,7 @@ namespace Safety_Browser
         {
             if (close)
             {
-                DialogResult dr = MessageBox.Show("您確定要退出該計劃嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -3182,7 +3182,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("您確定要退出該計劃嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -3343,7 +3343,7 @@ namespace Safety_Browser
                 WebRequest.DefaultWebProxy = new WebProxy();
                 using (var wc = new WebClient())
                 {
-                    wc.Headers.Add(HttpRequestHeader.UserAgent, "leave blank");
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, "Leave blank");
                     wc.Encoding = Encoding.UTF8;
                     string data = await wc.DownloadStringTaskAsync(domain_get);
                     string title = Regex.Match(data, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
@@ -3722,7 +3722,7 @@ namespace Safety_Browser
                             elseload_return = false;
 
                             timer_loader.Stop();
-                            label_loader.Text = "裝載...";
+                            label_loader.Text = "loading...";
                         }
                         else
                         {
@@ -3849,7 +3849,7 @@ namespace Safety_Browser
                         isNotHijackedLoaded = true;
 
                         timer_loader.Stop();
-                        label_loader.Text = "裝載...";
+                        label_loader.Text = "loading...";
 
                         string path_result = Path.GetTempPath() + "\\sb_result.txt";
                         if (File.Exists(path_result))
@@ -4305,7 +4305,7 @@ namespace Safety_Browser
         private void label_clearcache_Click(object sender, EventArgs e)
         {
             chromeBrowser.Reload(false);
-            label_clearcache.Text = "清除緩存...";
+            label_clearcache.Text = "Clearing Cache...";
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -4459,15 +4459,15 @@ namespace Safety_Browser
 
             if (timer_loader_i < 5)
             {
-                label_loader.Text = "裝載...";
+                label_loader.Text = "loading...";
             }
             else if (timer_loader_i < 10)
             {
-                label_loader.Text = "將數據提供給服務器...";
+                label_loader.Text = "getting data to the server...";
             }
             else if (timer_loader_i > 15)
             {
-                label_loader.Text = "做好準備...";
+                label_loader.Text = "getting ready...";
             }
         }
 
@@ -4497,7 +4497,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("您確定要退出該計劃嗎？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -4593,11 +4593,11 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "獲得診斷...";
+                label_getdiagnostics.Text = "Getting Diagnostics...";
                 pingProc.WaitForExit();
             }
 
-            label_getdiagnostics.Text = "得到診斷";
+            label_getdiagnostics.Text = "Get Dignostics";
             Cursor.Current = Cursors.Default;
 
             result_ping = pingProc.StandardOutput.ReadToEnd();
@@ -4642,7 +4642,7 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "獲得診斷...";
+                label_getdiagnostics.Text = "Getting Diagnostics...";
                 Cursor.Current = Cursors.WaitCursor;
                 pingProc.WaitForExit();
             }
