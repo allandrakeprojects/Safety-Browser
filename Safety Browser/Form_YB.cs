@@ -212,7 +212,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1004", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //Close();
             }
         }
@@ -1156,7 +1156,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "view";
+                        label_view.Text = "观看";
 
                         if (line_count_panel > 7)
                         {
@@ -1403,7 +1403,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "view";
+                        label_view.Text = "观看";
 
                         if (line_count_panel > 7)
                         {
@@ -1837,7 +1837,7 @@ namespace Safety_Browser
 
         private static string Ellipsis(string value, int maxChars)
         {
-            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "。。。";
         }
 
         public string ReplaceBRwithNewline(string txtVal)
@@ -2174,7 +2174,7 @@ namespace Safety_Browser
                         pictureBox_browserstop.Visible = false;
 
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "加载中。。。";
 
                         pictureBox_loader_nav.Visible = false;
                     }
@@ -2362,7 +2362,7 @@ namespace Safety_Browser
                                     elseload_return = false;
 
                                     timer_loader.Stop();
-                                    label_loader.Text = "loading...";
+                                    label_loader.Text = "加载中。。。";
                                 }
                                 else
                                 {
@@ -2489,7 +2489,7 @@ namespace Safety_Browser
                                 isNotHijackedLoaded = true;
 
                                 timer_loader.Stop();
-                                label_loader.Text = "loading...";
+                                label_loader.Text = "加载中。。。";
 
                                 string path_result = Path.GetTempPath() + "\\sb_result.txt";
                                 if (File.Exists(path_result))
@@ -2512,7 +2512,7 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        label_clearcache.Text = "Clear Cache";
+                        label_clearcache.Text = "清除缓存";
                     }
                 }));
             }
@@ -2684,7 +2684,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2796,7 +2796,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2908,7 +2908,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2971,7 +2971,7 @@ namespace Safety_Browser
         {
             if (close)
             {
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -3182,7 +3182,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -3722,7 +3722,7 @@ namespace Safety_Browser
                             elseload_return = false;
 
                             timer_loader.Stop();
-                            label_loader.Text = "loading...";
+                            label_loader.Text = "加载中。。。";
                         }
                         else
                         {
@@ -3849,7 +3849,7 @@ namespace Safety_Browser
                         isNotHijackedLoaded = true;
 
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "加载中。。。";
 
                         string path_result = Path.GetTempPath() + "\\sb_result.txt";
                         if (File.Exists(path_result))
@@ -4305,7 +4305,7 @@ namespace Safety_Browser
         private void label_clearcache_Click(object sender, EventArgs e)
         {
             chromeBrowser.Reload(false);
-            label_clearcache.Text = "Clearing Cache...";
+            label_clearcache.Text = "缓存清除中。。。";
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -4459,15 +4459,15 @@ namespace Safety_Browser
 
             if (timer_loader_i < 5)
             {
-                label_loader.Text = "loading...";
+                label_loader.Text = "加载中。。。";
             }
             else if (timer_loader_i < 10)
             {
-                label_loader.Text = "getting data to the server...";
+                label_loader.Text = "资料收取中。。。";
             }
             else if (timer_loader_i > 15)
             {
-                label_loader.Text = "getting ready...";
+                label_loader.Text = "准备中。。。";
             }
         }
 
@@ -4497,7 +4497,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -4593,11 +4593,11 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "Getting Diagnostics...";
+                label_getdiagnostics.Text = "诊断中。。。";
                 pingProc.WaitForExit();
             }
 
-            label_getdiagnostics.Text = "Get Dignostics";
+            label_getdiagnostics.Text = "诊断";
             Cursor.Current = Cursors.Default;
 
             result_ping = pingProc.StandardOutput.ReadToEnd();
@@ -4642,7 +4642,7 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "Getting Diagnostics...";
+                label_getdiagnostics.Text = "诊断中。。。";
                 Cursor.Current = Cursors.WaitCursor;
                 pingProc.WaitForExit();
             }
