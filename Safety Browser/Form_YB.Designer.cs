@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_YB));
             this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_domain = new System.Windows.Forms.DataGridView();
@@ -159,44 +159,44 @@
             this.dataGridView_domain.AllowUserToAddRows = false;
             this.dataGridView_domain.AllowUserToDeleteRows = false;
             this.dataGridView_domain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
-            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(254)))));
+            this.dataGridView_domain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_domain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_domain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_domain.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_domain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_domain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_domain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.domain});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_domain.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_domain.Location = new System.Drawing.Point(1307, 47);
             this.dataGridView_domain.MultiSelect = false;
             this.dataGridView_domain.Name = "dataGridView_domain";
             this.dataGridView_domain.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_domain.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_domain.RowHeadersVisible = false;
             this.dataGridView_domain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_domain.Size = new System.Drawing.Size(196, 276);
@@ -270,7 +270,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(329, 13);
             this.label8.TabIndex = 34;
-            this.label8.Text = "请查询你的网络连接。";
+            this.label8.Text = "Check your Internet Connection.";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_titlebar
@@ -400,9 +400,9 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
             this.label2.Location = new System.Drawing.Point(85, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "聊天";
+            this.label2.Text = "Chat Now";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label_getdiagnostics
@@ -416,7 +416,7 @@
             this.label_getdiagnostics.Name = "label_getdiagnostics";
             this.label_getdiagnostics.Size = new System.Drawing.Size(191, 20);
             this.label_getdiagnostics.TabIndex = 14;
-            this.label_getdiagnostics.Text = "诊断";
+            this.label_getdiagnostics.Text = "Get Diagnostics";
             this.label_getdiagnostics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_getdiagnostics.Click += new System.EventHandler(this.label_getdiagnostics_Click);
             // 
@@ -430,7 +430,7 @@
             this.label_clearcache.Name = "label_clearcache";
             this.label_clearcache.Size = new System.Drawing.Size(160, 20);
             this.label_clearcache.TabIndex = 13;
-            this.label_clearcache.Text = "清除缓存";
+            this.label_clearcache.Text = "Clear Cache";
             this.label_clearcache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_clearcache.Click += new System.EventHandler(this.label_clearcache_Click);
             // 
@@ -452,9 +452,9 @@
             this.label_social.ForeColor = System.Drawing.Color.White;
             this.label_social.Location = new System.Drawing.Point(82, 214);
             this.label_social.Name = "label_social";
-            this.label_social.Size = new System.Drawing.Size(92, 25);
+            this.label_social.Size = new System.Drawing.Size(66, 25);
             this.label_social.TabIndex = 9;
-            this.label_social.Text = "社交服务";
+            this.label_social.Text = "Social";
             // 
             // label_emailus1
             // 
@@ -476,9 +476,9 @@
             this.label_emailus.ForeColor = System.Drawing.Color.White;
             this.label_emailus.Location = new System.Drawing.Point(82, 158);
             this.label_emailus.Name = "label_emailus";
-            this.label_emailus.Size = new System.Drawing.Size(52, 25);
+            this.label_emailus.Size = new System.Drawing.Size(89, 25);
             this.label_emailus.TabIndex = 5;
-            this.label_emailus.Text = "邮件";
+            this.label_emailus.Text = "Email Us";
             // 
             // label_chatus1
             // 
@@ -487,9 +487,9 @@
             this.label_chatus1.ForeColor = System.Drawing.Color.White;
             this.label_chatus1.Location = new System.Drawing.Point(84, 112);
             this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(178, 13);
+            this.label_chatus1.Size = new System.Drawing.Size(331, 13);
             this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "如有问题，请联系24/7在线客服。";
+            this.label_chatus1.Text = "Have questions? Get 24/7 live chat, real-time help with chat support.";
             // 
             // label_chatus
             // 
@@ -498,9 +498,9 @@
             this.label_chatus.ForeColor = System.Drawing.Color.White;
             this.label_chatus.Location = new System.Drawing.Point(82, 88);
             this.label_chatus.Name = "label_chatus";
-            this.label_chatus.Size = new System.Drawing.Size(92, 25);
+            this.label_chatus.Size = new System.Drawing.Size(83, 25);
             this.label_chatus.TabIndex = 2;
-            this.label_chatus.Text = "联系我们";
+            this.label_chatus.Text = "Chat Us";
             // 
             // pictureBox_helpback
             // 
@@ -521,9 +521,9 @@
             this.label_help.ForeColor = System.Drawing.Color.White;
             this.label_help.Location = new System.Drawing.Point(80, 23);
             this.label_help.Name = "label_help";
-            this.label_help.Size = new System.Drawing.Size(73, 33);
+            this.label_help.Size = new System.Drawing.Size(240, 33);
             this.label_help.TabIndex = 0;
-            this.label_help.Text = "帮助";
+            this.label_help.Text = "Help and Support";
             this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
@@ -565,14 +565,14 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.fileToolStripMenuItem.Text = "文档";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.exitToolStripMenuItem.Text = "退出";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
@@ -588,16 +588,16 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.viewToolStripMenuItem.Text = "观看";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.viewToolStripMenuItem.Text = "View";
             // 
             // goBackToolStripMenuItem
             // 
             this.goBackToolStripMenuItem.Enabled = false;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
             this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Left Key";
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.goBackToolStripMenuItem.Text = "返回";
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.goBackToolStripMenuItem.Text = "Go Back";
             this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
             // 
             // forwardToolStripMenuItem
@@ -605,8 +605,8 @@
             this.forwardToolStripMenuItem.Enabled = false;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
             this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "Right Key";
-            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.forwardToolStripMenuItem.Text = "前进";
+            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.forwardToolStripMenuItem.Text = "Forward";
             this.forwardToolStripMenuItem.Click += new System.EventHandler(this.forwardToolStripMenuItem_Click);
             // 
             // homeToolStripMenuItem
@@ -614,40 +614,41 @@
             this.homeToolStripMenuItem.Enabled = false;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
             this.homeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.homeToolStripMenuItem.Text = "主页";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.homeToolStripMenuItem.Text = "Home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+R";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.reloadToolStripMenuItem.Text = "刷新";
+            this.reloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.reloadToolStripMenuItem.Text = "Reload";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // cleanAndReloadToolStripMenuItem
             // 
             this.cleanAndReloadToolStripMenuItem.Enabled = false;
             this.cleanAndReloadToolStripMenuItem.Name = "cleanAndReloadToolStripMenuItem";
-            this.cleanAndReloadToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+R";
-            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.cleanAndReloadToolStripMenuItem.Text = "强制刷新";
+            this.cleanAndReloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.R)));
+            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cleanAndReloadToolStripMenuItem.Text = "Clean and Reload";
             this.cleanAndReloadToolStripMenuItem.Click += new System.EventHandler(this.cleanAndReloadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(236, 6);
             // 
             // resetZoomToolStripMenuItem
             // 
             this.resetZoomToolStripMenuItem.Enabled = false;
             this.resetZoomToolStripMenuItem.Name = "resetZoomToolStripMenuItem";
             this.resetZoomToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.resetZoomToolStripMenuItem.Text = "重置縮放";
+            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.resetZoomToolStripMenuItem.Text = "Reset Zoom";
             this.resetZoomToolStripMenuItem.Click += new System.EventHandler(this.resetZoomToolStripMenuItem_Click);
             // 
             // zoomInToolStripMenuItem
@@ -655,8 +656,8 @@
             this.zoomInToolStripMenuItem.Enabled = false;
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
             this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.zoomInToolStripMenuItem.Text = "放大";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.zoomInToolStripMenuItem.Text = "Zoom In";
             this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
             // zoomOutToolStripMenuItem
@@ -664,8 +665,8 @@
             this.zoomOutToolStripMenuItem.Enabled = false;
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
             this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.zoomOutToolStripMenuItem.Text = "縮小";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.zoomOutToolStripMenuItem.Text = "Zoom Out";
             this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
@@ -673,8 +674,8 @@
             this.versionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_version});
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.versionToolStripMenuItem.Text = "版本";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.versionToolStripMenuItem.Text = "Version";
             // 
             // toolStripMenuItem_version
             // 
@@ -742,7 +743,7 @@
             this.label_notifications.Name = "label_notifications";
             this.label_notifications.Size = new System.Drawing.Size(270, 31);
             this.label_notifications.TabIndex = 72;
-            this.label_notifications.Text = "通知";
+            this.label_notifications.Text = "Notifications";
             this.label_notifications.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel_notifications
@@ -763,7 +764,7 @@
             this.label_notificationstatus.Name = "label_notificationstatus";
             this.label_notificationstatus.Size = new System.Drawing.Size(268, 16);
             this.label_notificationstatus.TabIndex = 73;
-            this.label_notificationstatus.Text = "目前并没通知。";
+            this.label_notificationstatus.Text = "There are currently no notifications.";
             this.label_notificationstatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_notificationstatus.Visible = false;
             // 
@@ -1065,7 +1066,7 @@
             this.label_loader.Name = "label_loader";
             this.label_loader.Size = new System.Drawing.Size(1268, 23);
             this.label_loader.TabIndex = 78;
-            this.label_loader.Text = "加载中。。。";
+            this.label_loader.Text = "loading...";
             this.label_loader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer_loader
@@ -1283,4 +1284,3 @@
         private System.Windows.Forms.PictureBox pictureBox_menu;
     }
 }
-
