@@ -89,7 +89,7 @@ namespace Safety_Browser
                             }));
 
                         }).Start();
-                    }
+                    } 
                     else if (e.KeyData.ToString().ToUpper().IndexOf("Control".ToUpper()) >= 0 && e.KeyCode == Keys.R)
                     {
                         new Thread(() =>
@@ -167,7 +167,7 @@ namespace Safety_Browser
             chromeBrowser.LoadingStateChanged += BrowserLoadingStateChanged;
             NetworkAvailability();
             PictureBoxCenter();
-
+            
             if (get_status == "help")
             {
                 MinimumSize = new Size(710, 710);
@@ -282,10 +282,10 @@ namespace Safety_Browser
 
         // Form Closing
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        {            
             if (close)
             {
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -381,7 +381,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Hide();
@@ -406,7 +406,7 @@ namespace Safety_Browser
                 chromeBrowser.Reload(true);
             }
         }
-
+        
         private void cleanAndReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (not_hijacked)
@@ -447,8 +447,7 @@ namespace Safety_Browser
                 close = false;
                 Close();
                 SetClose = false;
-            }
-            else if (Main_SetClose)
+            } else if (Main_SetClose)
             {
                 close = false;
                 Close();
@@ -515,7 +514,7 @@ namespace Safety_Browser
             Point position = new Point(pictureBox_menu.Left, pictureBox_menu.Height);
             ToolStripMenuItem.DropDown.Show(pictureBox_menu, position);
         }
-
+        
         private void pictureBox_minimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
@@ -541,7 +540,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Hide();
@@ -557,7 +556,7 @@ namespace Safety_Browser
                 Hide();
             }
         }
-
+         
         private void label_titlebar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && e.Clicks >= 2)
@@ -587,8 +586,8 @@ namespace Safety_Browser
             e.Graphics.FillRectangle(defaultColor, Left);
             e.Graphics.FillRectangle(defaultColor, Right);
             e.Graphics.FillRectangle(defaultColor, Bottom);
-        }
-
+        }  
+        
         protected override void WndProc(ref Message message)
         {
             base.WndProc(ref message);

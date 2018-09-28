@@ -132,14 +132,14 @@ namespace Safety_Browser
         public Form_YB()
         {
             InitializeComponent();
-
+            
             Opacity = 0;
 
             timer.Interval = 20;
             timer.Tick += new EventHandler(fadeIn);
             timer.Start();
         }
-
+        
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         // Form Load
@@ -156,12 +156,12 @@ namespace Safety_Browser
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
             NetworkAvailability();
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetNotificationAsync(notifications_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             PictureBoxCenter();
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
@@ -170,10 +170,10 @@ namespace Safety_Browser
                 gHook.HookedKeys.Add(key);
             }
             gHook.hook();
-
+            
             GetInaccessibleLists();
         }
-
+        
         void fadeIn(object sender, EventArgs e)
         {
             if (Opacity >= 1)
@@ -212,7 +212,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1004", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //Close();
             }
         }
@@ -411,9 +411,9 @@ namespace Safety_Browser
                     }
                     else if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
@@ -606,9 +606,9 @@ namespace Safety_Browser
         // ByPass Calling
         private void ByPassCalling()
         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         // Get Domain
@@ -737,7 +737,7 @@ namespace Safety_Browser
                                             foreach (object obj in strArray)
                                             {
                                                 count_update++;
-
+                                                
                                                 if (count_update == 6)
                                                 {
                                                     if (obj.ToString() == "0" || obj.ToString() == "1")
@@ -784,12 +784,12 @@ namespace Safety_Browser
                                         if (BRAND_ID == last.ToString())
                                         {
                                             string[] strArray = replace_line.Split("*|*");
-
+                                            
                                             int count_update = 0;
                                             foreach (object obj in strArray)
                                             {
                                                 count_update++;
-
+                                                
                                                 if (count_update == 6)
                                                 {
                                                     if (obj.ToString() == "0" || obj.ToString() == "1")
@@ -1017,17 +1017,17 @@ namespace Safety_Browser
                             _message_unread = obj.ToString();
                         }
                     }
-
+                    
                     if (_message_type == "0")
                     {
                         Panel p = new Panel();
                         p.Name = "panel_notification_" + _message_id;
                         p.BackColor = Color.White;
                         p.Size = new Size(270, 83);
-
+                        
                         Label label_title = new Label();
                         Label label_content = new Label();
-
+                        
                         if (_message_title.Contains("★"))
                         {
                             label_title.Name = "label_title_notification_" + _message_id;
@@ -1043,7 +1043,7 @@ namespace Safety_Browser
                             label_title.AutoSize = true;
                             label_title.ForeColor = Color.FromArgb(0, 0, 0);
                             label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
-
+                            
                             label_content.Name = "label_content_notification_" + _message_id;
                             label_content.Text = Ellipsis(_message_content, 130);
                             label_content.Location = new Point(4, 19);
@@ -1156,7 +1156,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "view";
+                        label_view.Text = "观看";
 
                         if (line_count_panel > 7)
                         {
@@ -1197,7 +1197,7 @@ namespace Safety_Browser
                     }
                 }
             }
-
+            
             if (detect_no_notification == 0)
             {
                 label_notificationstatus.Location = new Point(7, 32);
@@ -1403,7 +1403,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "view";
+                        label_view.Text = "观看";
 
                         if (line_count_panel > 7)
                         {
@@ -1585,9 +1585,9 @@ namespace Safety_Browser
                             }
                         }
                     }
-                }
+                }                
 
-                if (MessageBox.Show(_message_content_inner + "\n\n", _message_title_inner.Replace("★", ""), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                if(MessageBox.Show(_message_content_inner + "\n\n", _message_title_inner.Replace("★", ""), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) ==  DialogResult.OK)
                 {
                     Process.Start(@"updater.exe");
                     close = false;
@@ -1608,7 +1608,7 @@ namespace Safety_Browser
                 string parent_name = ((Label)sender).Parent.Name;
                 string output = Regex.Match(parent_name, @"\d+").Value;
                 string text = string.Empty;
-
+                
                 string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
                 string line;
                 StreamReader sr = new StreamReader(notifications_file);
@@ -1791,7 +1791,7 @@ namespace Safety_Browser
                     ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).Text = Ellipsis(final_replace_message_title_inner, 20);
                     ((Label)flowLayoutPanel_notifications.Controls.Find("label_title_notification_" + output, true)[0]).ForeColor = Color.FromArgb(72, 72, 72);
                     ((Label)flowLayoutPanel_notifications.Controls.Find("label_content_notification_" + output, true)[0]).ForeColor = Color.FromArgb(72, 72, 72);
-
+                    
                     int count = 0;
                     string get_text = string.Empty;
                     foreach (object obj in strArray_inner)
@@ -1837,12 +1837,12 @@ namespace Safety_Browser
 
         private static string Ellipsis(string value, int maxChars)
         {
-            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "。。。";
         }
 
         public string ReplaceBRwithNewline(string txtVal)
         {
-            string newText = "";
+            string newText = "";  
             Regex regex = new Regex(@"(<br />|<br/>|</ br>|</br>)");
             newText = regex.Replace(txtVal, "\r\n");
             // Result    
@@ -2172,10 +2172,10 @@ namespace Safety_Browser
 
                         pictureBox_reload.Visible = true;
                         pictureBox_browserstop.Visible = false;
-
+                        
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
-
+                        label_loader.Text = "加载中。。。";
+                        
                         pictureBox_loader_nav.Visible = false;
                     }
                 }));
@@ -2362,7 +2362,7 @@ namespace Safety_Browser
                                     elseload_return = false;
 
                                     timer_loader.Stop();
-                                    label_loader.Text = "loading...";
+                                    label_loader.Text = "加载中。。。";
                                 }
                                 else
                                 {
@@ -2444,7 +2444,7 @@ namespace Safety_Browser
                                 {
                                     await Task.Delay(100);
                                 });
-
+                                                                
                                 back_button_i++;
                                 timer_detectifhijacked.Start();
                                 domain_one_time = false;
@@ -2489,8 +2489,8 @@ namespace Safety_Browser
                                 isNotHijackedLoaded = true;
 
                                 timer_loader.Stop();
-                                label_loader.Text = "loading...";
-
+                                label_loader.Text = "加载中。。。";
+                                
                                 string path_result = Path.GetTempPath() + "\\sb_result.txt";
                                 if (File.Exists(path_result))
                                 {
@@ -2512,7 +2512,7 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        label_clearcache.Text = "Clear Cache";
+                        label_clearcache.Text = "清除缓存";
                     }
                 }));
             }
@@ -2684,7 +2684,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2796,7 +2796,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2908,7 +2908,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: rc1008", "rainCheck", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2944,9 +2944,9 @@ namespace Safety_Browser
 
                         if (current_web_service < web_service.Length)
                         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                             GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         }
                         else
                         {
@@ -2971,7 +2971,7 @@ namespace Safety_Browser
         {
             if (close)
             {
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -3101,7 +3101,7 @@ namespace Safety_Browser
                 //Close();
             }
         }
-
+        
         private void pictureBox_minimize_MouseHover(object sender, EventArgs e)
         {
             pictureBox_minimize.BackColor = Color.FromArgb(197, 112, 53);
@@ -3182,7 +3182,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -3335,9 +3335,9 @@ namespace Safety_Browser
         }
 
         private async void timer_detectifhijacked_TickAsync(object sender, EventArgs e)
-        {
+        {            
             timer_detectifhijacked.Stop();
-
+            
             try
             {
                 WebRequest.DefaultWebProxy = new WebProxy();
@@ -3347,7 +3347,7 @@ namespace Safety_Browser
                     wc.Encoding = Encoding.UTF8;
                     string data = await wc.DownloadStringTaskAsync(domain_get);
                     string title = Regex.Match(data, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
-
+                    
                     timeout = false;
                     timer_handler.Stop();
 
@@ -3550,7 +3550,7 @@ namespace Safety_Browser
             //    }
             //}
         }
-
+        
         private void timer_elseloaded_Tick(object sender, EventArgs e)
         {
             Invoke(new Action(async () =>
@@ -3722,7 +3722,7 @@ namespace Safety_Browser
                             elseload_return = false;
 
                             timer_loader.Stop();
-                            label_loader.Text = "loading...";
+                            label_loader.Text = "加载中。。。";
                         }
                         else
                         {
@@ -3849,7 +3849,7 @@ namespace Safety_Browser
                         isNotHijackedLoaded = true;
 
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "加载中。。。";
 
                         string path_result = Path.GetTempPath() + "\\sb_result.txt";
                         if (File.Exists(path_result))
@@ -4305,7 +4305,7 @@ namespace Safety_Browser
         private void label_clearcache_Click(object sender, EventArgs e)
         {
             chromeBrowser.Reload(false);
-            label_clearcache.Text = "Clearing Cache...";
+            label_clearcache.Text = "缓存清除中。。。";
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -4394,11 +4394,11 @@ namespace Safety_Browser
         private void timer_notifications_Tick(object sender, EventArgs e)
         {
             timer_notifications.Stop();
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             GetNotificationAsync(notifications_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
-
+        
         private void timer_close_Tick(object sender, EventArgs e)
         {
             Close();
@@ -4459,15 +4459,15 @@ namespace Safety_Browser
 
             if (timer_loader_i < 5)
             {
-                label_loader.Text = "loading...";
+                label_loader.Text = "加载中。。。";
             }
             else if (timer_loader_i < 10)
             {
-                label_loader.Text = "getting data to the server...";
+                label_loader.Text = "资料收取中。。。";
             }
             else if (timer_loader_i > 15)
             {
-                label_loader.Text = "getting ready...";
+                label_loader.Text = "准备中。。。";
             }
         }
 
@@ -4497,7 +4497,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -4593,11 +4593,11 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "Getting Diagnostics...";
+                label_getdiagnostics.Text = "诊断中。。。";
                 pingProc.WaitForExit();
             }
 
-            label_getdiagnostics.Text = "Get Dignostics";
+            label_getdiagnostics.Text = "诊断";
             Cursor.Current = Cursors.Default;
 
             result_ping = pingProc.StandardOutput.ReadToEnd();
@@ -4642,7 +4642,7 @@ namespace Safety_Browser
 
             while (!pingProc.HasExited)
             {
-                label_getdiagnostics.Text = "Getting Diagnostics...";
+                label_getdiagnostics.Text = "诊断中。。。";
                 Cursor.Current = Cursors.WaitCursor;
                 pingProc.WaitForExit();
             }
