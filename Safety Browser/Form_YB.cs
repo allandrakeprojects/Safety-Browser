@@ -1187,56 +1187,56 @@ namespace Safety_Browser
 
                             if (delta < 1 * MINUTE)
                             {
-                                label_date.Text = "just now";
+                                label_date.Text = "刚刚";
                             }
                             else if (delta < 2 * MINUTE)
                             {
-                                label_date.Text = "a minute ago";
+                                label_date.Text = "一分钟前";
                             }
                             else if (delta < 45 * MINUTE)
                             {
                                 if (ts.Minutes == 1)
                                 {
-                                    label_date.Text = ts.Minutes + " minute ago";
+                                    label_date.Text = "一分钟前";
                                 }
                                 else
                                 {
-                                    label_date.Text = ts.Minutes + " minutes ago";
+                                    label_date.Text = ts.Minutes + "分钟前";
                                 }
                             }
                             else if (delta < 90 * MINUTE)
                             {
-                                label_date.Text = "an hour ago";
+                                label_date.Text = "一小时前";
                             }
                             else if (delta < 24 * HOUR)
                             {
                                 if (ts.Hours == 1)
                                 {
-                                    label_date.Text = ts.Hours + " hour ago";
+                                    label_date.Text = "一小时前";
                                 }
                                 else
                                 {
-                                    label_date.Text = ts.Hours + " hours ago";
+                                    label_date.Text = ts.Hours + "小时前";
                                 }
                             }
                             else if (delta < 48 * HOUR)
                             {
-                                label_date.Text = "yesterday";
+                                label_date.Text = "昨日";
                             }
                             else if (delta < 30 * DAY)
                             {
                                 if (ts.Days == 1)
                                 {
-                                    label_date.Text = ts.Days + " day ago";
+                                    label_date.Text = ts.Days + "天前";
                                 }
                                 else
                                 {
-                                    label_date.Text = ts.Days + " days ago";
+                                    label_date.Text = ts.Days + "天前";
                                 }
                             }
                             else
                             {
-                                label_date.Text = "older message";
+                                label_date.Text = "已读信息";
                             }
 
                             label_date.AutoSize = true;
@@ -1447,56 +1447,56 @@ namespace Safety_Browser
 
                         if (delta < 1 * MINUTE)
                         {
-                            label_date.Text = "just now";
+                            label_date.Text = "刚刚";
                         }
                         else if (delta < 2 * MINUTE)
                         {
-                            label_date.Text = "a minute ago";
+                            label_date.Text = "一分钟前";
                         }
                         else if (delta < 45 * MINUTE)
                         {
                             if (ts.Minutes == 1)
                             {
-                                label_date.Text = ts.Minutes + " minute ago";
+                                label_date.Text = "一分钟前";
                             }
                             else
                             {
-                                label_date.Text = ts.Minutes + " minutes ago";
+                                label_date.Text = ts.Minutes + "分钟前";
                             }
                         }
                         else if (delta < 90 * MINUTE)
                         {
-                            label_date.Text = "an hour ago";
+                            label_date.Text = "一小时前";
                         }
                         else if (delta < 24 * HOUR)
                         {
                             if (ts.Hours == 1)
                             {
-                                label_date.Text = ts.Hours + " hour ago";
+                                label_date.Text = "一小时前";
                             }
                             else
                             {
-                                label_date.Text = ts.Hours + " hours ago";
+                                label_date.Text = ts.Hours + "小时前";
                             }
                         }
                         else if (delta < 48 * HOUR)
                         {
-                            label_date.Text = "yesterday";
+                            label_date.Text = "昨日";
                         }
                         else if (delta < 30 * DAY)
                         {
                             if (ts.Days == 1)
                             {
-                                label_date.Text = ts.Days + " day ago";
+                                label_date.Text = ts.Days + "天前";
                             }
                             else
                             {
-                                label_date.Text = ts.Days + " days ago";
+                                label_date.Text = ts.Days + "天前";
                             }
                         }
                         else
                         {
-                            label_date.Text = "older message";
+                            label_date.Text = "已读信息";
                         }
 
                         label_date.AutoSize = true;
@@ -1631,56 +1631,56 @@ namespace Safety_Browser
 
                                             if (delta < 1 * MINUTE)
                                             {
-                                                _message_date_inner = "just now";
+                                                _message_date_inner = "刚刚";
                                             }
                                             else if (delta < 2 * MINUTE)
                                             {
-                                                _message_date_inner = "a minute ago";
+                                                _message_date_inner = "一分钟前";
                                             }
                                             else if (delta < 45 * MINUTE)
                                             {
                                                 if (ts.Minutes == 1)
                                                 {
-                                                    _message_date_inner = ts.Minutes + " minute ago";
+                                                    _message_date_inner = "一分钟前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Minutes + " minutes ago";
+                                                    _message_date_inner = ts.Minutes + "分钟前";
                                                 }
                                             }
                                             else if (delta < 90 * MINUTE)
                                             {
-                                                _message_date_inner = "an hour ago";
+                                                _message_date_inner = "一小时前";
                                             }
                                             else if (delta < 24 * HOUR)
                                             {
                                                 if (ts.Hours == 1)
                                                 {
-                                                    _message_date_inner = ts.Hours + " hour ago";
+                                                    _message_date_inner = "一小时前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Hours + " hours ago";
+                                                    _message_date_inner = ts.Hours + "小时前";
                                                 }
                                             }
                                             else if (delta < 48 * HOUR)
                                             {
-                                                _message_date_inner = "yesterday";
+                                                _message_date_inner = "昨日";
                                             }
                                             else if (delta < 30 * DAY)
                                             {
                                                 if (ts.Days == 1)
                                                 {
-                                                    _message_date_inner = ts.Days + " day ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Days + " days ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                             }
                                             else
                                             {
-                                                _message_date_inner = "older message";
+                                                _message_date_inner = "已读信息";
                                             }
                                         }
                                     }
@@ -1782,56 +1782,56 @@ namespace Safety_Browser
 
                                             if (delta < 1 * MINUTE)
                                             {
-                                                _message_date_inner = "just now";
+                                                _message_date_inner = "刚刚";
                                             }
                                             else if (delta < 2 * MINUTE)
                                             {
-                                                _message_date_inner = "a minute ago";
+                                                _message_date_inner = "一分钟前";
                                             }
                                             else if (delta < 45 * MINUTE)
                                             {
                                                 if (ts.Minutes == 1)
                                                 {
-                                                    _message_date_inner = ts.Minutes + " minute ago";
+                                                    _message_date_inner = "一分钟前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Minutes + " minutes ago";
+                                                    _message_date_inner = ts.Minutes + "分钟前";
                                                 }
                                             }
                                             else if (delta < 90 * MINUTE)
                                             {
-                                                _message_date_inner = "an hour ago";
+                                                _message_date_inner = "一小时前";
                                             }
                                             else if (delta < 24 * HOUR)
                                             {
                                                 if (ts.Hours == 1)
                                                 {
-                                                    _message_date_inner = ts.Hours + " hour ago";
+                                                    _message_date_inner = "一小时前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Hours + " hours ago";
+                                                    _message_date_inner = ts.Hours + "小时前";
                                                 }
                                             }
                                             else if (delta < 48 * HOUR)
                                             {
-                                                _message_date_inner = "yesterday";
+                                                _message_date_inner = "昨日";
                                             }
                                             else if (delta < 30 * DAY)
                                             {
                                                 if (ts.Days == 1)
                                                 {
-                                                    _message_date_inner = ts.Days + " day ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Days + " days ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                             }
                                             else
                                             {
-                                                _message_date_inner = "older message";
+                                                _message_date_inner = "已读信息";
                                             }
                                         }
                                     }

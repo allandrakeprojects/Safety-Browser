@@ -172,6 +172,7 @@
   <ItemGroup>
     <Content Include="logo.ico" />
     <Content Include="logo_yb.ico" />
+    <Content Include="Safety Browser.sln" />
     <None Include="Resources\help_back.png" />
     <None Include="Resources\refresh_notification1.png" />
     <None Include="Resources\clockwise %285%29.png" />
