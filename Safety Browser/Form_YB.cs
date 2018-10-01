@@ -667,7 +667,7 @@ namespace Safety_Browser
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Check your Internet Connection! Thank you.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("请查询你的网络连接！謝謝。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     close = false;
                     Close();
                 }
@@ -742,7 +742,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Check your Internet Connection! Thank you.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请查询你的网络连接！謝謝。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 close = false;
                 Close();
             }
@@ -1187,56 +1187,56 @@ namespace Safety_Browser
 
                             if (delta < 1 * MINUTE)
                             {
-                                label_date.Text = "just now";
+                                label_date.Text = "刚刚";
                             }
                             else if (delta < 2 * MINUTE)
                             {
-                                label_date.Text = "a minute ago";
+                                label_date.Text = "一分钟前";
                             }
                             else if (delta < 45 * MINUTE)
                             {
                                 if (ts.Minutes == 1)
                                 {
-                                    label_date.Text = "a minute ago";
+                                    label_date.Text = "一分钟前";
                                 }
                                 else
                                 {
-                                    label_date.Text = ts.Minutes + " minutes ago";
+                                    label_date.Text = ts.Minutes + "分钟前";
                                 }
                             }
                             else if (delta < 90 * MINUTE)
                             {
-                                label_date.Text = "an hour ago";
+                                label_date.Text = "一小时前";
                             }
                             else if (delta < 24 * HOUR)
                             {
                                 if (ts.Hours == 1)
                                 {
-                                    label_date.Text = "an hour ago";
+                                    label_date.Text = "一小时前";
                                 }
                                 else
                                 {
-                                    label_date.Text = ts.Hours + " hours ago";
+                                    label_date.Text = ts.Hours + "小时前";
                                 }
                             }
                             else if (delta < 48 * HOUR)
                             {
-                                label_date.Text = "yesterday";
+                                label_date.Text = "昨日";
                             }
                             else if (delta < 30 * DAY)
                             {
                                 if (ts.Days == 1)
                                 {
-                                    label_date.Text = ts.Days + " day ago";
+                                    label_date.Text = ts.Days + "天前";
                                 }
                                 else
                                 {
-                                    label_date.Text = ts.Days + " days ago";
+                                    label_date.Text = ts.Days + "天前";
                                 }
                             }
                             else
                             {
-                                label_date.Text = "older message";
+                                label_date.Text = "已读信息";
                             }
 
                             label_date.AutoSize = true;
@@ -1246,7 +1246,7 @@ namespace Safety_Browser
 
                             Label label_view = new Label();
                             label_view.Name = "label_view_notification_" + _message_id;
-                            label_view.Text = "view";
+                            label_view.Text = "观看";
 
                             if (line_count_panel > 7)
                             {
@@ -1447,56 +1447,56 @@ namespace Safety_Browser
 
                         if (delta < 1 * MINUTE)
                         {
-                            label_date.Text = "just now";
+                            label_date.Text = "刚刚";
                         }
                         else if (delta < 2 * MINUTE)
                         {
-                            label_date.Text = "a minute ago";
+                            label_date.Text = "一分钟前";
                         }
                         else if (delta < 45 * MINUTE)
                         {
                             if (ts.Minutes == 1)
                             {
-                                label_date.Text = "a minute ago";
+                                label_date.Text = "一分钟前";
                             }
                             else
                             {
-                                label_date.Text = ts.Minutes + " minutes ago";
+                                label_date.Text = ts.Minutes + "分钟前";
                             }
                         }
                         else if (delta < 90 * MINUTE)
                         {
-                            label_date.Text = "an hour ago";
+                            label_date.Text = "一小时前";
                         }
                         else if (delta < 24 * HOUR)
                         {
                             if (ts.Hours == 1)
                             {
-                                label_date.Text = "an hour ago";
+                                label_date.Text = "一小时前";
                             }
                             else
                             {
-                                label_date.Text = ts.Hours + " hours ago";
+                                label_date.Text = ts.Hours + "小时前";
                             }
                         }
                         else if (delta < 48 * HOUR)
                         {
-                            label_date.Text = "yesterday";
+                            label_date.Text = "昨日";
                         }
                         else if (delta < 30 * DAY)
                         {
                             if (ts.Days == 1)
                             {
-                                label_date.Text = ts.Days + " day ago";
+                                label_date.Text = ts.Days + "天前";
                             }
                             else
                             {
-                                label_date.Text = ts.Days + " days ago";
+                                label_date.Text = ts.Days + "天前";
                             }
                         }
                         else
                         {
-                            label_date.Text = "older message";
+                            label_date.Text = "已读信息";
                         }
 
                         label_date.AutoSize = true;
@@ -1506,7 +1506,7 @@ namespace Safety_Browser
 
                         Label label_view = new Label();
                         label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "view";
+                        label_view.Text = "观看";
 
                         if (line_count_panel > 7)
                         {
@@ -1631,56 +1631,56 @@ namespace Safety_Browser
 
                                             if (delta < 1 * MINUTE)
                                             {
-                                                _message_date_inner = "just now";
+                                                _message_date_inner = "刚刚";
                                             }
                                             else if (delta < 2 * MINUTE)
                                             {
-                                                _message_date_inner = "a minute ago";
+                                                _message_date_inner = "一分钟前";
                                             }
                                             else if (delta < 45 * MINUTE)
                                             {
                                                 if (ts.Minutes == 1)
                                                 {
-                                                    _message_date_inner = "a minute ago";
+                                                    _message_date_inner = "一分钟前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Minutes + " minutes ago";
+                                                    _message_date_inner = ts.Minutes + "分钟前";
                                                 }
                                             }
                                             else if (delta < 90 * MINUTE)
                                             {
-                                                _message_date_inner = "an hour ago";
+                                                _message_date_inner = "一小时前";
                                             }
                                             else if (delta < 24 * HOUR)
                                             {
                                                 if (ts.Hours == 1)
                                                 {
-                                                    _message_date_inner = "an hour ago";
+                                                    _message_date_inner = "一小时前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Hours + " hours ago";
+                                                    _message_date_inner = ts.Hours + "小时前";
                                                 }
                                             }
                                             else if (delta < 48 * HOUR)
                                             {
-                                                _message_date_inner = "yesterday";
+                                                _message_date_inner = "昨日";
                                             }
                                             else if (delta < 30 * DAY)
                                             {
                                                 if (ts.Days == 1)
                                                 {
-                                                    _message_date_inner = ts.Days + " day ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Days + " days ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                             }
                                             else
                                             {
-                                                _message_date_inner = "older message";
+                                                _message_date_inner = "已读信息";
                                             }
                                         }
                                     }
@@ -1782,56 +1782,56 @@ namespace Safety_Browser
 
                                             if (delta < 1 * MINUTE)
                                             {
-                                                _message_date_inner = "just now";
+                                                _message_date_inner = "刚刚";
                                             }
                                             else if (delta < 2 * MINUTE)
                                             {
-                                                _message_date_inner = "a minute ago";
+                                                _message_date_inner = "一分钟前";
                                             }
                                             else if (delta < 45 * MINUTE)
                                             {
                                                 if (ts.Minutes == 1)
                                                 {
-                                                    _message_date_inner = "a minute ago";
+                                                    _message_date_inner = "一分钟前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Minutes + " minutes ago";
+                                                    _message_date_inner = ts.Minutes + "分钟前";
                                                 }
                                             }
                                             else if (delta < 90 * MINUTE)
                                             {
-                                                _message_date_inner = "an hour ago";
+                                                _message_date_inner = "一小时前";
                                             }
                                             else if (delta < 24 * HOUR)
                                             {
                                                 if (ts.Hours == 1)
                                                 {
-                                                    _message_date_inner = "an hour ago";
+                                                    _message_date_inner = "一小时前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Hours + " hours ago";
+                                                    _message_date_inner = ts.Hours + "小时前";
                                                 }
                                             }
                                             else if (delta < 48 * HOUR)
                                             {
-                                                _message_date_inner = "yesterday";
+                                                _message_date_inner = "昨日";
                                             }
                                             else if (delta < 30 * DAY)
                                             {
                                                 if (ts.Days == 1)
                                                 {
-                                                    _message_date_inner = ts.Days + " day ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                                 else
                                                 {
-                                                    _message_date_inner = ts.Days + " days ago";
+                                                    _message_date_inner = ts.Days + "天前";
                                                 }
                                             }
                                             else
                                             {
-                                                _message_date_inner = "older message";
+                                                _message_date_inner = "已读信息";
                                             }
                                         }
                                     }
@@ -1940,7 +1940,7 @@ namespace Safety_Browser
 
         private static string Ellipsis(string value, int maxChars)
         {
-            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "。。。";
         }
 
         public string ReplaceBRwithNewline(string txtVal)
@@ -2277,7 +2277,7 @@ namespace Safety_Browser
                         pictureBox_browserstop.Visible = false;
 
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "加载中。。。";
 
                         pictureBox_loader_nav.Visible = false;
                     }
@@ -2470,7 +2470,7 @@ namespace Safety_Browser
                                     label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
 
                                     timer_loader.Stop();
-                                    label_loader.Text = "loading...";
+                                    label_loader.Text = "加载中。。。";
 
                                     string path_result = Path.GetTempPath() + "\\sb_result.txt";
                                     if (File.Exists(path_result))
@@ -2608,7 +2608,7 @@ namespace Safety_Browser
                                 label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
 
                                 timer_loader.Stop();
-                                label_loader.Text = "loading...";
+                                label_loader.Text = "加载中。。。";
 
                                 string path_result = Path.GetTempPath() + "\\sb_result.txt";
                                 if (File.Exists(path_result))
@@ -2631,7 +2631,7 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        label_clearcache.Text = "Clear Cache";
+                        label_clearcache.Text = "清除缓存";
                     }
                 }));
             }
@@ -3090,7 +3090,7 @@ namespace Safety_Browser
         {
             if (close)
             {
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -3315,7 +3315,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -3859,7 +3859,7 @@ namespace Safety_Browser
                             label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
 
                             timer_loader.Stop();
-                            label_loader.Text = "loading...";
+                            label_loader.Text = "加载中。。。";
 
                             string path_result = Path.GetTempPath() + "\\sb_result.txt";
                             if (File.Exists(path_result))
@@ -3997,7 +3997,7 @@ namespace Safety_Browser
                         label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
 
                         timer_loader.Stop();
-                        label_loader.Text = "loading...";
+                        label_loader.Text = "加载中。。。";
                         
                         string path_result = Path.GetTempPath() + "\\sb_result.txt";
                         if (File.Exists(path_result))
@@ -4453,7 +4453,7 @@ namespace Safety_Browser
         private void label_clearcache_Click(object sender, EventArgs e)
         {
             chromeBrowser.Reload(false);
-            label_clearcache.Text = "Clearing cache...";
+            label_clearcache.Text = "缓存清除中。。。";
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -4588,15 +4588,15 @@ namespace Safety_Browser
 
             if (timer_loader_i < 5)
             {
-                label_loader.Text = "loading...";
+                label_loader.Text = "加载中。。。";
             }
             else if (timer_loader_i < 10)
             {
-                label_loader.Text = "getting data to the server...";
+                label_loader.Text = "资料收取中。。。";
             }
             else if (timer_loader_i > 15)
             {
-                label_loader.Text = "getting ready...";
+                label_loader.Text = "准备中。。。";
             }
         }
 
@@ -4626,7 +4626,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("Exit the program?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -4728,7 +4728,7 @@ namespace Safety_Browser
                 {
                     Invoke(new Action(delegate
                     {
-                        label_getdiagnostics.Text = "Getting diagnostics...";
+                        label_getdiagnostics.Text = "诊断中。。。";
                     }));
 
                     proc.WaitForExit(30000);
@@ -4771,7 +4771,7 @@ namespace Safety_Browser
                 {
                     Invoke(new Action(delegate
                     {
-                        label_getdiagnostics.Text = "Getting diagnostics...";
+                        label_getdiagnostics.Text = "诊断中。。。";
                     }));
 
                     proc.WaitForExit(30000);
