@@ -91,8 +91,8 @@ namespace Safety_Browser
         private bool help_click = true;
         private int radius = 30;
         private bool notification_click = true;
-        private static string result_ping;
-        private static string result_traceroute;
+        private static string result_ping = "";
+        private static string result_traceroute = "";
         private string dumpPath;
         private int back_button_i;
         private bool elseload_return;
@@ -152,16 +152,26 @@ namespace Safety_Browser
                 File.Delete(path_result);
             }
 
+            if (File.Exists(Path.GetTempPath() + "\\traceroute.txt"))
+            {
+                File.Delete(Path.GetTempPath() + "\\traceroute.txt");
+            }
+
+            if (File.Exists(Path.GetTempPath() + "\\ping.txt"))
+            {
+                File.Delete(Path.GetTempPath() + "\\ping.txt");
+            }
+
+            if (File.Exists(Path.GetTempPath() + "\\Diagnostics.zip"))
+            {
+                File.Delete(Path.GetTempPath() + "\\Diagnostics.zip");
+            }
+            
             InitializeChromium();
+            GetMACAddress();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
             NetworkAvailability();
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            GetNotificationAsync(notifications_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             PictureBoxCenter();
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
@@ -170,8 +180,6 @@ namespace Safety_Browser
                 gHook.HookedKeys.Add(key);
             }
             gHook.hook();
-
-            GetInaccessibleLists();
         }
 
         void fadeIn(object sender, EventArgs e)
@@ -195,7 +203,7 @@ namespace Safety_Browser
                     string auth = "r@inCh3ckd234b70";
                     string type = "category";
                     string request = "http://raincheck.ssitex.com/api/api.php";
-                    string mac_id = GetMACAddress();
+                    string mac_id = get_macAddress;
 
                     NameValueCollection postData = new NameValueCollection()
                     {
@@ -364,10 +372,29 @@ namespace Safety_Browser
 
             if (networkIsAvailable)
             {
+                panel_cefsharp.Controls.Add(chromeBrowser);
+
+                GetInaccessibleLists();
+
+                #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                GetTextToTextAsync(web_service[current_web_service]);
+                #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                
                 GetIPInfo();
+
+                #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                GetNotificationAsync(notifications_service[current_web_service]);
+                #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+                label_chatus2.Enabled = true;
+                label_emailus1.Enabled = true;
+                label_chatus2.ForeColor = Color.FromArgb(235, 99, 6);
+                label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
             }
             else
             {
+                panel_cefsharp.Controls.Clear();
+
                 timer_handler.Stop();
 
                 panel_cefsharp.Visible = false;
@@ -376,6 +403,13 @@ namespace Safety_Browser
 
                 panel_connection.Visible = true;
                 panel_connection.Enabled = true;
+
+                pictureBox_nofication.Enabled = true;
+                pictureBox_noficationhover.Enabled = true;
+                pictureBox_nofication.Image = Properties.Resources.notification;
+                timer_detectifhijacked.Stop();
+
+                NotificationsAsync();
             }
 
             NetworkChange.NetworkAvailabilityChanged += new NetworkAvailabilityChangedEventHandler(NetworkChange_NetworkAvailabilityChanged);
@@ -390,6 +424,26 @@ namespace Safety_Browser
 
                 if (networkIsAvailable)
                 {
+                    panel_cefsharp.Controls.Add(chromeBrowser);
+
+                    if (!domain_one_time)
+                    {
+                        chromeBrowser.Reload();
+                    }
+
+                    GetMACAddress();
+
+                    bool isEmpty = !inaccessble_lists.Any();
+                    if (isEmpty)
+                    {
+                        GetInaccessibleLists();
+                    }
+
+                    if (!isIPInserted)
+                    {
+                        GetIPInfo();
+                    }
+                    
                     if (dataGridView_domain.RowCount == 0 && last_index_hijacked_get)
                     {
                         if (current_web_service < web_service.Length)
@@ -411,9 +465,9 @@ namespace Safety_Browser
                     }
                     else if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
@@ -428,7 +482,7 @@ namespace Safety_Browser
                         panel_connection.Enabled = false;
                         pictureBox_loader.Visible = false;
                         label_loader.Visible = false;
-
+                        
                         panel_cefsharp.Visible = true;
                     }
                     else
@@ -461,18 +515,46 @@ namespace Safety_Browser
                             dataGridView_domain.Rows[current_domain_index].Selected = true;
                         }
                     }
+
+                    #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    GetNotificationAsync(notifications_service[current_web_service]);
+                    #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    
+                    if (!domain_one_time)
+                    {
+                        label_chatus2.Enabled = true;
+                        label_emailus1.Enabled = true;
+                        label_chatus2.ForeColor = Color.FromArgb(235, 99, 6);
+                        label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
+                        label_clearcache.Enabled = true;
+                        label_getdiagnostics.Enabled = true;
+
+                        timer_detectifhijacked.Start();
+                    }
                 }
                 else
                 {
+                    panel_cefsharp.Controls.Clear();
+
                     chromeBrowser.Stop();
                     timer_handler.Stop();
-
+                    timer_notifications.Stop();
+                    
                     panel_cefsharp.Visible = false;
                     pictureBox_loader.Visible = false;
                     label_loader.Visible = false;
 
                     panel_connection.Visible = true;
                     panel_connection.Enabled = true;
+                    
+                    label_chatus2.Enabled = false;
+                    label_emailus1.Enabled = false;
+                    label_chatus2.ForeColor = Color.Black;
+                    label_emailus1.ForeColor = Color.Black;
+                    label_clearcache.Enabled = false;
+                    label_getdiagnostics.Enabled = false;
+
+                    timer_detectifhijacked.Stop();
                 }
             }));
         }
@@ -585,7 +667,7 @@ namespace Safety_Browser
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1001", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("请查询你的网络连接！謝謝。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     close = false;
                     Close();
                 }
@@ -660,7 +742,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请查询你的网络连接！謝謝。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 close = false;
                 Close();
             }
@@ -673,7 +755,7 @@ namespace Safety_Browser
             {
                 var client = new HttpClient();
                 var requestContent = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair<string, string>("macid", GetMACAddress()),
+                    new KeyValuePair<string, string>("macid", get_macAddress),
                     new KeyValuePair<string, string>("api_key", API_KEY),
                     new KeyValuePair<string, string>("brand_code", BRAND_CODE),
                 });
@@ -836,9 +918,12 @@ namespace Safety_Browser
                         }
                         else
                         {
-                            // delete
-                            await GetNotificationDeleteAsync(notifications_delete_service[current_web_service]);
-                            // end delete
+                            if (networkIsAvailable)
+                            {
+                                // delete
+                                await GetNotificationDeleteAsync(notifications_delete_service[current_web_service]);
+                                // end delete
+                            }
 
                             if (isNewEntry)
                             {
@@ -874,359 +959,377 @@ namespace Safety_Browser
             }
             catch (Exception err)
             {
-                MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                close = false;
-                Close();
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //close = false;
+                //Close();
             }
         }
 
         private async Task NotificationsAsync()
         {
-            notificationscount = 0;
-
-            //update
             string notifications_file = Path.Combine(Path.GetTempPath(), "sb_notifications.txt");
-            List<string> line_to_delete = new List<string>();
-            int line_count = 0;
-            string line_update;
-            StreamReader sr_update = new StreamReader(notifications_file);
-            while ((line_update = sr_update.ReadLine()) != null)
+            if (File.Exists(notifications_file))
             {
-                if (line_update != "")
+                notificationscount = 0;
+
+                //update
+                List<string> line_to_delete = new List<string>();
+                int line_count = 0;
+                string line_update;
+                StreamReader sr_update = new StreamReader(notifications_file);
+                while ((line_update = sr_update.ReadLine()) != null)
                 {
-                    string[] strArray = line_update.Split("*|*");
-
-                    int count_update = 0;
-                    foreach (object obj in strArray)
+                    if (line_update != "")
                     {
-                        count_update++;
+                        string[] strArray = line_update.Split("*|*");
 
-                        // Message Type
-                        if (count_update == 7)
+                        int count_update = 0;
+                        foreach (object obj in strArray)
                         {
-                            if (obj.ToString() != "0")
+                            count_update++;
+
+                            // Message Type
+                            if (count_update == 7)
                             {
-                                string delete_id = obj.ToString();
-                                string line_delete;
-                                StreamReader sr_delete = new StreamReader(notifications_file);
-                                while ((line_delete = sr_delete.ReadLine()) != null)
+                                if (obj.ToString() != "0")
                                 {
-                                    if (line_delete != "")
+                                    string delete_id = obj.ToString();
+                                    string line_delete;
+                                    StreamReader sr_delete = new StreamReader(notifications_file);
+                                    while ((line_delete = sr_delete.ReadLine()) != null)
                                     {
-                                        string[] strArray_inner = line_delete.Split("*|*");
-
-                                        int count_update_inner = 0;
-                                        foreach (object obje in strArray_inner)
+                                        if (line_delete != "")
                                         {
-                                            count_update_inner++;
+                                            string[] strArray_inner = line_delete.Split("*|*");
 
-                                            if (count_update_inner == 1)
+                                            int count_update_inner = 0;
+                                            foreach (object obje in strArray_inner)
                                             {
-                                                if (delete_id == obje.ToString().Replace("\"", ""))
+                                                count_update_inner++;
+
+                                                if (count_update_inner == 1)
                                                 {
-                                                    line_to_delete.Add(line_delete);
-                                                    line_count++;
+                                                    if (delete_id == obje.ToString().Replace("\"", ""))
+                                                    {
+                                                        line_to_delete.Add(line_delete);
+                                                        line_count++;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+
+                                    sr_delete.Close();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                sr_update.Close();
+
+                for (int i = 0; i < line_count; i++)
+                {
+                    string text = File.ReadAllText(notifications_file);
+                    text = text.Replace(line_to_delete[i], "");
+                    File.WriteAllText(notifications_file, text);
+                }
+
+                if (isFirstOpened)
+                {
+                    if (networkIsAvailable)
+                    {
+                        // delete
+                        await GetNotificationDeleteAsync(notifications_delete_service[current_web_service]);
+                        // end delete
+                    }
+                }
+
+                flowLayoutPanel_notifications.Controls.Clear();
+
+                string line_count_inner;
+                int line_count_panel = 0;
+                StreamReader sr_count = new StreamReader(notifications_file);
+                while ((line_count_inner = sr_count.ReadLine()) != null)
+                {
+                    if (line_count_inner != "")
+                    {
+                        line_count_panel++;
+                    }
+                }
+
+                sr_count.Close();
+                int detect_no_notification = 0;
+                string line;
+                StreamReader sr = new StreamReader(notifications_file);
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line != "")
+                    {
+                        string[] strArray = line.Split("*|*");
+
+                        int count = 0;
+                        foreach (object obj in strArray)
+                        {
+                            count++;
+                            detect_no_notification++;
+
+                            if (count == 1)
+                            {
+                                _message_id = obj.ToString().Replace("\"", "");
+                            }
+                            else if (count == 2)
+                            {
+                                _message_date = obj.ToString();
+                            }
+                            else if (count == 3)
+                            {
+                                _message_title = obj.ToString();
+                            }
+                            else if (count == 4)
+                            {
+                                _message_content = ReplaceBRwithNewline(obj.ToString());
+                            }
+                            else if (count == 5)
+                            {
+                                _message_status = obj.ToString();
+                            }
+                            else if (count == 6)
+                            {
+                                _message_type = obj.ToString();
+                            }
+                            else if (count == 7)
+                            {
+                                _message_edited_id = obj.ToString();
+                            }
+                            else if (count == 8)
+                            {
+                                _message_unread = obj.ToString();
+                            }
+                        }
+
+                        if (_message_type == "0")
+                        {
+                            Panel p = new Panel();
+                            p.Name = "panel_notification_" + _message_id;
+                            p.BackColor = Color.White;
+                            p.Size = new Size(270, 83);
+
+                            Label label_title = new Label();
+                            Label label_content = new Label();
+
+                            if (_message_title.Contains("★"))
+                            {
+                                label_title.Name = "label_title_notification_" + _message_id;
+                                label_title.Text = Ellipsis(_message_title, 20);
+
+                                if (_message_unread.Contains("U"))
+                                {
+                                    notificationscount++;
+                                    label_notificationscount.Text = notificationscount.ToString();
                                 }
 
-                                sr_delete.Close();
+                                label_title.Location = new Point(3, 0);
+                                label_title.AutoSize = true;
+                                label_title.ForeColor = Color.FromArgb(0, 0, 0);
+                                label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
+
+                                label_content.Name = "label_content_notification_" + _message_id;
+                                label_content.Text = Ellipsis(_message_content, 130);
+                                label_content.Location = new Point(4, 19);
+                                label_content.AutoSize = true;
+                                label_content.MaximumSize = new Size(248, 40);
+                                label_content.ForeColor = Color.FromArgb(0, 0, 0);
+                                label_content.Font = new Font("Microsoft Sans Serif", 8);
                             }
+                            else
+                            {
+                                label_title.Name = "label_title_notification_" + _message_id;
+                                label_title.Text = Ellipsis(_message_title, 20);
+
+                                if (_message_unread.Contains("U"))
+                                {
+                                    notificationscount++;
+                                    label_notificationscount.Text = notificationscount.ToString();
+                                }
+
+                                label_title.Location = new Point(3, 0);
+                                label_title.AutoSize = true;
+                                label_title.ForeColor = Color.FromArgb(72, 72, 72);
+                                label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
+
+                                label_content.Name = "label_content_notification_" + _message_id;
+                                label_content.Text = Ellipsis(_message_content, 130);
+                                label_content.Location = new Point(4, 19);
+                                label_content.AutoSize = true;
+                                label_content.MaximumSize = new Size(248, 40);
+                                label_content.ForeColor = Color.FromArgb(72, 72, 72);
+                                label_content.Font = new Font("Microsoft Sans Serif", 8);
+                            }
+
+                            Label label_date = new Label();
+                            label_date.Name = "label_date_notification_" + _message_id;
+
+                            const int SECOND = 1;
+                            const int MINUTE = 60 * SECOND;
+                            const int HOUR = 60 * MINUTE;
+                            const int DAY = 24 * HOUR;
+                            const int MONTH = 30 * DAY;
+
+                            string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                            string get_date_parse = _message_date;
+                            DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                            var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
+                            double delta = Math.Abs(ts.TotalSeconds);
+
+                            if (delta < 1 * MINUTE)
+                            {
+                                label_date.Text = "just now";
+                            }
+                            else if (delta < 2 * MINUTE)
+                            {
+                                label_date.Text = "a minute ago";
+                            }
+                            else if (delta < 45 * MINUTE)
+                            {
+                                if (ts.Minutes == 1)
+                                {
+                                    label_date.Text = ts.Minutes + " minute ago";
+                                }
+                                else
+                                {
+                                    label_date.Text = ts.Minutes + " minutes ago";
+                                }
+                            }
+                            else if (delta < 90 * MINUTE)
+                            {
+                                label_date.Text = "an hour ago";
+                            }
+                            else if (delta < 24 * HOUR)
+                            {
+                                if (ts.Hours == 1)
+                                {
+                                    label_date.Text = ts.Hours + " hour ago";
+                                }
+                                else
+                                {
+                                    label_date.Text = ts.Hours + " hours ago";
+                                }
+                            }
+                            else if (delta < 48 * HOUR)
+                            {
+                                label_date.Text = "yesterday";
+                            }
+                            else if (delta < 30 * DAY)
+                            {
+                                if (ts.Days == 1)
+                                {
+                                    label_date.Text = ts.Days + " day ago";
+                                }
+                                else
+                                {
+                                    label_date.Text = ts.Days + " days ago";
+                                }
+                            }
+                            else
+                            {
+                                label_date.Text = "older message";
+                            }
+
+                            label_date.AutoSize = true;
+                            label_date.Location = new Point(4, 61);
+                            label_date.ForeColor = Color.FromArgb(168, 168, 168);
+                            label_date.Font = new Font("Microsoft Sans Serif", 8);
+
+                            Label label_view = new Label();
+                            label_view.Name = "label_view_notification_" + _message_id;
+                            label_view.Text = "观看";
+
+                            if (line_count_panel > 7)
+                            {
+                                label_view.Location = new Point(220, 61);
+                                p.Size = new Size(250, 83);
+                                label_content.MaximumSize = new Size(230, 40);
+                                flowLayoutPanel_notifications.AutoScroll = true;
+                            }
+                            else
+                            {
+                                label_view.Location = new Point(232, 61);
+                                flowLayoutPanel_notifications.AutoScroll = false;
+                            }
+
+                            label_view.AutoSize = true;
+                            label_view.ForeColor = Color.FromArgb(72, 72, 72);
+                            label_view.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Underline);
+                            label_view.Cursor = Cursors.Hand;
+                            label_view.Click += new EventHandler(click_event);
+
+                            Label label_separator_notification = new Label();
+                            label_separator_notification.Name = "label_separator_notification_" + _message_id;
+                            label_separator_notification.AutoSize = false;
+                            label_separator_notification.Text = " ";
+                            label_separator_notification.Size = new Size(270, 1);
+                            label_separator_notification.Location = new Point(0, 81);
+                            label_separator_notification.BackColor = Color.FromArgb(238, 238, 238);
+
+                            flowLayoutPanel_notifications.Controls.Add(p);
+                            flowLayoutPanel_notifications.Controls.SetChildIndex(p, 0);
+
+                            p.Controls.Add(label_title);
+                            p.Controls.Add(label_content);
+                            p.Controls.Add(label_date);
+                            p.Controls.Add(label_view);
+                            p.Controls.Add(label_separator_notification);
+                            flowLayoutPanel_notifications.Invalidate();
                         }
                     }
                 }
-            }
 
-            sr_update.Close();
-
-            for (int i = 0; i < line_count; i++)
-            {
-                string text = File.ReadAllText(notifications_file);
-                text = text.Replace(line_to_delete[i], "");
-                File.WriteAllText(notifications_file, text);
-            }
-
-            if (isFirstOpened)
-            {
-                // delete
-                await GetNotificationDeleteAsync(notifications_delete_service[current_web_service]);
-                // end delete
-            }
-
-            flowLayoutPanel_notifications.Controls.Clear();
-
-            string line_count_inner;
-            int line_count_panel = 0;
-            StreamReader sr_count = new StreamReader(notifications_file);
-            while ((line_count_inner = sr_count.ReadLine()) != null)
-            {
-                if (line_count_inner != "")
+                if (detect_no_notification == 0)
                 {
-                    line_count_panel++;
+                    label_notificationstatus.Location = new Point(7, 32);
+                    label_notificationstatus.Visible = true;
+                    label_notificationstatus.BringToFront();
+                    flowLayoutPanel_notifications.Visible = false;
                 }
-            }
-
-            sr_count.Close();
-            int detect_no_notification = 0;
-            string line;
-            StreamReader sr = new StreamReader(notifications_file);
-            while ((line = sr.ReadLine()) != null)
-            {
-                if (line != "")
+                else
                 {
-                    string[] strArray = line.Split("*|*");
+                    label_notificationstatus.Visible = false;
+                    flowLayoutPanel_notifications.Visible = true;
+                    flowLayoutPanel_notifications.BringToFront();
+                }
 
-                    int count = 0;
-                    foreach (object obj in strArray)
+                if (notificationscount == 0)
+                {
+                    label_notificationscount.Visible = false;
+                }
+                else
+                {
+                    if (isNotHijackedLoaded)
                     {
-                        count++;
-                        detect_no_notification++;
-
-                        if (count == 1)
-                        {
-                            _message_id = obj.ToString().Replace("\"", "");
-                        }
-                        else if (count == 2)
-                        {
-                            _message_date = obj.ToString();
-                        }
-                        else if (count == 3)
-                        {
-                            _message_title = obj.ToString();
-                        }
-                        else if (count == 4)
-                        {
-                            _message_content = ReplaceBRwithNewline(obj.ToString());
-                        }
-                        else if (count == 5)
-                        {
-                            _message_status = obj.ToString();
-                        }
-                        else if (count == 6)
-                        {
-                            _message_type = obj.ToString();
-                        }
-                        else if (count == 7)
-                        {
-                            _message_edited_id = obj.ToString();
-                        }
-                        else if (count == 8)
-                        {
-                            _message_unread = obj.ToString();
-                        }
+                        label_notificationscount.Visible = true;
                     }
-
-                    if (_message_type == "0")
+                    else if (!networkIsAvailable)
                     {
-                        Panel p = new Panel();
-                        p.Name = "panel_notification_" + _message_id;
-                        p.BackColor = Color.White;
-                        p.Size = new Size(270, 83);
-
-                        Label label_title = new Label();
-                        Label label_content = new Label();
-
-                        if (_message_title.Contains("★"))
-                        {
-                            label_title.Name = "label_title_notification_" + _message_id;
-                            label_title.Text = Ellipsis(_message_title, 20);
-
-                            if (_message_unread.Contains("U"))
-                            {
-                                notificationscount++;
-                                label_notificationscount.Text = notificationscount.ToString();
-                            }
-
-                            label_title.Location = new Point(3, 0);
-                            label_title.AutoSize = true;
-                            label_title.ForeColor = Color.FromArgb(0, 0, 0);
-                            label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
-
-                            label_content.Name = "label_content_notification_" + _message_id;
-                            label_content.Text = Ellipsis(_message_content, 130);
-                            label_content.Location = new Point(4, 19);
-                            label_content.AutoSize = true;
-                            label_content.MaximumSize = new Size(248, 40);
-                            label_content.ForeColor = Color.FromArgb(0, 0, 0);
-                            label_content.Font = new Font("Microsoft Sans Serif", 8);
-                        }
-                        else
-                        {
-                            label_title.Name = "label_title_notification_" + _message_id;
-                            label_title.Text = Ellipsis(_message_title, 20);
-
-                            if (_message_unread.Contains("U"))
-                            {
-                                notificationscount++;
-                                label_notificationscount.Text = notificationscount.ToString();
-                            }
-
-                            label_title.Location = new Point(3, 0);
-                            label_title.AutoSize = true;
-                            label_title.ForeColor = Color.FromArgb(72, 72, 72);
-                            label_title.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
-
-                            label_content.Name = "label_content_notification_" + _message_id;
-                            label_content.Text = Ellipsis(_message_content, 130);
-                            label_content.Location = new Point(4, 19);
-                            label_content.AutoSize = true;
-                            label_content.MaximumSize = new Size(248, 40);
-                            label_content.ForeColor = Color.FromArgb(72, 72, 72);
-                            label_content.Font = new Font("Microsoft Sans Serif", 8);
-                        }
-
-                        Label label_date = new Label();
-                        label_date.Name = "label_date_notification_" + _message_id;
-
-                        const int SECOND = 1;
-                        const int MINUTE = 60 * SECOND;
-                        const int HOUR = 60 * MINUTE;
-                        const int DAY = 24 * HOUR;
-                        const int MONTH = 30 * DAY;
-
-                        string date_now_parse = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        DateTime date_now = DateTime.ParseExact(date_now_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-                        string get_date_parse = _message_date;
-                        DateTime get_date = DateTime.ParseExact(get_date_parse, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-                        var ts = new TimeSpan(date_now.Ticks - get_date.Ticks);
-                        double delta = Math.Abs(ts.TotalSeconds);
-
-                        if (delta < 1 * MINUTE)
-                        {
-                            label_date.Text = "just now";
-                        }
-                        else if (delta < 2 * MINUTE)
-                        {
-                            label_date.Text = "a minute ago";
-                        }
-                        else if (delta < 45 * MINUTE)
-                        {
-                            if (ts.Minutes == 1)
-                            {
-                                label_date.Text = ts.Minutes + " minute ago";
-                            }
-                            else
-                            {
-                                label_date.Text = ts.Minutes + " minutes ago";
-                            }
-                        }
-                        else if (delta < 90 * MINUTE)
-                        {
-                            label_date.Text = "an hour ago";
-                        }
-                        else if (delta < 24 * HOUR)
-                        {
-                            if (ts.Hours == 1)
-                            {
-                                label_date.Text = ts.Hours + " hour ago";
-                            }
-                            else
-                            {
-                                label_date.Text = ts.Hours + " hours ago";
-                            }
-                        }
-                        else if (delta < 48 * HOUR)
-                        {
-                            label_date.Text = "yesterday";
-                        }
-                        else if (delta < 30 * DAY)
-                        {
-                            if (ts.Days == 1)
-                            {
-                                label_date.Text = ts.Days + " day ago";
-                            }
-                            else
-                            {
-                                label_date.Text = ts.Days + " days ago";
-                            }
-                        }
-                        else
-                        {
-                            label_date.Text = "older message";
-                        }
-
-                        label_date.AutoSize = true;
-                        label_date.Location = new Point(4, 61);
-                        label_date.ForeColor = Color.FromArgb(168, 168, 168);
-                        label_date.Font = new Font("Microsoft Sans Serif", 8);
-
-                        Label label_view = new Label();
-                        label_view.Name = "label_view_notification_" + _message_id;
-                        label_view.Text = "观看";
-
-                        if (line_count_panel > 7)
-                        {
-                            label_view.Location = new Point(220, 61);
-                            p.Size = new Size(250, 83);
-                            label_content.MaximumSize = new Size(230, 40);
-                            flowLayoutPanel_notifications.AutoScroll = true;
-                        }
-                        else
-                        {
-                            label_view.Location = new Point(232, 61);
-                            flowLayoutPanel_notifications.AutoScroll = false;
-                        }
-
-                        label_view.AutoSize = true;
-                        label_view.ForeColor = Color.FromArgb(72, 72, 72);
-                        label_view.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Underline);
-                        label_view.Cursor = Cursors.Hand;
-                        label_view.Click += new EventHandler(click_event);
-
-                        Label label_separator_notification = new Label();
-                        label_separator_notification.Name = "label_separator_notification_" + _message_id;
-                        label_separator_notification.AutoSize = false;
-                        label_separator_notification.Text = " ";
-                        label_separator_notification.Size = new Size(270, 1);
-                        label_separator_notification.Location = new Point(0, 81);
-                        label_separator_notification.BackColor = Color.FromArgb(238, 238, 238);
-
-                        flowLayoutPanel_notifications.Controls.Add(p);
-                        flowLayoutPanel_notifications.Controls.SetChildIndex(p, 0);
-
-                        p.Controls.Add(label_title);
-                        p.Controls.Add(label_content);
-                        p.Controls.Add(label_date);
-                        p.Controls.Add(label_view);
-                        p.Controls.Add(label_separator_notification);
-                        flowLayoutPanel_notifications.Invalidate();
+                        label_notificationscount.Visible = true;
                     }
                 }
-            }
 
-            if (detect_no_notification == 0)
+                sr.Close();
+
+
+                Update();
+            }
+            else
             {
                 label_notificationstatus.Location = new Point(7, 32);
                 label_notificationstatus.Visible = true;
                 label_notificationstatus.BringToFront();
                 flowLayoutPanel_notifications.Visible = false;
             }
-            else
-            {
-                label_notificationstatus.Visible = false;
-                flowLayoutPanel_notifications.Visible = true;
-                flowLayoutPanel_notifications.BringToFront();
-            }
-
-            if (notificationscount == 0)
-            {
-                label_notificationscount.Visible = false;
-            }
-            else
-            {
-                if (isNotHijackedLoaded)
-                {
-                    label_notificationscount.Visible = true;
-                }
-            }
-
-            sr.Close();
-
-            Update();
         }
 
         private new void Update()
@@ -1860,7 +1963,7 @@ namespace Safety_Browser
                     WebRequest.DefaultWebProxy = new WebProxy();
                     var client = new HttpClient();
                     var requestContent = new FormUrlEncodedContent(new[] {
-                        new KeyValuePair<string, string>("macid", GetMACAddress()),
+                        new KeyValuePair<string, string>("macid", get_macAddress),
                         new KeyValuePair<string, string>("api_key", API_KEY),
                         new KeyValuePair<string, string>("brand_code", BRAND_CODE),
                     });
@@ -2361,8 +2464,19 @@ namespace Safety_Browser
                                     label_getdiagnostics.Enabled = true;
                                     elseload_return = false;
 
+                                    label_chatus2.Enabled = true;
+                                    label_emailus1.Enabled = true;
+                                    label_chatus2.ForeColor = Color.FromArgb(235, 99, 6);
+                                    label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
+
                                     timer_loader.Stop();
                                     label_loader.Text = "加载中。。。";
+
+                                    string path_result = Path.GetTempPath() + "\\sb_result.txt";
+                                    if (File.Exists(path_result))
+                                    {
+                                        UploadResult();
+                                    }
                                 }
                                 else
                                 {
@@ -2487,6 +2601,11 @@ namespace Safety_Browser
                                 label_getdiagnostics.Enabled = true;
                                 elseload_return = false;
                                 isNotHijackedLoaded = true;
+
+                                label_chatus2.Enabled = true;
+                                label_emailus1.Enabled = true;
+                                label_chatus2.ForeColor = Color.FromArgb(235, 99, 6);
+                                label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
 
                                 timer_loader.Stop();
                                 label_loader.Text = "加载中。。。";
@@ -3014,7 +3133,7 @@ namespace Safety_Browser
         }
 
         // Get MAC Address
-        public static string GetMACAddress()
+        private void GetMACAddress()
         {
             try
             {
@@ -3026,12 +3145,25 @@ namespace Safety_Browser
                         macAddress += nic.GetPhysicalAddress().ToString();
                 }
 
-                return macAddress;
+                if (macAddress.Equals(""))
+                {
+                    foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+                    {
+                        if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
+                            nic.OperationalStatus == OperationalStatus.Up && nic.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                            macAddress += nic.GetPhysicalAddress().ToString();
+                    }
+
+                    get_macAddress = macAddress;
+                }
+                else
+                {
+                    get_macAddress = macAddress;
+                }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1005", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
             }
         }
 
@@ -3052,10 +3184,11 @@ namespace Safety_Browser
                     HttpResponseMessage response = client.GetAsync(API_PATH_IP_API).GetAwaiter().GetResult();
                     if (response.IsSuccessStatusCode)
                     {
+                        isIPInserted = true;
                         var locationDetails = response.Content.ReadAsAsync<IpInfo>().GetAwaiter().GetResult();
                         if (locationDetails != null)
                         {
-                            _mac_address = GetMACAddress();
+                            _mac_address = get_macAddress;
                             _external_ip = GetExternalIp();
                             _isp = locationDetails.isp.Replace("'", "''");
                             _city = locationDetails.city.Replace("'", "''");
@@ -3412,7 +3545,6 @@ namespace Safety_Browser
                         if (!html.Contains("landing_image"))
                         {
                             chromeBrowser.Dock = DockStyle.None;
-                            pictureBox_loader.BringToFront();
                             pictureBox_loader.Visible = true;
                             label_loader.Visible = true;
                             domain_one_time = true;
@@ -3443,7 +3575,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
         }
 
@@ -3721,8 +3853,19 @@ namespace Safety_Browser
                             label_getdiagnostics.Enabled = true;
                             elseload_return = false;
 
+                            label_chatus2.Enabled = true;
+                            label_emailus1.Enabled = true;
+                            label_chatus2.ForeColor = Color.FromArgb(235, 99, 6);
+                            label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
+
                             timer_loader.Stop();
                             label_loader.Text = "加载中。。。";
+
+                            string path_result = Path.GetTempPath() + "\\sb_result.txt";
+                            if (File.Exists(path_result))
+                            {
+                                UploadResult();
+                            }
                         }
                         else
                         {
@@ -3848,9 +3991,14 @@ namespace Safety_Browser
                         elseload_return = false;
                         isNotHijackedLoaded = true;
 
+                        label_chatus2.Enabled = true;
+                        label_emailus1.Enabled = true;
+                        label_chatus2.ForeColor = Color.FromArgb(235, 99, 6);
+                        label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
+
                         timer_loader.Stop();
                         label_loader.Text = "加载中。。。";
-
+                        
                         string path_result = Path.GetTempPath() + "\\sb_result.txt";
                         if (File.Exists(path_result))
                         {
@@ -4321,40 +4469,17 @@ namespace Safety_Browser
 
         private void label_getdiagnostics_Click(object sender, EventArgs e)
         {
-            GetTraceRoute(domain_get);
-            GetPing(domain_get);
-            ZipFile zip = new ZipFile();
+            if (isGetDiagnosticsClicked)
+            {
+                result_traceroute = "";
+                result_ping = "";
 
-            zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
-            zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
-            zip.Save(Path.GetTempPath() + "\\Diagnostics.zip");
+                timer_diagnostics.Start();
+                GetTraceRoute(domain_get);
 
-            // Read file data
-            FileStream fs = new FileStream(Path.GetTempPath() + "\\Diagnostics.zip", FileMode.Open, FileAccess.Read);
-            byte[] data = new byte[fs.Length];
-            fs.Read(data, 0, data.Length);
-            fs.Close();
-
-            // Generate post objects
-            Dictionary<string, object> postParameters = new Dictionary<string, object>();
-            postParameters.Add("api_key", API_KEY);
-            postParameters.Add("brand_code", BRAND_CODE);
-            postParameters.Add("macid", _mac_address);
-            postParameters.Add("zipfile", new FormUpload.FileParameter(data, "Diagnostics.zip", "application/zip"));
-
-            // Create request and receive response
-            string postURL = diagnostics_service[current_web_service];
-            string userAgent = "admin";
-            HttpWebResponse webResponse = FormUpload.MultipartFormDataPost(postURL, userAgent, postParameters);
-
-            // Process response
-            StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
-            //string fullResponse = responseReader.ReadToEnd();
-            //MessageBox.Show(fullResponse);
-
-            File.Delete(Path.GetTempPath() + "\\traceroute.txt");
-            File.Delete(Path.GetTempPath() + "\\ping.txt");
-            File.Delete(Path.GetTempPath() + "\\Diagnostics.zip");
+                label_getdiagnostics.Cursor = Cursors.Default;
+                isGetDiagnosticsClicked = false;
+            }
         }
 
         const int WS_MINIMIZEBOX = 0x20000;
@@ -4452,6 +4577,10 @@ namespace Safety_Browser
         private string datetime_created;
         private bool isInaccessible;
         private bool isTimeout;
+        private string get_macAddress;
+        private bool isPingStarted = true;
+        private bool isGetDiagnosticsClicked = true;
+        private bool isIPInserted = false;
 
         private void timer_loader_Tick(object sender, EventArgs e)
         {
@@ -4584,42 +4713,36 @@ namespace Safety_Browser
             var startInfo = new ProcessStartInfo(@"cmd.exe", "/c ping -n 8 " + replace_domain.ToString())
             {
                 CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
                 UseShellExecute = false,
                 RedirectStandardOutput = true
             };
 
-            var pingProc = new Process { StartInfo = startInfo };
-            pingProc.Start();
+            var proc = new Process { StartInfo = startInfo };
 
-            while (!pingProc.HasExited)
+            ThreadStart ths = new ThreadStart(() =>
             {
-                label_getdiagnostics.Text = "诊断中。。。";
-                pingProc.WaitForExit();
-            }
+                proc.Start();
 
-            label_getdiagnostics.Text = "诊断";
-            Cursor.Current = Cursors.Default;
-
-            result_ping = pingProc.StandardOutput.ReadToEnd();
-
-            string temp_file = Path.Combine(Path.GetTempPath(), "ping.txt");
-
-            if (File.Exists(temp_file))
-            {
-                File.Delete(temp_file);
-
-                using (StreamWriter sw = new StreamWriter(temp_file))
+                while (!proc.HasExited)
                 {
-                    sw.WriteLine(result_ping);
+                    Invoke(new Action(delegate
+                    {
+                        label_getdiagnostics.Text = "诊断中。。。";
+                    }));
+
+                    proc.WaitForExit(30000);
                 }
-            }
-            else
-            {
-                using (StreamWriter sw = new StreamWriter(temp_file))
+
+                Invoke(new Action(delegate
                 {
-                    sw.WriteLine(result_ping);
-                }
-            }
+                    label_getdiagnostics.Text = "诊断";
+                }));
+
+                result_ping = proc.StandardOutput.ReadToEnd();
+            });
+            Thread th = new Thread(ths);
+            th.Start();
         }
 
         private void GetTraceRoute(string domain)
@@ -4628,43 +4751,132 @@ namespace Safety_Browser
             replace_domain.Replace("https://", "");
             replace_domain.Replace("http://", "");
             replace_domain.Replace("www.", "");
-            replace_domain.Replace(".com/.", ".com");
+            replace_domain.Replace(".com/.", ".com");       
 
             var startInfo = new ProcessStartInfo(@"cmd.exe", "/c tracert " + replace_domain.ToString())
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
-                RedirectStandardOutput = true,
+                LoadUserProfile = true,
+                RedirectStandardOutput = true
             };
 
-            var pingProc = new Process { StartInfo = startInfo };
-            pingProc.Start();
+            var proc = new Process { StartInfo = startInfo };
 
-            while (!pingProc.HasExited)
+            ThreadStart ths = new ThreadStart(() =>
             {
-                label_getdiagnostics.Text = "诊断中。。。";
-                Cursor.Current = Cursors.WaitCursor;
-                pingProc.WaitForExit();
-            }
+                proc.Start();
 
-            result_traceroute = pingProc.StandardOutput.ReadToEnd();
-
-            string temp_file = Path.Combine(Path.GetTempPath(), "traceroute.txt");
-
-            if (File.Exists(temp_file))
-            {
-                File.Delete(temp_file);
-
-                using (StreamWriter sw = new StreamWriter(temp_file))
+                while (!proc.HasExited)
                 {
-                    sw.WriteLine(result_traceroute);
+                    Invoke(new Action(delegate
+                    {
+                        label_getdiagnostics.Text = "诊断中。。。";
+                    }));
+
+                    proc.WaitForExit(30000);
                 }
-            }
-            else
+
+                result_traceroute = proc.StandardOutput.ReadToEnd();
+            });
+            Thread th = new Thread(ths);
+            th.Start();
+        }
+
+        private void timer_diagnostics_Tick(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(result_traceroute))
             {
-                using (StreamWriter sw = new StreamWriter(temp_file))
+                if (isPingStarted)
                 {
-                    sw.WriteLine(result_traceroute);
+                    isPingStarted = false;
+                    GetPing(domain_get);
+                }
+
+                if (!String.IsNullOrEmpty(result_traceroute) && !String.IsNullOrEmpty(result_ping))
+                {
+                    timer_diagnostics.Stop();
+                    isGetDiagnosticsClicked = true;
+                    isPingStarted = true;
+                    label_getdiagnostics.Cursor = Cursors.Hand;
+
+                    try
+                    {
+                        string temp_traceroute = Path.Combine(Path.GetTempPath(), "traceroute.txt");
+
+                        if (File.Exists(temp_traceroute))
+                        {
+                            File.Delete(temp_traceroute);
+
+                            using (StreamWriter sw = new StreamWriter(temp_traceroute))
+                            {
+                                sw.WriteLine(result_traceroute);
+                            }
+                        }
+                        else
+                        {
+                            using (StreamWriter sw = new StreamWriter(temp_traceroute))
+                            {
+                                sw.WriteLine(result_traceroute);
+                            }
+                        }
+
+                        string temp_ping = Path.Combine(Path.GetTempPath(), "ping.txt");
+
+                        if (File.Exists(temp_ping))
+                        {
+                            File.Delete(temp_ping);
+
+                            using (StreamWriter sw = new StreamWriter(temp_ping))
+                            {
+                                sw.WriteLine(result_ping);
+                            }
+                        }
+                        else
+                        {
+                            using (StreamWriter sw = new StreamWriter(temp_ping))
+                            {
+                                sw.WriteLine(result_ping);
+                            }
+                        }
+
+                        ZipFile zip = new ZipFile();
+
+                        zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
+                        zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
+                        zip.Save(Path.GetTempPath() + "\\Diagnostics.zip");
+
+                        // Read file data
+                        FileStream fs = new FileStream(Path.GetTempPath() + "\\Diagnostics.zip", FileMode.Open, FileAccess.Read);
+                        byte[] data = new byte[fs.Length];
+                        fs.Read(data, 0, data.Length);
+                        fs.Close();
+
+                        // Generate post objects
+                        Dictionary<string, object> postParameters = new Dictionary<string, object>();
+                        postParameters.Add("api_key", API_KEY);
+                        postParameters.Add("brand_code", BRAND_CODE);
+                        postParameters.Add("macid", _mac_address);
+                        postParameters.Add("zipfile", new FormUpload.FileParameter(data, "Diagnostics.zip", "application/zip"));
+
+                        // Create request and receive response
+                        string postURL = diagnostics_service[current_web_service];
+                        string userAgent = "admin";
+                        HttpWebResponse webResponse = FormUpload.MultipartFormDataPost(postURL, userAgent, postParameters);
+
+                        // Process response
+                        StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
+                        //string fullResponse = responseReader.ReadToEnd();
+                        //MessageBox.Show(fullResponse);
+
+                        File.Delete(Path.GetTempPath() + "\\traceroute.txt");
+                        File.Delete(Path.GetTempPath() + "\\ping.txt");
+                        File.Delete(Path.GetTempPath() + "\\Diagnostics.zip");
+                    }
+                    catch (Exception ex)
+                    {
+                        // Leave blank
+                    }
                 }
             }
         }

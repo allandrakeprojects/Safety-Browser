@@ -223,6 +223,8 @@ namespace Safety_Browser
 
             if (!networkIsAvailable)
             {
+                panel_cefsharp.Controls.Clear();
+
                 panel_cefsharp.Visible = false;
 
                 panel_connection.Visible = true;
@@ -241,6 +243,9 @@ namespace Safety_Browser
 
                 if (networkIsAvailable)
                 {
+                    panel_cefsharp.Controls.Add(chromeBrowser);
+                    chromeBrowser.Reload();
+
                     panel_cefsharp.Visible = true;
 
                     panel_connection.Visible = false;
@@ -248,6 +253,8 @@ namespace Safety_Browser
                 }
                 else
                 {
+                    panel_cefsharp.Controls.Clear();
+
                     panel_cefsharp.Visible = false;
 
                     panel_connection.Visible = true;
@@ -529,7 +536,7 @@ namespace Safety_Browser
             }
             else
             {
-                MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+                MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -568,7 +575,7 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+                    MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
                     WindowState = FormWindowState.Maximized;
                 }
             }

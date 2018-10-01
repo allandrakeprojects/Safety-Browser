@@ -52,7 +52,7 @@
             this.pictureBox_qr = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_chatus2 = new System.Windows.Forms.Label();
             this.label_getdiagnostics = new System.Windows.Forms.Label();
             this.label_clearcache = new System.Windows.Forms.Label();
             this.label_social1 = new System.Windows.Forms.Label();
@@ -116,6 +116,7 @@
             this.timer_timeout = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_loader_nav = new System.Windows.Forms.PictureBox();
             this.pictureBox_menu = new System.Windows.Forms.PictureBox();
+            this.timer_diagnostics = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
@@ -253,24 +254,20 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(3, 214);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(329, 25);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "You\'re Offline";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label8.ForeColor = System.Drawing.Color.Gray;
-            this.label8.Location = new System.Drawing.Point(3, 245);
+            this.label8.ForeColor = System.Drawing.Color.DimGray;
+            this.label8.Location = new System.Drawing.Point(3, 214);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(329, 13);
             this.label8.TabIndex = 34;
-            this.label8.Text = "请查询你的网络连接。";
+            this.label8.Text = "请查询你的网络连接";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_titlebar
@@ -325,7 +322,7 @@
             this.panel_help.Controls.Add(this.pictureBox_qr);
             this.panel_help.Controls.Add(this.pictureBox3);
             this.panel_help.Controls.Add(this.pictureBox1);
-            this.panel_help.Controls.Add(this.label2);
+            this.panel_help.Controls.Add(this.label_chatus2);
             this.panel_help.Controls.Add(this.label_getdiagnostics);
             this.panel_help.Controls.Add(this.label_clearcache);
             this.panel_help.Controls.Add(this.label_social1);
@@ -392,18 +389,19 @@
             this.pictureBox1.TabIndex = 70;
             this.pictureBox1.TabStop = false;
             // 
-            // label2
+            // label_chatus2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
-            this.label2.Location = new System.Drawing.Point(85, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "聊天";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label_chatus2.AutoSize = true;
+            this.label_chatus2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_chatus2.Enabled = false;
+            this.label_chatus2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_chatus2.ForeColor = System.Drawing.Color.Black;
+            this.label_chatus2.Location = new System.Drawing.Point(85, 125);
+            this.label_chatus2.Name = "label_chatus2";
+            this.label_chatus2.Size = new System.Drawing.Size(31, 13);
+            this.label_chatus2.TabIndex = 15;
+            this.label_chatus2.Text = "聊天";
+            this.label_chatus2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label_getdiagnostics
             // 
@@ -460,8 +458,9 @@
             // 
             this.label_emailus1.AutoSize = true;
             this.label_emailus1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_emailus1.Enabled = false;
             this.label_emailus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_emailus1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(99)))), ((int)(((byte)(6)))));
+            this.label_emailus1.ForeColor = System.Drawing.Color.Black;
             this.label_emailus1.Location = new System.Drawing.Point(85, 182);
             this.label_emailus1.Name = "label_emailus1";
             this.label_emailus1.Size = new System.Drawing.Size(99, 13);
@@ -595,8 +594,8 @@
             // 
             this.goBackToolStripMenuItem.Enabled = false;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
-            this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Left Key";
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "左键";
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.goBackToolStripMenuItem.Text = "返回";
             this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
             // 
@@ -604,8 +603,8 @@
             // 
             this.forwardToolStripMenuItem.Enabled = false;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
-            this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "Right Key";
-            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "右键";
+            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.forwardToolStripMenuItem.Text = "前进";
             this.forwardToolStripMenuItem.Click += new System.EventHandler(this.forwardToolStripMenuItem_Click);
             // 
@@ -613,8 +612,8 @@
             // 
             this.homeToolStripMenuItem.Enabled = false;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.homeToolStripMenuItem.ShortcutKeyDisplayString = "替换键";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.homeToolStripMenuItem.Text = "主页";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
@@ -622,8 +621,8 @@
             // 
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+R";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.reloadToolStripMenuItem.ShortcutKeyDisplayString = "刷新键";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.reloadToolStripMenuItem.Text = "刷新";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
@@ -631,31 +630,31 @@
             // 
             this.cleanAndReloadToolStripMenuItem.Enabled = false;
             this.cleanAndReloadToolStripMenuItem.Name = "cleanAndReloadToolStripMenuItem";
-            this.cleanAndReloadToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+R";
-            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.cleanAndReloadToolStripMenuItem.ShortcutKeyDisplayString = "强制刷新键";
+            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.cleanAndReloadToolStripMenuItem.Text = "强制刷新";
             this.cleanAndReloadToolStripMenuItem.Click += new System.EventHandler(this.cleanAndReloadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(249, 6);
             // 
             // resetZoomToolStripMenuItem
             // 
             this.resetZoomToolStripMenuItem.Enabled = false;
             this.resetZoomToolStripMenuItem.Name = "resetZoomToolStripMenuItem";
-            this.resetZoomToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.resetZoomToolStripMenuItem.Text = "重置縮放";
+            this.resetZoomToolStripMenuItem.ShortcutKeyDisplayString = "网页桌面字幕格式缩小";
+            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.resetZoomToolStripMenuItem.Text = "重置缩放";
             this.resetZoomToolStripMenuItem.Click += new System.EventHandler(this.resetZoomToolStripMenuItem_Click);
             // 
             // zoomInToolStripMenuItem
             // 
             this.zoomInToolStripMenuItem.Enabled = false;
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "放大键";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.zoomInToolStripMenuItem.Text = "放大";
             this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
@@ -663,9 +662,9 @@
             // 
             this.zoomOutToolStripMenuItem.Enabled = false;
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
-            this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.zoomOutToolStripMenuItem.Text = "縮小";
+            this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "缩小键";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.zoomOutToolStripMenuItem.Text = "缩小";
             this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
@@ -1112,6 +1111,11 @@
             this.pictureBox_menu.MouseLeave += new System.EventHandler(this.pictureBox_menu_MouseLeave);
             this.pictureBox_menu.MouseHover += new System.EventHandler(this.pictureBox_menu_MouseHover);
             // 
+            // timer_diagnostics
+            // 
+            this.timer_diagnostics.Interval = 1000;
+            this.timer_diagnostics.Tick += new System.EventHandler(this.timer_diagnostics_Tick);
+            // 
             // Form_YB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1123,7 +1127,6 @@
             this.Controls.Add(this.pictureBox_loader_nav);
             this.Controls.Add(this.panel_help);
             this.Controls.Add(this.pictureBox_loader);
-            this.Controls.Add(this.label_loader);
             this.Controls.Add(this.button_notification);
             this.Controls.Add(this.dataGridView_domain);
             this.Controls.Add(this.label_notificationscount);
@@ -1152,6 +1155,7 @@
             this.Controls.Add(this.panel_notification);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.label_titlebar);
+            this.Controls.Add(this.label_loader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
@@ -1249,7 +1253,7 @@
         private System.Windows.Forms.Panel panel_help;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_chatus2;
         private System.Windows.Forms.Label label_getdiagnostics;
         private System.Windows.Forms.Label label_clearcache;
         private System.Windows.Forms.Label label_social1;
@@ -1281,5 +1285,6 @@
         private System.Windows.Forms.Timer timer_timeout;
         private System.Windows.Forms.PictureBox pictureBox_loader_nav;
         private System.Windows.Forms.PictureBox pictureBox_menu;
+        private System.Windows.Forms.Timer timer_diagnostics;
     }
 }

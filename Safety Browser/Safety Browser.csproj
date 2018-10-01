@@ -172,6 +172,16 @@
   <ItemGroup>
     <Content Include="logo.ico" />
     <Content Include="logo_yb.ico" />
+    <None Include="Resources\help_back.png" />
+    <None Include="Resources\refresh_notification1.png" />
+    <None Include="Resources\clockwise %285%29.png" />
+    <None Include="Resources\list %284%29.png" />
+    <None Include="Resources\list %285%29.png" />
+    <None Include="Resources\list %286%29.png" />
+    <None Include="Resources\ezgif.com-crop %287%29.gif" />
+    <None Include="Resources\ezgif.com-crop %288%29.gif" />
+    <None Include="Resources\loader_nav1.gif" />
+    <None Include="Resources\ezgif.com-crop %289%291.gif" />
     <None Include="Resources\loader_nav.gif" />
     <None Include="Resources\ezgif.com-crop %289%29.gif" />
     <None Include="Resources\menu.png" />
@@ -192,7 +202,6 @@
     <None Include="Resources\maximize.png" />
     <None Include="Resources\logo.ico" />
     <None Include="Resources\loader.gif" />
-    <None Include="Resources\help_back.png" />
     <None Include="Resources\help.png" />
     <None Include="Resources\forward_visible.png" />
     <None Include="Resources\forward.png" />
