@@ -267,7 +267,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(329, 13);
             this.label8.TabIndex = 34;
-            this.label8.Text = "请查询你的网络连接";
+            this.label8.Text = "Check your Internet Connection";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_titlebar
@@ -398,9 +398,9 @@
             this.label_chatus2.ForeColor = System.Drawing.Color.Black;
             this.label_chatus2.Location = new System.Drawing.Point(85, 125);
             this.label_chatus2.Name = "label_chatus2";
-            this.label_chatus2.Size = new System.Drawing.Size(31, 13);
+            this.label_chatus2.Size = new System.Drawing.Size(54, 13);
             this.label_chatus2.TabIndex = 15;
-            this.label_chatus2.Text = "聊天";
+            this.label_chatus2.Text = "Chat Now";
             this.label_chatus2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label_getdiagnostics
@@ -414,7 +414,7 @@
             this.label_getdiagnostics.Name = "label_getdiagnostics";
             this.label_getdiagnostics.Size = new System.Drawing.Size(191, 20);
             this.label_getdiagnostics.TabIndex = 14;
-            this.label_getdiagnostics.Text = "诊断";
+            this.label_getdiagnostics.Text = "Get Diagnostics";
             this.label_getdiagnostics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_getdiagnostics.Click += new System.EventHandler(this.label_getdiagnostics_Click);
             // 
@@ -428,7 +428,7 @@
             this.label_clearcache.Name = "label_clearcache";
             this.label_clearcache.Size = new System.Drawing.Size(160, 20);
             this.label_clearcache.TabIndex = 13;
-            this.label_clearcache.Text = "清除缓存";
+            this.label_clearcache.Text = "Clear Cache";
             this.label_clearcache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_clearcache.Click += new System.EventHandler(this.label_clearcache_Click);
             // 
@@ -450,9 +450,9 @@
             this.label_social.ForeColor = System.Drawing.Color.White;
             this.label_social.Location = new System.Drawing.Point(82, 214);
             this.label_social.Name = "label_social";
-            this.label_social.Size = new System.Drawing.Size(92, 25);
+            this.label_social.Size = new System.Drawing.Size(66, 25);
             this.label_social.TabIndex = 9;
-            this.label_social.Text = "社交服务";
+            this.label_social.Text = "Social";
             // 
             // label_emailus1
             // 
@@ -475,9 +475,9 @@
             this.label_emailus.ForeColor = System.Drawing.Color.White;
             this.label_emailus.Location = new System.Drawing.Point(82, 158);
             this.label_emailus.Name = "label_emailus";
-            this.label_emailus.Size = new System.Drawing.Size(52, 25);
+            this.label_emailus.Size = new System.Drawing.Size(89, 25);
             this.label_emailus.TabIndex = 5;
-            this.label_emailus.Text = "邮件";
+            this.label_emailus.Text = "Email Us";
             // 
             // label_chatus1
             // 
@@ -486,9 +486,9 @@
             this.label_chatus1.ForeColor = System.Drawing.Color.White;
             this.label_chatus1.Location = new System.Drawing.Point(84, 112);
             this.label_chatus1.Name = "label_chatus1";
-            this.label_chatus1.Size = new System.Drawing.Size(178, 13);
+            this.label_chatus1.Size = new System.Drawing.Size(331, 13);
             this.label_chatus1.TabIndex = 3;
-            this.label_chatus1.Text = "如有问题，请联系24/7在线客服。";
+            this.label_chatus1.Text = "Have questions? Get 24/7 live chat, real-time help with chat support.";
             // 
             // label_chatus
             // 
@@ -497,9 +497,9 @@
             this.label_chatus.ForeColor = System.Drawing.Color.White;
             this.label_chatus.Location = new System.Drawing.Point(82, 88);
             this.label_chatus.Name = "label_chatus";
-            this.label_chatus.Size = new System.Drawing.Size(92, 25);
+            this.label_chatus.Size = new System.Drawing.Size(83, 25);
             this.label_chatus.TabIndex = 2;
-            this.label_chatus.Text = "联系我们";
+            this.label_chatus.Text = "Chat Us";
             // 
             // pictureBox_helpback
             // 
@@ -520,9 +520,9 @@
             this.label_help.ForeColor = System.Drawing.Color.White;
             this.label_help.Location = new System.Drawing.Point(80, 23);
             this.label_help.Name = "label_help";
-            this.label_help.Size = new System.Drawing.Size(73, 33);
+            this.label_help.Size = new System.Drawing.Size(240, 33);
             this.label_help.TabIndex = 0;
-            this.label_help.Text = "帮助";
+            this.label_help.Text = "Help and Support";
             this.label_help.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
@@ -564,14 +564,14 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.fileToolStripMenuItem.Text = "文档";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.exitToolStripMenuItem.Text = "退出";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
@@ -587,84 +587,84 @@
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.viewToolStripMenuItem.Text = "观看";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Text = "View";
             // 
             // goBackToolStripMenuItem
             // 
             this.goBackToolStripMenuItem.Enabled = false;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
-            this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "左键";
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.goBackToolStripMenuItem.Text = "返回";
+            this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Left Key";
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.goBackToolStripMenuItem.Text = "Go Back";
             this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
             // 
             // forwardToolStripMenuItem
             // 
             this.forwardToolStripMenuItem.Enabled = false;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
-            this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "右键";
-            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.forwardToolStripMenuItem.Text = "前进";
+            this.forwardToolStripMenuItem.ShortcutKeyDisplayString = "Right Key";
+            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.forwardToolStripMenuItem.Text = "Forward";
             this.forwardToolStripMenuItem.Click += new System.EventHandler(this.forwardToolStripMenuItem_Click);
             // 
             // homeToolStripMenuItem
             // 
             this.homeToolStripMenuItem.Enabled = false;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.ShortcutKeyDisplayString = "替换键";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.homeToolStripMenuItem.Text = "主页";
+            this.homeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.homeToolStripMenuItem.Text = "Home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.ShortcutKeyDisplayString = "刷新键";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.reloadToolStripMenuItem.Text = "刷新";
+            this.reloadToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+R";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.reloadToolStripMenuItem.Text = "Reload";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // cleanAndReloadToolStripMenuItem
             // 
             this.cleanAndReloadToolStripMenuItem.Enabled = false;
             this.cleanAndReloadToolStripMenuItem.Name = "cleanAndReloadToolStripMenuItem";
-            this.cleanAndReloadToolStripMenuItem.ShortcutKeyDisplayString = "强制刷新键";
-            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.cleanAndReloadToolStripMenuItem.Text = "强制刷新";
+            this.cleanAndReloadToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+R";
+            this.cleanAndReloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cleanAndReloadToolStripMenuItem.Text = "Clean and Reload";
             this.cleanAndReloadToolStripMenuItem.Click += new System.EventHandler(this.cleanAndReloadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(249, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(236, 6);
             // 
             // resetZoomToolStripMenuItem
             // 
             this.resetZoomToolStripMenuItem.Enabled = false;
             this.resetZoomToolStripMenuItem.Name = "resetZoomToolStripMenuItem";
-            this.resetZoomToolStripMenuItem.ShortcutKeyDisplayString = "网页桌面字幕格式缩小";
-            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.resetZoomToolStripMenuItem.Text = "重置缩放";
+            this.resetZoomToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+0";
+            this.resetZoomToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.resetZoomToolStripMenuItem.Text = "Reset Zoom";
             this.resetZoomToolStripMenuItem.Click += new System.EventHandler(this.resetZoomToolStripMenuItem_Click);
             // 
             // zoomInToolStripMenuItem
             // 
             this.zoomInToolStripMenuItem.Enabled = false;
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "放大键";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.zoomInToolStripMenuItem.Text = "放大";
+            this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl++";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.zoomInToolStripMenuItem.Text = "Zoom In";
             this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
             // zoomOutToolStripMenuItem
             // 
             this.zoomOutToolStripMenuItem.Enabled = false;
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
-            this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "缩小键";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.zoomOutToolStripMenuItem.Text = "缩小";
+            this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.zoomOutToolStripMenuItem.Text = "Zoom Out";
             this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
@@ -672,14 +672,14 @@
             this.versionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_version});
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.versionToolStripMenuItem.Text = "版本";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.versionToolStripMenuItem.Text = "Version";
             // 
             // toolStripMenuItem_version
             // 
             this.toolStripMenuItem_version.Enabled = false;
             this.toolStripMenuItem_version.Name = "toolStripMenuItem_version";
-            this.toolStripMenuItem_version.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem_version.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_version.Text = "1.0.0";
             // 
             // timer_mouse
@@ -741,7 +741,7 @@
             this.label_notifications.Name = "label_notifications";
             this.label_notifications.Size = new System.Drawing.Size(270, 31);
             this.label_notifications.TabIndex = 72;
-            this.label_notifications.Text = "通知";
+            this.label_notifications.Text = "Notification";
             this.label_notifications.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel_notifications
@@ -762,7 +762,7 @@
             this.label_notificationstatus.Name = "label_notificationstatus";
             this.label_notificationstatus.Size = new System.Drawing.Size(268, 16);
             this.label_notificationstatus.TabIndex = 73;
-            this.label_notificationstatus.Text = "目前并没通知。";
+            this.label_notificationstatus.Text = "There are currently no notifications.";
             this.label_notificationstatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_notificationstatus.Visible = false;
             // 
