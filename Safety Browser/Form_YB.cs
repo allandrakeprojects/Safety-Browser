@@ -2631,7 +2631,13 @@ namespace Safety_Browser
                     }
                     else
                     {
-                        label_clearcache.Text = "清除缓存";
+                        if (isCacheClicked)
+                        {
+                            isCacheClicked = false;
+                            label_clearcache.Text = "清除缓存";
+                            label_clearcache.Cursor = Cursors.Hand;
+                            MessageBox.Show("缓存已清除。", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }));
             }
@@ -4353,18 +4359,7 @@ namespace Safety_Browser
                 {
                     notification_click = false;
 
-                    while (panel_cefsharp.Width > panel_cefsharp_resize)
-                    {
-                        if (!notification_click)
-                        {
-                            Application.DoEvents();
-                            panel_cefsharp.Width -= 4;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    panel_cefsharp.Width = panel_cefsharp_resize;
 
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
@@ -4375,18 +4370,7 @@ namespace Safety_Browser
                 {
                     notification_click = true;
 
-                    while (panel_cefsharp_size > panel_cefsharp.Width)
-                    {
-                        if (notification_click)
-                        {
-                            Application.DoEvents();
-                            panel_cefsharp.Width += 4;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    panel_cefsharp.Width = panel_cefsharp_size;
 
                     panel_notification.Visible = false;
                     label_separator.Visible = false;
@@ -4407,18 +4391,7 @@ namespace Safety_Browser
                 {
                     notification_click = false;
 
-                    while (panel_cefsharp.Width > panel_cefsharp_resize)
-                    {
-                        if (!notification_click)
-                        {
-                            Application.DoEvents();
-                            panel_cefsharp.Width -= 4;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    panel_cefsharp.Width = panel_cefsharp_resize;
 
                     panel_notification.Visible = true;
                     label_separator.Visible = true;
@@ -4429,18 +4402,7 @@ namespace Safety_Browser
                 {
                     notification_click = true;
 
-                    while (panel_cefsharp_size > panel_cefsharp.Width)
-                    {
-                        if (notification_click)
-                        {
-                            Application.DoEvents();
-                            panel_cefsharp.Width += 4;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    panel_cefsharp.Width = panel_cefsharp_size;
 
                     panel_notification.Visible = false;
                     label_separator.Visible = false;
@@ -4452,8 +4414,35 @@ namespace Safety_Browser
 
         private void label_clearcache_Click(object sender, EventArgs e)
         {
-            chromeBrowser.Reload(false);
-            label_clearcache.Text = "缓存清除中。。。";
+            if (!isCacheClicked)
+            {
+                label_clearcache.Cursor = Cursors.Default;
+                isCacheClicked = true;
+                chromeBrowser.Reload(false);
+                label_clearcache.Text = "缓存清除中。。。";
+
+                panel_help.Visible = false;
+                help_click = true;
+
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    button_notification.Visible = true;
+                }
+
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+            }
         }
 
         private void pictureBox_hover_Click(object sender, EventArgs e)
@@ -4479,6 +4468,28 @@ namespace Safety_Browser
 
                 label_getdiagnostics.Cursor = Cursors.Default;
                 isGetDiagnosticsClicked = false;
+
+                panel_help.Visible = false;
+                help_click = true;
+
+                if (pictureBox_loader.Visible == true)
+                {
+                    panel_cefsharp.Visible = false;
+                }
+                else
+                {
+                    panel_cefsharp.Visible = true;
+                }
+
+                if (!notification_click)
+                {
+                    panel_notification.Visible = true;
+                    label_separator.Visible = true;
+                    button_notification.Visible = true;
+                }
+
+                pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
             }
         }
 
@@ -4581,6 +4592,7 @@ namespace Safety_Browser
         private bool isPingStarted = true;
         private bool isGetDiagnosticsClicked = true;
         private bool isIPInserted = false;
+        private bool isCacheClicked = false;
 
         private void timer_loader_Tick(object sender, EventArgs e)
         {
@@ -4877,6 +4889,8 @@ namespace Safety_Browser
                     {
                         // Leave blank
                     }
+                    
+                    MessageBox.Show("诊断报告已发送。", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
