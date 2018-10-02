@@ -3151,13 +3151,15 @@ namespace Safety_Browser
                         macAddress += nic.GetPhysicalAddress().ToString();
                 }
 
-                if (macAddress.Equals(""))
+                if (macAddress.Equals("") || macAddress == null)
                 {
                     foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
                     {
                         if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
-                            nic.OperationalStatus == OperationalStatus.Up && nic.NetworkInterfaceType != NetworkInterfaceType.Loopback)
-                            macAddress += nic.GetPhysicalAddress().ToString();
+                            nic.OperationalStatus == OperationalStatus.Up)
+                        {
+                            macAddress = nic.GetPhysicalAddress().ToString();
+                        }
                     }
 
                     get_macAddress = macAddress;
