@@ -60,7 +60,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
+    <ApplicationIcon>desktop_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -170,8 +170,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="desktop_icon.ico" />
     <Content Include="logo.ico" />
     <Content Include="logo_yb.ico" />
+    <None Include="Resources\yb.png" />
+    <None Include="Resources\yb_intro.png" />
+    <None Include="Resources\desktop_icon.ico" />
     <Content Include="Safety Browser.sln" />
     <None Include="Resources\help_back.png" />
     <None Include="Resources\refresh_notification1.png" />

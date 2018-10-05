@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Safety_Browser
@@ -11,17 +12,37 @@ namespace Safety_Browser
         {
             if (browserControl.CanExecuteJavascriptInMainFrame)
             {
-                Form_YB_NewTab form_newtab = new Form_YB_NewTab(targetUrl, "normal");
-                int open_form = Application.OpenForms.Count;
+                //Form_YB_NewTab form_newtab = new Form_YB_NewTab(targetUrl, "normal");
+                //int open_form = Application.OpenForms.Count;
 
-                if (open_form == 1)
+                //if (open_form == 1)
+                //{
+                //    form_newtab.Show();
+                //}
+                //else
+                //{
+                //    Form_YB_NewTab.SetClose = true;
+                //    form_newtab.Show();
+                //}
+
+                if (targetUrl.Contains("ambassador"))
                 {
-                    form_newtab.Show();
+                    Process.Start(targetUrl);
                 }
                 else
                 {
-                    Form_YB_NewTab.SetClose = true;
-                    form_newtab.Show();
+                    Form_YB_NewTab form_newtab = new Form_YB_NewTab(targetUrl, "normal");
+                    int open_form = Application.OpenForms.Count;
+
+                    if (open_form == 1)
+                    {
+                        form_newtab.Show();
+                    }
+                    else
+                    {
+                        Form_YB_NewTab.SetClose = true;
+                        form_newtab.Show();
+                    }
                 }
             }
 

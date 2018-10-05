@@ -167,12 +167,12 @@ namespace Safety_Browser
                 File.Delete(Path.GetTempPath() + "\\Diagnostics.zip");
             }
 
-            InitializeChromium();
+            PictureBoxCenter();
             GetMACAddress();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
+            InitializeChromium();
             NetworkAvailability();
-            PictureBoxCenter();
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))

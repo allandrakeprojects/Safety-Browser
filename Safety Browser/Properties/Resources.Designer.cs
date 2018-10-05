@@ -131,6 +131,16 @@ namespace Safety_Browser.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon desktop_icon {
+            get {
+                object obj = ResourceManager.GetObject("desktop_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap exit {
@@ -387,6 +397,26 @@ namespace Safety_Browser.Properties {
             get {
                 object obj = ResourceManager.GetObject("safety_browser_desktop", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap yb {
+            get {
+                object obj = ResourceManager.GetObject("yb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap yb_intro {
+            get {
+                object obj = ResourceManager.GetObject("yb_intro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
