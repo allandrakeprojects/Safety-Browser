@@ -153,6 +153,11 @@ namespace Safety_Browser
             {
                 File.Delete(path_result);
             }
+            
+            if (File.Exists(Path.GetTempPath() + "\\deviceinfo.txt"))
+            {
+                File.Delete(Path.GetTempPath() + "\\deviceinfo.txt");
+            }
 
             if (File.Exists(Path.GetTempPath() + "\\traceroute.txt"))
             {
@@ -4554,14 +4559,14 @@ namespace Safety_Browser
 
                     using (StreamWriter sw = new StreamWriter(temp_deviceinfo, true, Encoding.UTF8))
                     {
-                        sw.WriteLine("\r\n" + "Windows: " + Environment.OSVersion + "\r\n" + "Processor: " + procName + "\r\n" + "Installed memory (RAM): " + ram + "\r\n" + "System type: " + description + "\r\n");
+                        sw.WriteLine("\r\n" + "Windows: " + Environment.OSVersion + "\r\n" + "Processor: " + procName + "\r\n" + "Installed memory (RAM): " + ram + ".0 GB\r\n" + "System type: " + description + "\r\n");
                     }
                 }
                 else
                 {
                     using (StreamWriter sw = new StreamWriter(temp_deviceinfo, true, Encoding.UTF8))
                     {
-                        sw.WriteLine("\r\n" + "Windows: " + Environment.OSVersion + "\r\n" + "Processor: " + procName + "\r\n" + "Installed memory (RAM): " + ram + "\r\n" + "System type: " + description + "\r\n");
+                        sw.WriteLine("\r\n" + "Windows: " + Environment.OSVersion + "\r\n" + "Processor: " + procName + "\r\n" + "Installed memory (RAM): " + ram + ".0 GB\r\n" + "System type: " + description + "\r\n");
                     }
                 }
             }
@@ -4948,6 +4953,7 @@ namespace Safety_Browser
                         //string fullResponse = responseReader.ReadToEnd();
                         //MessageBox.Show(fullResponse);
 
+                        File.Delete(Path.GetTempPath() + "\\deviceinfo.txt");
                         File.Delete(Path.GetTempPath() + "\\traceroute.txt");
                         File.Delete(Path.GetTempPath() + "\\ping.txt");
                         File.Delete(Path.GetTempPath() + "\\Diagnostics.zip");
