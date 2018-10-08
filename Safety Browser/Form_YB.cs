@@ -2172,7 +2172,9 @@ namespace Safety_Browser
         {
             CefSettings settings = new CefSettings();
             settings.CefCommandLineArgs.Add("no-proxy-server", "1");
-            settings.CefCommandLineArgs.Add("enable-npapi", "1");
+            settings.CefCommandLineArgs.Add("ppapi-flash-path", AppDomain.CurrentDomain.BaseDirectory + "pepflashplayer32_31_0_0_108.dll");
+            settings.CefCommandLineArgs.Add("ppapi-flash-version", "31.0.0.108");
+
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
@@ -3106,6 +3108,8 @@ namespace Safety_Browser
                     Invoke(new Action(() =>
                     {
                         Cef.Shutdown();
+                        Close();
+                        Application.Exit();
                     }));
                 }
             }
@@ -3114,6 +3118,8 @@ namespace Safety_Browser
                 Invoke(new Action(() =>
                 {
                     Cef.Shutdown();
+                    Close();
+                    Application.Exit();
                 }));
             }
         }
@@ -3329,7 +3335,8 @@ namespace Safety_Browser
                     Invoke(new Action(() =>
                     {
                         Cef.Shutdown();
-                        Environment.Exit(0);
+                        Close();
+                        Application.Exit();
                     }));
                 }
                 else
@@ -3344,7 +3351,8 @@ namespace Safety_Browser
                 Invoke(new Action(() =>
                 {
                     Cef.Shutdown();
-                    Environment.Exit(0);
+                    Close();
+                    Application.Exit();
                 }));
             }
         }
@@ -4539,7 +4547,9 @@ namespace Safety_Browser
 
         private void timer_close_Tick(object sender, EventArgs e)
         {
+            Cef.Shutdown();
             Close();
+            Application.Exit();
         }
 
         private void timer_notifications_detect_Tick(object sender, EventArgs e)
