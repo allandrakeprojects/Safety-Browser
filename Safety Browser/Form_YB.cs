@@ -21,6 +21,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Management;
+using Microsoft.Win32;
 
 namespace Safety_Browser
 {
@@ -3108,7 +3110,6 @@ namespace Safety_Browser
                     Invoke(new Action(() =>
                     {
                         Cef.Shutdown();
-                        Close();
                         Application.Exit();
                     }));
                 }
@@ -3118,7 +3119,6 @@ namespace Safety_Browser
                 Invoke(new Action(() =>
                 {
                     Cef.Shutdown();
-                    Close();
                     Application.Exit();
                 }));
             }
@@ -3335,7 +3335,6 @@ namespace Safety_Browser
                     Invoke(new Action(() =>
                     {
                         Cef.Shutdown();
-                        Close();
                         Application.Exit();
                     }));
                 }
@@ -3351,7 +3350,6 @@ namespace Safety_Browser
                 Invoke(new Action(() =>
                 {
                     Cef.Shutdown();
-                    Close();
                     Application.Exit();
                 }));
             }
@@ -4489,6 +4487,7 @@ namespace Safety_Browser
                 else
                 {
                     panel_cefsharp.Visible = true;
+                    GetDeviceInfo();
                 }
 
                 if (!notification_click)
@@ -4513,6 +4512,62 @@ namespace Safety_Browser
                 cp.Style |= WS_MINIMIZEBOX;
                 cp.ClassStyle |= CS_DBLCLKS;
                 return cp;
+            }
+        }
+
+        private void GetDeviceInfo()
+        {
+            try
+            {
+                string clockSpeed = "";
+                string procName = "";
+                string manufacturer = "";
+                string get_ram = "";
+                string description = "";
+
+                using (ManagementObjectSearcher win32Proc = new ManagementObjectSearcher("select * from Win32_Processor"),
+                win32CompSys = new ManagementObjectSearcher("select * from Win32_ComputerSystem"),
+                win32Memory = new ManagementObjectSearcher("select * from Win32_PhysicalMemory"),
+                ram_get = new ManagementObjectSearcher("select * from Win32_OperatingSystem "))
+                {
+                    foreach (ManagementObject obj in win32Proc.Get())
+                    {
+                        clockSpeed = obj["CurrentClockSpeed"].ToString();
+                        procName = obj["Name"].ToString();
+                        manufacturer = obj["Manufacturer"].ToString();
+                        description = obj["Description"].ToString();
+                    }
+
+                    foreach (ManagementObject obj in ram_get.Get())
+                    {
+                        get_ram = obj["TotalVisibleMemorySize"].ToString();
+                    }
+                }
+
+                string ram = get_ram.Substring(0, 2);
+
+                string temp_deviceinfo = Path.Combine(Path.GetTempPath(), "deviceinfo.txt");
+
+                if (File.Exists(temp_deviceinfo))
+                {
+                    File.Delete(temp_deviceinfo);
+
+                    using (StreamWriter sw = new StreamWriter(temp_deviceinfo, true, Encoding.UTF8))
+                    {
+                        sw.WriteLine("\r\n" + "Windows: " + Environment.OSVersion + "\r\n" + "Processor: " + procName + "\r\n" + "Installed memory (RAM): " + ram + "\r\n" + "System type: " + description + "\r\n");
+                    }
+                }
+                else
+                {
+                    using (StreamWriter sw = new StreamWriter(temp_deviceinfo, true, Encoding.UTF8))
+                    {
+                        sw.WriteLine("\r\n" + "Windows: " + Environment.OSVersion + "\r\n" + "Processor: " + procName + "\r\n" + "Installed memory (RAM): " + ram + "\r\n" + "System type: " + description + "\r\n");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Leave blank
             }
         }
 
@@ -4548,7 +4603,6 @@ namespace Safety_Browser
         private void timer_close_Tick(object sender, EventArgs e)
         {
             Cef.Shutdown();
-            Close();
             Application.Exit();
         }
 
@@ -4832,14 +4886,14 @@ namespace Safety_Browser
                         {
                             File.Delete(temp_traceroute);
 
-                            using (StreamWriter sw = new StreamWriter(temp_traceroute))
+                            using (StreamWriter sw = new StreamWriter(temp_traceroute, true, Encoding.UTF8))
                             {
                                 sw.WriteLine(result_traceroute);
                             }
                         }
                         else
                         {
-                            using (StreamWriter sw = new StreamWriter(temp_traceroute))
+                            using (StreamWriter sw = new StreamWriter(temp_traceroute, true, Encoding.UTF8))
                             {
                                 sw.WriteLine(result_traceroute);
                             }
@@ -4851,21 +4905,22 @@ namespace Safety_Browser
                         {
                             File.Delete(temp_ping);
 
-                            using (StreamWriter sw = new StreamWriter(temp_ping))
+                            using (StreamWriter sw = new StreamWriter(temp_ping, true, Encoding.UTF8))
                             {
                                 sw.WriteLine(result_ping);
                             }
                         }
                         else
                         {
-                            using (StreamWriter sw = new StreamWriter(temp_ping))
+                            using (StreamWriter sw = new StreamWriter(temp_ping, true, Encoding.UTF8))
                             {
                                 sw.WriteLine(result_ping);
                             }
                         }
 
                         ZipFile zip = new ZipFile();
-
+                        
+                        zip.AddFile(Path.GetTempPath() + "\\deviceinfo.txt", "");
                         zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
                         zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
                         zip.Save(Path.GetTempPath() + "\\Diagnostics.zip");
