@@ -2305,24 +2305,29 @@ namespace Safety_Browser
                         label_loader.Text = "加载中。。。";
 
                         pictureBox_loader_nav.Visible = false;
-                        
-                        if (handler_url.Contains("about:blank"))
-                        {
-                            chromeBrowser.Back();
-                            
-                            Form_YB_NewTab form_newtab = new Form_YB_NewTab(domain_get + "/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
-                            int open_form = Application.OpenForms.Count;
 
-                            if (open_form == 1)
+                        if (last_url.Contains("/page/player/wallet/deposit.jsp"))
+                        {
+                            if (handler_url.Contains("about:blank"))
                             {
-                                form_newtab.Show();
-                            }
-                            else
-                            {
-                                Form_YB_NewTab.SetClose = true;
-                                form_newtab.Show();
+                                chromeBrowser.Back();
+
+                                Form_YB_NewTab form_newtab = new Form_YB_NewTab(domain_get + "/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
+                                int open_form = Application.OpenForms.Count;
+
+                                if (open_form == 1)
+                                {
+                                    form_newtab.Show();
+                                }
+                                else
+                                {
+                                    Form_YB_NewTab.SetClose = true;
+                                    form_newtab.Show();
+                                }
                             }
                         }
+                        
+                        last_url = handler_url;
                     }
                 }));
             }
@@ -4699,6 +4704,7 @@ namespace Safety_Browser
         private bool isGetDiagnosticsClicked = true;
         private bool isIPInserted = false;
         private bool isCacheClicked = false;
+        private string last_url = "";
 
         private void timer_loader_Tick(object sender, EventArgs e)
         {
@@ -5013,6 +5019,7 @@ namespace Safety_Browser
 
         [DllImport("user32.dll", EntryPoint = "SetWindowText", CharSet = CharSet.Unicode)]
         public static extern bool SetWindowText(IntPtr hWnd, String strNewWindowName);
+
         [DllImport("user32.dll", EntryPoint = "FindWindow", CharSet = CharSet.Unicode)]
         public static extern IntPtr FindWindow(string className, string windowName);
 
