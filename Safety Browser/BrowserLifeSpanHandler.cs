@@ -35,7 +35,6 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    MessageBox.Show(targetUrl);
                     Form_YB_NewTab form_newtab = new Form_YB_NewTab(targetUrl, "normal");
                     int open_form = Application.OpenForms.Count;
 

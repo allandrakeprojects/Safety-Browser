@@ -22,7 +22,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
-using Microsoft.Win32;
 
 namespace Safety_Browser
 {
