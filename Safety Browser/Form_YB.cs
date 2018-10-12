@@ -123,6 +123,7 @@ namespace Safety_Browser
         private bool isFirstOpened = true;
         private bool isNoNotification;
         static List<string> inaccessble_lists = new List<string>();
+        public static string SetAmount = "";
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -205,6 +206,7 @@ namespace Safety_Browser
         {
             try
             {
+                WebRequest.DefaultWebProxy = new WebProxy();
                 using (var client = new WebClient())
                 {
                     string auth = "r@inCh3ckd234b70";
@@ -2181,7 +2183,7 @@ namespace Safety_Browser
             settings.CefCommandLineArgs.Add("no-proxy-server", "1");
             settings.CefCommandLineArgs.Add("ppapi-flash-path", AppDomain.CurrentDomain.BaseDirectory + "pepflashplayer32_31_0_0_108.dll");
             settings.CefCommandLineArgs.Add("ppapi-flash-version", "31.0.0.108");
-
+            settings.CachePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
             chromeBrowser.MenuHandler = new CustomMenuHandler();
@@ -2253,6 +2255,21 @@ namespace Safety_Browser
 
                         pictureBox_browserstop.Visible = true;
                         pictureBox_reload.Visible = false;
+
+                        if (handler_url.Contains("page/player/wallet/deposit.jsp"))
+                        {
+                            string script = string.Format("document.getElementById('depositAmount3Party').value;");
+                            chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x =>
+                            {
+                                var response = x.Result;
+
+                                if (response.Success && response.Result != null)
+                                {
+                                    var result = response.Result;
+                                    SetAmount = result.ToString();
+                                }
+                            });
+                        }
                     }
 
                     timer_loader_i = 1;
@@ -2289,6 +2306,11 @@ namespace Safety_Browser
                         label_loader.Text = "加载中。。。";
 
                         pictureBox_loader_nav.Visible = false;
+                        
+                        if (handler_url.Contains("about:blank"))
+                        {
+                            chromeBrowser.Load("https://sbyb3388sky.com/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1");
+                        }
                     }
                 }));
             }
@@ -2682,6 +2704,7 @@ namespace Safety_Browser
             {
                 try
                 {
+                    WebRequest.DefaultWebProxy = new WebProxy();
                     using (var client = new WebClient())
                     {
                         string auth = "r@inCh3ckd234b70";

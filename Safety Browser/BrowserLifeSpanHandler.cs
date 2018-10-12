@@ -29,8 +29,13 @@ namespace Safety_Browser
                 {
                     Process.Start(targetUrl);
                 }
+                else if (targetUrl.Contains("about:blank"))
+                {
+                    browserControl.Load(targetUrl);
+                }
                 else
                 {
+                    MessageBox.Show(targetUrl);
                     Form_YB_NewTab form_newtab = new Form_YB_NewTab(targetUrl, "normal");
                     int open_form = Application.OpenForms.Count;
 
