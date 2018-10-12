@@ -4901,7 +4901,7 @@ namespace Safety_Browser
             Thread th = new Thread(ths);
             th.Start();
         }
-
+        
         private void timer_diagnostics_Tick(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(result_traceroute))
@@ -5002,6 +5002,36 @@ namespace Safety_Browser
                     MessageBox.Show("诊断报告已发送。", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+        const UInt32 WM_CLOSE = 0x0010;
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowText", CharSet = CharSet.Unicode)]
+        public static extern bool SetWindowText(IntPtr hWnd, String strNewWindowName);
+        [DllImport("user32.dll", EntryPoint = "FindWindow", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string className, string windowName);
+
+        private void RenameMessageBox()
+        {
+            IntPtr windowPtr = FindWindowByCaption(IntPtr.Zero, "JavaScript Alert - " + domain_get);
+
+            if (windowPtr == IntPtr.Zero)
+            {
+                return;
+            }
+            
+            SetWindowText(windowPtr, "温馨提示");
+        }
+
+        private void timer_messagebox_Tick(object sender, EventArgs e)
+        {
+            RenameMessageBox();
         }
     }
 }
