@@ -2309,7 +2309,20 @@ namespace Safety_Browser
                         
                         if (handler_url.Contains("about:blank"))
                         {
-                            chromeBrowser.Load("https://sbyb3388sky.com/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1");
+                            chromeBrowser.Back();
+                            
+                            Form_YB_NewTab form_newtab = new Form_YB_NewTab(domain_get + "/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
+                            int open_form = Application.OpenForms.Count;
+
+                            if (open_form == 1)
+                            {
+                                form_newtab.Show();
+                            }
+                            else
+                            {
+                                Form_YB_NewTab.SetClose = true;
+                                form_newtab.Show();
+                            }
                         }
                     }
                 }));
