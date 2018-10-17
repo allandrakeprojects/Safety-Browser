@@ -46,6 +46,7 @@ namespace Safety_Browser
         private string newtab_link;
         private bool hard_refresh;
         private string get_status;
+        private string handler_url;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -165,6 +166,7 @@ namespace Safety_Browser
         private void Form_Main_Load(object sender, EventArgs e)
         {
             chromeBrowser.LoadingStateChanged += BrowserLoadingStateChanged;
+            chromeBrowser.AddressChanged += BrowserAddressChanged;
             NetworkAvailability();
             PictureBoxCenter();
 
@@ -178,6 +180,11 @@ namespace Safety_Browser
                 MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
                 WindowState = FormWindowState.Maximized;
             }
+        }
+
+        private void BrowserAddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            handler_url = e.Address;
         }
 
         private void BrowserLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)

@@ -2313,6 +2313,7 @@ namespace Safety_Browser
                                 chromeBrowser.Back();
 
                                 Form_YB_NewTab form_newtab = new Form_YB_NewTab(domain_get + "/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
+                                //Form_YB_NewTab form_newtab = new Form_YB_NewTab("http://jjdemoapi.ggow99038.com:1003/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
                                 int open_form = Application.OpenForms.Count;
 
                                 if (open_form == 1)
