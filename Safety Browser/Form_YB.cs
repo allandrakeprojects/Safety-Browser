@@ -228,7 +228,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //Close();
             }
         }
@@ -675,7 +675,7 @@ namespace Safety_Browser
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("请查询你的网络连接！謝謝。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("请查询你的网络连接！謝謝。", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     close = false;
                     Close();
                 }
@@ -750,7 +750,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("请查询你的网络连接！謝謝。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请查询你的网络连接！謝謝。", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 close = false;
                 Close();
             }
@@ -967,7 +967,7 @@ namespace Safety_Browser
             }
             catch (Exception err)
             {
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + err.Message + "\nError Code: 1002", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //close = false;
                 //Close();
             }
@@ -2126,7 +2126,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //close = false;
                 //Close();
             }
@@ -2684,7 +2684,7 @@ namespace Safety_Browser
                             isCacheClicked = false;
                             label_clearcache.Text = "清除缓存";
                             label_clearcache.Cursor = Cursors.Hand;
-                            MessageBox.Show("缓存已清除。", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("缓存已清除。", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }));
@@ -2858,7 +2858,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -2970,7 +2970,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -3082,7 +3082,7 @@ namespace Safety_Browser
                 //var st = new StackTrace(ex, true);
                 //var frame = st.GetFrame(0);
                 //var line = frame.GetFileLineNumber();
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1008", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Close();
             }
@@ -3145,7 +3145,7 @@ namespace Safety_Browser
         {
             if (close)
             {
-                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "永宝快线", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -3184,7 +3184,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -3222,7 +3222,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1005", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1005", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -3260,7 +3260,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1006", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1006", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -3288,7 +3288,7 @@ namespace Safety_Browser
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1003", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There is a problem with the server! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1003", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //close = false;
                 //Close();
             }
@@ -3374,7 +3374,7 @@ namespace Safety_Browser
                 pictureBox_menu.BackColor = Color.FromArgb(197, 112, 53);
                 pictureBox_hover.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "永宝快线", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -4750,7 +4750,7 @@ namespace Safety_Browser
                 IsCloseVisible = true;
                 pictureBox_close.BackColor = Color.FromArgb(197, 112, 53);
 
-                DialogResult dr = MessageBox.Show("退出程序？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("退出程序？", "永宝快线", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     Invoke(new Action(() =>
@@ -5004,7 +5004,7 @@ namespace Safety_Browser
                         // Leave blank
                     }
 
-                    MessageBox.Show("诊断报告已发送。", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("诊断报告已发送。", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
