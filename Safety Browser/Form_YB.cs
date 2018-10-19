@@ -135,12 +135,152 @@ namespace Safety_Browser
         {
             InitializeComponent();
 
+            //try
+            //{
+            //    NetworkManagement networkManagement = new NetworkManagement();
+            //    networkManagement.setDNS("114.114.114.114");
+            //    networkManagement.setDNS("114.114.115.115");
+            //}
+            //catch (Exception err)
+            //{
+            //    MessageBox.Show(err.ToString());
+            //}
+            //var interfaceType = typeof(InterfaceName);
+            //var methods = interfaceType.GetMethods();
+
+            //List<String> methodNames = new List<String>();
+            //foreach (var method in methods)
+            //{
+            //    methodNames.Add(method.Name);
+            //}
+            //SetDnsConfig();
+
+            Thread thread = new Thread(delegate ()
+            {
+                DNSServer();
+            });
+            thread.Start();
+
+
+            //bool test = setDNS("114.114.114.114");
+            //MessageBox.Show(String.Format("Test {0}", test));
+
             Opacity = 0;
 
             timer.Interval = 20;
             timer.Tick += new EventHandler(fadeIn);
             timer.Start();
         }
+
+        public static void DNSServer()
+        {
+            string adapter_name = "";
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in interfaces)
+            {
+                adapter_name = adapter.Name;
+
+                if (adapter_name != "")
+                {
+                    try
+                    {
+                        Process process_1 = new Process();
+                        ProcessStartInfo startInfo_1 = new ProcessStartInfo();
+                        startInfo_1.WindowStyle = ProcessWindowStyle.Hidden;
+                        startInfo_1.FileName = "cmd.exe";
+                        string command_1 = "netsh dnsclient add dnsservers " + adapter_name + " 114.114.114.114 index=1";
+                        startInfo_1.Arguments = "/user:Administrator \"cmd /K " + command_1 + "\"";
+                        startInfo_1.Verb = "runas";
+                        process_1.StartInfo = startInfo_1;
+                        process_1.Start();
+
+                        Process process_2 = new Process();
+                        ProcessStartInfo startInfo_2 = new ProcessStartInfo();
+                        startInfo_2.WindowStyle = ProcessWindowStyle.Hidden;
+                        startInfo_2.FileName = "cmd.exe";
+                        string command_2 = "netsh dnsclient add dnsservers " + adapter_name + " 114.114.115.115 index=2";
+                        startInfo_2.Arguments = "/user:Administrator \"cmd /K " + command_2 + "\"";
+                        startInfo_2.Verb = "runas";
+                        process_2.StartInfo = startInfo_2;
+                        process_2.Start();
+
+                        adapter_name = "";
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.ToString());
+                    }
+                }
+            }
+        }
+
+
+        public void SetDnsConfig()
+        {
+            try
+            {
+                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObjectCollection moc = mc.GetInstances();
+                string nic = string.Empty;
+                foreach (ManagementObject mo in moc)
+                {
+                    if ((bool)mo["ipEnabled"])
+                    {
+                        nic = mo["Caption"].ToString();
+                        MessageBox.Show(nic);
+                        if ((bool)mo["IPEnabled"])
+                        {
+                            if (mo["Caption"].Equals(nic))
+                            {
+                                ManagementBaseObject DnsEntry = mo.GetMethodParameters("SetDNSServerSearchOrder");
+                                DnsEntry["DNSServerSearchOrder"] = "114.114.114.114,114.114.114.115".Split(',');//Two ip addresses you want to set     
+                                ManagementBaseObject DnsMbo = mo.InvokeMethod("SetDNSServerSearchOrder", DnsEntry, null);
+                                int returnCode = int.Parse(DnsMbo["returnvalue"].ToString());//This will give you the return code you can use to evaluate if its not working  
+                                MessageBox.Show(returnCode.ToString());
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+        }
+
+        public bool setDNS(string dns)
+        {
+            ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection objMOC = objMC.GetInstances();
+
+            foreach (ManagementObject objMO in objMOC)
+            {
+                if ((bool)objMO["IPEnabled"])
+                {
+                    // Set Preferred DNS
+                    try
+                    {
+                        ManagementBaseObject newDNS = objMO.GetMethodParameters("SetDNSServerSearchOrder");
+                        newDNS["DNSServerSearchOrder"] = dns.Split(',');
+                        ManagementBaseObject setDNS =
+                            objMO.InvokeMethod("SetDNSServerSearchOrder", newDNS, null);
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Preferred DNS set failed");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+
+
+
 
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
