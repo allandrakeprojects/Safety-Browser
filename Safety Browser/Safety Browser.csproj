@@ -11,7 +11,7 @@
     <ProjectGuid>{104AF941-FDF4-4DEE-9517-F15F32578DC2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Safety_Browser</RootNamespace>
-    <AssemblyName>Safety Browser</AssemblyName>
+    <AssemblyName>YB Browser</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -68,6 +68,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Safety_Browser.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChoETL, Version=1.0.8.4, Culture=neutral, processorArchitecture=MSIL">
@@ -151,6 +155,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,7 +175,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="desktop_icon.ico" />

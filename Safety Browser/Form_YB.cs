@@ -162,24 +162,34 @@ namespace Safety_Browser
                     {
                         Process process_1 = new Process();
                         ProcessStartInfo startInfo_1 = new ProcessStartInfo();
+                        startInfo_1.UseShellExecute = true;
                         startInfo_1.WindowStyle = ProcessWindowStyle.Hidden;
                         startInfo_1.FileName = "cmd.exe";
-                        string command_1 = "netsh dnsclient add dnsservers " + adapter_name + " 114.114.114.114 index=1";
+                        string command_1 = "netsh dnsclient add dnsservers " + adapter_name + " 114.114.115.115 index=1";
                         startInfo_1.Arguments = "/user:Administrator \"cmd /K " + command_1 + "\"";
-                        startInfo_1.Verb = "runas";
+                        if (Environment.OSVersion.Version.Major >= 6)  // windows vista or higher
+                        {
+                            startInfo_1.Verb = "runas";
+                        }
+                        //startInfo_1.Verb = "runas";
                         process_1.StartInfo = startInfo_1;
                         process_1.Start();
 
                         Process process_2 = new Process();
                         ProcessStartInfo startInfo_2 = new ProcessStartInfo();
+                        startInfo_2.UseShellExecute = true;
                         startInfo_2.WindowStyle = ProcessWindowStyle.Hidden;
                         startInfo_2.FileName = "cmd.exe";
-                        string command_2 = "netsh dnsclient add dnsservers " + adapter_name + " 114.114.115.115 index=2";
+                        string command_2 = "netsh dnsclient add dnsservers " + adapter_name + " 114.114.114.114 index=1";
                         startInfo_2.Arguments = "/user:Administrator \"cmd /K " + command_2 + "\"";
-                        startInfo_2.Verb = "runas";
+                        if (Environment.OSVersion.Version.Major >= 6)  // windows vista or higher
+                        {
+                            startInfo_2.Verb = "runas";
+                        }
+                        //startInfo_2.Verb = "runas";
                         process_2.StartInfo = startInfo_2;
                         process_2.Start();
-
+                        
                         adapter_name = "";
                     }
                     catch (Exception err)
@@ -3192,30 +3202,36 @@ namespace Safety_Browser
         // Form Closing
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (close)
+            Invoke(new Action(() =>
             {
-                DialogResult dr = MessageBox.Show("退出程序？", "永宝快线", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    Invoke(new Action(() =>
-                    {
-                        Cef.Shutdown();
-                        Application.Exit();
-                    }));
-                }
-            }
-            else
-            {
-                Invoke(new Action(() =>
-                {
-                    Cef.Shutdown();
-                    Application.Exit();
-                }));
-            }
+                Cef.Shutdown();
+                Application.Exit();
+            }));
+
+            //if (close)
+            //{
+            //    DialogResult dr = MessageBox.Show("退出程序？", "永宝快线", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //    if (dr == DialogResult.No)
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //    else
+            //    {
+            //        Invoke(new Action(() =>
+            //        {
+            //            Cef.Shutdown();
+            //            Application.Exit();
+            //        }));
+            //    }
+            //}
+            //else
+            //{
+            //    Invoke(new Action(() =>
+            //    {
+            //        Cef.Shutdown();
+            //        Application.Exit();
+            //    }));
+            //}
         }
 
         // Get external IP
@@ -4787,8 +4803,15 @@ namespace Safety_Browser
             }
             else
             {
-                MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
-                WindowState = FormWindowState.Maximized;
+                //MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
+                //WindowState = FormWindowState.Maximized;
+                Screen screen = Screen.FromControl(this);
+                int x = screen.WorkingArea.X - screen.Bounds.X;
+                int y = screen.WorkingArea.Y - screen.Bounds.Y;
+                this.MaximizedBounds = new Rectangle(x, y,
+                    screen.WorkingArea.Width, screen.WorkingArea.Height);
+                this.MaximumSize = screen.WorkingArea.Size;
+                this.WindowState = FormWindowState.Maximized;
             }
         }
 
@@ -4834,8 +4857,15 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
-                    WindowState = FormWindowState.Maximized;
+                    //MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
+                    //WindowState = FormWindowState.Maximized;
+                    Screen screen = Screen.FromControl(this);
+                    int x = screen.WorkingArea.X - screen.Bounds.X;
+                    int y = screen.WorkingArea.Y - screen.Bounds.Y;
+                    this.MaximizedBounds = new Rectangle(x, y,
+                        screen.WorkingArea.Width, screen.WorkingArea.Height);
+                    this.MaximumSize = screen.WorkingArea.Size;
+                    this.WindowState = FormWindowState.Maximized;
                 }
             }
 

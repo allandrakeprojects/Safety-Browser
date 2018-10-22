@@ -297,22 +297,22 @@ namespace Safety_Browser
         // Form Closing
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (close)
-            {
-                DialogResult dr = MessageBox.Show("退出程序？", "永宝快线",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    Hide();
-                }
-            }
-            else
-            {
-                Hide();
-            }
+            //if (close)
+            //{
+            //    DialogResult dr = MessageBox.Show("退出程序？", "永宝快线",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //    if (dr == DialogResult.No)
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //    else
+            //    {
+            //        Hide();
+            //    }
+            //}
+            //else
+            //{
+            //    Hide();
+            //}
         }
 
         private void pictureBox_minimize_MouseHover(object sender, EventArgs e)
@@ -543,8 +543,15 @@ namespace Safety_Browser
             }
             else
             {
-                MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
-                WindowState = FormWindowState.Maximized;
+                //MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
+                //WindowState = FormWindowState.Maximized;
+                Screen screen = Screen.FromControl(this);
+                int x = screen.WorkingArea.X - screen.Bounds.X;
+                int y = screen.WorkingArea.Y - screen.Bounds.Y;
+                this.MaximizedBounds = new Rectangle(x, y,
+                    screen.WorkingArea.Width, screen.WorkingArea.Height);
+                this.MaximumSize = screen.WorkingArea.Size;
+                this.WindowState = FormWindowState.Maximized;
             }
         }
 
@@ -582,8 +589,15 @@ namespace Safety_Browser
                 }
                 else
                 {
-                    MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
-                    WindowState = FormWindowState.Maximized;
+                    //MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
+                    //WindowState = FormWindowState.Maximized;
+                    Screen screen = Screen.FromControl(this);
+                    int x = screen.WorkingArea.X - screen.Bounds.X;
+                    int y = screen.WorkingArea.Y - screen.Bounds.Y;
+                    this.MaximizedBounds = new Rectangle(x, y,
+                        screen.WorkingArea.Width, screen.WorkingArea.Height);
+                    this.MaximumSize = screen.WorkingArea.Size;
+                    this.WindowState = FormWindowState.Maximized;
                 }
             }
 
