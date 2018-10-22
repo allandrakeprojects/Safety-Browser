@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using System.Management;
 using Microsoft.Win32;
 using System.Security;
+using System.Security.Permissions;
 
 namespace Safety_Browser
 {
@@ -53,6 +54,7 @@ namespace Safety_Browser
         private bool domain_one_time = true;
         private bool load_not_hijacked = false;
         private bool connection_handler = false;
+        private bool IsDNSInserted = false;
         private string _mac_address;
         private string _external_ip;
         private string _isp;
@@ -142,230 +144,60 @@ namespace Safety_Browser
             timer.Interval = 20;
             timer.Tick += new EventHandler(FadeIn);
             timer.Start();
+        }
 
-            Thread thread = new Thread(delegate ()
+        private void label_changedns_Click(object sender, EventArgs e)
+        {
+            DNSServer();
+        }
+
+        private void DNSServer()
+        {
+            try
             {
-                DNSServer();
-            });
-            thread.Start();
-        }
+                DisplayDnsAddresses();
 
-        public static NetworkInterface GetActiveEthernetOrWifiNetworkInterface()
-        {
-            var Nic = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(
-                a => a.OperationalStatus == OperationalStatus.Up &&
-                (a.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || a.NetworkInterfaceType == NetworkInterfaceType.Ethernet) &&
-                a.GetIPProperties().GatewayAddresses.Any(g => g.Address.AddressFamily.ToString() == "InterNetwork"));
-
-            return Nic;
-        }
-                
-        public static void SetDNS(string DnsString)
-        {
-            //string[] Dns = { DnsString };
-            //var CurrentInterface = GetActiveEthernetOrWifiNetworkInterface();
-            //if (CurrentInterface == null) return;
-
-            //ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            //ManagementObjectCollection objMOC = objMC.GetInstances();
-            //foreach (ManagementObject objMO in objMOC)
-            //{
-            //    if ((bool)objMO["IPEnabled"])
-            //    {
-            //        if (objMO["Caption"].ToString().Equals(CurrentInterface.Description))
-            //        {
-            //            try
-            //            {
-            //                ManagementBaseObject newDNS = objMO.GetMethodParameters("SetDNSServerSearchOrder");
-            //                newDNS["DNSServerSearchOrder"] = DnsString.Split(',');
-            //                ManagementBaseObject setDNS = objMO.InvokeMethod("SetDNSServerSearchOrder", newDNS, null);
-            //            }
-            //            catch (Exception err)
-            //            {
-            //                MessageBox.Show(err.ToString());
-            //            }
-
-            //            //ManagementBaseObject objdns = objMO.GetMethodParameters("SetDNSServerSearchOrder");
-            //            //if (objdns != null)
-            //            //{
-            //            //    MessageBox.Show("detect");
-            //            //    objdns["DNSServerSearchOrder"] = Dns;
-            //            //    objMO.InvokeMethod("SetDNSServerSearchOrder", objdns, null);
-            //            //}
-            //        }
-            //    }
-            //}
-        }
-
-        static void setDNSServerSearchOrder()
-
-        {
-
-            var CurrentInterface = GetActiveEthernetOrWifiNetworkInterface();
-            MessageBox.Show(CurrentInterface.Description);
-            ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-
-            ManagementObjectCollection moc = objMC.GetInstances();
-
-
-
-            // Not sure if following two statements are needed - found in an example
-
-            // Same problem occurs if they are commented out
-
-            objMC.Scope.Options.EnablePrivileges = true;
-
-            objMC.Get();
-
-
-
-            foreach (ManagementObject mo in moc)
-
-            {
-
-                if ((bool)mo["IPEnabled"])
-
+                string networkIntefaceType = string.Empty;
+                foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
                 {
-                    MessageBox.Show(mo["Caption"].ToString());
-                    if (mo["Caption"].ToString().Contains(CurrentInterface.Description))
-
+                    if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet && nic.OperationalStatus == OperationalStatus.Up && !nic.Name.Contains("Tunnel") && !nic.Name.Contains("VirtualBox") && !nic.Name.Contains("Adapter") && !nic.Description.Contains("Npcap") && !nic.Description.Contains("Loopback"))
                     {
-
-                        String DNS = "157.60.68.11,157.60.104.33,157.54.14.146";
-
-                        ManagementBaseObject inParams = mo.GetMethodParameters("SetDNSServerSearchOrder");
-
-                        inParams["DNSServerSearchOrder"] = DNS.Split(',');
-
-                        Object result = mo.InvokeMethod("SetDNSServerSearchOrder", inParams, null);
-
-
-                        //The follow Invokes causes an exception with the error message:
-
-                        // "Invalid Method Parameter(s)"
-
-                        //ManagementBaseObject setDNS =
-
-                        //        objMC.InvokeMethod("SetDNSServerSearchOrder", inParams, null);
-
+                        networkIntefaceType = nic.NetworkInterfaceType.ToString();
+                        
+                        break;
                     }
-
                 }
 
+                MessageBox.Show(networkIntefaceType);
+
+                if (!IsDNSInserted)
+                {
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.UseShellExecute = true;
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    string command_1 = "netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.115.115 index=1";
+                    string command_2 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.114.114 index=1";
+                    startInfo.Arguments = "/user:Administrator \"cmd /K " + command_1 + command_2 + "\"";
+                    if (Environment.OSVersion.Version.Major >= 6)
+                    {
+                        startInfo.Verb = "runas";
+                    }
+                    process.StartInfo = startInfo;
+                    process.Start();
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
             }
         }
         
-        public void setDNS(string DNS)
-        {
-            var CurrentInterface = GetActiveEthernetOrWifiNetworkInterface();
-            ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection objMOC = objMC.GetInstances();
-
-            foreach (ManagementObject objMO in objMOC)
-            {
-                if ((bool)objMO["IPEnabled"])
-                {
-                    // if you are using the System.Net.NetworkInformation.NetworkInterface
-                    // you'll need to change this line to
-                    // if (objMO["Caption"].ToString().Contains(NIC))
-                    // and pass in the Description property instead of the name 
-                    if (objMO["Caption"].Equals(CurrentInterface.Description))
-                    {
-                        ManagementBaseObject newDNS =
-                          objMO.GetMethodParameters("SetDNSServerSearchOrder");
-                        newDNS["DNSServerSearchOrder"] = DNS.Split(',');
-                        ManagementBaseObject setDNS =
-                          objMO.InvokeMethod("SetDNSServerSearchOrder", newDNS, null);
-                    }
-                }
-            }
-
-            MessageBox.Show("ghghghg");
-        }
-
-        public static void UnsetDNS()
-        {
-            var CurrentInterface = GetActiveEthernetOrWifiNetworkInterface();
-            if (CurrentInterface == null) return;
-
-            ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection objMOC = objMC.GetInstances();
-            foreach (ManagementObject objMO in objMOC)
-            {
-                if ((bool)objMO["IPEnabled"])
-                {
-                    if (objMO["Caption"].ToString().Contains(CurrentInterface.Description))
-                    {
-                        ManagementBaseObject objdns = objMO.GetMethodParameters("SetDNSServerSearchOrder");
-                        if (objdns != null)
-                        {
-                            objdns["DNSServerSearchOrder"] = null;
-                            objMO.InvokeMethod("SetDNSServerSearchOrder", objdns, null);
-                        }
-                    }
-                }
-            }
-        }
-
-        public void setDNSasd(string DNS)
-        {
-            var CurrentInterface = GetActiveEthernetOrWifiNetworkInterface();
-            ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection objMOC = objMC.GetInstances();
-
-            foreach (ManagementObject objMO in objMOC)
-            {
-                if ((bool)objMO["IPEnabled"])
-                {
-                    // if you are using the System.Net.NetworkInformation.NetworkInterface you'll need to change this line to if (objMO["Caption"].ToString().Contains(NIC)) and pass in the Description property instead of the name 
-                    //if (objMO["Caption"].Equals(NIC))
-                    if (objMO["Caption"].ToString().Contains(CurrentInterface.Description))
-                    {
-                        try
-                        {
-                            ManagementBaseObject newDNS = objMO.GetMethodParameters("SetDNSServerSearchOrder");
-                            newDNS["DNSServerSearchOrder"] = DNS.Split('.');
-                            ManagementBaseObject setDNS = objMO.InvokeMethod("SetDNSServerSearchOrder", newDNS, null);
-                        }
-                        catch (Exception)
-                        {
-                            throw;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void UAC(int value)
-        {
-            string UAC_key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
-            //Registry.SetValue(UAC_key, "EnableLUA", 0);
-
-            RegistryKey mykey;
-            mykey = Registry.CurrentUser.CreateSubKey(UAC_key);
-            mykey.SetValue("EnableLUA", 0);
-            mykey.Close();
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public static void DisplayDnsAddresses()
+        public void DisplayDnsAddresses()
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            int count = 0;
             foreach (NetworkInterface adapter in adapters)
             {
 
@@ -373,60 +205,36 @@ namespace Safety_Browser
                 IPAddressCollection dnsServers = adapterProperties.DnsAddresses;
                 if (dnsServers.Count > 0)
                 {
-                    Console.WriteLine(adapter.Description);
                     foreach (IPAddress dns in dnsServers)
                     {
-                        if (dns.ToString() == "144.144.144.144" || dns.ToString() == "144.144.155.155")
+                        count++;
+
+                        if (count == 1)
                         {
-                            IsDNSInserted = true;
+                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
+                            {
+                                IsDNSInserted = true;
+                                MessageBox.Show("DNS Already Set!");
+                                break;
+                            }
+                        }
+                        else if (count == 2)
+                        {
+                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
+                            {
+                                IsDNSInserted = true;
+                                MessageBox.Show("DNS Already Set!");
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            IsDNSInserted = false;
+                            break;
                         }
                     }
-                    Console.WriteLine();
                 }
             }
-        }
-
-
-        private void DNSServer()
-        {
-            DisplayDnsAddresses();
-
-            string UAC_key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
-
-            RegistryKey mykey_1;
-            mykey_1 = Registry.CurrentUser.CreateSubKey(UAC_key);
-            mykey_1.SetValue("EnableLUA", 0);
-            mykey_1.Close();
-
-            if (!IsDNSInserted)
-            {
-                var CurrentInterface = GetActiveEthernetOrWifiNetworkInterface();
-
-
-                Process process = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.UseShellExecute = true;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                startInfo.FileName = "cmd.exe";
-                string command_1 = "netsh dnsclient add dnsservers " + CurrentInterface.NetworkInterfaceType.ToString() + " 114.114.115.115 index=1";
-                string command_2 = "&netsh dnsclient add dnsservers " + CurrentInterface.NetworkInterfaceType.ToString() + " 114.114.114.114 index=1";
-                startInfo.Arguments = "/user:Administrator \"cmd /K " + command_1 + command_2 + "\"";
-                if (Environment.OSVersion.Version.Major >= 6)
-                {
-                    startInfo.Verb = "runas";
-                }
-                process.StartInfo = startInfo;
-                process.Start();
-            }
-            else
-            {
-                MessageBox.Show("jhgfhgf");
-            }
-                        
-            RegistryKey mykey_2;
-            mykey_2 = Registry.CurrentUser.CreateSubKey(UAC_key);
-            mykey_2.SetValue("EnableLUA", 1);
-            mykey_2.Close();
         }
         
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -823,6 +631,7 @@ namespace Safety_Browser
                         label_emailus1.ForeColor = Color.FromArgb(235, 99, 6);
                         label_clearcache.Enabled = true;
                         label_getdiagnostics.Enabled = true;
+                        label_changedns.Enabled = true;
 
                         timer_detectifhijacked.Start();
                     }
@@ -848,6 +657,7 @@ namespace Safety_Browser
                     label_emailus1.ForeColor = Color.Black;
                     label_clearcache.Enabled = false;
                     label_getdiagnostics.Enabled = false;
+                    label_changedns.Enabled = false;
 
                     timer_detectifhijacked.Stop();
                 }
@@ -2798,6 +2608,7 @@ namespace Safety_Browser
                                     zoomOutToolStripMenuItem.Enabled = true;
                                     label_clearcache.Enabled = true;
                                     label_getdiagnostics.Enabled = true;
+                                    label_changedns.Enabled = true;
                                     elseload_return = false;
 
                                     label_chatus2.Enabled = true;
@@ -2935,6 +2746,7 @@ namespace Safety_Browser
                                 zoomOutToolStripMenuItem.Enabled = true;
                                 label_clearcache.Enabled = true;
                                 label_getdiagnostics.Enabled = true;
+                                label_changedns.Enabled = true;
                                 elseload_return = false;
                                 isNotHijackedLoaded = true;
 
@@ -3918,6 +3730,7 @@ namespace Safety_Browser
                             timer_detectifhijacked.Stop();
                             label_clearcache.Enabled = false;
                             label_getdiagnostics.Enabled = false;
+                            label_changedns.Enabled = false;
                         }
                     }
                     else
@@ -4030,6 +3843,7 @@ namespace Safety_Browser
             //                timer_detectifhijacked.Stop();
             //                label_clearcache.Enabled = false;
             //                label_getdiagnostics.Enabled = false;
+            //                label_changedns.Enabled = false;
             //            }
             //        }
             //    }
@@ -4204,6 +4018,7 @@ namespace Safety_Browser
                             zoomOutToolStripMenuItem.Enabled = true;
                             label_clearcache.Enabled = true;
                             label_getdiagnostics.Enabled = true;
+                            label_changedns.Enabled = true;
                             elseload_return = false;
 
                             label_chatus2.Enabled = true;
@@ -4341,6 +4156,7 @@ namespace Safety_Browser
                         zoomOutToolStripMenuItem.Enabled = true;
                         label_clearcache.Enabled = true;
                         label_getdiagnostics.Enabled = true;
+                        label_changedns.Enabled = true;
                         elseload_return = false;
                         isNotHijackedLoaded = true;
 
@@ -4853,9 +4669,7 @@ namespace Safety_Browser
                 return cp;
             }
         }
-
-        public static bool IsDNSInserted { get; private set; }
-
+        
         private void GetDeviceInfo()
         {
             try
