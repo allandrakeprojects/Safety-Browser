@@ -812,7 +812,7 @@
             // timer_notifications
             // 
             this.timer_notifications.Interval = 10000;
-            this.timer_notifications.Tick += new System.EventHandler(this.timer_notifications_Tick);
+            this.timer_notifications.Tick += new System.EventHandler(this.timer_notifications_TickAsync);
             // 
             // timer_close
             // 

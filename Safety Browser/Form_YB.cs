@@ -4775,12 +4775,10 @@ namespace Safety_Browser
             Process.Start("mailto:cs@yb188188.com");
         }
 
-        private void timer_notifications_Tick(object sender, EventArgs e)
+        private async void timer_notifications_TickAsync(object sender, EventArgs e)
         {
             timer_notifications.Stop();
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            GetNotificationAsync(notifications_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            await GetNotificationAsync(notifications_service[current_web_service]);
         }
 
         private void timer_close_Tick(object sender, EventArgs e)
