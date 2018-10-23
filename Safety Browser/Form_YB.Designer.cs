@@ -122,7 +122,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).BeginInit();
             this.panel_connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).BeginInit();
-            this.panel_cefsharp.SuspendLayout();
             this.panel_landing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_landing)).BeginInit();
             this.panel_help.SuspendLayout();
@@ -293,7 +292,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_cefsharp.BackColor = System.Drawing.Color.White;
-            this.panel_cefsharp.Controls.Add(this.panel_landing);
             this.panel_cefsharp.Location = new System.Drawing.Point(1, 38);
             this.panel_cefsharp.Name = "panel_cefsharp";
             this.panel_cefsharp.Size = new System.Drawing.Size(1268, 725);
@@ -303,7 +301,7 @@
             // 
             this.panel_landing.BackColor = System.Drawing.Color.White;
             this.panel_landing.Controls.Add(this.pictureBox_landing);
-            this.panel_landing.Location = new System.Drawing.Point(148, 454);
+            this.panel_landing.Location = new System.Drawing.Point(1, 1);
             this.panel_landing.Name = "panel_landing";
             this.panel_landing.Size = new System.Drawing.Size(1268, 762);
             this.panel_landing.TabIndex = 79;
@@ -353,7 +351,7 @@
             this.label_changedns.Enabled = false;
             this.label_changedns.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label_changedns.ForeColor = System.Drawing.Color.White;
-            this.label_changedns.Location = new System.Drawing.Point(297, 399);
+            this.label_changedns.Location = new System.Drawing.Point(293, 400);
             this.label_changedns.Name = "label_changedns";
             this.label_changedns.Size = new System.Drawing.Size(113, 20);
             this.label_changedns.TabIndex = 74;
@@ -1147,6 +1145,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
+            this.Controls.Add(this.panel_landing);
             this.Controls.Add(this.pictureBox_loader_nav);
             this.Controls.Add(this.panel_help);
             this.Controls.Add(this.pictureBox_loader);
@@ -1191,7 +1190,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_domain)).EndInit();
             this.panel_connection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_1)).EndInit();
-            this.panel_cefsharp.ResumeLayout(false);
             this.panel_landing.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_landing)).EndInit();
             this.panel_help.ResumeLayout(false);
