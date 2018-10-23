@@ -309,7 +309,7 @@
             // pictureBox_landing
             // 
             this.pictureBox_landing.Image = global::Safety_Browser.Properties.Resources.logo_yb;
-            this.pictureBox_landing.Location = new System.Drawing.Point(537, 294);
+            this.pictureBox_landing.Location = new System.Drawing.Point(537, 296);
             this.pictureBox_landing.Name = "pictureBox_landing";
             this.pictureBox_landing.Size = new System.Drawing.Size(196, 145);
             this.pictureBox_landing.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
