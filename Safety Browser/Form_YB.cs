@@ -54,7 +54,7 @@ namespace Safety_Browser
         private bool domain_one_time = true;
         private bool load_not_hijacked = false;
         private bool connection_handler = false;
-        private bool IsDNSInserted = false;
+        private bool isDNSInserted = false;
         private string _mac_address;
         private string _external_ip;
         private string _isp;
@@ -147,10 +147,57 @@ namespace Safety_Browser
         }
 
         private void label_changedns_Click(object sender, EventArgs e)
-        {
+        {            
             DNSServer();
         }
 
+        public void DisplayDnsAddresses()
+        {
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            int count = 0;
+            foreach (NetworkInterface adapter in adapters)
+            {
+                if (isDNSInserted)
+                {
+                    break;
+                }
+
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                IPAddressCollection dnsServers = adapterProperties.DnsAddresses;
+                if (dnsServers.Count > 0)
+                {
+                    foreach (IPAddress dns in dnsServers)
+                    {
+                        count++;
+
+                        if (count == 1)
+                        {
+                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
+                            {
+                                isDNSInserted = true;
+                                MessageBox.Show("DNS Already Set.");
+                                break;
+                            }
+                        }
+                        else if (count == 2)
+                        {
+                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
+                            {
+                                isDNSInserted = true;
+                                MessageBox.Show("DNS Already Set.");
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            isDNSInserted = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
         private void DNSServer()
         {
             try
@@ -162,15 +209,13 @@ namespace Safety_Browser
                 {
                     if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet && nic.OperationalStatus == OperationalStatus.Up && !nic.Name.Contains("Tunnel") && !nic.Name.Contains("VirtualBox") && !nic.Name.Contains("Adapter") && !nic.Description.Contains("Npcap") && !nic.Description.Contains("Loopback"))
                     {
-                        networkIntefaceType = nic.NetworkInterfaceType.ToString();
+                        networkIntefaceType = nic.Name;
                         
                         break;
                     }
                 }
 
-                MessageBox.Show(networkIntefaceType);
-
-                if (!IsDNSInserted)
+                if (!isDNSInserted)
                 {
                     Process process = new Process();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -186,54 +231,37 @@ namespace Safety_Browser
                     }
                     process.StartInfo = startInfo;
                     process.Start();
+                    
+                    panel_help.Visible = false;
+                    help_click = true;
+
+                    if (pictureBox_loader.Visible == true)
+                    {
+                        panel_cefsharp.Visible = false;
+                    }
+                    else
+                    {
+                        panel_cefsharp.Visible = true;
+                    }
+
+                    if (!notification_click)
+                    {
+                        panel_notification.Visible = true;
+                        label_separator.Visible = true;
+                        button_notification.Visible = true;
+                    }
+
+                    pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
+                    pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
+
+                    MessageBox.Show("DNS Set.");
                 }
+
+                isDNSInserted = false;
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.ToString());
-            }
-        }
-        
-        public void DisplayDnsAddresses()
-        {
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-            int count = 0;
-            foreach (NetworkInterface adapter in adapters)
-            {
-
-                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
-                IPAddressCollection dnsServers = adapterProperties.DnsAddresses;
-                if (dnsServers.Count > 0)
-                {
-                    foreach (IPAddress dns in dnsServers)
-                    {
-                        count++;
-
-                        if (count == 1)
-                        {
-                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
-                            {
-                                IsDNSInserted = true;
-                                MessageBox.Show("DNS Already Set!");
-                                break;
-                            }
-                        }
-                        else if (count == 2)
-                        {
-                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
-                            {
-                                IsDNSInserted = true;
-                                MessageBox.Show("DNS Already Set!");
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            IsDNSInserted = false;
-                            break;
-                        }
-                    }
-                }
+                // Leave blank
             }
         }
         
