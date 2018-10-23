@@ -302,7 +302,7 @@ namespace Safety_Browser
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
             InitializeChromium();
-            NetworkAvailability();
+            NetworkAvailabilityAsync();
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
@@ -487,7 +487,7 @@ namespace Safety_Browser
         }
 
         // Network Handler
-        private void NetworkAvailability()
+        private async void NetworkAvailabilityAsync()
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
 
@@ -507,15 +507,15 @@ namespace Safety_Browser
 
                 GetInaccessibleLists();
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                await GetTextToTextAsync(web_service[current_web_service]);
+                //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                 GetIPInfo();
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                GetNotificationAsync(notifications_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                await GetNotificationAsync(notifications_service[current_web_service]);
+                //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                 label_chatus2.Enabled = true;
                 label_emailus1.Enabled = true;
@@ -549,7 +549,7 @@ namespace Safety_Browser
         // Network Handler Changed
         private void NetworkChange_NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
         {
-            Invoke(new Action(() =>
+            Invoke(new Action(async () =>
             {
                 networkIsAvailable = e.IsAvailable;
 
@@ -579,7 +579,7 @@ namespace Safety_Browser
                     {
                         if (current_web_service < web_service.Length)
                         {
-                            ByPassCalling();
+                            ByPassCallingAsync();
 
                             panel_connection.Visible = false;
                             panel_connection.Enabled = false;
@@ -596,9 +596,9 @@ namespace Safety_Browser
                     }
                     else if (dataGridView_domain.RowCount == 0 && !connection_handler)
                     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                        GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        await GetTextToTextAsync(web_service[current_web_service]);
+                        //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                         panel_connection.Visible = false;
                         panel_connection.Enabled = false;
@@ -647,9 +647,9 @@ namespace Safety_Browser
                         }
                     }
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    GetNotificationAsync(notifications_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    await GetNotificationAsync(notifications_service[current_web_service]);
+                    //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                     if (!domain_one_time)
                     {
@@ -738,7 +738,7 @@ namespace Safety_Browser
 
                         if (current_web_service < web_service.Length)
                         {
-                            ByPassCalling();
+                            ByPassCallingAsync();
                         }
                         else
                         {
@@ -786,7 +786,7 @@ namespace Safety_Browser
 
                             if (current_web_service < web_service.Length)
                             {
-                                ByPassCalling();
+                                ByPassCallingAsync();
                             }
                             else
                             {
@@ -819,11 +819,11 @@ namespace Safety_Browser
         }
 
         // ByPass Calling
-        private void ByPassCalling()
+        private async void ByPassCallingAsync()
         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            await GetTextToTextAsync(web_service[current_web_service]);
+            //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         // Get Domain
@@ -3222,7 +3222,7 @@ namespace Safety_Browser
         }
 
         // Loading State Changed
-        private void Label_loadingstate_TextChanged(object sender, EventArgs e)
+        private async void Label_loadingstate_TextChangedAsync(object sender, EventArgs e)
         {
             if (label_loadingstate.Text == "0")
             {
@@ -3246,9 +3246,9 @@ namespace Safety_Browser
 
                         if (current_web_service < web_service.Length)
                         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                            GetTextToTextAsync(web_service[current_web_service]);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            await GetTextToTextAsync(web_service[current_web_service]);
+                            //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         }
                         else
                         {
@@ -4778,7 +4778,10 @@ namespace Safety_Browser
         private async void timer_notifications_TickAsync(object sender, EventArgs e)
         {
             timer_notifications.Stop();
+            
+            //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             await GetNotificationAsync(notifications_service[current_web_service]);
+            //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         private void timer_close_Tick(object sender, EventArgs e)

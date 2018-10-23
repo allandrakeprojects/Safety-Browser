@@ -734,7 +734,7 @@
             this.label_loadingstate.Size = new System.Drawing.Size(64, 13);
             this.label_loadingstate.TabIndex = 21;
             this.label_loadingstate.Text = "loadingstate";
-            this.label_loadingstate.TextChanged += new System.EventHandler(this.Label_loadingstate_TextChanged);
+            this.label_loadingstate.TextChanged += new System.EventHandler(this.Label_loadingstate_TextChangedAsync);
             // 
             // panel_notification
             // 
