@@ -175,6 +175,7 @@ namespace Safety_Browser
                             if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
                             {
                                 isDNSInserted = true;
+
                                 MessageBox.Show("DNS Already Set.");
                                 break;
                             }
@@ -202,8 +203,6 @@ namespace Safety_Browser
         {
             try
             {
-                DisplayDnsAddresses();
-
                 string networkIntefaceType = string.Empty;
                 foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
                 {
@@ -222,9 +221,22 @@ namespace Safety_Browser
                     startInfo.UseShellExecute = true;
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    string command_1 = "netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.115.115 index=1";
-                    string command_2 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.114.114 index=1";
-                    startInfo.Arguments = "/user:Administrator \"cmd /K " + command_1 + command_2 + "\"";
+                    if (label_changedns.Text == "Change to China DNS")
+                    {
+                        string command_1 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.114.114 index=1";
+                        string command_2 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.115.115 index=1";
+                        string command_3 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 8.8.8.8 index=1";
+                        string command_4 = "netsh dnsclient add dnsservers " + networkIntefaceType + " 8.8.4.4 index=1";
+                        startInfo.Arguments = "/user:Administrator \"cmd /K " + command_4 + command_3 + command_2 + command_1 + "\"";
+                    }
+                    else
+                    {
+                        string command_1 = "&netsh dnsclient delete dnsservers " + networkIntefaceType + " 114.114.114.114";
+                        string command_2 = "&netsh dnsclient delete dnsservers " + networkIntefaceType + " 114.114.115.115";
+                        string command_3 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 8.8.8.8 index=1";
+                        string command_4 = "netsh dnsclient add dnsservers " + networkIntefaceType + " 8.8.4.4 index=1";
+                        startInfo.Arguments = "/user:Administrator \"cmd /K " + command_4 + command_3 + command_2 + command_1 + "\"";
+                    }
                     if (Environment.OSVersion.Version.Major >= 6)
                     {
                         startInfo.Verb = "runas";
@@ -254,7 +266,16 @@ namespace Safety_Browser
                     pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
                     pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
 
-                    MessageBox.Show("DNS Set.");
+                    if (label_changedns.Text == "Change to China DNS")
+                    {
+                        label_changedns.Text = "Remove China DNS";
+                        MessageBox.Show("China DNS Set。");
+                    }
+                    else
+                    {
+                        label_changedns.Text = "Change to China DNS";
+                        MessageBox.Show("China DNS Removed。");
+                    }
                 }
 
                 isDNSInserted = false;
@@ -264,7 +285,56 @@ namespace Safety_Browser
                 // Leave blank
             }
         }
-        
+
+        public void DisplayDnsAddressesLoad()
+        {
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            int count = 0;
+            foreach (NetworkInterface adapter in adapters)
+            {
+                if (isDNSInserted)
+                {
+                    break;
+                }
+
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                IPAddressCollection dnsServers = adapterProperties.DnsAddresses;
+                if (dnsServers.Count > 0)
+                {
+                    foreach (IPAddress dns in dnsServers)
+                    {
+                        count++;
+
+                        if (count == 1)
+                        {
+                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
+                            {
+                                isDNSInserted = true;
+                                label_changedns.Text = "Remove China DNS";
+                                break;
+                            }
+                        }
+                        else if (count == 2)
+                        {
+                            if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
+                            {
+                                isDNSInserted = true;
+                                label_changedns.Text = "Remove China DNS";
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            isDNSInserted = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            isDNSInserted = false;
+        }
+
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         // Form Load
@@ -310,6 +380,8 @@ namespace Safety_Browser
                 gHook.HookedKeys.Add(key);
             }
             gHook.hook();
+
+            DisplayDnsAddressesLoad();
         }
 
         private void FadeIn(object sender, EventArgs e)
@@ -1217,11 +1289,11 @@ namespace Safety_Browser
                             }
                             else if (count == 3)
                             {
-                                _message_title = obj.ToString();
+                                _message_title = ReplaceString(obj.ToString());
                             }
                             else if (count == 4)
                             {
-                                _message_content = ReplaceBRwithNewline(obj.ToString());
+                                _message_content = ReplaceString(obj.ToString());
                             }
                             else if (count == 5)
                             {
@@ -1505,11 +1577,11 @@ namespace Safety_Browser
                         }
                         else if (count == 3)
                         {
-                            _message_title = obj.ToString();
+                            _message_title = ReplaceString(obj.ToString());
                         }
                         else if (count == 4)
                         {
-                            _message_content = ReplaceBRwithNewline(obj.ToString());
+                            _message_content = ReplaceString(obj.ToString());
                         }
                         else if (count == 5)
                         {
@@ -1727,11 +1799,11 @@ namespace Safety_Browser
                                         }
                                         else if (count_inner == 3)
                                         {
-                                            _message_title_inner = obje.ToString();
+                                            _message_title_inner = ReplaceString(obje.ToString());
                                         }
                                         else if (count_inner == 4)
                                         {
-                                            _message_content_inner = ReplaceBRwithNewline(obje.ToString());
+                                            _message_content_inner = ReplaceString(obje.ToString());
                                         }
                                         else if (count_inner == 5)
                                         {
@@ -1826,8 +1898,6 @@ namespace Safety_Browser
                 if (MessageBox.Show(_message_content_inner + "\n\n", _message_title_inner.Replace("★", ""), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                 {
                     Process.Start(@"updater.exe");
-                    close = false;
-                    timer_close.Start();
                 }
             }
             catch (Exception)
@@ -1878,11 +1948,11 @@ namespace Safety_Browser
                                         }
                                         else if (count_inner == 3)
                                         {
-                                            _message_title_inner = obje.ToString();
+                                            _message_title_inner = ReplaceString(obje.ToString());
                                         }
                                         else if (count_inner == 4)
                                         {
-                                            _message_content_inner = ReplaceBRwithNewline(obje.ToString());
+                                            _message_content_inner = ReplaceString(obje.ToString());
                                         }
                                         else if (count_inner == 5)
                                         {
@@ -2076,11 +2146,14 @@ namespace Safety_Browser
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "。。。";
         }
 
-        public string ReplaceBRwithNewline(string txtVal)
+        public string ReplaceString(string txtVal)
         {
             string newText = "";
             Regex regex = new Regex(@"(<br />|<br/>|</ br>|</br>)");
             newText = regex.Replace(txtVal, "\r\n");
+            newText = newText.Replace("&amp;", "&");
+            newText = newText.Replace("&lt;", "<");
+            newText = newText.Replace("&gt;", ">");
             // Result    
             return newText;
         }

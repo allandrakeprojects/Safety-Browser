@@ -353,9 +353,9 @@
             this.label_changedns.ForeColor = System.Drawing.Color.White;
             this.label_changedns.Location = new System.Drawing.Point(293, 400);
             this.label_changedns.Name = "label_changedns";
-            this.label_changedns.Size = new System.Drawing.Size(113, 20);
+            this.label_changedns.Size = new System.Drawing.Size(80, 20);
             this.label_changedns.TabIndex = 74;
-            this.label_changedns.Text = "Change DNS";
+            this.label_changedns.Text = "Change to China DNS";
             this.label_changedns.Click += new System.EventHandler(this.label_changedns_Click);
             // 
             // label_social2
@@ -1146,6 +1146,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1270, 764);
             this.Controls.Add(this.panel_landing);
+            this.Controls.Add(this.label_loader);
             this.Controls.Add(this.pictureBox_loader_nav);
             this.Controls.Add(this.panel_help);
             this.Controls.Add(this.pictureBox_loader);
@@ -1177,7 +1178,6 @@
             this.Controls.Add(this.panel_notification);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.label_titlebar);
-            this.Controls.Add(this.label_loader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
