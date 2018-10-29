@@ -2154,6 +2154,7 @@ namespace Safety_Browser
             newText = newText.Replace("&amp;", "&");
             newText = newText.Replace("&lt;", "<");
             newText = newText.Replace("&gt;", ">");
+            newText = newText.Replace("\"\"", "\"");
             // Result    
             return newText;
         }
