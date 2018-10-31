@@ -221,7 +221,7 @@ namespace Safety_Browser
                     startInfo.UseShellExecute = true;
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    if (label_changedns.Text == "Change to China DNS")
+                    if (label_changedns.Text == "更换至中国DNS")
                     {
                         string command_1 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.114.114 index=1";
                         string command_2 = "&netsh dnsclient add dnsservers " + networkIntefaceType + " 114.114.115.115 index=1";
@@ -266,15 +266,15 @@ namespace Safety_Browser
                     pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
                     pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
 
-                    if (label_changedns.Text == "Change to China DNS")
+                    if (label_changedns.Text == "更换至中国DNS")
                     {
-                        label_changedns.Text = "Remove China DNS";
-                        MessageBox.Show("China DNS Set。");
+                        label_changedns.Text = "移除中国DNS";
+                        MessageBox.Show("中国DNS已设置。");
                     }
                     else
                     {
-                        label_changedns.Text = "Change to China DNS";
-                        MessageBox.Show("China DNS Removed。");
+                        label_changedns.Text = "更换至中国DNS";
+                        MessageBox.Show("中国DNS已移除。");
                     }
                 }
 
@@ -310,7 +310,7 @@ namespace Safety_Browser
                             if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
                             {
                                 isDNSInserted = true;
-                                label_changedns.Text = "Remove China DNS";
+                                label_changedns.Text = "移除中国DNS";
                                 break;
                             }
                         }
@@ -319,7 +319,7 @@ namespace Safety_Browser
                             if (dns.ToString() == "114.114.114.114" || dns.ToString() == "114.114.115.115")
                             {
                                 isDNSInserted = true;
-                                label_changedns.Text = "Remove China DNS";
+                                label_changedns.Text = "移除中国DNS";
                                 break;
                             }
                         }
@@ -5209,6 +5209,11 @@ namespace Safety_Browser
                         postParameters.Add("api_key", API_KEY);
                         postParameters.Add("brand_code", BRAND_CODE);
                         postParameters.Add("macid", _mac_address);
+                        postParameters.Add("city", _city);
+                        postParameters.Add("province", _province);
+                        postParameters.Add("country", _country);
+                        postParameters.Add("ip", _external_ip);
+                        postParameters.Add("isp", _isp);
                         postParameters.Add("zipfile", new FormUpload.FileParameter(data, "Diagnostics.zip", "application/zip"));
 
                         // Create request and receive response

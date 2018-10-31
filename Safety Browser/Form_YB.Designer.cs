@@ -353,9 +353,9 @@
             this.label_changedns.ForeColor = System.Drawing.Color.White;
             this.label_changedns.Location = new System.Drawing.Point(293, 400);
             this.label_changedns.Name = "label_changedns";
-            this.label_changedns.Size = new System.Drawing.Size(80, 20);
+            this.label_changedns.Size = new System.Drawing.Size(131, 20);
             this.label_changedns.TabIndex = 74;
-            this.label_changedns.Text = "Change to China DNS";
+            this.label_changedns.Text = "更换至中国DNS";
             this.label_changedns.Click += new System.EventHandler(this.label_changedns_Click);
             // 
             // label_social2
