@@ -371,6 +371,7 @@ namespace Safety_Browser
             GetMACAddress();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
+            GetIPInfo();
             InitializeChromium();
             NetworkAvailabilityAsync();
             gHook = new GlobalKeyboardHook();
@@ -2379,8 +2380,19 @@ namespace Safety_Browser
         {
             CefSettings settings = new CefSettings();
             settings.CefCommandLineArgs.Add("no-proxy-server", "1");
-            settings.CefCommandLineArgs.Add("ppapi-flash-path", AppDomain.CurrentDomain.BaseDirectory + "pepflashplayer32_31_0_0_108.dll");
-            settings.CefCommandLineArgs.Add("ppapi-flash-version", "31.0.0.108");
+
+            if (_country != "China")
+            {
+                settings.CefCommandLineArgs.Add("ppapi-flash-path", AppDomain.CurrentDomain.BaseDirectory + "pepflashplayer32_31_0_0_122.dll");
+                settings.CefCommandLineArgs.Add("ppapi-flash-version", "31_0_0_122");
+            }
+            else
+            {
+                // China
+                settings.CefCommandLineArgs.Add("ppapi-flash-path", AppDomain.CurrentDomain.BaseDirectory + "pepflashplayer32_31_0_0_108.dll");
+                settings.CefCommandLineArgs.Add("ppapi-flash-version", "31.0.0.108");
+            }
+
             settings.CachePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser();
@@ -2409,7 +2421,7 @@ namespace Safety_Browser
             Invoke(new Action(() =>
             {
                 pictureBox_back.Enabled = e.CanGoBack;
-                goBackToolStripMenuItem.Enabled = e.CanGoBack;
+                goBackToolStripMenuItem.Enabled = e.CanGoBack; 
                 pictureBox_forward.Enabled = e.CanGoForward;
                 forwardToolStripMenuItem.Enabled = e.CanGoForward;
 
