@@ -121,6 +121,9 @@
     <Compile Include="BrowserLifeSpanHandler.cs" />
     <Compile Include="CustomMenuHandler.cs" />
     <Compile Include="DownloadHandler.cs" />
+    <Compile Include="Dropshadow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormUpload.cs" />
     <Compile Include="Form_Notification.cs">
       <SubType>Form</SubType>
