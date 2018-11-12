@@ -131,27 +131,16 @@ namespace Safety_Browser
         public static extern bool ReleaseCapture();
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
-
-
-
-
-
-
-
-
-
-
-
-
+        
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
-            int nLeftRect, // x-coordinate of upper-left corner
-            int nTopRect, // y-coordinate of upper-left corner
-            int nRightRect, // x-coordinate of lower-right corner
-            int nBottomRect, // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse 
          );
 
         [DllImport("dwmapi.dll")]
@@ -163,12 +152,12 @@ namespace Safety_Browser
         [DllImport("dwmapi.dll")]
         public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
 
-        private bool m_aeroEnabled;                     // variables for box shadow
+        private bool m_aeroEnabled;              
         private const int CS_DROPSHADOW = 0x00020000;
         private const int WM_NCPAINT = 0x0085;
         private const int WM_ACTIVATEAPP = 0x001C;
 
-        public struct MARGINS                           // struct for box shadow
+        public struct MARGINS                        
         {
             public int leftWidth;
             public int rightWidth;
@@ -176,7 +165,7 @@ namespace Safety_Browser
             public int bottomHeight;
         }
 
-        private const int WM_NCHITTEST = 0x84;          // variables for dragging the form
+        private const int WM_NCHITTEST = 0x84; 
         private const int HTCLIENT = 0x1;
         private const int HTCAPTION = 0x2;
         private const int WS_MINIMIZEBOX = 0x20000;
@@ -213,7 +202,7 @@ namespace Safety_Browser
         {
             switch (m.Msg)
             {
-                case WM_NCPAINT:                        // box shadow
+                case WM_NCPAINT:
                     if (m_aeroEnabled)
                     {
                         var v = 2;
@@ -234,41 +223,9 @@ namespace Safety_Browser
             }
             base.WndProc(ref m);
 
-            if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)     // drag the form
+            if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)
                 m.Result = (IntPtr)HTCAPTION;
-
-
-
-            //const int wmNcHitTest = 0x84;
-            //const int htBottomLeft = 16;
-            //const int htBottomRight = 17;
-            //if (m.Msg == wmNcHitTest)
-            //{
-            //    int x = (int)(m.LParam.ToInt64() & 0xFFFF);
-            //    int y = (int)((m.LParam.ToInt64() & 0xFFFF0000) >> 16);
-            //    Point pt = PointToClient(new Point(x, y));
-            //    Size clientSize = ClientSize;
-            //    if (pt.X >= clientSize.Width - 16 && pt.Y >= clientSize.Height - 16 && clientSize.Height >= 16)
-            //    {
-            //        m.Result = (IntPtr)(IsMirrored ? htBottomLeft : htBottomRight);
-            //        return;
-            //    }
-            //}
-            //base.WndProc(ref m);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+           
             if (m.Msg == 0x84)
             {
                 var cursor = this.PointToClient(Cursor.Position);
@@ -283,148 +240,8 @@ namespace Safety_Browser
                 else if (Right.Contains(cursor)) m.Result = (IntPtr)HTRIGHT;
                 else if (Bottom.Contains(cursor)) m.Result = (IntPtr)HTBOTTOM;
             }
-
-            //base.WndProc(ref m);
-
-
-
-
-
-
-            //if (m.Msg == 0x84)
-            //{  // Trap WM_NCHITTEST
-            //    Point pos = new Point(m.LParam.ToInt32());
-            //    pos = this.PointToClient(pos);
-            //    if (pos.Y < cCaption)
-            //    {
-            //        m.Result = (IntPtr)2;  // HTCAPTION
-            //        return;
-            //    }
-            //    if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
-            //    {
-            //        m.Result = (IntPtr)17; // HTBOTTOMRIGHT
-            //        return;
-            //    }
-            //}
-            //base.WndProc(ref m);
-
-            const int RESIZE_HANDLE_SIZE = 10;
-
-            //switch (m.Msg)
-            //{
-            //    case 0x0084/*NCHITTEST*/ :
-            //        base.WndProc(ref m);
-
-            //        if ((int)m.Result == 0x01/*HTCLIENT*/)
-            //        {
-            //            Point screenPoint = new Point(m.LParam.ToInt32());
-            //            Point clientPoint = this.PointToClient(screenPoint);
-            //            if (clientPoint.Y <= RESIZE_HANDLE_SIZE)
-            //            {
-            //                if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-            //                    m.Result = (IntPtr)13/*HTTOPLEFT*/ ;
-            //                else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-            //                    m.Result = (IntPtr)12/*HTTOP*/ ;
-            //                else
-            //                    m.Result = (IntPtr)14/*HTTOPRIGHT*/ ;
-            //            }
-            //            else if (clientPoint.Y <= (Size.Height - RESIZE_HANDLE_SIZE))
-            //            {
-            //                if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-            //                    m.Result = (IntPtr)10/*HTLEFT*/ ;
-            //                else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-            //                    m.Result = (IntPtr)2/*HTCAPTION*/ ;
-            //                else
-            //                    m.Result = (IntPtr)11/*HTRIGHT*/ ;
-            //            }
-            //            else
-            //            {
-            //                if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-            //                    m.Result = (IntPtr)16/*HTBOTTOMLEFT*/ ;
-            //                else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-            //                    m.Result = (IntPtr)15/*HTBOTTOM*/ ;
-            //                else
-            //                    m.Result = (IntPtr)17/*HTBOTTOMRIGHT*/ ;
-            //            }
-            //        }
-            //        return;
-            //}
-            //base.WndProc(ref m);
         }
-
-        //private const int cGrip = 16;      // Grip size
-        //private const int cCaption = 32;   // Caption bar height;
-
-        //protected override void OnPaint(PaintEventArgs e)
-        //{
-        //    Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip, this.ClientSize.Height - cGrip, cGrip, cGrip);
-        //    ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
-        //    rc = new Rectangle(0, 0, this.ClientSize.Width, cCaption);
-        //    e.Graphics.FillRectangle(Brushes.DarkBlue, rc);
-        //}
-
-        //protected override void OnPaint(PaintEventArgs e)
-        //{
-        //    SolidBrush defaultColor = new SolidBrush(Color.FromArgb(235, 99, 6));
-        //    e.Graphics.FillRectangle(defaultColor, Top);
-        //    e.Graphics.FillRectangle(defaultColor, Left);
-        //    e.Graphics.FillRectangle(defaultColor, Right);
-        //    e.Graphics.FillRectangle(defaultColor, Bottom);
-        //}
-
-        //protected override void WndProc(ref Message message)
-        //{
-        //    base.WndProc(ref message);
-
-        //    if (message.Msg == 0x84)
-        //    {
-        //        var cursor = this.PointToClient(Cursor.Position);
-
-        //        if (TopLeft.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
-        //        else if (TopRight.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
-        //        else if (BottomLeft.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
-        //        else if (BottomRight.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
-
-        //        else if (Top.Contains(cursor)) message.Result = (IntPtr)HTTOP;
-        //        else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
-        //        else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
-        //        else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
-        //    }
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //protected override void OnPaintBackground(PaintEventArgs e)
-        //{
-        //    //base.OnPaintBackground(e);  //comment this out to prevent default painting
-        //    using (SolidBrush brush = new SolidBrush(Color.FromArgb(235, 99, 6)))  //any color you like
-        //        e.Graphics.FillRectangle(brush, e.ClipRectangle);
-        //}
-
+        
         public Form_YB()
         {
             InitializeComponent();
