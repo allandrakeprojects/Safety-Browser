@@ -131,121 +131,10 @@ namespace Safety_Browser
         public static extern bool ReleaseCapture();
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
-        
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse 
-         );
 
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
-
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
-
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
-
-        private bool m_aeroEnabled;              
-        private const int CS_DROPSHADOW = 0x00020000;
-        private const int WM_NCPAINT = 0x0085;
-        private const int WM_ACTIVATEAPP = 0x001C;
-
-        public struct MARGINS                        
-        {
-            public int leftWidth;
-            public int rightWidth;
-            public int topHeight;
-            public int bottomHeight;
-        }
-
-        private const int WM_NCHITTEST = 0x84; 
-        private const int HTCLIENT = 0x1;
-        private const int HTCAPTION = 0x2;
-        private const int WS_MINIMIZEBOX = 0x20000;
-        private const int CS_DBLCLKS = 0x8;
-        
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                m_aeroEnabled = CheckAeroEnabled();
-
-                CreateParams cp = base.CreateParams;
-                if (!m_aeroEnabled)
-                    cp.ClassStyle |= CS_DROPSHADOW;
-
-                cp.Style |= WS_MINIMIZEBOX;
-                cp.ClassStyle |= CS_DBLCLKS;
-                return cp;
-            }
-        }
-
-        private bool CheckAeroEnabled()
-        {
-            if (Environment.OSVersion.Version.Major >= 6)
-            {
-                int enabled = 0;
-                DwmIsCompositionEnabled(ref enabled);
-                return (enabled == 1) ? true : false;
-            }
-            return false;
-        }
-
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_NCPAINT:
-                    if (m_aeroEnabled)
-                    {
-                        var v = 2;
-                        DwmSetWindowAttribute(Handle, 2, ref v, 4);
-                        MARGINS margins = new MARGINS()
-                        {
-                            bottomHeight = 1,
-                            leftWidth = 0,
-                            rightWidth = 0,
-                            topHeight = 0
-                        };
-                        DwmExtendFrameIntoClientArea(Handle, ref margins);
-
-                    }
-                    break;
-                default:
-                    break;
-            }
-            base.WndProc(ref m);
-
-            if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)
-                m.Result = (IntPtr)HTCAPTION;
-           
-            if (m.Msg == 0x84)
-            {
-                var cursor = this.PointToClient(Cursor.Position);
-
-                if (TopLeft.Contains(cursor)) m.Result = (IntPtr)HTTOPLEFT;
-                else if (TopRight.Contains(cursor)) m.Result = (IntPtr)HTTOPRIGHT;
-                else if (BottomLeft.Contains(cursor)) m.Result = (IntPtr)HTBOTTOMLEFT;
-                else if (BottomRight.Contains(cursor)) m.Result = (IntPtr)HTBOTTOMRIGHT;
-
-                else if (Top.Contains(cursor)) m.Result = (IntPtr)HTTOP;
-                else if (Left.Contains(cursor)) m.Result = (IntPtr)HTLEFT;
-                else if (Right.Contains(cursor)) m.Result = (IntPtr)HTRIGHT;
-                else if (Bottom.Contains(cursor)) m.Result = (IntPtr)HTBOTTOM;
-            }
-        }
-        
         public Form_YB()
         {
             InitializeComponent();
-            Padding = new Padding(1, 0, 1, 1);
 
             Opacity = 0;
 
@@ -255,7 +144,7 @@ namespace Safety_Browser
         }
 
         private void label_changedns_Click(object sender, EventArgs e)
-        {            
+        {
             DNSServer();
         }
 
@@ -306,7 +195,7 @@ namespace Safety_Browser
                 }
             }
         }
-        
+
         private void DNSServer()
         {
             try
@@ -317,7 +206,7 @@ namespace Safety_Browser
                     if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet && nic.OperationalStatus == OperationalStatus.Up && !nic.Name.Contains("Tunnel") && !nic.Name.Contains("VirtualBox") && !nic.Name.Contains("Adapter") && !nic.Description.Contains("Npcap") && !nic.Description.Contains("Loopback"))
                     {
                         networkIntefaceType = nic.Name;
-                        
+
                         break;
                     }
                 }
@@ -351,7 +240,7 @@ namespace Safety_Browser
                     }
                     process.StartInfo = startInfo;
                     process.Start();
-                    
+
                     panel_help.Visible = false;
                     help_click = true;
 
@@ -454,7 +343,7 @@ namespace Safety_Browser
             {
                 File.Delete(path_result);
             }
-            
+
             if (File.Exists(Path.GetTempPath() + "\\deviceinfo.txt"))
             {
                 File.Delete(Path.GetTempPath() + "\\deviceinfo.txt");
@@ -2487,6 +2376,9 @@ namespace Safety_Browser
         private void InitializeChromium()
         {
             CefSettings settings = new CefSettings();
+            // updated
+            settings.CachePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
+            //settings.CefCommandLineArgs.Add("force-device-scale-factor", "1");
             settings.CefCommandLineArgs.Add("no-proxy-server", "1");
 
             if (_country != "China")
@@ -2529,7 +2421,7 @@ namespace Safety_Browser
             Invoke(new Action(() =>
             {
                 pictureBox_back.Enabled = e.CanGoBack;
-                goBackToolStripMenuItem.Enabled = e.CanGoBack; 
+                goBackToolStripMenuItem.Enabled = e.CanGoBack;
                 pictureBox_forward.Enabled = e.CanGoForward;
                 forwardToolStripMenuItem.Enabled = e.CanGoForward;
 
@@ -2574,20 +2466,21 @@ namespace Safety_Browser
                         pictureBox_browserstop.Visible = true;
                         pictureBox_reload.Visible = false;
 
-                        if (handler_url.Contains("page/player/wallet/deposit.jsp"))
-                        {
-                            string script = string.Format("document.getElementById('depositAmount3Party').value;");
-                            chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x =>
-                            {
-                                var response = x.Result;
+                        // comment
+                        //if (handler_url.Contains("page/player/wallet/deposit.jsp"))
+                        //{
+                        //    string script = string.Format("document.getElementById('depositAmount3Party').value;");
+                        //    chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x =>
+                        //    {
+                        //        var response = x.Result;
 
-                                if (response.Success && response.Result != null)
-                                {
-                                    var result = response.Result;
-                                    SetAmount = result.ToString();
-                                }
-                            });
-                        }
+                        //        if (response.Success && response.Result != null)
+                        //        {
+                        //            var result = response.Result;
+                        //            SetAmount = result.ToString();
+                        //        }
+                        //    });
+                        //}
                     }
 
                     timer_loader_i = 1;
@@ -2625,29 +2518,30 @@ namespace Safety_Browser
 
                         pictureBox_loader_nav.Visible = false;
 
-                        if (last_url.Contains("/page/player/wallet/deposit.jsp"))
-                        {
-                            if (handler_url.Contains("about:blank"))
-                            {
-                                chromeBrowser.Back();
+                        // comment
+                        //if (last_url.Contains("/page/player/wallet/deposit.jsp"))
+                        //{
+                        //    if (handler_url.Contains("about:blank"))
+                        //    {
+                        //        chromeBrowser.Back();
 
-                                Form_YB_NewTab form_newtab = new Form_YB_NewTab(domain_get + "/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
-                                //Form_YB_NewTab form_newtab = new Form_YB_NewTab("http://jjdemoapi.ggow99038.com:1003/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
-                                int open_form = Application.OpenForms.Count;
+                        //        Form_YB_NewTab form_newtab = new Form_YB_NewTab(domain_get + "/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
+                        //        //Form_YB_NewTab form_newtab = new Form_YB_NewTab("http://jjdemoapi.ggow99038.com:1003/player/payGateway?promoId=1&toBankId=-1&amount=" + SetAmount + "&method=1&bankType=1", "normal");
+                        //        int open_form = Application.OpenForms.Count;
 
-                                if (open_form == 1)
-                                {
-                                    form_newtab.Show();
-                                }
-                                else
-                                {
-                                    Form_YB_NewTab.SetClose = true;
-                                    form_newtab.Show();
-                                }
-                            }
-                        }
-                        
-                        last_url = handler_url;
+                        //        if (open_form == 1)
+                        //        {
+                        //            form_newtab.Show();
+                        //        }
+                        //        else
+                        //        {
+                        //            Form_YB_NewTab.SetClose = true;
+                        //            form_newtab.Show();
+                        //        }
+                        //    }
+                        //}
+
+                        //last_url = handler_url;
                     }
                 }));
             }
@@ -3497,26 +3391,6 @@ namespace Safety_Browser
             //}
         }
 
-        // Get external IP
-        private string GetExternalIp()
-        {
-            try
-            {
-                string externalIP;
-                WebRequest.DefaultWebProxy = new WebProxy();
-                externalIP = (new WebClient()).DownloadString("https://canihazip.com/s");
-                externalIP = (new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"))
-                             .Matches(externalIP)[0].ToString();
-
-                return externalIP;
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show("There is a problem! Please contact IT support. \n\nError Message: " + ex.Message + "\nError Code: 1004", "永宝快线", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-        }
-
         // Get MAC Address
         private void GetMACAddress()
         {
@@ -3559,7 +3433,7 @@ namespace Safety_Browser
         {
             try
             {
-                var API_PATH_IP_API = "http://ip-api.com/json/" + GetExternalIp();
+                var API_PATH_IP_API = "http://ip-api.com/json/";
 
                 WebRequest.DefaultWebProxy = new WebProxy();
                 using (HttpClient client = new HttpClient())
@@ -3576,7 +3450,7 @@ namespace Safety_Browser
                         if (locationDetails != null)
                         {
                             _mac_address = get_macAddress;
-                            _external_ip = GetExternalIp();
+                            _external_ip = locationDetails.query.Replace("'", "''");
                             _isp = locationDetails.isp.Replace("'", "''");
                             _city = locationDetails.city.Replace("'", "''");
                             _province = locationDetails.regionName.Replace("'", "''");
@@ -4465,17 +4339,6 @@ namespace Safety_Browser
                 pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
                 pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
             }
-            
-            if (!notification_click)
-            {
-                notification_click = true;
-
-                panel_notification.Visible = false;
-                label_separator.Visible = false;
-                button_notification.Visible = false;
-                button_notification.BringToFront();
-                pictureBox_nofication.Image = Properties.Resources.notification;
-            }
 
             chromeBrowser.Load(domain_get);
         }
@@ -4505,17 +4368,6 @@ namespace Safety_Browser
 
                 pictureBox_help.BackColor = Color.FromArgb(235, 99, 6);
                 pictureBox_helphover.BackColor = Color.FromArgb(235, 99, 6);
-            }
-
-            if (!notification_click)
-            {
-                notification_click = true;
-
-                panel_notification.Visible = false;
-                label_separator.Visible = false;
-                button_notification.Visible = false;
-                button_notification.BringToFront();
-                pictureBox_nofication.Image = Properties.Resources.notification;
             }
 
             chromeBrowser.Load(domain_get);
@@ -4759,26 +4611,29 @@ namespace Safety_Browser
         {
             if (help_click)
             {
+                var panel_cefsharp_resize = panel_cefsharp.Width - 280;
+                var panel_cefsharp_size = panel_cefsharp.Width + 280;
+
                 if (notification_click)
                 {
                     notification_click = false;
-                    
+
+                    panel_cefsharp.Width = panel_cefsharp_resize;
+
                     panel_notification.Visible = true;
-                    panel_notification.BringToFront();
                     label_separator.Visible = true;
-                    label_separator.BringToFront();
                     button_notification.Visible = true;
-                    button_notification.BringToFront();
                     pictureBox_nofication.Image = Properties.Resources.notification_back;
                 }
                 else
                 {
                     notification_click = true;
-                    
+
+                    panel_cefsharp.Width = panel_cefsharp_size;
+
                     panel_notification.Visible = false;
                     label_separator.Visible = false;
                     button_notification.Visible = false;
-                    button_notification.BringToFront();
                     pictureBox_nofication.Image = Properties.Resources.notification;
                 }
             }
@@ -4788,21 +4643,26 @@ namespace Safety_Browser
         {
             if (help_click)
             {
+                var panel_cefsharp_resize = panel_cefsharp.Width - 280;
+                var panel_cefsharp_size = panel_cefsharp.Width + 280;
+
                 if (notification_click)
                 {
                     notification_click = false;
-                    
+
+                    panel_cefsharp.Width = panel_cefsharp_resize;
+
                     panel_notification.Visible = true;
-                    panel_notification.BringToFront();
                     label_separator.Visible = true;
-                    label_separator.BringToFront();
                     button_notification.Visible = true;
                     pictureBox_nofication.Image = Properties.Resources.notification_back;
                 }
                 else
                 {
                     notification_click = true;
-                    
+
+                    panel_cefsharp.Width = panel_cefsharp_size;
+
                     panel_notification.Visible = false;
                     label_separator.Visible = false;
                     button_notification.Visible = false;
@@ -4893,17 +4753,18 @@ namespace Safety_Browser
             }
         }
 
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.Style |= WS_MINIMIZEBOX;
-        //        cp.ClassStyle |= CS_DBLCLKS;
-
-        //        return cp;
-        //    }
-        //}
+        const int WS_MINIMIZEBOX = 0x20000;
+        const int CS_DBLCLKS = 0x8;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.Style |= WS_MINIMIZEBOX;
+                cp.ClassStyle |= CS_DBLCLKS;
+                return cp;
+            }
+        }
 
         private void GetDeviceInfo()
         {
@@ -4985,7 +4846,7 @@ namespace Safety_Browser
         private async void timer_notifications_TickAsync(object sender, EventArgs e)
         {
             timer_notifications.Stop();
-            
+
             //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             await GetNotificationAsync(notifications_service[current_web_service]);
             //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -5157,6 +5018,35 @@ namespace Safety_Browser
             }
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            SolidBrush defaultColor = new SolidBrush(Color.FromArgb(235, 99, 6));
+            e.Graphics.FillRectangle(defaultColor, Top);
+            e.Graphics.FillRectangle(defaultColor, Left);
+            e.Graphics.FillRectangle(defaultColor, Right);
+            e.Graphics.FillRectangle(defaultColor, Bottom);
+        }
+
+        protected override void WndProc(ref Message message)
+        {
+            base.WndProc(ref message);
+
+            if (message.Msg == 0x84)
+            {
+                var cursor = this.PointToClient(Cursor.Position);
+
+                if (TopLeft.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
+                else if (TopRight.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
+                else if (BottomLeft.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
+                else if (BottomRight.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
+
+                else if (Top.Contains(cursor)) message.Result = (IntPtr)HTTOP;
+                else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
+                else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
+                else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
+            }
+        }
+
         private void GetPing(string domain)
         {
             StringBuilder replace_domain = new StringBuilder(domain);
@@ -5237,7 +5127,7 @@ namespace Safety_Browser
             Thread th = new Thread(ths);
             th.Start();
         }
-        
+
         private void timer_diagnostics_Tick(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(result_traceroute))
@@ -5296,7 +5186,7 @@ namespace Safety_Browser
                         }
 
                         ZipFile zip = new ZipFile();
-                        
+
                         zip.AddFile(Path.GetTempPath() + "\\deviceinfo.txt", "");
                         zip.AddFile(Path.GetTempPath() + "\\traceroute.txt", "");
                         zip.AddFile(Path.GetTempPath() + "\\ping.txt", "");
@@ -5367,7 +5257,7 @@ namespace Safety_Browser
             {
                 return;
             }
-            
+
             SetWindowText(windowPtr, "温馨提示");
         }
 
